@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.Bean.Student;
+import com.Bean.StudentDto;
 import com.repository.StudentRepository;
 import com.repository.StudentRepositoryImpl;
 
@@ -29,7 +30,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	@ManagedProperty(value = "#{studentRepository}")
 	StudentRepository studentRepository;
 
-	public List<Student> getStudentList() {
+	public List<StudentDto> getStudentList() {
 		return studentRepository.findAllStudents();
 	}
 
@@ -56,7 +57,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	@Override
-	public List<Student> findAllStudents() {
+	public List<StudentDto> findAllStudents() {
 		return studentRepository.findAllStudents();
 
 	}

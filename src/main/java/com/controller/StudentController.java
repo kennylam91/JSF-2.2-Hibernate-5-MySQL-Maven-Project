@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.Bean.Student;
+import com.Bean.StudentDto;
 import com.Bean.StudentForm;
 import com.service.StudentServiceImpl;
 import com.utility.ObjectMapper;
@@ -35,14 +36,14 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{studentService}")
 	private StudentServiceImpl studentService;
 
-	private List<Student> students;
+	private List<StudentDto> studentDtos;
 
-	public List<Student> getStudents() {
+	public List<StudentDto> getStudents() {
 		return studentService.findAllStudents();
 	}
 
 	public String getStudentListForm() {
-		students = studentService.getStudentList();
+		studentDtos = studentService.getStudentList();
 		return "student_list?faces-redirect=true";
 	}
 
@@ -63,13 +64,13 @@ public class StudentController implements Serializable {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.saveStudent(student);
-		students = studentService.findAllStudents();
+		studentDtos = studentService.findAllStudents();
 		return "student_list?faces-redirect=true";
 	}
 
 	public String deleteStudent(Long studentId) throws Exception {
 		studentService.deleteStudent(studentId);
-		students = studentService.findAllStudents();
+		studentDtos = studentService.findAllStudents();
 		return "student_list";
 	}
 
@@ -84,7 +85,7 @@ public class StudentController implements Serializable {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.updateStudent(student);
-		students = studentService.findAllStudents();
+		studentDtos = studentService.findAllStudents();
 		return "student_list?faces-redirect=true";
 	}
 

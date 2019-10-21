@@ -6,6 +6,7 @@ package com.repository;
 import java.util.List;
 
 import com.Bean.Student;
+import com.Bean.StudentDto;
 
 /**
  * @author BVCN 2 - LT88
@@ -20,6 +21,6 @@ public interface StudentRepository {
 
 	Student findStudentById(Long studentId);
 
-	List<Student> findAllStudents();
+	List<StudentDto> findAllStudents();
 
 }

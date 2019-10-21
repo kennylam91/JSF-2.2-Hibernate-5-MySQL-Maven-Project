@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.Bean.Student;
+import com.Bean.StudentDto;
 import com.util.HibernateUtil;
 
 import lombok.Getter;
@@ -30,17 +31,16 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	@SuppressWarnings("unchecked")
-	public List<Student> findAllStudents() {
+	public List<StudentDto> findAllStudents() {
 		Session session = this.sessionFactory.openSession();
-		List<Student> studentList = session
+		List<StudentDto> studentDtoList = session
 				.createQuery(
-						"select s "+ 
-						"from Student s "+ 
-						"left join fetch s.subjects "+ 
-						"left join fetch s.courses ")
+						"select new "+
+						"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.age,s.country,s.phone,s.email,s.note)"+
+						"from Student s ")
 				.list();
 		session.close();
-		return studentList;
+		return studentDtoList;
 	}
 
 	public Long saveStudent(Student student) {

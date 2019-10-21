@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import com.Bean.Student;
+import com.Bean.StudentDto;
 
 public interface StudentService {
 
@@ -14,5 +15,5 @@ public interface StudentService {
 
 	Student findStudentById(Long studentId);
 
-	List<Student> findAllStudents();
+	List<StudentDto> findAllStudents();
 }
