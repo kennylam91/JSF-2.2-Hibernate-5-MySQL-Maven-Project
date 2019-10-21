@@ -43,9 +43,9 @@ public class Student {
 	private String email;
 	private String note;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Subject> subjects = new HashSet<Subject>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<Course>();
 }

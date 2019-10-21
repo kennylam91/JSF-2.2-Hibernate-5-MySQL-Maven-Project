@@ -40,10 +40,10 @@ public class Course {
 
 	private Calendar startTime;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	Set<Student> students = new HashSet<Student>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id", nullable = false)
 	private Subject subject;
 

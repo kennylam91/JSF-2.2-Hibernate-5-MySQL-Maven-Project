@@ -48,14 +48,11 @@
 				required="true" requiredMessage="Country is required" />
 			<h:message for="country" />
 
-			<!-- <h:outputLabel>Subjects:</h:outputLabel>
-			<h:inputText value="#{studentForm.subjects}" id="subjects"
-				required="true" requiredMessage="Subjects is required" />
-			<h:message for="subjects" />
 
-			<h:outputLabel>Subjects:</h:outputLabel> -->
-			<!-- <h:form>
-				<p:dataList value="#{studentForm.subjects}" var="subject" id="subjects" type="ordered">
+			<h:outputLabel>Subjects:</h:outputLabel>
+			<h:form>
+				<p:dataList value="#{studentForm.subjects}" var="subject"
+					id="subjects" type="ordered">
 					<h:outputLabel>Code:</h:outputLabel>
 					<h:inputText value="#{subject.code}" id="studentSubjectCode"
 						required="true" requiredMessage="Subject Code is required" />
@@ -66,11 +63,11 @@
 						required="true" requiredMessage="Subject Name is required" />
 					<h:message for="studentSubjectName" />
 				</p:dataList>
-			</h:form> -->
+			</h:form>
+			<h:message />
 
-			<!-- 			<h:outputLabel>Courses:</h:outputLabel>
- -->
-			<!-- <h:form>
+			<h:outputLabel>Courses:</h:outputLabel>
+			<h:form>
 				<p:dataList value="#{studentForm.courses}" var="course" id="courses"
 					type="ordered">
 					<h:outputLabel>Code:</h:outputLabel>
@@ -83,7 +80,7 @@
 						required="true" requiredMessage="Course name is required" />
 					<h:message for="studentCourseName" />
 				</p:dataList>
-			</h:form> -->
+			</h:form>
 			<!-- <h:outputLabel>Courses:</h:outputLabel>
 			<h:inputText value="#{studentForm.courses}" id="courses"
 				required="true" requiredMessage="Courses is required" />

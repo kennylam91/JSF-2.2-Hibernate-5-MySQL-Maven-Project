@@ -39,10 +39,10 @@ public class Subject {
 	private float coefficient;
 	private float score;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	Set<Student> students = new HashSet<Student>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "students")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "students")
 	private Set<Course> courses = new HashSet<Course>();
 
 }
