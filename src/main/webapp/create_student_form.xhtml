@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Create new student</title>
+</h:head>
+<h:body>
+	<h3>Create new student:</h3>
+	<h:form id="form" style="margin-top: 10px;">
+		<h:panelGrid columns="3">
+
+			<h:outputLabel>First name:</h:outputLabel>
+			<h:inputText value="#{studentForm.firstName}" id="firstName"
+				required="true" requiredMessage="Firstname is required" />
+			<h:message for="firstName" />
+
+			<h:outputLabel>Last name:</h:outputLabel>
+			<h:inputText value="#{studentForm.lastName}" id="lastName"
+				required="true" requiredMessage="Lastname is required" />
+			<h:message for="lastName" />
+
+			<h:outputLabel>Age:</h:outputLabel>
+			<h:inputText value="#{studentForm.age}" id="age" required="true"
+				requiredMessage="Age is required" />
+			<h:message for="age" />
+
+			<h:outputLabel>Phone:</h:outputLabel>
+			<h:inputText value="#{studentForm.phone}" id="phone" required="true"
+				requiredMessage="Phone is required" />
+			<h:message for="phone" />
+
+			<h:outputLabel>Email:</h:outputLabel>
+			<h:inputText value="#{studentForm.email}" id="email" required="true"
+				requiredMessage="Email is required" />
+			<h:message for="email" />
+
+			<h:commandButton value="Create" styleClass="save"
+				action="#{studentController.createStudent(studentForm)}" />
+
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
