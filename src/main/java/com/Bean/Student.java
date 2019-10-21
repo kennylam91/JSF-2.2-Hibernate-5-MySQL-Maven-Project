@@ -1,5 +1,6 @@
 package com.Bean;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,9 +43,9 @@ public class Student {
 	private String email;
 	private String note;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Subject> subjects;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private Set<Subject> subjects = new HashSet<Subject>();
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Course> courses;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private Set<Course> courses = new HashSet<Course>();
 }

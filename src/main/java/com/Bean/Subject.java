@@ -1,5 +1,6 @@
 package com.Bean;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -38,10 +39,10 @@ public class Subject {
 	private float coefficient;
 	private float score;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	Set<Student> students;
+	@ManyToMany(fetch = FetchType.LAZY)
+	Set<Student> students = new HashSet<Student>();
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "students")
-	private Set<Course> courses;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "students")
+	private Set<Course> courses = new HashSet<Course>();
 
 }

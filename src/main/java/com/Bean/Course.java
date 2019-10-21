@@ -2,6 +2,7 @@ package com.Bean;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -29,21 +30,21 @@ import lombok.Setter;
 @SessionScoped
 public class Course {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-  private String name;
+	private String name;
 
-  private String code;
+	private String code;
 
-  private Calendar startTime;
+	private Calendar startTime;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  Set<Student> students;
+	@ManyToMany(fetch = FetchType.LAZY)
+	Set<Student> students = new HashSet<Student>();
 
-  @ManyToOne
-  @JoinColumn(name = "subject_id", nullable = false)
-  private Subject subject;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "subject_id", nullable = false)
+	private Subject subject;
 
 }

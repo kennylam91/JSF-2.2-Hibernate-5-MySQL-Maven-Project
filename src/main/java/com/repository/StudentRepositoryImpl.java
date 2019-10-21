@@ -31,10 +31,15 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 	@SuppressWarnings("unchecked")
 	public List<Student> findAllStudents() {
 		Session session = this.sessionFactory.openSession();
-		Criteria cr = session.createCriteria(Student.class);
-		List<Student> customerList = cr.list();
+		List<Student> studentList = session
+				.createQuery(
+							"select s " + 
+							"from Student s " + 
+							"left join fetch s.subjects " + 
+							"left join fetch s.courses ")
+				.list();
 		session.close();
-		return customerList;
+		return studentList;
 	}
 
 	public Long saveStudent(Student student) {
@@ -92,7 +97,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 				transaction.rollback();
 			}
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 
