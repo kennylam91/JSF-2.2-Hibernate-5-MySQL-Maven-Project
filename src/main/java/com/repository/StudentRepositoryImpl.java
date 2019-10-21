@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -33,10 +34,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 		Session session = this.sessionFactory.openSession();
 		List<Student> studentList = session
 				.createQuery(
-							"select s " + 
-							"from Student s " + 
-							"left join fetch s.subjects " + 
-							"left join fetch s.courses ")
+						"select s " + "from Student s " + "left join fetch s.subjects " + "left join fetch s.courses ")
 				.list();
 		session.close();
 		return studentList;
@@ -88,7 +86,12 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 
-			Student student = session.get(Student.class, studentId);
+//			Student student = session.get(Student.class, studentId);
+			Query query = session
+					.createQuery("select s " + "from Student s " + "left join fetch s.courses "
+							+ "left join fetch s.subjects " + "where s.id = :studentId")
+					.setParameter("studentId", studentId);
+			Student student = (Student) query.uniqueResult();
 
 			transaction.commit();
 			return student;
