@@ -18,7 +18,7 @@
 			action="#{studentController.getCreateForm()}"
 			style="margin-right:20px;" styleClass="ui-priority-primary" />
 	</h:form>
-	<p:dataTable value="#{studentController.students}" var="student"
+	<p:dataTable value="#{studentController.studentDtos}" var="student"
 		id="student_list_table">
 		<p:column headerText="code">
 			<h:outputText value="#{student.code}" />
@@ -29,11 +29,11 @@
 		<p:column headerText="Lastname">
 			<h:outputText value="#{student.lastName}" />
 		</p:column>
-		<p:column headerText="Age">
-			<h:outputText value="#{student.age}" />
+		<p:column headerText="Field">
+			<h:outputText value="#{student.field}" />
 		</p:column>
-		<p:column headerText="country">
-			<h:outputText value="#{student.country}" />
+		<p:column headerText="DOB">
+			<h:outputText value="#{student.DOB}" />
 		</p:column>
 		<p:column headerText="Phone">
 			<h:outputText value="#{student.phone}" />
@@ -43,6 +43,9 @@
 		</p:column>
 		<p:column headerText="Note">
 			<h:outputText value="#{student.note}" />
+		</p:column>
+		<p:column headerText="Note">
+			<h:outputText value="#{student.avgScore}" />
 		</p:column>
 		<p:column headerText="Action">
 			<h:form>

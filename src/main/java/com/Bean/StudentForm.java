@@ -1,10 +1,10 @@
 package com.Bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,22 +16,24 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@ManagedBean(name = "studentForm", eager = true)
+@ManagedBean(name = "studentForm")
 @SessionScoped
 public class StudentForm implements Serializable {
 
-  private static final long serialVersionUID = -5939218400151972369L;
+	private static final long serialVersionUID = -5939218400151972369L;
 
-  private Long Id;
+	private Long Id;
 
-  private String code;
-  private String firstName;
-  private String lastName;
-  private int age;
-  private String country;
-  private String phone;
-  private String email;
-  private String note;
-  private Set<Subject> subjects;
-  private Set<Course> courses;
+	private String code;
+	private String firstName;
+	private String lastName;
+	private Date DOB;
+	private String field;
+	private String country;
+	private String phone;
+	private String email;
+	private String note;
+	private float avgScore;
+	private Set<Subject> subjects;
+	private Set<Course> courses;
 }

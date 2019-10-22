@@ -36,7 +36,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 		List<StudentDto> studentDtoList = session
 				.createQuery(
 						"select new "+
-						"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.age,s.country,s.phone,s.email,s.note)"+
+						"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore)"+
 						"from Student s ")
 				.list();
 		session.close();

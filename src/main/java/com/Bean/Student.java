@@ -1,5 +1,7 @@
 package com.Bean;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,11 +39,14 @@ public class Student {
 	private String code;
 	private String firstName;
 	private String lastName;
-	private int age;
+	private Date DOB;
+	private String field;
 	private String country;
 	private String phone;
 	private String email;
 	private String note;
+	private float avgScore;
+	
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Subject> subjects = new HashSet<Subject>();

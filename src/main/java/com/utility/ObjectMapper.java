@@ -1,14 +1,16 @@
 package com.utility;
 
+import org.modelmapper.ModelMapper;
+
 import com.Bean.Student;
 import com.Bean.StudentForm;
 
 public class ObjectMapper {
+	public static ModelMapper mapper = new ModelMapper();
 
 	public static void convertToStudent(StudentForm studentForm, Student student) {
 		student.setFirstName(studentForm.getFirstName());
 		student.setLastName(studentForm.getLastName());
-		student.setAge(studentForm.getAge());
 		student.setEmail(studentForm.getEmail());
 		student.setPhone(studentForm.getPhone());
 		student.setNote(studentForm.getNote());
@@ -20,7 +22,6 @@ public class ObjectMapper {
 	}
 
 	public static void convertToStudentForm(Student student, StudentForm studentForm) {
-		studentForm.setAge(student.getAge());
 		studentForm.setEmail(student.getEmail());
 		studentForm.setFirstName(student.getFirstName());
 		studentForm.setLastName(student.getLastName());
@@ -33,4 +34,5 @@ public class ObjectMapper {
 		studentForm.setCourses(student.getCourses());
 		studentForm.setSubjects(student.getSubjects());
 	}
+
 }

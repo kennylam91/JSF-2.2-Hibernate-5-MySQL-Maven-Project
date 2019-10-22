@@ -1,5 +1,8 @@
 package com.Bean;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -14,15 +17,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @ManagedBean(name = "studentDto")
 @SessionScoped
-public class StudentDto {
+public class StudentDto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8116736993772045415L;
 	private Long Id;
 	private String code;
 	private String firstName;
 	private String lastName;
-	private int age;
-	private String country;
+	private String field;
+	private Date DOB;
 	private String phone;
 	private String email;
 	private String note;
+	private float avgScore;
+	
 }
