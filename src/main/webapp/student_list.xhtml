@@ -28,13 +28,13 @@
 
 			<f:facet name="header">
 				<div class="ui-g">
-					<div class="ui-g-4 left">
+					<div class="ui-g-2 left">
 						<p:commandButton value="New Student" id="new_student"
 							action="#{studentController.getCreateForm()}"
 							style="margin-right:20px;display:inline;" ajax="false" />
 					</div>
 
-					<div class="ui-g-4">
+					<div class="ui-g-6">
 						<h:outputText value="Rows:" />
 						<p:selectOneMenu id="rowsperpage"
 							value="#{studentController.pagination.rowsperpage}">
@@ -53,6 +53,23 @@
 								listener="#{studentController.onPaginationChange()}"
 								update="form" />
 						</p:inputText>
+
+						<h:outputText value="Ordered by:" />
+						<p:selectOneMenu id="ordered_by"
+							value="#{studentController.pagination.orderBy}">
+							<p:ajax event="valueChange"
+								listener="#{studentController.onPaginationChange()}"
+								update="form" />
+							<f:selectItem itemLabel="code" itemValue="code" />
+							<f:selectItem itemLabel="firstName" itemValue="firstName" />
+							<f:selectItem itemLabel="lastName" itemValue="lastName" />
+							<f:selectItem itemLabel="field" itemValue="field" />
+							<f:selectItem itemLabel="dob" itemValue="dob" />
+							<f:selectItem itemLabel="phone" itemValue="phone" />
+							<f:selectItem itemLabel="email" itemValue="email" />
+							<f:selectItem itemLabel="avgScore" itemValue="avgScore" />
+							<f:selectItem itemLabel="note" itemValue="note" />
+						</p:selectOneMenu>
 					</div>
 
 					<div class="ui-g-4 right">

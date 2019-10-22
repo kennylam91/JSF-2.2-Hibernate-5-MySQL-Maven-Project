@@ -49,9 +49,9 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("select new "
 				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
-				+ "from Student s " + "order by s.code ");
-		query.setMaxResults(pagination.getRowsperpage());
+				+ "from Student s " + "order by s." + pagination.getOrderBy());
 		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsperpage());
+		query.setMaxResults(pagination.getRowsperpage());
 		List<StudentDto> studentDtoList = query.list();
 		session.close();
 		return studentDtoList;

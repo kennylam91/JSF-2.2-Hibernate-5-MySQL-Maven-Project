@@ -22,4 +22,6 @@ public class Pagination {
 
 	private int page = 1;
 
+	private String orderBy = "code";
+
 }
