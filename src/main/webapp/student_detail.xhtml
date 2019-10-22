@@ -10,8 +10,6 @@
 </h:head>
 <h:body>
 	<h3>Student Detail</h3>
-	#{studentForm}
-	<br />
 	<h:form id="student-detail-form" style="margin-top: 10px;">
 		<h:panelGrid columns="3">
 
@@ -28,6 +26,20 @@
 				required="true" requiredMessage="Lastname is required" />
 			<h:message for="lastName" />
 
+			<h:outputLabel>Date of birth:</h:outputLabel>
+			<p:datePicker id="dob" value="#{studentForm.DOB}" showIcon="true" />
+			<h:message for="dob" />
+
+			<h:outputLabel>Field:</h:outputLabel>
+			<h:inputText value="#{studentForm.field}" id="field" required="true"
+				requiredMessage="Field is required" />
+			<h:message for="field" />
+
+			<h:outputLabel>Country:</h:outputLabel>
+			<h:inputText value="#{studentForm.country}" id="country"
+				required="true" requiredMessage="Country is required" />
+			<h:message for="country" />
+
 			<h:outputLabel>Phone:</h:outputLabel>
 			<h:inputText value="#{studentForm.phone}" id="phone" required="true"
 				requiredMessage="Phone is required" />
@@ -38,10 +50,27 @@
 				requiredMessage="Email is required" />
 			<h:message for="email" />
 
-			<h:outputLabel>Country:</h:outputLabel>
-			<h:inputText value="#{studentForm.country}" id="country"
-				required="true" requiredMessage="Country is required" />
-			<h:message for="country" />
+			<h:outputLabel>Note:</h:outputLabel>
+			<h:inputText value="#{studentForm.note}" id="note" required="false" />
+			<h:message for="email" />
+
+			<h:outputLabel>Average Score:</h:outputLabel>
+			<h:inputText value="#{studentForm.avgScore}" id="avgScore"
+				required="false" />
+			<h:message for="avgScore" />
+
+			<h:outputLabel>Scores:</h:outputLabel>
+			<h:inputText value="#{studentForm.scores}" id="scores"
+				required="false" />
+			<h:message for="scores" />
+
+			<h:outputLabel>Subjects:</h:outputLabel>
+			<!-- <h:inputText value="#{studentForm.subjects}" id="subjects"
+				required="false" /> -->
+			<h:form>
+				
+			</h:form>
+			<h:message for="subjects" />
 
 			<h:commandButton value="Save" styleClass="save"
 				action="#{studentController.update(studentForm)}" />
