@@ -94,7 +94,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 					.createQuery(
 							"select s "+ 
 							"from Student s "+ 
-							"left join fetch s.courses "+ 
+							"left join fetch s.scores "+ 
 							"left join fetch s.subjects "+ 
 							"where s.id = :studentId")
 					.setParameter("studentId", studentId);

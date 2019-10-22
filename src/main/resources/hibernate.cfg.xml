@@ -27,5 +27,6 @@
 		<mapping class="com.Bean.Student" />
 		<mapping class="com.Bean.Subject" />
 		<mapping class="com.Bean.Course" />
+		<mapping class="com.Bean.Score" />
 	</session-factory>
 </hibernate-configuration>

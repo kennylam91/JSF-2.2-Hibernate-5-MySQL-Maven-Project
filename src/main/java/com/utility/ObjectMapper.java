@@ -6,18 +6,20 @@ import com.Bean.Student;
 import com.Bean.StudentForm;
 
 public class ObjectMapper {
-	public static ModelMapper mapper = new ModelMapper();
 
 	public static void convertToStudent(StudentForm studentForm, Student student) {
 		student.setFirstName(studentForm.getFirstName());
 		student.setLastName(studentForm.getLastName());
+		student.setDOB(studentForm.getDOB());
 		student.setEmail(studentForm.getEmail());
 		student.setPhone(studentForm.getPhone());
 		student.setNote(studentForm.getNote());
 		student.setId(studentForm.getId());
 		student.setCode(studentForm.getCode());
+		student.setField(studentForm.getField());
+		student.setAvgScore(studentForm.getAvgScore());
 		student.setCountry(studentForm.getCountry());
-		student.setCourses(studentForm.getCourses());
+		student.setScores(studentForm.getScores());
 		student.setSubjects(studentForm.getSubjects());
 	}
 
@@ -27,11 +29,13 @@ public class ObjectMapper {
 		studentForm.setLastName(student.getLastName());
 		studentForm.setNote(student.getNote());
 		studentForm.setPhone(student.getPhone());
+		studentForm.setField(student.getField());
 		studentForm.setId(student.getId());
-		;
+		studentForm.setDOB(student.getDOB());
 		studentForm.setCode(student.getCode());
+		studentForm.setAvgScore(student.getAvgScore());
 		studentForm.setCountry(student.getCountry());
-		studentForm.setCourses(student.getCourses());
+		studentForm.setScores(student.getScores());
 		studentForm.setSubjects(student.getSubjects());
 	}
 

@@ -76,10 +76,9 @@ public class StudentController implements Serializable {
 	}
 
 	public String getStudentDetail(Long studentId) throws Exception {
-		initStudentForm();
-		System.out.println(studentForm);
 		Student student = studentService.findStudentById(studentId);
 		ObjectMapper.convertToStudentForm(student, studentForm);
+		System.out.println(studentForm);
 		return "student_detail?faces-redirect=true";
 	}
 

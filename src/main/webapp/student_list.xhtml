@@ -41,19 +41,21 @@
 		<p:column headerText="Email">
 			<h:outputText value="#{student.email}" />
 		</p:column>
+		<p:column headerText="Avg Score">
+			<h:outputText value="#{student.avgScore}" />
+		</p:column>
 		<p:column headerText="Note">
 			<h:outputText value="#{student.note}" />
 		</p:column>
-		<p:column headerText="Note">
-			<h:outputText value="#{student.avgScore}" />
-		</p:column>
+		
 		<p:column headerText="Action">
 			<h:form>
-				<h:commandButton value="Delete" id="delete_button"
-					action="#{studentController.deleteStudent(student.id)}">
-				</h:commandButton>
+				
 				<h:commandButton value="Detail" id="detail_button"
 					action="#{studentController.getStudentDetail(student.id)}">
+				</h:commandButton>
+				<h:commandButton value="Del" id="delete_button"
+					action="#{studentController.deleteStudent(student.id)}">
 				</h:commandButton>
 			</h:form>
 		</p:column>

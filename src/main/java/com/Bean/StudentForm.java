@@ -23,7 +23,6 @@ public class StudentForm implements Serializable {
 	private static final long serialVersionUID = -5939218400151972369L;
 
 	private Long Id;
-
 	private String code;
 	private String firstName;
 	private String lastName;
@@ -35,5 +34,5 @@ public class StudentForm implements Serializable {
 	private String note;
 	private float avgScore;
 	private Set<Subject> subjects;
-	private Set<Course> courses;
+	private Set<Score> scores;
 }

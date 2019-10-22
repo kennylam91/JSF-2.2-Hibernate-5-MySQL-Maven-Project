@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,15 +35,25 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(name = "code", nullable = false)
 	private String code;
+
+	@Column(name = "name", nullable = false)
 	private String name;
+
+	@Column(name = "description", nullable = true)
+	private String description;
+
+	@Column(name = "coefficient", nullable = false)
 	private float coefficient;
+
+	@Column(name = "score", nullable = true)
 	private float score;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	Set<Student> students = new HashSet<Student>();
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "students")
+	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<Course>();
 
 }

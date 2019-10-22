@@ -1,0 +1,11 @@
+INSERT INTO `test`.`students` (`Id`, `DOB`, `avgScore`, `code`, `country`, `email`, `field`, `firstName`, `lastName`, `note`, `phone`) VALUES ('1', '1991-1-1', '7', 'A01', 'VN', 'lam@gmail.com', 'Java', 'Lam', 'Pham', 'aaaaa', '0983989384');
+INSERT INTO `test`.`students` (`Id`, `DOB`, `avgScore`, `code`, `country`, `email`, `field`, `firstName`, `lastName`, `note`, `phone`) VALUES ('2', '1990-1-1', '7.5', 'A02', 'VN', 'vu@gmail.com', 'PHP', 'Vu', 'Nguyen', 'bbbbb', '0938938909');
+
+INSERT INTO `test`.`subjects` (`id`, `code`, `coefficient`, `description`, `name`, `score`) VALUES ('1', 'JC', '3', 'Java Core', 'Java Core', '5');
+INSERT INTO `test`.`subjects` (`id`, `code`, `coefficient`, `description`, `name`, `score`) VALUES ('2', 'JA', '5', 'Java Advance', 'Java Advance', '7');
+
+
+INSERT INTO `test`.`courses` (`id`, `begin_time`, `code`, `description`, `finish_time`, `name`, `subject_id`) VALUES ('1', '2019-10-22', 'JC01', 'Java Core 01', '2019-11-22', 'Java Core Course 01', '1');
+INSERT INTO `test`.`courses` (`id`, `begin_time`, `code`, `description`, `finish_time`, `name`, `subject_id`) VALUES ('2', '2019-10-23', 'JC02', 'Java Core 02', '2019-11-23', 'Java Core Course 02', '1');
+INSERT INTO `test`.`courses` (`id`, `begin_time`, `code`, `description`, `finish_time`, `name`, `subject_id`) VALUES ('3', '2019-10-24', 'JC01', 'Java Advance 01', '2019-11-24', 'Java Advance Course 01', '2');
+

@@ -28,11 +28,6 @@
 				required="true" requiredMessage="Lastname is required" />
 			<h:message for="lastName" />
 
-			<h:outputLabel>Age:</h:outputLabel>
-			<h:inputText value="#{studentForm.age}" id="age" required="true"
-				requiredMessage="Age is required" />
-			<h:message for="age" />
-
 			<h:outputLabel>Phone:</h:outputLabel>
 			<h:inputText value="#{studentForm.phone}" id="phone" required="true"
 				requiredMessage="Phone is required" />
@@ -47,45 +42,6 @@
 			<h:inputText value="#{studentForm.country}" id="country"
 				required="true" requiredMessage="Country is required" />
 			<h:message for="country" />
-
-
-			<h:outputLabel>Subjects:</h:outputLabel>
-			<h:form>
-				<p:dataList value="#{studentForm.subjects}" var="subject"
-					id="subjects" type="ordered">
-					<h:outputLabel>Code:</h:outputLabel>
-					<h:inputText value="#{subject.code}" id="studentSubjectCode"
-						required="true" requiredMessage="Subject Code is required" />
-					<h:message for="studentSubjectCode" />
-
-					<h:outputLabel>Name:</h:outputLabel>
-					<h:inputText value="#{subject.name}" id="studentSubjectName"
-						required="true" requiredMessage="Subject Name is required" />
-					<h:message for="studentSubjectName" />
-				</p:dataList>
-			</h:form>
-			<h:message />
-
-			<h:outputLabel>Courses:</h:outputLabel>
-			<h:form>
-				<p:dataList value="#{studentForm.courses}" var="course" id="courses"
-					type="ordered">
-					<h:outputLabel>Code:</h:outputLabel>
-					<h:inputText value="#{course.code}" id="studentCourseCode"
-						required="true" requiredMessage="Course Code is required" />
-					<h:message for="studentCourseCode" />
-
-					<h:outputLabel>Name:</h:outputLabel>
-					<h:inputText value="#{course.name}" id="studentCoursetName"
-						required="true" requiredMessage="Course name is required" />
-					<h:message for="studentCourseName" />
-				</p:dataList>
-			</h:form>
-			<!-- <h:outputLabel>Courses:</h:outputLabel>
-			<h:inputText value="#{studentForm.courses}" id="courses"
-				required="true" requiredMessage="Courses is required" />
-			<h:message for="courses"></h:message> -->
-
 
 			<h:commandButton value="Save" styleClass="save"
 				action="#{studentController.update(studentForm)}" />
