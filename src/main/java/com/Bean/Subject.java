@@ -50,9 +50,6 @@ public class Subject {
 	@Column(name = "score", nullable = true)
 	private float score;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	Set<Student> students = new HashSet<Student>();
-
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<Course>();
 

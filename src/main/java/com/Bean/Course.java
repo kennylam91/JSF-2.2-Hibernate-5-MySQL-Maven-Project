@@ -51,13 +51,11 @@ public class Course {
 	@Column(name = "finish_time", nullable = true)
 	private Calendar finishTime;
 
-	@OneToMany
-	private Set<Score> scores = new HashSet<Score>();
+	@Column(name = "status", nullable = false)
+	private Boolean status;
 
-	/*
-	 * @ManyToMany(fetch = FetchType.EAGER) Set<Student> students = new
-	 * HashSet<Student>();
-	 */
+	@ManyToMany(fetch = FetchType.EAGER)
+	Set<Student> students = new HashSet<Student>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id", nullable = false)

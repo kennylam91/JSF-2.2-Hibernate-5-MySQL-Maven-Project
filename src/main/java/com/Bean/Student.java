@@ -68,16 +68,7 @@ public class Student {
 	@Column(name = "avg_score", nullable = true)
 	private float avgScore;
 
-	@OneToMany
-	private Set<Score> scores = new HashSet<Score>();
-
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Subject> subjects = new HashSet<Subject>();
+	private Set<Course> courses = new HashSet<Course>();
 
-	/*
-	 * @ManyToMany(fetch = FetchType.EAGER)
-	 * 
-	 * @JoinTable(name = "scores") private Set<Course> courses = new
-	 * HashSet<Course>();
-	 */
 }

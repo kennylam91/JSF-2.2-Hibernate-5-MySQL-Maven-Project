@@ -59,18 +59,10 @@
 				required="false" />
 			<h:message for="avgScore" />
 
-			<h:outputLabel>Scores:</h:outputLabel>
-			<h:inputText value="#{studentForm.scores}" id="scores"
+			<h:outputLabel>Courses:</h:outputLabel>
+			<h:inputText value="#{studentForm.courses}" id="courses"
 				required="false" />
-			<h:message for="scores" />
-
-			<h:outputLabel>Subjects:</h:outputLabel>
-			<!-- <h:inputText value="#{studentForm.subjects}" id="subjects"
-				required="false" /> -->
-			<h:form>
-				
-			</h:form>
-			<h:message for="subjects" />
+			<h:message for="courses" />
 
 			<h:commandButton value="Save" styleClass="save"
 				action="#{studentController.update(studentForm)}" />

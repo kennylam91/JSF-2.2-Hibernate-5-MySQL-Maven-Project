@@ -2,6 +2,7 @@ package com.Bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -33,6 +34,6 @@ public class StudentForm implements Serializable {
 	private String email;
 	private String note;
 	private float avgScore;
-	private Set<Subject> subjects;
-	private Set<Score> scores;
+	private Set<Course> courses;
+
 }
