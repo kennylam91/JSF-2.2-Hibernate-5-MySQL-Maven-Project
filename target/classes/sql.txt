@@ -1,5 +1,5 @@
-INSERT INTO `test`.`students` (`Id`, `DOB`, `avgScore`, `code`, `country`, `email`, `field`, `firstName`, `lastName`, `note`, `phone`) VALUES ('1', '1991-1-1', '7', 'A01', 'VN', 'lam@gmail.com', 'Java', 'Lam', 'Pham', 'aaaaa', '0983989384');
-INSERT INTO `test`.`students` (`Id`, `DOB`, `avgScore`, `code`, `country`, `email`, `field`, `firstName`, `lastName`, `note`, `phone`) VALUES ('2', '1990-1-1', '7.5', 'A02', 'VN', 'vu@gmail.com', 'PHP', 'Vu', 'Nguyen', 'bbbbb', '0938938909');
+INSERT INTO `test`.`students` (`Id`, `dob`, `avg_score`, `code`, `country`, `email`, `field`, `first_name`, `last_name`, `note`, `phone`) VALUES ('1', '1991-1-1', '7', 'A01', 'VN', 'lam@gmail.com', 'Java', 'Lam', 'Pham', 'aaaaa', '0983989384');
+INSERT INTO `test`.`students` (`Id`, `dob`, `avg_score`, `code`, `country`, `email`, `field`, `first_name`, `last_name`, `note`, `phone`) VALUES ('2', '1990-1-1', '7.5', 'A02', 'VN', 'vu@gmail.com', 'PHP', 'Vu', 'Nguyen', 'bbbbb', '0938938909');
 
 INSERT INTO `test`.`subjects` (`id`, `code`, `coefficient`, `description`, `name`, `score`) VALUES ('1', 'JC', '3', 'Java Core', 'Java Core', '5');
 INSERT INTO `test`.`subjects` (`id`, `code`, `coefficient`, `description`, `name`, `score`) VALUES ('2', 'JA', '5', 'Java Advance', 'Java Advance', '7');

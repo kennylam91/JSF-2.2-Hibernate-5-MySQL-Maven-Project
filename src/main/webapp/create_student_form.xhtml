@@ -13,6 +13,11 @@
 	<h:form id="form" style="margin-top: 10px;">
 		<h:panelGrid columns="3">
 
+			<h:outputLabel>Code:</h:outputLabel>
+			<h:inputText value="#{studentForm.code}" id="code" required="true"
+				requiredMessage="code is required" />
+			<h:message for="code" />
+
 			<h:outputLabel>First name:</h:outputLabel>
 			<h:inputText value="#{studentForm.firstName}" id="firstName"
 				required="true" requiredMessage="Firstname is required" />
@@ -23,10 +28,19 @@
 				required="true" requiredMessage="Lastname is required" />
 			<h:message for="lastName" />
 
-			<h:outputLabel>Age:</h:outputLabel>
-			<h:inputText value="#{studentForm.age}" id="age" required="true"
-				requiredMessage="Age is required" />
-			<h:message for="age" />
+			<h:outputLabel>Date of birth:</h:outputLabel>
+			<p:datePicker id="dob" value="#{studentForm.DOB}" showIcon="true" />
+			<h:message for="dob" />
+
+			<h:outputLabel>Field:</h:outputLabel>
+			<h:inputText value="#{studentForm.field}" id="field" required="true"
+				requiredMessage="Field is required" />
+			<h:message for="field" />
+
+			<h:outputLabel>Country:</h:outputLabel>
+			<h:inputText value="#{studentForm.country}" id="country"
+				required="true" requiredMessage="Country is required" />
+			<h:message for="country" />
 
 			<h:outputLabel>Phone:</h:outputLabel>
 			<h:inputText value="#{studentForm.phone}" id="phone" required="true"

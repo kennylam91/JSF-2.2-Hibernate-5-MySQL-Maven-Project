@@ -59,6 +59,15 @@ public class StudentController implements Serializable {
 		studentForm.setFirstName(null);
 		studentForm.setLastName(null);
 		studentForm.setPhone(null);
+		studentForm.setCode(null);
+		studentForm.setCountry(null);
+		studentForm.setDOB(null);
+		studentForm.setField(null);
+		studentForm.setAvgScore(0);
+		studentForm.setId(null);
+		studentForm.setNote(null);
+		studentForm.setScores(null);
+		studentForm.setSubjects(null);
 	}
 
 	public String createStudent(StudentForm studentForm) {
