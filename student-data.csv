@@ -1,0 +1,9 @@
+Id,dob,avg_score,code,country,email,field,first_name,last_name,note,phone
+4,"1995-10-03 00:00:00",0,A03,Vietnam,thang@gmail.com,JAVA,thang,"pham van ",NULL,0352180691
+5,"1994-10-01 00:00:00",0,A04,Vietnam,dung@gmail.com,PHP,dung,vu,NULL,03829827294
+6,"1996-10-02 00:00:00",0,A05,Vietnam,viet@gmail.com,JAVA,viet,dang,NULL,09284729877
+7,"2001-10-22 00:00:00",0,A06,Vietnam,thao@gmail.com,PHP,thao,dang,NULL,09728495829
+8,"1993-01-15 00:00:00",0,A08,Vietnam,hiep@gmail.com,PHP,nguyen,hiep,NULL,02365498756
+9,"1994-05-02 00:00:00",0,A07,Vietnam,dung@gmail.com,PHP,"tran van ",dung,NULL,0326549875
+10,"1996-06-02 00:00:00",0,A09,Vietnam,an@gmail.com,PYTHON,"tran dinh",an,NULL,03256498756
+11,"1998-06-02 00:00:00",0,A10,Vietnam,anh@gmail.com,JAVA,"nguyen tuan",anh,NULL,0235698745

@@ -5,6 +5,7 @@ package com.repository;
 
 import java.util.List;
 
+import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 
@@ -22,5 +23,7 @@ public interface StudentRepository {
 	Student findStudentById(Long studentId);
 
 	List<StudentDto> findAllStudents();
+	
+	List<StudentDto> findStudentsByPagination(Pagination pagination);
 
 }

@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import org.modelmapper.ModelMapper;
 
+import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.Bean.StudentForm;
@@ -38,14 +39,17 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{studentService}")
 	private StudentServiceImpl studentService;
 
+	@ManagedProperty(value = "#{pagination}")
+	private Pagination pagination;
+
 	private List<StudentDto> studentDtos;
 
-	public List<StudentDto> getStudentDtos() {
-		return studentService.findAllStudents();
+	public List<StudentDto> getStudentDtos(Pagination pagination) {
+		return studentService.findStudentsByPagination(pagination);
 	}
 
 	public String getStudentListForm() {
-		studentDtos = studentService.getStudentList();
+		studentDtos = studentService.findStudentsByPagination(pagination);
 		return "student_list?faces-redirect=true";
 	}
 
@@ -97,6 +101,12 @@ public class StudentController implements Serializable {
 		studentService.updateStudent(student);
 		studentDtos = studentService.findAllStudents();
 		return "student_list?faces-redirect=true";
+	}
+	
+	public void onPaginationChange() {
+		System.out.println("pagination change");
+		System.out.println(pagination);
+		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 
 }

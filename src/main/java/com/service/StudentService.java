@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.List;
 
+import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 
@@ -16,4 +17,6 @@ public interface StudentService {
 	Student findStudentById(Long studentId);
 
 	List<StudentDto> findAllStudents();
+	
+	List<StudentDto> findStudentsByPagination(Pagination pagination);
 }

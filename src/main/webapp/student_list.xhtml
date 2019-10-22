@@ -9,56 +9,105 @@
 
 
 <h:head>
+	<style type="text/css">
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+</style>
 	<title>Student List</title>
 </h:head>
 <h:body>
 	<h3>Student List</h3>
-	<h:form id="create_student_form">
-		<p:commandButton value="New Student" id="create_student_btn"
-			action="#{studentController.getCreateForm()}"
-			style="margin-right:20px;" styleClass="ui-priority-primary" />
+	<h:form id="form">
+		<p:dataTable value="#{studentController.studentDtos}" var="student"
+			id="student_list_table">
+
+			<f:facet name="header">
+				<div class="ui-g">
+					<div class="ui-g-4 left">
+						<p:commandButton value="New Student" id="new_student"
+							action="#{studentController.getCreateForm()}"
+							style="margin-right:20px;display:inline;" ajax="false" />
+					</div>
+
+					<div class="ui-g-4">
+						<h:outputText value="Rows:" />
+						<p:selectOneMenu id="rowsperpage"
+							value="#{studentController.pagination.rowsperpage}">
+							<p:ajax event="valueChange"
+								listener="#{studentController.onPaginationChange()}"
+								update="form" />
+							<f:selectItem itemLabel="5" itemValue="5" />
+							<f:selectItem itemLabel="10" itemValue="10" />
+							<f:selectItem itemLabel="20" itemValue="20" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Page:" />
+						<p:inputText id="page"
+							value="#{studentController.pagination.page}">
+							<p:ajax event="keyup"
+								listener="#{studentController.onPaginationChange()}"
+								update="form" />
+						</p:inputText>
+					</div>
+
+					<div class="ui-g-4 right">
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="" style="width:150px"
+								placeholder="Enter keyword" />
+						</p:outputPanel>
+					</div>
+				</div>
+
+
+
+			</f:facet>
+
+			<p:column headerText="code">
+				<h:outputText value="#{student.code}" />
+			</p:column>
+			<p:column headerText="Firstname">
+				<h:outputText value="#{student.firstName}" />
+			</p:column>
+			<p:column headerText="Lastname">
+				<h:outputText value="#{student.lastName}" />
+			</p:column>
+			<p:column headerText="Field">
+				<h:outputText value="#{student.field}" />
+			</p:column>
+			<p:column headerText="DOB">
+				<h:outputText value="#{student.DOB}" />
+			</p:column>
+			<p:column headerText="Phone">
+				<h:outputText value="#{student.phone}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{student.email}" />
+			</p:column>
+			<p:column headerText="Avg Score">
+				<h:outputText value="#{student.avgScore}" />
+			</p:column>
+			<p:column headerText="Note">
+				<h:outputText value="#{student.note}" />
+			</p:column>
+
+			<p:column headerText="Action">
+				<h:form>
+
+					<h:commandButton value="Detail" id="detail_button"
+						action="#{studentController.getStudentDetail(student.id)}">
+					</h:commandButton>
+					<h:commandButton value="Del" id="delete_button"
+						action="#{studentController.deleteStudent(student.id)}">
+					</h:commandButton>
+				</h:form>
+			</p:column>
+		</p:dataTable>
 	</h:form>
-	<p:dataTable value="#{studentController.studentDtos}" var="student"
-		id="student_list_table">
-		<p:column headerText="code">
-			<h:outputText value="#{student.code}" />
-		</p:column>
-		<p:column headerText="Firstname">
-			<h:outputText value="#{student.firstName}" />
-		</p:column>
-		<p:column headerText="Lastname">
-			<h:outputText value="#{student.lastName}" />
-		</p:column>
-		<p:column headerText="Field">
-			<h:outputText value="#{student.field}" />
-		</p:column>
-		<p:column headerText="DOB">
-			<h:outputText value="#{student.DOB}" />
-		</p:column>
-		<p:column headerText="Phone">
-			<h:outputText value="#{student.phone}" />
-		</p:column>
-		<p:column headerText="Email">
-			<h:outputText value="#{student.email}" />
-		</p:column>
-		<p:column headerText="Avg Score">
-			<h:outputText value="#{student.avgScore}" />
-		</p:column>
-		<p:column headerText="Note">
-			<h:outputText value="#{student.note}" />
-		</p:column>
-		
-		<p:column headerText="Action">
-			<h:form>
-				
-				<h:commandButton value="Detail" id="detail_button"
-					action="#{studentController.getStudentDetail(student.id)}">
-				</h:commandButton>
-				<h:commandButton value="Del" id="delete_button"
-					action="#{studentController.deleteStudent(student.id)}">
-				</h:commandButton>
-			</h:form>
-		</p:column>
-	</p:dataTable>
 </h:body>
 </html>

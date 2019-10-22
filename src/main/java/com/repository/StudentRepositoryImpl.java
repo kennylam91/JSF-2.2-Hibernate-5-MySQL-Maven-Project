@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.util.HibernateUtil;
@@ -33,12 +34,25 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 	@SuppressWarnings("unchecked")
 	public List<StudentDto> findAllStudents() {
 		Session session = this.sessionFactory.openSession();
-		List<StudentDto> studentDtoList = session
-				.createQuery(
-						"select new "+
-						"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore)"+
-						"from Student s ")
-				.list();
+		Query query = session.createQuery("select new "
+				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
+				+ "from Student s " + "order by s.code ");
+		query.setMaxResults(20);
+
+		List<StudentDto> studentDtoList = query.list();
+		session.close();
+		return studentDtoList;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("select new "
+				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
+				+ "from Student s " + "order by s.code ");
+		query.setMaxResults(pagination.getRowsperpage());
+		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsperpage());
+		List<StudentDto> studentDtoList = query.list();
 		session.close();
 		return studentDtoList;
 	}
@@ -92,10 +106,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 //			Student student = session.get(Student.class, studentId);
 			Query query = session
 					.createQuery(
-							"select s "+ 
-							"from Student s "+ 
-							"left join fetch s.courses "+
-							"where s.id = :studentId")
+							"select s " + "from Student s " + "left join fetch s.courses " + "where s.id = :studentId")
 					.setParameter("studentId", studentId);
 			Student student = (Student) query.uniqueResult();
 

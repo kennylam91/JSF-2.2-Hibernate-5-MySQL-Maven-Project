@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.repository.StudentRepository;
@@ -29,10 +30,6 @@ public class StudentServiceImpl implements StudentService, Serializable {
 
 	@ManagedProperty(value = "#{studentRepository}")
 	StudentRepository studentRepository;
-
-	public List<StudentDto> getStudentList() {
-		return studentRepository.findAllStudents();
-	}
 
 	@Override
 	public Long saveStudent(Student student) {
@@ -60,6 +57,11 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	public List<StudentDto> findAllStudents() {
 		return studentRepository.findAllStudents();
 
+	}
+
+	@Override
+	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
+		return studentRepository.findStudentsByPagination(pagination);
 	}
 
 }

@@ -19,11 +19,9 @@ import lombok.Setter;
 @SessionScoped
 public class StudentDto implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8116736993772045415L;
-	private Long Id;
+	private Long id;
 	private String code;
 	private String firstName;
 	private String lastName;
