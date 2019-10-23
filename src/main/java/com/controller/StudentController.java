@@ -5,6 +5,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
+import org.apache.log4j.Logger;
+
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
@@ -25,10 +28,10 @@ import lombok.Setter;
 @SessionScoped
 public class StudentController implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7828547113215254846L;
+	
+	private static final Logger logger = Logger.getLogger(StudentController.class);
+
 
 	@ManagedProperty(value = "#{studentForm}")
 	private StudentForm studentForm;
@@ -100,6 +103,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void onPaginationChange() {
+		logger.info(pagination.toString());
 		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 

@@ -11,11 +11,6 @@
 	text-align: left;
 }
 
-.shortInput {
-	display: inline-block;
-	width: 20px;
-}
-
 .right {
 	text-align: right;
 }
@@ -31,10 +26,12 @@
 		<f:facet name="header">
 			<div class="ui-g">
 				<div class="ui-g-2 left">
-					<p:commandButton value="New Student" id="new_student"
-						action="#{studentController.getCreateForm}"
-						style="margin-right:20px;display:inline;"
-						onkeypress="if( event.keyCode == 13){event.keyCode=0;}" />
+					<h:form id="create_student">
+						<p:commandButton value="New Student" id="new_student"
+							action="#{studentController.getCreateForm}"
+							style="margin-right:20px;display:inline;"
+							onkeypress="if( event.keyCode == 13){event.keyCode=0;}" />
+					</h:form>
 				</div>
 
 				<div class="ui-g-6">
@@ -75,7 +72,6 @@
 							<f:selectItem itemLabel="note" itemValue="note" />
 						</p:selectOneMenu>
 
-
 						<p:selectOneMenu id="asc_or_desc"
 							value="#{studentController.pagination.ascOrDesc}">
 							<p:ajax event="valueChange"
@@ -89,15 +85,35 @@
 
 
 				<div class="ui-g-4 right">
-					<p:outputPanel>
-						<h:outputText value="Search all fields:" />
-						<p:inputText id="globalFilter" onkeyup="" style="width:150px"
-							placeholder="Enter keyword" />
-					</p:outputPanel>
+					<h:form id="search">
+						<p:outputPanel>
+							<h:outputText value="Search by" />
+							<p:selectOneMenu id="search_field"
+								value="#{studentController.pagination.searchField}">
+								<p:ajax event="valueChange"
+									listener="#{studentController.onPaginationChange}"
+									update="student_list_table" />
+								<f:selectItem itemLabel="code" itemValue="code" />
+								<f:selectItem itemLabel="firstName" itemValue="firstName" />
+								<f:selectItem itemLabel="lastName" itemValue="lastName" />
+								<f:selectItem itemLabel="field" itemValue="field" />
+								<f:selectItem itemLabel="dob" itemValue="dob" />
+								<f:selectItem itemLabel="phone" itemValue="phone" />
+								<f:selectItem itemLabel="email" itemValue="email" />
+								<f:selectItem itemLabel="avgScore" itemValue="avgScore" />
+								<f:selectItem itemLabel="note" itemValue="note" />
+							</p:selectOneMenu>
+							<p:inputText id="search_keyword" onkeyup="" style="width:150px"
+								value="#{studentController.pagination.searchKeyword}"
+								placeholder="Enter keyword">
+								<p:ajax event="keyup"
+									listener="#{studentController.onPaginationChange}"
+									update="student_list_table" />
+							</p:inputText>
+						</p:outputPanel>
+					</h:form>
 				</div>
 			</div>
-
-
 
 		</f:facet>
 

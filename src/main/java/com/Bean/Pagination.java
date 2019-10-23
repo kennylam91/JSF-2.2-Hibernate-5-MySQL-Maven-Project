@@ -24,5 +24,9 @@ public class Pagination {
 	private String orderBy = "code";
 	
 	private String ascOrDesc = "asc";
+	
+	private String searchField = "code";
+	
+	private String searchKeyword = "";
 
 }
