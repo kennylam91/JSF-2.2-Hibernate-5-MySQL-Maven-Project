@@ -47,12 +47,39 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 		String fieldSearch = getStudentField(pagination.getSearchField());
 		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("select new "
-				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
-				+ "from Student s " + "where " + fieldSearch + " " + "like :searchKeyword" + " " + "order by "
-				+ orderedBy + " " + ascOrDesc + ",s.code asc");
+		Query query;
+		if(pagination.getSearchField().equals("all")) {
+			query = session.createQuery(
+					"select new "+
+					"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "+
+					"from Student s " + 
+					"where s.code like :searchKeyword or" + " " + 
+					"s.firstName like :searchKeyword or" + " " + 
+					"s.lastName like :searchKeyword or" + " " + 
+					"s.field like :searchKeyword or" + " " + 
+					"s.DOB like :searchKeyword or" + " " + 
+					"s.phone like :searchKeyword or" + " " + 
+					"s.email like :searchKeyword or" + " " +
+					"s.avgScore like :searchKeyword or" + " " +
+					"s.note like :searchKeyword " + " " + 
+					"order by "+orderedBy + " " + 
+					ascOrDesc + ",s.code asc");
 
-		query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+		}
+		else {
+			query = session.createQuery(
+					"select new "+
+					"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "+
+					"from Student s " + 
+					"where " + fieldSearch + " " + 
+					"like :searchKeyword" + " " + 
+					"order by "+orderedBy + " " + 
+					ascOrDesc + ",s.code asc");
+
+			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+		}
+		
 		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsperpage());
 		query.setMaxResults(pagination.getRowsperpage());
 		List<StudentDto> studentDtoList = query.list();
@@ -109,11 +136,11 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 //			Student student = session.get(Student.class, studentId);
 			Query query = session
 					.createQuery(
-							"select s " + "from Student s " + "left join fetch s.courses " + "where s.id = :studentId")
+							"select s from Student s " + 
+							"left join fetch s.courses " + 
+							"where s.id = :studentId")
 					.setParameter("studentId", studentId);
-			System.out.println(query);
 			Student student = (Student) query.uniqueResult();
-
 			transaction.commit();
 			return student;
 		} catch (Exception e) {
