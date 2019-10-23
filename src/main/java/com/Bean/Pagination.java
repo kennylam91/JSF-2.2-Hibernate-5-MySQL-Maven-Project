@@ -1,7 +1,6 @@
 package com.Bean;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import lombok.AllArgsConstructor;
@@ -23,5 +22,7 @@ public class Pagination {
 	private int page = 1;
 
 	private String orderBy = "code";
+	
+	private String ascOrDesc = "asc";
 
 }

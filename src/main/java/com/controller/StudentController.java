@@ -5,9 +5,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-
-import org.modelmapper.ModelMapper;
-
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
@@ -90,7 +87,6 @@ public class StudentController implements Serializable {
 	public String getStudentDetail(Long studentId) throws Exception {
 		Student student = studentService.findStudentById(studentId);
 		ObjectMapper.convertToStudentForm(student, studentForm);
-		System.out.println(studentForm);
 		return "student_detail?faces-redirect=true";
 	}
 
@@ -102,10 +98,8 @@ public class StudentController implements Serializable {
 		studentDtos = studentService.findAllStudents();
 		return "student_list?faces-redirect=true";
 	}
-	
+
 	public void onPaginationChange() {
-		System.out.println("pagination change");
-		System.out.println(pagination);
 		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 

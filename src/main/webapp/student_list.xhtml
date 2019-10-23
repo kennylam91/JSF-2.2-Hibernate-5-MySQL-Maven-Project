@@ -5,13 +5,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-
-
 <h:head>
 	<style type="text/css">
 .left {
 	text-align: left;
+}
+
+.shortInput {
+	display: inline-block;
+	width: 20px;
 }
 
 .right {
@@ -22,44 +24,46 @@
 </h:head>
 <h:body>
 	<h3>Student List</h3>
-	<h:form id="form">
-		<p:dataTable value="#{studentController.studentDtos}" var="student"
-			id="student_list_table">
+	<!-- <h:form id="form"> -->
+	<p:dataTable value="#{studentController.studentDtos}" var="student"
+		id="student_list_table">
 
-			<f:facet name="header">
-				<div class="ui-g">
-					<div class="ui-g-2 left">
-						<p:commandButton value="New Student" id="new_student"
-							action="#{studentController.getCreateForm()}"
-							style="margin-right:20px;display:inline;" ajax="false" />
-					</div>
+		<f:facet name="header">
+			<div class="ui-g">
+				<div class="ui-g-2 left">
+					<p:commandButton value="New Student" id="new_student"
+						action="#{studentController.getCreateForm}"
+						style="margin-right:20px;display:inline;"
+						onkeypress="if( event.keyCode == 13){event.keyCode=0;}" />
+				</div>
 
-					<div class="ui-g-6">
+				<div class="ui-g-6">
+					<h:form>
 						<h:outputText value="Rows:" />
 						<p:selectOneMenu id="rowsperpage"
 							value="#{studentController.pagination.rowsperpage}">
 							<p:ajax event="valueChange"
-								listener="#{studentController.onPaginationChange()}"
-								update="form" />
+								listener="#{studentController.onPaginationChange}"
+								update="student_list_table" />
 							<f:selectItem itemLabel="5" itemValue="5" />
 							<f:selectItem itemLabel="10" itemValue="10" />
 							<f:selectItem itemLabel="20" itemValue="20" />
 						</p:selectOneMenu>
 
 						<h:outputText value="Page:" />
-						<p:inputText id="page"
+						<p:inputText id="page" maxlength="3" size="3"
 							value="#{studentController.pagination.page}">
 							<p:ajax event="keyup"
-								listener="#{studentController.onPaginationChange()}"
-								update="form" />
+								listener="#{studentController.onPaginationChange}"
+								update="student_list_table" />
 						</p:inputText>
 
 						<h:outputText value="Ordered by:" />
 						<p:selectOneMenu id="ordered_by"
 							value="#{studentController.pagination.orderBy}">
 							<p:ajax event="valueChange"
-								listener="#{studentController.onPaginationChange()}"
-								update="form" />
+								listener="#{studentController.onPaginationChange}"
+								update="student_list_table" />
 							<f:selectItem itemLabel="code" itemValue="code" />
 							<f:selectItem itemLabel="firstName" itemValue="firstName" />
 							<f:selectItem itemLabel="lastName" itemValue="lastName" />
@@ -70,61 +74,73 @@
 							<f:selectItem itemLabel="avgScore" itemValue="avgScore" />
 							<f:selectItem itemLabel="note" itemValue="note" />
 						</p:selectOneMenu>
-					</div>
 
-					<div class="ui-g-4 right">
-						<p:outputPanel>
-							<h:outputText value="Search all fields:" />
-							<p:inputText id="globalFilter" onkeyup="" style="width:150px"
-								placeholder="Enter keyword" />
-						</p:outputPanel>
-					</div>
+
+						<p:selectOneMenu id="asc_or_desc"
+							value="#{studentController.pagination.ascOrDesc}">
+							<p:ajax event="valueChange"
+								listener="#{studentController.onPaginationChange}"
+								update="student_list_table" />
+							<f:selectItem itemLabel="asc" itemValue="asc" />
+							<f:selectItem itemLabel="desc" itemValue="desc" />
+						</p:selectOneMenu>
+					</h:form>
 				</div>
 
 
+				<div class="ui-g-4 right">
+					<p:outputPanel>
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter" onkeyup="" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</div>
+			</div>
 
-			</f:facet>
 
-			<p:column headerText="code">
-				<h:outputText value="#{student.code}" />
-			</p:column>
-			<p:column headerText="Firstname">
-				<h:outputText value="#{student.firstName}" />
-			</p:column>
-			<p:column headerText="Lastname">
-				<h:outputText value="#{student.lastName}" />
-			</p:column>
-			<p:column headerText="Field">
-				<h:outputText value="#{student.field}" />
-			</p:column>
-			<p:column headerText="DOB">
-				<h:outputText value="#{student.DOB}" />
-			</p:column>
-			<p:column headerText="Phone">
-				<h:outputText value="#{student.phone}" />
-			</p:column>
-			<p:column headerText="Email">
-				<h:outputText value="#{student.email}" />
-			</p:column>
-			<p:column headerText="Avg Score">
-				<h:outputText value="#{student.avgScore}" />
-			</p:column>
-			<p:column headerText="Note">
-				<h:outputText value="#{student.note}" />
-			</p:column>
 
-			<p:column headerText="Action">
-				<h:form>
+		</f:facet>
 
-					<h:commandButton value="Detail" id="detail_button"
-						action="#{studentController.getStudentDetail(student.id)}">
-					</h:commandButton>
-					<h:commandButton value="Del" id="delete_button"
-						action="#{studentController.deleteStudent(student.id)}">
-					</h:commandButton>
-				</h:form>
-			</p:column>
-		</p:dataTable>
-	</h:form>
+		<p:column headerText="code">
+			<h:outputText value="#{student.code}" />
+		</p:column>
+		<p:column headerText="Firstname">
+			<h:outputText value="#{student.firstName}" />
+		</p:column>
+		<p:column headerText="Lastname">
+			<h:outputText value="#{student.lastName}" />
+		</p:column>
+		<p:column headerText="Field">
+			<h:outputText value="#{student.field}" />
+		</p:column>
+		<p:column headerText="DOB">
+			<h:outputText value="#{student.DOB}" />
+		</p:column>
+		<p:column headerText="Phone">
+			<h:outputText value="#{student.phone}" />
+		</p:column>
+		<p:column headerText="Email">
+			<h:outputText value="#{student.email}" />
+		</p:column>
+		<p:column headerText="Avg Score">
+			<h:outputText value="#{student.avgScore}" />
+		</p:column>
+		<p:column headerText="Note">
+			<h:outputText value="#{student.note}" />
+		</p:column>
+
+		<p:column headerText="Action">
+			<h:form>
+
+				<h:commandButton value="Detail" id="detail_button"
+					action="#{studentController.getStudentDetail(student.id)}">
+				</h:commandButton>
+				<h:commandButton value="Del" id="delete_button"
+					action="#{studentController.deleteStudent(student.id)}">
+				</h:commandButton>
+			</h:form>
+		</p:column>
+	</p:dataTable>
+	<!-- </h:form> -->
 </h:body>
 </html>

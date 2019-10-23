@@ -1,11 +1,9 @@
 package com.repository;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,7 +36,6 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
 				+ "from Student s " + "order by s.code ");
 		query.setMaxResults(20);
-
 		List<StudentDto> studentDtoList = query.list();
 		session.close();
 		return studentDtoList;
@@ -46,10 +43,12 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 
 	@SuppressWarnings("unchecked")
 	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
+		String orderedBy = getOrderByParameter(pagination.getOrderBy());
+		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("select new "
 				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
-				+ "from Student s " + "order by s." + pagination.getOrderBy());
+				+ "from Student s " + "order by " + orderedBy + " " + ascOrDesc +",s.code");
 		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsperpage());
 		query.setMaxResults(pagination.getRowsperpage());
 		List<StudentDto> studentDtoList = query.list();
@@ -122,6 +121,33 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 		}
 
 		return null;
+	}
+
+	private String getOrderByParameter(String orderedBy) {
+		switch (orderedBy) {
+		case "firstName":
+			return "s.firstName";
+		case "lastName":
+			return "s.lastName";
+		case "field":
+			return "s.field";
+		case "dob":
+			return "s.dob";
+		case "phone":
+			return "email";
+		case "avgScore":
+			return "s.avgScore";
+		case "score":
+			return "s.score";
+		default:
+			return "s.code";
+		}
+	}
+
+	private String getAscOrDescParameter(String ascOrDesc) {
+		if (ascOrDesc.equalsIgnoreCase("desc"))
+			return "desc";
+		return "asc";
 	}
 
 }
