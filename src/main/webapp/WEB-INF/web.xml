@@ -9,18 +9,20 @@
 		<param-value>Development</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<!-- Welcome page -->
 	<welcome-file-list>
 		<welcome-file>faces/index.xhtml</welcome-file>
 	</welcome-file-list>
-	
+
 	<!-- Install slf4j bridge handler -->
 	<listener>
-		<listener-class>
-		    	com.util.MyListener
-		  </listener-class>
+		<listener-class>com.util.MyListener</listener-class>
 	</listener>
-	
 
 	<!-- JSF mapping -->
 	<servlet>

@@ -6,6 +6,16 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+			if (args.validationFailed) {
+				PF('dlg').show();
+			} else {
+				PF('dlg').hide();
+			}
+		}
+	</script>
+
 	<style type="text/css">
 .left {
 	text-align: left;
@@ -26,11 +36,62 @@
 		<f:facet name="header">
 			<div class="ui-g">
 				<div class="ui-g-2 left">
-					<h:form id="create_student">
-						<p:commandButton value="New Student" id="new_student"
-							action="#{studentController.getCreateForm}"
-							style="margin-right:20px;display:inline;"
-							onkeypress="if( event.keyCode == 13){event.keyCode=0;}" />
+					<h:form>
+						<p:commandButton id="create_student_button" class="ui-button"
+							type="button" value="Create Student" onclick="PF('dlg').show()" />
+
+						<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+						<p:dialog header="Create Student" widgetVar="dlg" resizable="true"
+							width="600px">
+							<p:panelGrid id="create_student_form" columns="2" cellpadding="5"
+								layout="grid">
+								<p:outputLabel for="code" value="Code:" />
+								<p:inputText id="code" value="#{studentForm.code}"
+									required="true" />
+
+								<h:outputLabel for="first_name" value="Firstname:" />
+								<p:inputText id="first_name" value="#{studentForm.firstName}"
+									required="true" label="first_name" />
+
+								<h:outputLabel for="last_name" value="Lastname:" />
+								<p:inputText id="last_name" value="#{studentForm.lastName}"
+									required="true" label="last_name" />
+
+								<h:outputLabel for="dob" value="Date of birth:" />
+								<p:datePicker id="dob" value="#{studentForm.DOB}"
+									required="true" label="dob" />
+
+								<h:outputLabel for="field" value="Field:" />
+								<p:inputText id="field" value="#{studentForm.field}"
+									required="true" label="field" />
+									
+								<h:outputLabel for="address" value="Address:" />
+								<p:inputText id="address" value="#{studentForm.address}"
+									required="true" label="address" />
+
+								<h:outputLabel for="phone" value="Phone:" />
+								<p:inputText id="phone" value="#{studentForm.phone}"
+									required="true" label="phone" />
+
+								<h:outputLabel for="email" value="Email:" />
+								<p:inputText id="email" value="#{studentForm.email}"
+									required="true" label="email" />
+
+								<f:facet name="footer">
+									<div align="center">
+										<p:commandButton id="create_student_button_confirm"
+											value="Create" update="student_list_table"
+											action="#{studentController.createStudent(studentForm)}"
+											oncomplete="handleLoginRequest(xhr, status, args)" />
+										<p:commandButton type="button" value="Cancel"
+											onclick="PF('dlg').hide()" />
+									</div>
+								</f:facet>
+							</p:panelGrid>
+
+
+						</p:dialog>
 					</h:form>
 				</div>
 

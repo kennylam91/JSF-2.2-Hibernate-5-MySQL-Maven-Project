@@ -18,7 +18,7 @@ public class ObjectMapper {
 		student.setCode(studentForm.getCode());
 		student.setField(studentForm.getField());
 		student.setAvgScore(studentForm.getAvgScore());
-		student.setCountry(studentForm.getCountry());
+		student.setAddress(studentForm.getAddress());
 		student.setCourses(studentForm.getCourses());
 
 	}
@@ -34,7 +34,7 @@ public class ObjectMapper {
 		studentForm.setDOB(student.getDOB());
 		studentForm.setCode(student.getCode());
 		studentForm.setAvgScore(student.getAvgScore());
-		studentForm.setCountry(student.getCountry());
+		studentForm.setAddress(student.getAddress());
 		studentForm.setCourses(student.getCourses());
 	}
 

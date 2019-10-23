@@ -64,7 +64,7 @@ public class StudentController implements Serializable {
 		studentForm.setLastName(null);
 		studentForm.setPhone(null);
 		studentForm.setCode(null);
-		studentForm.setCountry(null);
+		studentForm.setAddress(null);
 		studentForm.setDOB(null);
 		studentForm.setField(null);
 		studentForm.setAvgScore(0);
@@ -73,12 +73,11 @@ public class StudentController implements Serializable {
 		studentForm.setCourses(null);
 	}
 
-	public String createStudent(StudentForm studentForm) {
+	public void createStudent(StudentForm studentForm) {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.saveStudent(student);
-		studentDtos = studentService.findAllStudents();
-		return "student_list?faces-redirect=true";
+		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 
 	public String deleteStudent(Long studentId) throws Exception {

@@ -28,7 +28,7 @@ public class StudentForm implements Serializable {
 	private String lastName;
 	private Date DOB;
 	private String field;
-	private String country;
+	private String address;
 	private String phone;
 	private String email;
 	private String note;

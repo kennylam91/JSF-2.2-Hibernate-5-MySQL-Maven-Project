@@ -50,8 +50,8 @@ public class Student {
 	@Column(name = "field", nullable = false)
 	private String field;
 
-	@Column(name = "country", nullable = false)
-	private String country;
+	@Column(name = "address", nullable = false)
+	private String address;
 
 	@Column(name = "phone", nullable = false)
 	private String phone;
