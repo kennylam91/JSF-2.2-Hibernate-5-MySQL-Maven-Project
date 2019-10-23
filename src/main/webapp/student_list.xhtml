@@ -107,7 +107,7 @@
 							<p:inputText id="search_keyword" onkeyup="" style="width:150px"
 								value="#{studentController.pagination.searchKeyword}"
 								placeholder="Enter keyword">
-								<p:ajax event="keyup"
+								<p:ajax event="change"
 									listener="#{studentController.onPaginationChange}"
 									update="student_list_table" />
 							</p:inputText>
@@ -148,7 +148,6 @@
 
 		<p:column headerText="Action">
 			<h:form>
-
 				<h:commandButton value="Detail" id="detail_button"
 					action="#{studentController.getStudentDetail(student.id)}">
 				</h:commandButton>
