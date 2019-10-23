@@ -38,7 +38,9 @@
 				<div class="ui-g-2 left">
 					<h:form>
 						<p:commandButton id="create_student_button" class="ui-button"
-							type="button" value="Create Student" onclick="PF('dlg').show()" />
+							type="button" value="Create Student" onclick="PF('dlg').show()">
+							<f:ajax listener="#{studentController.getCreateForm}" event="click" ></f:ajax>
+							</p:commandButton>
 
 						<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
@@ -65,7 +67,7 @@
 								<h:outputLabel for="field" value="Field:" />
 								<p:inputText id="field" value="#{studentForm.field}"
 									required="true" label="field" />
-									
+
 								<h:outputLabel for="address" value="Address:" />
 								<p:inputText id="address" value="#{studentForm.address}"
 									required="true" label="address" />
@@ -89,8 +91,6 @@
 									</div>
 								</f:facet>
 							</p:panelGrid>
-
-
 						</p:dialog>
 					</h:form>
 				</div>

@@ -29,9 +29,8 @@ import lombok.Setter;
 public class StudentController implements Serializable {
 
 	private static final long serialVersionUID = 7828547113215254846L;
-	
-	private static final Logger logger = Logger.getLogger(StudentController.class);
 
+	private static final Logger logger = Logger.getLogger(StudentController.class);
 
 	@ManagedProperty(value = "#{studentForm}")
 	private StudentForm studentForm;
@@ -53,9 +52,9 @@ public class StudentController implements Serializable {
 		return "student_list?faces-redirect=true";
 	}
 
-	public String getCreateForm() {
-		initStudentForm();
-		return "create_student_form?faces-redirect=true";
+	public void getCreateForm() {
+		studentForm = new StudentForm();
+		System.out.println("click");
 	}
 
 	private void initStudentForm() {
