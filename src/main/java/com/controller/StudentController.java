@@ -48,15 +48,9 @@ public class StudentController implements Serializable {
 	}
 
 	public String getStudentListForm() {
-
+		clearStudentForm();
 		studentDtos = studentService.findStudentsByPagination(pagination);
 		return "student_list?faces-redirect=true";
-	}
-
-	public String backStudentList() {
-		clearStudentForm();
-		System.out.println(studentForm);
-		return "student_list";
 	}
 
 	private void clearStudentForm() {
@@ -104,7 +98,6 @@ public class StudentController implements Serializable {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.updateStudent(student);
-		studentDtos = studentService.findAllStudents();
 	}
 
 	public void onPaginationChange() {
