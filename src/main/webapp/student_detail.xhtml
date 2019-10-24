@@ -22,7 +22,7 @@
 				</f:facet>
 
 				<p:outputLabel>Student Code:</p:outputLabel>
-				<p:inplace id="student_code" editor="true">
+				<p:inplace editor="true">
 					<p:inputText value="#{studentForm.code}" id="studentCode"
 						required="true" />
 				</p:inplace>
@@ -30,20 +30,21 @@
 
 				<p:outputLabel for="firstName">Firstname:</p:outputLabel>
 				<p:inplace editor="true">
-					<p:inputText value="#{studentForm.firstName}" id="firstName" />
+					<p:inputText value="#{studentForm.firstName}" id="firstName"
+						required="true" />
 				</p:inplace>
 				<!-- <p:message for="firstName" /> -->
 
 				<p:outputLabel>Lastname:</p:outputLabel>
 				<p:inplace editor="true">
 					<p:inputText value="#{studentForm.lastName}" id="lastName"
-						required="true" requiredMessage="Lastname is required" />
+						required="true" />
 				</p:inplace>
 				<!-- 	<p:message for="lastName" /> -->
 
 				<p:outputLabel>Date of birth:</p:outputLabel>
 				<p:inplace editor="true">
-					<p:calendar id="dob" pattern="dd/MM/yyyy"
+					<p:calendar id="dob" pattern="dd/MM/yyyy" required="true"
 						value="#{studentForm.DOB}" showOn="button">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:calendar>
@@ -61,7 +62,7 @@
 				<p:outputLabel>Address:</p:outputLabel>
 				<p:inplace editor="true">
 					<p:inputText value="#{studentForm.address}" id="address"
-						required="true" requiredMessage="Address is required" />
+						requiredMessage="Address is required" />
 				</p:inplace>
 				<!-- <p:message for="address" /> -->
 

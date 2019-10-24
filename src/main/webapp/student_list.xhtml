@@ -227,7 +227,7 @@
 					<p:ajax event="valueChange"
 						listener="#{studentController.onPaginationChange}"
 						update="student_list_table" />
-					<f:selectItem itemLabel="2" itemValue="2" />
+					<f:selectItem itemLabel="10" itemValue="10" />
 					<f:selectItem itemLabel="20" itemValue="20" />
 					<f:selectItem itemLabel="50" itemValue="50" />
 				</p:selectOneMenu>
@@ -235,9 +235,6 @@
 				<h:outputText value="Page:" />
 				<h:outputText id="page" maxlength="3" size="3"
 					value="#{studentController.pagination.page}">
-					<!-- <p:ajax event="keyup"
-						listener="#{studentController.onPaginationChange}"
-						update="student_list_table" /> -->
 				</h:outputText>
 
 				<p:commandButton icon="pi pi-chevron-right"

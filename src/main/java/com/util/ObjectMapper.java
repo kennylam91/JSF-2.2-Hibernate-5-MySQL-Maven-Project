@@ -1,4 +1,4 @@
-package com.utility;
+package com.util;
 
 import org.modelmapper.ModelMapper;
 

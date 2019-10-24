@@ -13,7 +13,7 @@ import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.Bean.StudentForm;
 import com.service.StudentServiceImpl;
-import com.utility.ObjectMapper;
+import com.util.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
