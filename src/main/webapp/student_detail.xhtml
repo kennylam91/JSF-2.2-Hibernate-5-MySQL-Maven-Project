@@ -6,68 +6,109 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
+	<style type="text/css">
+.column {
+	font-weight: bold;
+}
+</style>
 	<title>Student detail</title>
 </h:head>
 <h:body>
-	<h3>Student Detail</h3>
-	<h:form id="student-detail-form" style="margin-top: 10px;">
-		<h:panelGrid columns="3">
+	<div style="margin: 20px;">
+		<h:form id="student-detail-form">
+			<p:panelGrid columns="2" style="width:550px;">
+				<f:facet name="header">
+					<p:outputLabel value="STUDENT DETAIL"></p:outputLabel>
+				</f:facet>
 
-			<h:outputLabel>StudentID:</h:outputLabel>
-			<h:inputText value="#{studentForm.code}" id="studentCode" />
-			<h:message for="studentCode" />
+				<p:outputLabel>Student Code:</p:outputLabel>
+				<p:inplace id="student_code" editor="true">
+					<p:inputText value="#{studentForm.code}" id="studentCode"
+						required="true" />
+				</p:inplace>
+				<!-- <p:message for="studentCode" /> -->
 
-			<h:outputLabel for="firstName">First name:</h:outputLabel>
-			<h:inputText value="#{studentForm.firstName}" id="firstName" />
-			<h:message for="firstName" />
+				<p:outputLabel for="firstName">Firstname:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.firstName}" id="firstName" />
+				</p:inplace>
+				<!-- <p:message for="firstName" /> -->
 
-			<h:outputLabel>Last name:</h:outputLabel>
-			<h:inputText value="#{studentForm.lastName}" id="lastName"
-				required="true" requiredMessage="Lastname is required" />
-			<h:message for="lastName" />
+				<p:outputLabel>Lastname:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.lastName}" id="lastName"
+						required="true" requiredMessage="Lastname is required" />
+				</p:inplace>
+				<!-- 	<p:message for="lastName" /> -->
 
-			<h:outputLabel>Date of birth:</h:outputLabel>
-			<p:datePicker id="dob" value="#{studentForm.DOB}" showIcon="true" />
-			<h:message for="dob" />
+				<p:outputLabel>Date of birth:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:calendar id="dob" pattern="dd/MM/yyyy"
+						value="#{studentForm.DOB}" showOn="button">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:calendar>
 
-			<h:outputLabel>Field:</h:outputLabel>
-			<h:inputText value="#{studentForm.field}" id="field" required="true"
-				requiredMessage="Field is required" />
-			<h:message for="field" />
+				</p:inplace>
+				<!-- <p:message for="dob" /> -->
 
-			<h:outputLabel>Address:</h:outputLabel>
-			<h:inputText value="#{studentForm.address}" id="address"
-				required="true" requiredMessage="Address is required" />
-			<h:message for="address" />
+				<p:outputLabel>Field:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.field}" id="field"
+						required="true" requiredMessage="Field is required" />
+				</p:inplace>
+				<!-- <p:message for="field" /> -->
 
-			<h:outputLabel>Phone:</h:outputLabel>
-			<h:inputText value="#{studentForm.phone}" id="phone" required="true"
-				requiredMessage="Phone is required" />
-			<h:message for="phone" />
+				<p:outputLabel>Address:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.address}" id="address"
+						required="true" requiredMessage="Address is required" />
+				</p:inplace>
+				<!-- <p:message for="address" /> -->
 
-			<h:outputLabel>Email:</h:outputLabel>
-			<h:inputText value="#{studentForm.email}" id="email" required="true"
-				requiredMessage="Email is required" />
-			<h:message for="email" />
+				<p:outputLabel>Phone:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.phone}" id="phone"
+						required="true" requiredMessage="Phone is required" />
+				</p:inplace>
+				<!-- <p:message for="phone" /> -->
 
-			<h:outputLabel>Note:</h:outputLabel>
-			<h:inputText value="#{studentForm.note}" id="note" required="false" />
-			<h:message for="email" />
+				<p:outputLabel>Email:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.email}" id="email"
+						required="true" requiredMessage="Email is required" />
+				</p:inplace>
+				<!-- <p:message for="email" /> -->
 
-			<h:outputLabel>Average Score:</h:outputLabel>
-			<h:inputText value="#{studentForm.avgScore}" id="avgScore"
-				required="false" />
-			<h:message for="avgScore" />
+				<p:outputLabel>Note:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.note}" id="note" required="false" />
+				</p:inplace>
+				<!-- <p:message for="note" /> -->
 
-			<h:outputLabel>Courses:</h:outputLabel>
-			<h:inputText value="#{studentForm.courses}" id="courses"
-				required="false" />
-			<h:message for="courses" />
+				<p:outputLabel>Average Score:</p:outputLabel>
+				<p:inplace editor="true">
+					<p:inputText value="#{studentForm.avgScore}" id="avgScore"
+						required="false" />
+				</p:inplace>
+				<!-- <p:message for="avgScore" /> -->
 
-			<h:commandButton value="Save" styleClass="save"
-				action="#{studentController.update(studentForm)}" />
+				<!-- <p:outputLabel>Courses:</p:outputLabel>
+					<p:outputLabel value="#{studentForm.courses}" id="courses"
+						required="false" /> -->
+				<!-- <p:message for="courses" /> -->
 
-		</h:panelGrid>
-	</h:form>
+				<f:facet name="footer">
+					<div align="center">
+						<p:commandButton value="Save Student" styleClass="save"
+							action="#{studentController.update(studentForm)}" />
+						<p:linkButton outcome="student_list" value="Back To List"
+							style="margin-left:20px;">
+						</p:linkButton>
+					</div>
+				</f:facet>
+
+			</p:panelGrid>
+		</h:form>
+	</div>
 </h:body>
 </html>

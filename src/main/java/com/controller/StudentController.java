@@ -74,16 +74,15 @@ public class StudentController implements Serializable {
 	public String getStudentDetail(Long studentId) throws Exception {
 		Student student = studentService.findStudentById(studentId);
 		ObjectMapper.convertToStudentForm(student, studentForm);
+		logger.info(studentForm);
 		return "student_detail?faces-redirect=true";
 	}
 
-	public String update(StudentForm studentForm) throws Exception {
-		// Student student = studentService.findStudentById(studentForm.getId());
+	public void update(StudentForm studentForm) throws Exception {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.updateStudent(student);
 		studentDtos = studentService.findAllStudents();
-		return "student_list?faces-redirect=true";
 	}
 
 	public void onPaginationChange() {
