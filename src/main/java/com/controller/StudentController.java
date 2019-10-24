@@ -48,8 +48,30 @@ public class StudentController implements Serializable {
 	}
 
 	public String getStudentListForm() {
+
 		studentDtos = studentService.findStudentsByPagination(pagination);
 		return "student_list?faces-redirect=true";
+	}
+
+	public String backStudentList() {
+		clearStudentForm();
+		System.out.println(studentForm);
+		return "student_list";
+	}
+
+	private void clearStudentForm() {
+		studentForm.setAddress(null);
+		studentForm.setAvgScore(0);
+		studentForm.setCode(null);
+		studentForm.setCourses(null);
+		studentForm.setDOB(null);
+		studentForm.setEmail(null);
+		studentForm.setField(null);
+		studentForm.setFirstName(null);
+		studentForm.setId(null);
+		studentForm.setLastName(null);
+		studentForm.setNote(null);
+		studentForm.setPhone(null);
 	}
 
 	public void getCreateForm() {
@@ -96,7 +118,7 @@ public class StudentController implements Serializable {
 			studentDtos = studentService.findStudentsByPagination(pagination);
 		}
 	}
-	
+
 	public void getNextPage() {
 		pagination.setPage(pagination.getPage() + 1);
 		studentDtos = studentService.findStudentsByPagination(pagination);

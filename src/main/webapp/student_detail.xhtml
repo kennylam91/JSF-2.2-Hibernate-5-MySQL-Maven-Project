@@ -102,9 +102,9 @@
 					<div align="center">
 						<p:commandButton value="Save Student" styleClass="save"
 							action="#{studentController.update(studentForm)}" />
-						<p:linkButton outcome="student_list" value="Back To List"
-							style="margin-left:20px;">
-						</p:linkButton>
+						<p:commandButton action="#{studentController.backStudentList}"
+							value="Back To List" style="margin-left:20px;">
+						</p:commandButton>
 					</div>
 				</f:facet>
 
