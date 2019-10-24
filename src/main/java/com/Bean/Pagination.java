@@ -25,7 +25,7 @@ public class Pagination {
 
 	private static final int CURRENT_PAGE_DEFAULT = 1;
 
-	private static final int ROWS_PER_PAGE_DEFAULT = 5;
+	private static final int ROWS_PER_PAGE_DEFAULT = 2;
 
 	private int rowsperpage = ROWS_PER_PAGE_DEFAULT;
 

@@ -60,8 +60,8 @@ public class StudentController implements Serializable {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.saveStudent(student);
-		
-		//update studentDtos for table student_list
+
+		// update studentDtos for table student_list
 		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 
@@ -88,6 +88,18 @@ public class StudentController implements Serializable {
 
 	public void onPaginationChange() {
 		logger.info(pagination.toString());
+		studentDtos = studentService.findStudentsByPagination(pagination);
+	}
+
+	public void getPreviousPage() {
+		if (pagination.getPage() > 1) {
+			pagination.setPage(pagination.getPage() - 1);
+			studentDtos = studentService.findStudentsByPagination(pagination);
+		}
+	}
+	
+	public void getNextPage() {
+		pagination.setPage(pagination.getPage() + 1);
 		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 
