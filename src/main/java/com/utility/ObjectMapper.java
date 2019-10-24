@@ -7,6 +7,8 @@ import com.Bean.StudentForm;
 
 public class ObjectMapper {
 
+	public static ModelMapper modelMapper = new ModelMapper();
+
 	public static void convertToStudent(StudentForm studentForm, Student student) {
 		student.setFirstName(studentForm.getFirstName());
 		student.setLastName(studentForm.getLastName());
@@ -37,5 +39,7 @@ public class ObjectMapper {
 		studentForm.setAddress(student.getAddress());
 		studentForm.setCourses(student.getCourses());
 	}
+	
+	
 
 }

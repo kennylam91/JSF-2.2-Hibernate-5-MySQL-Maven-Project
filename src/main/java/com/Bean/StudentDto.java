@@ -21,7 +21,6 @@ import lombok.ToString;
 @SessionScoped
 public class StudentDto implements Serializable {
 
-
 	private static final long serialVersionUID = 8116736993772045415L;
 	private Long id;
 	private String code;
@@ -33,5 +32,5 @@ public class StudentDto implements Serializable {
 	private String email;
 	private String note;
 	private float avgScore;
-	
+
 }

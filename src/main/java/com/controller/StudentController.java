@@ -54,28 +54,14 @@ public class StudentController implements Serializable {
 
 	public void getCreateForm() {
 		studentForm = new StudentForm();
-		System.out.println("click");
-	}
-
-	private void initStudentForm() {
-		studentForm.setEmail(null);
-		studentForm.setFirstName(null);
-		studentForm.setLastName(null);
-		studentForm.setPhone(null);
-		studentForm.setCode(null);
-		studentForm.setAddress(null);
-		studentForm.setDOB(null);
-		studentForm.setField(null);
-		studentForm.setAvgScore(0);
-		studentForm.setId(null);
-		studentForm.setNote(null);
-		studentForm.setCourses(null);
 	}
 
 	public void createStudent(StudentForm studentForm) {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.saveStudent(student);
+		
+		//update studentDtos for table student_list
 		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 

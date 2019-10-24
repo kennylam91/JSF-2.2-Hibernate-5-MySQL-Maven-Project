@@ -17,16 +17,26 @@ import lombok.ToString;
 @ManagedBean(name = "pagination")
 @SessionScoped
 public class Pagination {
-	private int rowsperpage = 5;
+	private static final String SEARCH_KEYWORD_DEFAULT = "";
 
-	private int page = 1;
+	private static final String ORDERBY_ASC_OR_DESC_DEFAULT = "asc";
 
-	private String orderBy = "code";
+	private static final String ORDERBY_FIELD_DEFAULT = "code";
+
+	private static final int CURRENT_PAGE_DEFAULT = 1;
+
+	private static final int ROWS_PER_PAGE_DEFAULT = 5;
+
+	private int rowsperpage = ROWS_PER_PAGE_DEFAULT;
+
+	private int page = CURRENT_PAGE_DEFAULT;
+
+	private String orderBy = ORDERBY_FIELD_DEFAULT;
 	
-	private String ascOrDesc = "asc";
+	private String ascOrDesc = ORDERBY_ASC_OR_DESC_DEFAULT;
 	
-	private String searchField = "code";
+	private String searchField = ORDERBY_FIELD_DEFAULT;
 	
-	private String searchKeyword = "";
+	private String searchKeyword = SEARCH_KEYWORD_DEFAULT;
 
 }

@@ -29,6 +29,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+	
 	@SuppressWarnings("unchecked")
 	public List<StudentDto> findAllStudents() {
 		Session session = this.sessionFactory.openSession();
