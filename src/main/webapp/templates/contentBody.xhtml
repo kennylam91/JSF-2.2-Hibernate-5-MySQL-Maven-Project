@@ -15,9 +15,9 @@
 			<div class="wpsp-card-head">
 				<div class="subject-inner wpsp-left wpsp-class-filter">
 					<div class="subject-inner wpsp-left wpsp-class-filter">
-						<!-- <form name="StudentClass" id="StudentClass" action="">
-							<label class="wpsp-labelMain">Select Class Name</label> 
-							<select name="ClassID" id="ClassID" class="wpsp-form-control">
+						<form name="StudentClass" id="StudentClass" action="">
+							<label class="wpsp-labelMain">Select Class Name</label> <select
+								name="ClassID" id="ClassID" class="wpsp-form-control">
 								<option value="all">All</option>
 								<option value="1">Class one</option>
 								<option value="2">Bachelor of Theology CC</option>
@@ -26,20 +26,7 @@
 								<option value="5">Paralelo A</option>
 								<option value="6">White Belt</option>
 							</select>
-						</form> -->
-						<h:form>
-							<h:panelGrid columns="2" style="margin-bottom:10px"
-								cellpadding="5">
-								<p:outputLabel for="console" value="Select Class Name"></p:outputLabel>
-								<p:selectOneMenu id="console"
-									value="#{selectOneMenuView.console}" style="width:125px">
-									<f:selectItem itemLabel="Select One" itemValue="" />
-									<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-									<f:selectItem itemLabel="PS4" itemValue="PS4" />
-									<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-								</p:selectOneMenu>
-							</h:panelGrid>
-						</h:form>
+						</form>
 					</div>
 				</div>
 				<div class="wpsp-right wpsp-import-export">
@@ -231,22 +218,20 @@
 						class="dataTables_wrapper form-inline dt-bootstrap">
 						<div class="wpsp-dataTable-top">
 							<div id="student_table_filter" class="dataTables_filter">
-								<label class="wpsp-label"> <p:inputText
-										styleClass="wpsp-form-control wpsp-input-sm" id="float-input" />
+								<label class="wpsp-label"> <input
+									class="wpsp-form-control wpsp-input-sm" />
 								</label>
-								<!-- <label class="wpsp-label"> <h:inputText type="search"
-										class="wpsp-form-control wpsp-input-sm"
-										placeholder="Search..." aria-controls="student_table" /></label> -->
 							</div>
 						</div>
+
+						<ui:insert name="student-list-table">
+							<ui:include src="/templates/student-list-table.xhtml"></ui:include>
+						</ui:insert>
+
 						<!-- <table id="student_table" class="wpsp-table dataTable dtr-inline"
 							cellspacing="0" width="100%" style="width: 100%;" role="grid"
 							aria-describedby="student_table_info"> -->
-						<div class="wpsp-table dataTable dtr-inline">
-							<ui:insert name="student-list-table">
-								<ui:include src="/templates/student-list-table.xhtml"></ui:include>
-							</ui:insert>
-						</div>
+
 						<!-- 	</table> -->
 						<div class="wpsp-dataTable-bottom">
 							<div class="wpsp-length-info">

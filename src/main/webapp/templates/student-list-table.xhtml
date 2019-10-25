@@ -13,7 +13,8 @@
 	<ui:composition>
 		<p:dataTable value="#{studentController.studentDtos}" var="student"
 			reflow="true" id="student_list_table" rowKey="student.Id"
-			selection="#{studentController.selectedStudentDtos}">
+			selection="#{studentController.selectedStudentDtos}"
+			styleClass="wpsp-table dataTable dtr-inline">
 			<!-- <f:facet name="header">
 				<ui:insert name="table-header">
 					<ui:include src="/templates/student-list-table-header.xhtml"></ui:include>
