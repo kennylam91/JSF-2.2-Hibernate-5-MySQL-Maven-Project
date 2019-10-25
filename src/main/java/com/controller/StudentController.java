@@ -43,6 +43,8 @@ public class StudentController implements Serializable {
 
 	private List<StudentDto> studentDtos;
 
+	private List<StudentDto> selectedStudentDtos;
+
 	public List<StudentDto> getStudentDtos(Pagination pagination) {
 		return studentService.findStudentsByPagination(pagination);
 	}

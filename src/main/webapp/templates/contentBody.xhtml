@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title><ui:insert name="title">Default title</ui:insert></title>
+</head>
+
+<body>
+	<ui:composition>
+		<div class="wpsp-card">
+			<div class="wpsp-card-head">
+				<div class="subject-inner wpsp-left wpsp-class-filter">
+					<div class="subject-inner wpsp-left wpsp-class-filter">
+						<!-- <form name="StudentClass" id="StudentClass" action="">
+							<label class="wpsp-labelMain">Select Class Name</label> 
+							<select name="ClassID" id="ClassID" class="wpsp-form-control">
+								<option value="all">All</option>
+								<option value="1">Class one</option>
+								<option value="2">Bachelor of Theology CC</option>
+								<option value="3">Class 8</option>
+								<option value="4">jss 1</option>
+								<option value="5">Paralelo A</option>
+								<option value="6">White Belt</option>
+							</select>
+						</form> -->
+						<h:form>
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="5">
+								<p:outputLabel for="console" value="Select Class Name"></p:outputLabel>
+								<p:selectOneMenu id="console"
+									value="#{selectOneMenuView.console}" style="width:125px">
+									<f:selectItem itemLabel="Select One" itemValue="" />
+									<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+									<f:selectItem itemLabel="PS4" itemValue="PS4" />
+									<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</h:form>
+					</div>
+				</div>
+				<div class="wpsp-right wpsp-import-export">
+					<div class="wpsp-btn-lists" disabled="disabled"
+						title="Please Purchase This Add-on">
+
+						<div class="wpsp-btn-list"
+							wpsp-tooltip="Please Purchase This Add-on">
+
+							<div class="wpsp-button-group wpsp-dropdownmain wpsp-left">
+								<button type="button" class="wpsp-btn wpsp-btn-success print"
+									id="PrintStudent" disabled="disabled" title="">
+									<i class="fa fa-print"></i> Print
+								</button>
+								<button type="button"
+									class="wpsp-btn wpsp-btn-success wpsp-dropdown-toggle"
+									disabled="disabled" title="">
+									<!-- <span class="sr-only">Toggle Dropdown</span> -->
+								</button>
+								<div class="wpsp-dropdown wpsp-dropdown-md">
+									<ul>
+										<li class="wpsp-drop-title wpsp-checkList">Select Columns
+											to Print</li>
+										<form id="StudentColumnForm" name="StudentColumnForm">
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_rollno" id="s_rollno"
+												checked="checked" /> <label for="s_rollno">Roll
+													Number</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_fname" id="s_fname"
+												checked="checked" /> <label for="s_fname">Student
+													First Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_mname" id="s_mname"
+												checked="checked" /> <label for="s_mname">Student
+													Middle Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_lname" id="s_lname"
+												checked="checked" /> <label for="s_lname">Student
+													Last Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_zipcode" id="s_zipcode"
+												checked="checked" /> <label for="s_zipcode">Zip
+													Code</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_country" id="s_country"
+												checked="checked" /> <label for="s_country">Country</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_gender" id="s_gender"
+												checked="checked" /> <label for="s_gender">Gender</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_address" id="s_address"
+												checked="checked" /> <label for="s_address">Current
+													Address</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_paddress" id="s_paddress"
+												checked="checked" /> <label for="s_paddress">Permanent
+													Address</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="p_fname " id="p_fname "
+												checked="checked" /> <label for="p_fname ">Parent
+													First Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_bloodgrp" id="s_bloodgrp"
+												checked="checked" /> <label for="s_bloodgrp">Blood
+													Group</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_dob" id="s_dob"
+												checked="checked" /> <label for="s_dob">Date Of
+													Birth</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_doj" id="s_doj"
+												checked="checked" /> <label for="s_doj">Date Of
+													Join</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_phone" id="s_phone"
+												checked="checked" /> <label for="s_phone">Phone
+													Number</label></li> <input type="hidden" name="ClassID" value="0" /> <input
+												type="hidden" name="exportstudent" value="exportstudent" />
+										</form>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+						<div class="wpsp-btn-list"
+							wpsp-tooltip="Please Purchase This Add-on">
+							<button id="ImportStudent"
+								class="wpsp-btn wpsp-dark-btn wpsp-popclick impt"
+								disabled="disabled" title="" data-pop="ImportModal">
+								<i class="fa fa-upload"></i> Import
+							</button>
+						</div>
+						<div class="wpsp-btn-list"
+							wpsp-tooltip="Please Purchase This Add-on">
+							<div class="wpsp-dropdownmain wpsp-button-group">
+								<button type="button" class="wpsp-btn print" id="ExportStudents"
+									disabled="disabled" title="">
+									<i class="fa fa-download"></i> Export
+								</button>
+								<button type="button"
+									class="wpsp-btn wpsp-btn-blue wpsp-dropdown-toggle"
+									disabled="disabled" title="">
+									<!-- <span class="sr-only">Toggle Dropdown</span> -->
+								</button>
+								<div id="exportcontainer" style="display: none;"></div>
+								<div class="wpsp-dropdown wpsp-dropdown-md wpsp-dropdown-right">
+									<ul>
+										<li class="wpsp-drop-title wpsp-checkList">Select Columns
+											to Export</li>
+										<form id="ExportColumnForm" name="ExportStudentColumn">
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_rollno" id="s_rollno"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_rollno">Roll Number</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_fname" id="s_fname"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_fname">Student First Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_mname" id="s_mname"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_mname">Student Middle Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_lname" id="s_lname"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_lname">Student Last Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_zipcode" id="s_zipcode"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_zipcode">Zip Code</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_country" id="s_country"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_country">Country</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_gender" id="s_gender"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_gender">Gender</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_address" id="s_address"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_address">Current Address</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_paddress" id="s_paddress"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_paddress">Permanent Address</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="p_fname " id="p_fname "
+												checked="checked" /> <label class="wpsp-label"
+												for="p_fname ">Parent First Name</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_bloodgrp" id="s_bloodgrp"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_bloodgrp">Blood Group</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_dob" id="s_dob"
+												checked="checked" /> <label class="wpsp-label" for="s_dob">Date
+													Of Birth</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_doj" id="s_doj"
+												checked="checked" /> <label class="wpsp-label" for="s_doj">Date
+													Of Join</label></li>
+											<li class="wpsp-checkList"><input type="checkbox"
+												name="StudentColumn[]" value="s_phone" id="s_phone"
+												checked="checked" /> <label class="wpsp-label"
+												for="s_phone">Phone Number</label></li> <input type="hidden"
+												name="ClassID" value="0" /> <input type="hidden"
+												name="exportstudent" value="exportstudent" />
+										</form>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="wpsp-card-body">
+				<div class="subject-head">
+					<div class="wpsp-bulkaction">
+						<select name="bulkaction" class="wpsp-form-control"
+							id="bulkaction">
+							<option value="">Select Action</option>
+							<option value="bulkUsersDelete">Delete</option>
+						</select>
+					</div>
+					<div id="student_table_wrapper"
+						class="dataTables_wrapper form-inline dt-bootstrap">
+						<div class="wpsp-dataTable-top">
+							<div id="student_table_filter" class="dataTables_filter">
+								<label class="wpsp-label"> <p:inputText
+										styleClass="wpsp-form-control wpsp-input-sm" id="float-input" />
+								</label>
+								<!-- <label class="wpsp-label"> <h:inputText type="search"
+										class="wpsp-form-control wpsp-input-sm"
+										placeholder="Search..." aria-controls="student_table" /></label> -->
+							</div>
+						</div>
+						<!-- <table id="student_table" class="wpsp-table dataTable dtr-inline"
+							cellspacing="0" width="100%" style="width: 100%;" role="grid"
+							aria-describedby="student_table_info"> -->
+						<div class="wpsp-table dataTable dtr-inline">
+							<ui:insert name="student-list-table">
+								<ui:include src="/templates/student-list-table.xhtml"></ui:include>
+							</ui:insert>
+						</div>
+						<!-- 	</table> -->
+						<div class="wpsp-dataTable-bottom">
+							<div class="wpsp-length-info">
+								<div class="dataTables_length" id="student_table_length">
+									<label class="wpsp-label">Show <select
+										name="student_table_length" aria-controls="student_table"
+										class="wpsp-form-control wpsp-input-sm"><option
+												value="10">10</option>
+											<option value="25">25</option>
+											<option value="50">50</option>
+											<option value="100">100</option></select> entries
+									</label>
+								</div>
+								<div class="dataTables_info" id="student_table_info"
+									role="status" aria-live="polite">Showing 1 to 8 of 8
+									entries</div>
+							</div>
+							<div class="dataTables_paginate paging_simple_numbers"
+								id="student_table_paginate" style="display: none;">
+								<ul class="pagination">
+									<li class="paginate_button previous disabled"
+										id="student_table_previous"><a href="#"
+										aria-controls="student_table" data-dt-idx="0" tabindex="0"><i
+											class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+									<li class="paginate_button active"><a href="#"
+										aria-controls="student_table" data-dt-idx="1" tabindex="0">1</a></li>
+									<li class="paginate_button next disabled"
+										id="student_table_next"><a href="#"
+										aria-controls="student_table" data-dt-idx="2" tabindex="0"><i
+											class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-body -->
+		</div>
+	</ui:composition>
+</body>
+
+</html>

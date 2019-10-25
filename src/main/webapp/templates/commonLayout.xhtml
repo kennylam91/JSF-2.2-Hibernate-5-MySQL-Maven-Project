@@ -11,20 +11,45 @@
 	<h:outputStylesheet library="primefaces" name="components.css" />
 	<h:outputStylesheet name="primeicons/primeicons.css"
 		library="primefaces" />
-	<h:outputStylesheet library="bootstrap-4.0.0"
-		name="dist/css/bootstrap.min.css" />
+	<h:outputStylesheet library="primefaces-nova-light"
+		name="components.css" />
 	<h:outputStylesheet library="css" name="styles.css" />
 
 	<script type="text/javascript" src="../resources/js/app.js"></script>
 </h:head>
 <h:body>
-	<div class="container">
+	<div class="">
 		<div id="header">
 			<ui:insert name="header">
 				<ui:include src="/templates/header.xhtml" />
 			</ui:insert>
 		</div>
-		<div id="body" class="row d-flex justify-content-center">
+		<div id="left-side-bar">
+			<ui:insert name="left-side-bar">
+				<ui:include src="/templates/leftSidebar.xhtml" />
+			</ui:insert>
+		</div>
+		<div class="wpsp-wrapper">
+			<!-- Main content -->
+			<div class="wpsp-container">
+				<div id="contentHead">
+					<ui:insert name="contentHead">
+						<ui:include src="/templates/contentHead.xhtml" />
+					</ui:insert>
+				</div>
+				<div id="contentBody">
+					<ui:insert name="contentBody">
+						<ui:include src="/templates/contentBody.xhtml" />
+					</ui:insert>
+				</div>
+				<div id="contentFooter">
+					<ui:insert name="contentFooter">
+						<ui:include src="/templates/contentFooter.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+		<!-- <div id="body" class="">
 			<div id="main">
 				<div id="content">
 					<ui:insert name="content">
@@ -37,7 +62,7 @@
 					<ui:include src="/templates/footer.xhtml" />
 				</ui:insert>
 			</div>
-		</div>
+		</div> -->
 
 	</div>
 </h:body>
