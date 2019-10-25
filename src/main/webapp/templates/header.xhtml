@@ -2,10 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
-		<h1>Default Header</h1>
+		<div class="row">
+			<div class="col-sm-2 py-3 px-4">
+				<h:form>
+					<p:menuButton value="Menu">
+						<p:menuitem value="Student" icon="pi pi-save" />
+						<p:menuitem value="Update" icon="pi pi-refresh" />
+						<p:menuitem value="Delete" ajax="false" icon="pi pi-times" />
+						<p:separator />
+						<p:menuitem value="Homepage" url="http://www.primefaces.org"
+							icon="pi pi-home" />
+					</p:menuButton>
+				</h:form>
+			</div>
+			<div class="d-flex d-center align-items-center">
+				<span><h2>Student Management System</h2></span>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
 	</ui:composition>
 </body>
 </html>

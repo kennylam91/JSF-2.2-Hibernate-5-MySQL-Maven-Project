@@ -1,3 +1,35 @@
-.red{
+.red {
 	color: red;
+}
+
+.container {
+	border: solid 1px gainsboro;
+}
+
+.ui-datatable-tablewrapper {
+	display: grid;
+}
+
+.ui-g div {
+	text-align: center;
+}
+
+.align_center {
+	vertical-align: sub;
+	display: inline-block;
+}
+
+.align-middle {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#student-list-table-content {
+	style ="display: grid;
+	width: 100%;
+}
+
+.d-center {
+	margin-right: auto;
+	margin-left: auto;
 }

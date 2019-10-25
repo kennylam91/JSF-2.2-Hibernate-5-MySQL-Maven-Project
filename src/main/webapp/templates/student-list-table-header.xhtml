@@ -9,12 +9,12 @@
 </head>
 <body>
 	<ui:composition>
-		<div class="ui-g">
-			<div class="ui-g-2 left">
+		<div class="ui-g ">
+			<div class="ui-g-3">
 				<h:form>
 					<p:commandButton id="create_student_button" class="ui-button"
 						action="#{studentController.getCreateForm}" type="button"
-						value="Create Student" onclick="PF('dlg').show()">
+						value="New Student" onclick="PF('dlg').show()">
 					</p:commandButton>
 
 					<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
@@ -71,11 +71,11 @@
 				</h:form>
 			</div>
 
-			<div class="ui-g-6 align_center">
+			<div class="ui-g-5 align_center">
 				<h:form id="order">
 					<p:outputLabel>
-						<h:outputText value="Ordered:" styleClass="align_center" />
-						<p:selectOneMenu id="ordered_by"
+						<h:outputText value="Order by: " styleClass="align_center mx-1" />
+						<p:selectOneMenu id="ordered_by" styleClass=""
 							value="#{studentController.pagination.orderBy}">
 							<p:ajax event="valueChange"
 								listener="#{studentController.onPaginationChange}"
@@ -108,7 +108,7 @@
 			<div class="ui-g-4 right align_center">
 				<h:form id="search">
 					<p:outputPanel>
-						<h:outputText value="Search: " />
+						<h:outputText value="Search: " styleClass="mx-1" />
 						<p:selectOneMenu id="search_field"
 							value="#{studentController.pagination.searchField}">
 							<p:ajax event="valueChange"
@@ -127,7 +127,7 @@
 						</p:selectOneMenu>
 						<p:inputText id="search_keyword" onkeyup="" style="width:35%"
 							value="#{studentController.pagination.searchKeyword}"
-							placeholder="Enter keyword">
+							placeholder="keyword">
 							<p:ajax event="change"
 								listener="#{studentController.onPaginationChange}"
 								update="student_list_table" />

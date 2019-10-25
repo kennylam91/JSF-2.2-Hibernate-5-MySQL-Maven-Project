@@ -8,17 +8,16 @@
 	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
-		<h2 class="red">Default leftSidebar</h2>
 		<h:form>
 			<p:panelMenu>
-				<p:submenu label="Student Management">
-					<p:menuitem value="Save" icon="pi pi-save" />
-					<p:menuitem value="Update" icon="pi pi-refresh" />
+				<p:submenu label="Student">
+					<p:menuitem value="Student List"/>
+					<p:menuitem value="Update" />
 				</p:submenu>
-				<p:submenu label="Non-Ajax Menuitem">
+				<p:submenu label="Course">
 					<p:menuitem value="Delete" icon="pi pi-times" />
 				</p:submenu>
-			</p:panelMenu>
+			</p:panelMenu>>
 		</h:form>
 	</ui:composition>
 </body>

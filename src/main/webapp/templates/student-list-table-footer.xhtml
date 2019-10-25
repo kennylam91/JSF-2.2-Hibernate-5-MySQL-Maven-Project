@@ -16,7 +16,7 @@
 				title="previous_page" action="#{studentController.getPreviousPage}"
 				update="student_list_table">
 			</p:commandButton>
-			<h:outputText value="Rows:" />
+			<h:outputText value="Rows:" styleClass="mx-1" />
 			<p:selectOneMenu id="rowsperpage"
 				value="#{studentController.pagination.rowsperpage}">
 				<p:ajax event="valueChange"
@@ -27,12 +27,12 @@
 				<f:selectItem itemLabel="50" itemValue="50" />
 			</p:selectOneMenu>
 
-			<h:outputText value="Page:" />
+			<h:outputText value="Page:" styleClass="mx-1" />
 			<h:outputText id="page" maxlength="3" size="3"
 				value="#{studentController.pagination.page}">
 			</h:outputText>
 
-			<p:commandButton icon="pi pi-chevron-right" style="margin-left:20px;"
+			<p:commandButton icon="pi pi-chevron-right" styleClass="mx-2"
 				title="next_page" action="#{studentController.getNextPage}"
 				update="student_list_table">
 			</p:commandButton>

@@ -8,35 +8,37 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title><ui:insert name="title" /></title>
-	<h:outputStylesheet library="css" name="styles.css" />
 	<h:outputStylesheet library="primefaces" name="components.css" />
-	<h:outputStylesheet library="primefaces-omega" name="theme.css" />
-</h:head>
-<h:body>
 	<h:outputStylesheet name="primeicons/primeicons.css"
 		library="primefaces" />
+	<h:outputStylesheet library="bootstrap-4.0.0/dist/css"
+		name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="styles.css" />
 
-	<div id="header">
-		<ui:insert name="header">
-			<ui:include src="/templates/header.xhtml" />
-		</ui:insert>
-	</div>
-	<div id="body" class="ui-g">
-		<div id="leftSidebar" class="ui-g-2">
-			<ui:insert name="leftSidebar">
-				<ui:include src="/templates/leftSidebar.xhtml"></ui:include>
+	<script type="text/javascript" src="../resources/js/app.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<div id="header">
+			<ui:insert name="header">
+				<ui:include src="/templates/header.xhtml" />
 			</ui:insert>
 		</div>
-		<div id="content" class="ui-g-10">
-			<ui:insert name="content">
-				<ui:include src="/templates/content.xhtml" />
-			</ui:insert>
+		<div id="body" class="row d-flex justify-content-center">
+			<div id="main">
+				<div id="content">
+					<ui:insert name="content">
+						<ui:include src="/templates/content.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+			<div id="footer" class="w-100">
+				<ui:insert name="footer">
+					<ui:include src="/templates/footer.xhtml" />
+				</ui:insert>
+			</div>
 		</div>
-	</div>
-	<div id="footer">
-		<ui:insert name="footer">
-			<ui:include src="/templates/footer.xhtml" />
-		</ui:insert>
+
 	</div>
 </h:body>
 </html>
