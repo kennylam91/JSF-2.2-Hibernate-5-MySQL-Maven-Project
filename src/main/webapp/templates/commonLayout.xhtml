@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="title" /></title>
+	<h:outputStylesheet library="css" name="styles.css" />
+	<h:outputStylesheet library="primefaces" name="components.css" />
+	<h:outputStylesheet library="primefaces-omega" name="theme.css" />
+</h:head>
+<h:body>
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+
+	<div id="header">
+		<ui:insert name="header">
+			<ui:include src="/templates/header.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="body" class="ui-g">
+		<div id="leftSidebar" class="ui-g-2">
+			<ui:insert name="leftSidebar">
+				<ui:include src="/templates/leftSidebar.xhtml"></ui:include>
+			</ui:insert>
+		</div>
+		<div id="content" class="ui-g-10">
+			<ui:insert name="content">
+				<ui:include src="/templates/content.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>
+	</div>
+</h:body>
+</html>

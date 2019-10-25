@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title><ui:insert name="title">Default title</ui:insert></title>
+</head>
+
+<body>
+	<p:column headerText="code">
+		<h:outputText value="#{student.code}" />
+	</p:column>
+	<p:column headerText="Firstname">
+		<h:outputText value="#{student.firstName}" />
+	</p:column>
+	<p:column headerText="Lastname">
+		<h:outputText value="#{student.lastName}" />
+	</p:column>
+	<p:column headerText="Field">
+		<h:outputText value="#{student.field}" />
+	</p:column>
+	<p:column headerText="DOB">
+		<h:outputText value="#{student.DOB}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+	</p:column>
+	<p:column headerText="Phone">
+		<h:outputText value="#{student.phone}" />
+	</p:column>
+	<p:column headerText="Email">
+		<h:outputText value="#{student.email}" />
+	</p:column>
+	<p:column headerText="Avg Score">
+		<h:outputText value="#{student.avgScore}" />
+	</p:column>
+	<p:column headerText="Action">
+		<h:form>
+			<h:commandButton value="Detail" id="detail_button"
+				action="#{studentController.getStudentDetail(student.id)}">
+			</h:commandButton>
+			<h:commandButton value="Del" id="delete_button"
+				action="#{studentController.deleteStudent(student.id)}">
+			</h:commandButton>
+		</h:form>
+	</p:column>
+</body>
+
+</html>
