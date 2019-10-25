@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<div>
+			<h:form id="student-detail-form" styleClass="mt-5">
+				<p:panelGrid columns="2" style="width:550px;">
+					<f:facet name="header">
+						<p:outputLabel value="STUDENT DETAIL"></p:outputLabel>
+					</f:facet>
+
+					<p:outputLabel>Student Code:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.code}" id="studentCode"
+							required="true" />
+					</p:inplace>
+					<!-- <p:message for="studentCode" /> -->
+
+					<p:outputLabel for="firstName">Firstname:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.firstName}" id="firstName"
+							required="true" />
+					</p:inplace>
+					<!-- <p:message for="firstName" /> -->
+
+					<p:outputLabel>Lastname:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.lastName}" id="lastName"
+							required="true" />
+					</p:inplace>
+					<!-- 	<p:message for="lastName" /> -->
+
+					<p:outputLabel>Date of birth:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:calendar id="dob" pattern="dd/MM/yyyy" required="true"
+							value="#{studentForm.DOB}" showOn="button">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:calendar>
+
+					</p:inplace>
+					<!-- <p:message for="dob" /> -->
+
+					<p:outputLabel>Field:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.field}" id="field"
+							required="true" requiredMessage="Field is required" />
+					</p:inplace>
+					<!-- <p:message for="field" /> -->
+
+					<p:outputLabel>Address:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.address}" id="address"
+							requiredMessage="Address is required" />
+					</p:inplace>
+					<!-- <p:message for="address" /> -->
+
+					<p:outputLabel>Phone:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.phone}" id="phone"
+							required="true" requiredMessage="Phone is required" />
+					</p:inplace>
+					<!-- <p:message for="phone" /> -->
+
+					<p:outputLabel>Email:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.email}" id="email"
+							required="true" requiredMessage="Email is required" />
+					</p:inplace>
+					<!-- <p:message for="email" /> -->
+
+					<p:outputLabel>Note:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.note}" id="note"
+							required="false" />
+					</p:inplace>
+					<!-- <p:message for="note" /> -->
+
+					<p:outputLabel>Average Score:</p:outputLabel>
+					<p:inplace editor="true">
+						<p:inputText value="#{studentForm.avgScore}" id="avgScore"
+							required="false" />
+					</p:inplace>
+					<!-- <p:message for="avgScore" /> -->
+
+					<!-- <p:outputLabel>Courses:</p:outputLabel>
+					<p:outputLabel value="#{studentForm.courses}" id="courses"
+						required="false" /> -->
+					<!-- <p:message for="courses" /> -->
+
+					<f:facet name="footer">
+						<div align="center">
+							<p:commandButton value="Save Student" styleClass="save"
+								action="#{studentController.update(studentForm)}" />
+							<p:commandButton action="#{studentController.getStudentListForm}"
+								value="Back To List" style="margin-left:20px;">
+							</p:commandButton>
+						</div>
+					</f:facet>
+
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

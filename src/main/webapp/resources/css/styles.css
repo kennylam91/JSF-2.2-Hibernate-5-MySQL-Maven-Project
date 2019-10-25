@@ -6,13 +6,9 @@
 	border: solid 1px gainsboro;
 }
 
-.ui-datatable-tablewrapper {
+/* .ui-datatable-tablewrapper {
 	display: grid;
-}
-
-.ui-g div {
-	text-align: center;
-}
+} */
 
 .align_center {
 	vertical-align: sub;
@@ -25,7 +21,7 @@
 }
 
 #student-list-table-content {
-	style ="display: grid;
+	display: grid;
 	width: 100%;
 }
 

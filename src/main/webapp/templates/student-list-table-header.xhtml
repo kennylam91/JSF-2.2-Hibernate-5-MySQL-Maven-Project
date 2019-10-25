@@ -9,7 +9,7 @@
 </head>
 <body>
 	<ui:composition>
-		<div class="ui-g ">
+		<div class="ui-g">
 			<div class="ui-g-3">
 				<h:form>
 					<p:commandButton id="create_student_button" class="ui-button"
@@ -21,8 +21,7 @@
 
 					<p:dialog header="Create Student" widgetVar="dlg" resizable="true"
 						modal="true" width="700px" height="400px">
-						<p:panelGrid id="create_student_form" columns="2" cellpadding="5"
-							layout="grid">
+						<p:panelGrid id="create_student_form" columns="2" cellpadding="5">
 							<p:outputLabel for="code" value="Code:" />
 							<p:inputText id="code" value="#{studentForm.code}"
 								required="true" />
@@ -37,7 +36,7 @@
 
 							<h:outputLabel for="dob" value="Date of birth:" />
 							<p:calendar id="dob" pattern="dd/MM/yyyy"
-								value="#{studentForm.DOB}" showOn="button">
+								value="#{studentForm.DOB}">
 							</p:calendar>
 
 							<h:outputLabel for="field" value="Field:" />
