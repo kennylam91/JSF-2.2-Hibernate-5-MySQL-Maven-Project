@@ -1,30 +1,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
 </head>
-
 <body>
-	<ui:composition>
-		<div class="wpsp-pageHead">
-			<h1 class="wpsp-pagetitle">Students Management</h1>
-			<div class="wpsp-right">
-				<ol class="wpsp-breadcrumb">
-					<div class="student"></div>
-					<li><a
-						href="https://demo.wpschoolpress.com/wp-admin/admin.php?page=sch-dashboard">Dashboard</a></li>
-					<li><a
-						href="https://demo.wpschoolpress.com/wp-admin/admin.php?page=sch-student&amp;tab=addstudent"><span
-							class="active">Students Management</span></a></li>
-				</ol>
-				<a class="wpsp-btn administrator"
-					href="https://demo.wpschoolpress.com/wp-admin/admin.php?page=sch-student&amp;tab=addstudent"><i
-					class="fa fa-plus-circle"></i> New Student</a>
-			</div>
-		</div>
-	</ui:composition>
-
+  <ui:composition>
+    <h:form>
+      <div class="wpsp-pageHead">
+        <h1 class="wpsp-pagetitle">Students Management</h1>
+        <div class="wpsp-right">
+          <ol class="wpsp-breadcrumb">
+            <li><a href="https://demo.wpschoolpress.com/wp-admin/admin.php?page=sch-dashboard">Dashboard</a></li>
+            <li><a href="https://demo.wpschoolpress.com/wp-admin/admin.php?page=sch-student&amp;tab=addstudent"><span
+                class="active">Students Management</span></a></li>
+          </ol>
+          <p:commandButton id="create_student_button" styleClass="wpsp-btn"
+            style="height:2.5rem; width:135px;padding:0;background-color: #00bdda;
+    border-color: #00bdda;"
+            action="#{studentController.getCreateForm}" value="New Student" onclick="PF('dlg').show()"
+            icon="pi pi-plus-circle">
+          </p:commandButton>
+        </div>
+      </div>
+      <p:growl id="growl" sticky="true" showDetail="true" life="1" />
+      <p:dialog header="Create Student" widgetVar="dlg" resizable="false">
+        <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
+          <h:outputLabel for="code" value="Code:" />
+          <p:inputText id="code" value="#{studentForm.code}" required="true" />
+          <h:outputLabel for="first_name" value="Firstname:" />
+          <p:inputText id="first_name" value="#{studentForm.firstName}" required="true" label="first_name" />
+          <h:outputLabel for="last_name" value="Lastname:" />
+          <p:inputText id="last_name" value="#{studentForm.lastName}" required="true" label="last_name" />
+          <h:outputLabel for="dob" value="Date of birth:" />
+          <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentForm.DOB}">
+          </p:datePicker>
+          <h:outputLabel for="field" value="Field:" />
+          <p:inputText id="field" value="#{studentForm.field}" required="true" label="field" />
+          <h:outputLabel for="address" value="Address:" />
+          <p:inputText id="address" value="#{studentForm.address}" required="true" label="address" />
+          <h:outputLabel for="phone" value="Phone:" />
+          <p:inputText id="phone" value="#{studentForm.phone}" required="true" label="phone" />
+          <h:outputLabel for="email" value="Email:" />
+          <p:inputText id="email" value="#{studentForm.email}" required="true" label="email" />
+          <f:facet name="footer">
+            <div align="center">
+              <p:commandButton id="create_student_button_confirm" value="Create"
+                update="student_list_table growl record_search_status create_student_form"
+                action="#{studentController.createStudent(studentForm)}"
+                oncomplete="handleLoginRequest(xhr, status, args)" />
+              <p:commandButton type="button" value="Cancel" onclick="PF('dlg').hide()" update="growl" />
+            </div>
+          </f:facet>
+        </p:panelGrid>
+      </p:dialog>
+    </h:form>
+  </ui:composition>
 </body>
-
 </html>

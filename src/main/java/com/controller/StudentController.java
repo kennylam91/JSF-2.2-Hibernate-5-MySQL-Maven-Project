@@ -78,9 +78,11 @@ public class StudentController implements Serializable {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.saveStudent(student);
-
+		
 		// update studentDtos for table student_list
 		studentDtos = studentService.findStudentsByPagination(pagination);
+		clearStudentForm();
+		System.out.println(studentForm);
 	}
 
 	public String deleteStudent(Long studentId) throws Exception {

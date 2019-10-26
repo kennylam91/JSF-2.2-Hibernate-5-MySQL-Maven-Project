@@ -1,5 +1,7 @@
 package com.Bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,7 +18,10 @@ import lombok.ToString;
 @ToString
 @ManagedBean(name = "pagination")
 @SessionScoped
-public class Pagination {
+public class Pagination implements Serializable{
+
+	private static final long serialVersionUID = -1964671145149488777L;
+
 	private static final String SEARCH_KEYWORD_DEFAULT = "";
 
 	private static final String ORDERBY_ASC_OR_DESC_DEFAULT = "asc";
