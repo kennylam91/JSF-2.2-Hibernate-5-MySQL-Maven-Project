@@ -3,8 +3,7 @@
 }
 
 .select_input {
-	display: block;
-	width: 100%;
+	display: inline-block;
 	height: calc(1.8125rem + 2px);
 	font-weight: 400;
 	line-height: 1.5;
@@ -19,6 +18,9 @@
 	font-size: 14px;
 	line-height: 1.5;
 	min-height: 20px;
+}
+wpsp-labelMain{
+	display:inline-block;
 }
 
 #student_list_table_head {
