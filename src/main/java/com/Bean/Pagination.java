@@ -29,7 +29,7 @@ public class Pagination {
 
 	private static final String SEARCH_FIELD_DEFAULT = "field";
 
-	private int rowsperpage = ROWS_PER_PAGE_DEFAULT;
+	private int rowsPerPage = ROWS_PER_PAGE_DEFAULT;
 
 	private int page = CURRENT_PAGE_DEFAULT;
 
@@ -40,5 +40,17 @@ public class Pagination {
 	private String searchField = SEARCH_FIELD_DEFAULT;
 
 	private String searchKeyword = SEARCH_KEYWORD_DEFAULT;
+	
+	public int getFirstRowIndexOnPage() {
+		return 1 + rowsPerPage*(page-1);
+	}
+	
+	public int getLastRowIndexOnPage() {
+		return rowsPerPage*page;
+	}
+	
+	public int getTotalRecords() {
+		return 100;
+	}
 
 }

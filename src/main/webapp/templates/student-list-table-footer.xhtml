@@ -1,43 +1,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
 <title><ui:insert name="title">Default title</ui:insert></title>
 </head>
-
 <body>
-	<ui:composition>
-		<h:form id="rows_page_form">
-			<p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;"
-				title="previous_page" action="#{studentController.getPreviousPage}"
-				update="student_list_table">
-			</p:commandButton>
-			<h:outputText value="Rows:" styleClass="mx-1" />
-			<p:selectOneMenu id="rowsperpage"
-				value="#{studentController.pagination.rowsperpage}">
-				<p:ajax event="valueChange"
-					listener="#{studentController.onPaginationChange}"
-					update="student_list_table" />
-				<f:selectItem itemLabel="10" itemValue="10" />
-				<f:selectItem itemLabel="20" itemValue="20" />
-				<f:selectItem itemLabel="50" itemValue="50" />
-			</p:selectOneMenu>
-
-			<h:outputText value="Page:" styleClass="mx-1" />
-			<h:outputText id="page" maxlength="3" size="3"
-				value="#{studentController.pagination.page}">
-			</h:outputText>
-
-			<p:commandButton icon="pi pi-chevron-right" styleClass="mx-2"
-				title="next_page" action="#{studentController.getNextPage}"
-				update="student_list_table">
-			</p:commandButton>
-		</h:form>
-	</ui:composition>
+  <ui:composition>
+    <h:form id="rows_page_form">
+      <p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;" title="previous_page"
+        action="#{studentController.getPreviousPage}" update="student_list_table record_search_status">
+      </p:commandButton>
+      <label class="wpsp-labelMain">Rows: </label>
+      <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
+        value="#{studentController.pagination.rowsPerPage}">
+        <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="student_list_table record_search_status" />
+        <f:selectItem itemLabel="10" itemValue="10" />
+        <f:selectItem itemLabel="20" itemValue="20" />
+        <f:selectItem itemLabel="50" itemValue="50" />
+      </h:selectOneMenu>
+      <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
+          value="#{studentController.pagination.page}">
+        </h:outputText></label>
+      <p:commandButton icon="pi pi-chevron-right" styleClass="mx-2" title="next_page"
+        action="#{studentController.getNextPage}" update="student_list_table record_search_status">
+      </p:commandButton>
+    </h:form>
+  </ui:composition>
 </body>
-
 </html>

@@ -1,61 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
 <title><ui:insert name="title">Default title</ui:insert></title>
 </head>
-
 <body>
-	<ui:composition>
-		<div id="student-list-table-content">
-			<p:column selectionMode="multiple"
-				styleClass="nosortsorting_disabled" style="width:50px;" />
-
-			<p:column headerText="Code" style="width:110px">
-				<h:outputText value="#{student.code}" />
-			</p:column>
-			<p:column headerText="Firstname" style="width:120px">
-				<h:outputText value="#{student.firstName}" />
-			</p:column>
-			<p:column headerText="Lastname" style="width:120px">
-				<h:outputText value="#{student.lastName}" />
-			</p:column>
-			<p:column headerText="Field" style="width:100px">
-				<h:outputText value="#{student.field}" />
-			</p:column>
-			<p:column headerText="DOB">
-				<h:outputText value="#{student.DOB}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
-			</p:column>
-			<p:column headerText="Phone">
-				<h:outputText value="#{student.phone}" />
-			</p:column>
-			<p:column headerText="Email">
-				<h:outputText value="#{student.email}" />
-			</p:column>
-			<p:column headerText="Avg Score" style="width:110px;">
-				<h:outputText value="#{student.avgScore}" />
-			</p:column>
-			<p:column headerText="Action" style="width:115px">
-				<h:form>
-					<p:commandButton title="Detail" id="detail_button"
-						icon="pi pi-info"
-						action="#{studentController.getStudentDetail(student.id)}">
-					</p:commandButton>
-					<p:commandButton title="Delete" id="delete_button"
-						icon="pi pi-minus"
-						action="#{studentController.deleteStudent(student.id)}">
-					</p:commandButton>
-				</h:form>
-			</p:column>
-		</div>
-	</ui:composition>
-
+  <ui:composition>
+    <div id="student-list-table-content">
+      <div>
+        <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:50px;" />
+        <p:column headerText="Code" style="width:110px">
+          <h:outputText value="#{student.code}" />
+        </p:column>
+        <p:column headerText="Firstname" style="width:120px">
+          <h:outputText value="#{student.firstName}" />
+        </p:column>
+        <p:column headerText="Lastname" style="width:120px">
+          <h:outputText value="#{student.lastName}" />
+        </p:column>
+        <p:column headerText="Field" style="width:100px">
+          <h:outputText value="#{student.field}" />
+        </p:column>
+        <p:column headerText="DOB">
+          <h:outputText value="#{student.DOB}">
+            <f:convertDateTime pattern="dd/MM/yyyy" />
+          </h:outputText>
+        </p:column>
+        <p:column headerText="Phone">
+          <h:outputText value="#{student.phone}" />
+        </p:column>
+        <p:column headerText="Email">
+          <h:outputText value="#{student.email}" />
+        </p:column>
+        <p:column headerText="Avg Score" style="width:110px;">
+          <h:outputText value="#{student.avgScore}" />
+        </p:column>
+        <p:column headerText="Action" style="width:115px">
+          <h:form>
+            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
+              action="#{studentController.getStudentDetail(student.id)}">
+            </p:commandButton>
+            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus"
+              action="#{studentController.deleteStudent(student.id)}">
+            </p:commandButton>
+          </h:form>
+        </p:column>
+      </div>
+    </div>
+  </ui:composition>
 </body>
-
 </html>

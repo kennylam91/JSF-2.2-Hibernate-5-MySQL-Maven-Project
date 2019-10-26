@@ -81,8 +81,8 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 		}
 		
-		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsperpage());
-		query.setMaxResults(pagination.getRowsperpage());
+		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
+		query.setMaxResults(pagination.getRowsPerPage());
 		List<StudentDto> studentDtoList = query.list();
 		session.close();
 		return studentDtoList;
