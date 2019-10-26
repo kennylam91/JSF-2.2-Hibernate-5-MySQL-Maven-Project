@@ -27,16 +27,18 @@ public class Pagination {
 
 	private static final int ROWS_PER_PAGE_DEFAULT = 10;
 
+	private static final String SEARCH_FIELD_DEFAULT = "field";
+
 	private int rowsperpage = ROWS_PER_PAGE_DEFAULT;
 
 	private int page = CURRENT_PAGE_DEFAULT;
 
 	private String orderBy = ORDERBY_FIELD_DEFAULT;
-	
+
 	private String ascOrDesc = ORDERBY_ASC_OR_DESC_DEFAULT;
-	
-	private String searchField = ORDERBY_FIELD_DEFAULT;
-	
+
+	private String searchField = SEARCH_FIELD_DEFAULT;
+
 	private String searchKeyword = SEARCH_KEYWORD_DEFAULT;
 
 }
