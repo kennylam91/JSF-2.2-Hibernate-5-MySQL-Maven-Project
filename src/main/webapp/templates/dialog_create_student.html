@@ -8,7 +8,7 @@
       <h:outputLabel for="code" value="Code:" />
       <p:inputText id="code" value="#{newStudentForm.code}" required="true" />
       <h:outputLabel for="first_name" value="Firstname:" />
-      <p:inputText id="first_name" value="#{newnewStudentForm.firstName}" required="true" label="first_name" />
+      <p:inputText id="first_name" value="#{newStudentForm.firstName}" required="true" label="first_name" />
       <h:outputLabel for="last_name" value="Lastname:" />
       <p:inputText id="last_name" value="#{newStudentForm.lastName}" required="true" label="last_name" />
       <h:outputLabel for="dob" value="Date of birth:" />
@@ -30,9 +30,10 @@
       <p:inputText id="email" value="#{newStudentForm.email}" required="true" label="email" />
       <f:facet name="footer">
         <div align="center">
-          <p:commandButton id="create_student_button_confirm" value="Create" update="main-content"
-            action="#{studentController.createStudent(newStudentForm)}" oncomplete="handleLoginRequest(xhr, status, args)" />
-          <p:commandButton type="button" value="Cancel" onclick="PF('dlg').hide()" update="growl" />
+          <p:commandButton id="create_student_button_confirm" value="Create" update="main-content create_student_form"
+            action="#{studentController.createStudent(newStudentForm)}"
+            oncomplete="handleLoginRequest(xhr, status, args)" />
+          <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_student').hide()" update="growl" />
         </div>
       </f:facet>
     </p:panelGrid>

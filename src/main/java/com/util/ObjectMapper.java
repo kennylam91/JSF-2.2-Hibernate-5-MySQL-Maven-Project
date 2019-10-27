@@ -2,6 +2,7 @@ package com.util;
 
 import org.modelmapper.ModelMapper;
 
+import com.Bean.NewStudentForm;
 import com.Bean.Student;
 import com.Bean.StudentForm;
 
@@ -38,6 +39,11 @@ public class ObjectMapper {
 		studentForm.setAvgScore(student.getAvgScore());
 		studentForm.setAddress(student.getAddress());
 		studentForm.setCourses(student.getCourses());
+	}
+
+	public static Student convertToStudentFromNewStudentForm(NewStudentForm newStudentForm) {
+		return modelMapper.map(newStudentForm, Student.class);
+
 	}
 
 }

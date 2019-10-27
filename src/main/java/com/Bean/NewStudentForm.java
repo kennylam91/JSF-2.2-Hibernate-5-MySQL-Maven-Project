@@ -13,7 +13,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ManagedBean(name = "newStudentForm")
 @SessionScoped
 public class NewStudentForm implements Serializable {
@@ -30,4 +29,10 @@ public class NewStudentForm implements Serializable {
 	private String phone;
 	private String email;
 
+	/*
+	 * public NewStudentForm() { code = ""; firstName = ""; lastName = ""; dob =
+	 * null; gender = "male"; field = ""; address = ""; phone = ""; email = "";
+	 * 
+	 * }
+	 */
 }

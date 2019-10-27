@@ -1,143 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
 </head>
 <body>
-	<ui:composition>
-		<div class="ui-g">
-			<div class="ui-g-3">
-				<h:form>
-					<p:commandButton id="create_student_button" class="ui-button"
-						action="#{studentController.getCreateForm}" type="button"
-						value="New Student" onclick="PF('dlg').show()">
-					</p:commandButton>
-
-					<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-
-					<p:dialog header="Create Student" widgetVar="dlg" resizable="true"
-						modal="true" width="700px" height="400px">
-						<p:panelGrid id="create_student_form" columns="2" cellpadding="5">
-							<p:outputLabel for="code" value="Code:" />
-							<p:inputText id="code" value="#{studentForm.code}"
-								required="true" />
-
-							<h:outputLabel for="first_name" value="Firstname:" />
-							<p:inputText id="first_name" value="#{studentForm.firstName}"
-								required="true" label="first_name" />
-
-							<h:outputLabel for="last_name" value="Lastname:" />
-							<p:inputText id="last_name" value="#{studentForm.lastName}"
-								required="true" label="last_name" />
-
-							<h:outputLabel for="dob" value="Date of birth:" />
-							<p:calendar id="dob" pattern="dd/MM/yyyy"
-								value="#{studentForm.DOB}">
-							</p:calendar>
-
-							<h:outputLabel for="field" value="Field:" />
-							<p:inputText id="field" value="#{studentForm.field}"
-								required="true" label="field" />
-
-							<h:outputLabel for="address" value="Address:" />
-							<p:inputText id="address" value="#{studentForm.address}"
-								required="true" label="address" />
-
-							<h:outputLabel for="phone" value="Phone:" />
-							<p:inputText id="phone" value="#{studentForm.phone}"
-								required="true" label="phone" />
-
-							<h:outputLabel for="email" value="Email:" />
-							<p:inputText id="email" value="#{studentForm.email}"
-								required="true" label="email" />
-
-							<f:facet name="footer">
-								<div align="center">
-									<p:commandButton id="create_student_button_confirm"
-										value="Create" update="main-content"
-										action="#{studentController.createStudent(studentForm)}"
-										oncomplete="handleLoginRequest(xhr, status, args)" />
-									<p:commandButton type="button" value="Cancel"
-										onclick="PF('dlg').hide()" />
-								</div>
-							</f:facet>
-						</p:panelGrid>
-					</p:dialog>
-				</h:form>
-			</div>
-
-			<div class="ui-g-5 align_center">
-				<h:form id="order">
-					<p:outputLabel>
-						<h:outputText value="Order by: " styleClass="align_center mx-1" />
-						<p:selectOneMenu id="ordered_by" styleClass=""
-							value="#{studentController.pagination.orderBy}">
-							<p:ajax event="valueChange"
-								listener="#{studentController.onPaginationChange}"
-								update="main-content" />
-							<f:selectItem itemLabel="code" itemValue="code" />
-							<f:selectItem itemLabel="firstName" itemValue="firstName" />
-							<f:selectItem itemLabel="lastName" itemValue="lastName" />
-							<f:selectItem itemLabel="field" itemValue="field" />
-							<f:selectItem itemLabel="dob" itemValue="dob" />
-							<f:selectItem itemLabel="phone" itemValue="phone" />
-							<f:selectItem itemLabel="email" itemValue="email" />
-							<f:selectItem itemLabel="avgScore" itemValue="avgScore" />
-							<f:selectItem itemLabel="note" itemValue="note" />
-						</p:selectOneMenu>
-
-						<p:selectOneMenu id="asc_or_desc"
-							value="#{studentController.pagination.ascOrDesc}">
-							<p:ajax event="valueChange"
-								listener="#{studentController.onPaginationChange}"
-								update="main-content" />
-							<f:selectItem itemLabel="asc" itemValue="asc" />
-							<f:selectItem itemLabel="desc" itemValue="desc" />
-						</p:selectOneMenu>
-
-					</p:outputLabel>
-				</h:form>
-			</div>
-
-
-			<div class="ui-g-4 right align_center">
-				<h:form id="search">
-					<p:outputPanel>
-						<h:outputText value="Search: " styleClass="mx-1" />
-						<p:selectOneMenu id="search_field"
-							value="#{studentController.pagination.searchField}">
-							<p:ajax event="valueChange"
-								listener="#{studentController.onPaginationChange}"
-								update="main-content" />
-							<f:selectItem itemLabel="code" itemValue="code" />
-							<f:selectItem itemLabel="firstName" itemValue="firstName" />
-							<f:selectItem itemLabel="lastName" itemValue="lastName" />
-							<f:selectItem itemLabel="field" itemValue="field" />
-							<f:selectItem itemLabel="dob" itemValue="dob" />
-							<f:selectItem itemLabel="phone" itemValue="phone" />
-							<f:selectItem itemLabel="email" itemValue="email" />
-							<f:selectItem itemLabel="avgScore" itemValue="avgScore" />
-							<f:selectItem itemLabel="note" itemValue="note" />
-							<f:selectItem itemLabel="all" itemValue="all" />
-						</p:selectOneMenu>
-						<p:inputText id="search_keyword" onkeyup="" style="width:35%"
-							value="#{studentController.pagination.searchKeyword}"
-							placeholder="keyword">
-							<p:ajax event="change"
-								listener="#{studentController.onPaginationChange}"
-								update="main-content" />
-						</p:inputText>
-					</p:outputPanel>
-				</h:form>
-			</div>
-		</div>
-	</ui:composition>
-	>
-
+  <ui:composition>
+    <div class="ui-g">
+      <div class="ui-g-3">
+        <h:form>
+        <!-- action="#{studentController.getCreateForm}" -->
+          <p:commandButton id="create_student_button" class="ui-button" type="button" value="New Student"
+            onclick="PF('dlg_create_student').show()">
+          </p:commandButton>
+          <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+          <p:dialog header="Create Student" widgetVar="dlg" resizable="true" modal="true" width="700px" height="400px">
+            <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
+              <p:outputLabel for="code" value="Code:" />
+              <p:inputText id="code" value="#{studentForm.code}" required="true" />
+              <h:outputLabel for="first_name" value="Firstname:" />
+              <p:inputText id="first_name" value="#{studentForm.firstName}" required="true" label="first_name" />
+              <h:outputLabel for="last_name" value="Lastname:" />
+              <p:inputText id="last_name" value="#{studentForm.lastName}" required="true" label="last_name" />
+              <h:outputLabel for="dob" value="Date of birth:" />
+              <p:calendar id="dob" pattern="dd/MM/yyyy" value="#{studentForm.DOB}">
+              </p:calendar>
+              <h:outputLabel for="field" value="Field:" />
+              <p:inputText id="field" value="#{studentForm.field}" required="true" label="field" />
+              <h:outputLabel for="address" value="Address:" />
+              <p:inputText id="address" value="#{studentForm.address}" required="true" label="address" />
+              <h:outputLabel for="phone" value="Phone:" />
+              <p:inputText id="phone" value="#{studentForm.phone}" required="true" label="phone" />
+              <h:outputLabel for="email" value="Email:" />
+              <p:inputText id="email" value="#{studentForm.email}" required="true" label="email" />
+              <f:facet name="footer">
+                <div align="center">
+                  <p:commandButton id="create_student_button_confirm" value="Create" update="main-content"
+                    action="#{studentController.createStudent(studentForm)}"
+                    oncomplete="handleLoginRequest(xhr, status, args)" />
+                  <p:commandButton type="button" value="Cancel" onclick="PF('dlg').hide()" />
+                </div>
+              </f:facet>
+            </p:panelGrid>
+          </p:dialog>
+        </h:form>
+      </div>
+      <div class="ui-g-5 align_center">
+        <h:form id="order">
+          <p:outputLabel>
+            <h:outputText value="Order by: " styleClass="align_center mx-1" />
+            <p:selectOneMenu id="ordered_by" styleClass="" value="#{studentController.pagination.orderBy}">
+              <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="main-content" />
+              <f:selectItem itemLabel="code" itemValue="code" />
+              <f:selectItem itemLabel="firstName" itemValue="firstName" />
+              <f:selectItem itemLabel="lastName" itemValue="lastName" />
+              <f:selectItem itemLabel="field" itemValue="field" />
+              <f:selectItem itemLabel="dob" itemValue="dob" />
+              <f:selectItem itemLabel="phone" itemValue="phone" />
+              <f:selectItem itemLabel="email" itemValue="email" />
+              <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
+              <f:selectItem itemLabel="note" itemValue="note" />
+            </p:selectOneMenu>
+            <p:selectOneMenu id="asc_or_desc" value="#{studentController.pagination.ascOrDesc}">
+              <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="main-content" />
+              <f:selectItem itemLabel="asc" itemValue="asc" />
+              <f:selectItem itemLabel="desc" itemValue="desc" />
+            </p:selectOneMenu>
+          </p:outputLabel>
+        </h:form>
+      </div>
+      <div class="ui-g-4 right align_center">
+        <h:form id="search">
+          <p:outputPanel>
+            <h:outputText value="Search: " styleClass="mx-1" />
+            <p:selectOneMenu id="search_field" value="#{studentController.pagination.searchField}">
+              <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="main-content" />
+              <f:selectItem itemLabel="code" itemValue="code" />
+              <f:selectItem itemLabel="firstName" itemValue="firstName" />
+              <f:selectItem itemLabel="lastName" itemValue="lastName" />
+              <f:selectItem itemLabel="field" itemValue="field" />
+              <f:selectItem itemLabel="dob" itemValue="dob" />
+              <f:selectItem itemLabel="phone" itemValue="phone" />
+              <f:selectItem itemLabel="email" itemValue="email" />
+              <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
+              <f:selectItem itemLabel="note" itemValue="note" />
+              <f:selectItem itemLabel="all" itemValue="all" />
+            </p:selectOneMenu>
+            <p:inputText id="search_keyword" onkeyup="" style="width:35%"
+              value="#{studentController.pagination.searchKeyword}" placeholder="keyword">
+              <p:ajax event="change" listener="#{studentController.onPaginationChange}" update="main-content" />
+            </p:inputText>
+          </p:outputPanel>
+        </h:form>
+      </div>
+    </div>
+  </ui:composition>
+  >
 </body>
-
 </html>

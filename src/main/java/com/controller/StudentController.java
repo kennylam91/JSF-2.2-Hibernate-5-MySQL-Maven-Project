@@ -59,34 +59,14 @@ public class StudentController implements Serializable {
 		return "student_list?faces-redirect=true";
 	}
 
-	private void clearStudentForm() {
-		studentForm.setAddress("");
-		studentForm.setAvgScore(0);
-		studentForm.setCode(null);
-		studentForm.setCourses(null);
-		studentForm.setDob(null);
-		studentForm.setEmail(null);
-		studentForm.setField(null);
-		studentForm.setFirstName(null);
-		studentForm.setId(null);
-		studentForm.setLastName(null);
-		studentForm.setNote(null);
-		studentForm.setPhone(null);
-	}
-
-	public void getCreateForm() {
-		newStudentForm = new NewStudentForm();
-	}
-
-	public void createStudent(StudentForm studentForm) {
-		Student student = new Student();
-		ObjectMapper.convertToStudent(studentForm, student);
+	public void createStudent(NewStudentForm newStudentForm) {
+		Student student = ObjectMapper.convertToStudentFromNewStudentForm(newStudentForm);
 		studentService.saveStudent(student);
 
 		// update studentDtos for table student_list
 		studentDtos = studentService.findStudentsByPagination(pagination);
-		clearStudentForm();
-		System.out.println(studentForm);
+		clearNewStudenForm(newStudentForm);
+
 	}
 
 	public String deleteStudent(Long studentId) throws Exception {
@@ -123,6 +103,32 @@ public class StudentController implements Serializable {
 	public void getNextPage() {
 		pagination.setPage(pagination.getPage() + 1);
 		studentDtos = studentService.findStudentsByPagination(pagination);
+	}
+
+	private void clearNewStudenForm(NewStudentForm newStudentForm) {
+		newStudentForm.setAddress(null);
+		newStudentForm.setCode(null);
+		newStudentForm.setDob(null);
+		newStudentForm.setEmail(null);
+		newStudentForm.setField(null);
+		newStudentForm.setFirstName(null);
+		newStudentForm.setLastName(null);
+		newStudentForm.setPhone(null);
+	}
+
+	private void clearStudentForm() {
+		studentForm.setAddress(null);
+		studentForm.setAvgScore(0);
+		studentForm.setCode(null);
+		studentForm.setCourses(null);
+		studentForm.setDob(null);
+		studentForm.setEmail(null);
+		studentForm.setField(null);
+		studentForm.setFirstName(null);
+		studentForm.setId(null);
+		studentForm.setLastName(null);
+		studentForm.setNote(null);
+		studentForm.setPhone(null);
 	}
 
 }
