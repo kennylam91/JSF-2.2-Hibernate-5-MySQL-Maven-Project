@@ -58,7 +58,7 @@
 							<f:facet name="footer">
 								<div align="center">
 									<p:commandButton id="create_student_button_confirm"
-										value="Create" update="student_list_table"
+										value="Create" update="main-content"
 										action="#{studentController.createStudent(studentForm)}"
 										oncomplete="handleLoginRequest(xhr, status, args)" />
 									<p:commandButton type="button" value="Cancel"
@@ -78,7 +78,7 @@
 							value="#{studentController.pagination.orderBy}">
 							<p:ajax event="valueChange"
 								listener="#{studentController.onPaginationChange}"
-								update="student_list_table" />
+								update="main-content" />
 							<f:selectItem itemLabel="code" itemValue="code" />
 							<f:selectItem itemLabel="firstName" itemValue="firstName" />
 							<f:selectItem itemLabel="lastName" itemValue="lastName" />
@@ -94,7 +94,7 @@
 							value="#{studentController.pagination.ascOrDesc}">
 							<p:ajax event="valueChange"
 								listener="#{studentController.onPaginationChange}"
-								update="student_list_table" />
+								update="main-content" />
 							<f:selectItem itemLabel="asc" itemValue="asc" />
 							<f:selectItem itemLabel="desc" itemValue="desc" />
 						</p:selectOneMenu>
@@ -112,7 +112,7 @@
 							value="#{studentController.pagination.searchField}">
 							<p:ajax event="valueChange"
 								listener="#{studentController.onPaginationChange}"
-								update="student_list_table" />
+								update="main-content" />
 							<f:selectItem itemLabel="code" itemValue="code" />
 							<f:selectItem itemLabel="firstName" itemValue="firstName" />
 							<f:selectItem itemLabel="lastName" itemValue="lastName" />
@@ -129,7 +129,7 @@
 							placeholder="keyword">
 							<p:ajax event="change"
 								listener="#{studentController.onPaginationChange}"
-								update="student_list_table" />
+								update="main-content" />
 						</p:inputText>
 					</p:outputPanel>
 				</h:form>

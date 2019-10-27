@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
 </head>
 <body>
@@ -45,8 +46,7 @@
           <p:inputText id="email" value="#{studentForm.email}" required="true" label="email" />
           <f:facet name="footer">
             <div align="center">
-              <p:commandButton id="create_student_button_confirm" value="Create"
-                update="student_list_table growl record_search_status create_student_form"
+              <p:commandButton id="create_student_button_confirm" value="Create" update="main-content"
                 action="#{studentController.createStudent(studentForm)}"
                 oncomplete="handleLoginRequest(xhr, status, args)" />
               <p:commandButton type="button" value="Cancel" onclick="PF('dlg').hide()" update="growl" />

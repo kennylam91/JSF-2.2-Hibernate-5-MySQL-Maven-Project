@@ -21,7 +21,7 @@
                 <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
                 <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
                 <!-- <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
-                  update="student_list_table" /> -->
+                  update="main-content" /> -->
               </h:selectOneMenu>
             </h:form>
           </div>
@@ -166,7 +166,7 @@
                     style="width:180px; display:inline;" value="#{studentController.pagination.searchKeyword}"
                     placeholder="Search keyword">
                     <p:ajax event="change" listener="#{studentController.onPaginationChange}"
-                      update="student_list_table record_search_status" />
+                      update="main-content" />
                   </p:inputText>
                 </h:form>
               </div>
