@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
 
+import com.Bean.NewStudentForm;
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
@@ -41,6 +42,9 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{pagination}")
 	private Pagination pagination;
 
+	@ManagedProperty(value = "#{newStudentForm}")
+	private NewStudentForm newStudentForm;
+
 	private List<StudentDto> studentDtos;
 
 	private List<StudentDto> selectedStudentDtos;
@@ -71,7 +75,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void getCreateForm() {
-		clearStudentForm();
+		newStudentForm = new NewStudentForm();
 	}
 
 	public void createStudent(StudentForm studentForm) {
