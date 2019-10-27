@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+  <p:dialog header="Create Student" widgetVar="dlg_create_student" resizable="false">
+    <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
+      <h:outputLabel for="code" value="Code:" />
+      <p:inputText id="code" value="#{studentForm.code}" required="true" />
+      <h:outputLabel for="first_name" value="Firstname:" />
+      <p:inputText id="first_name" value="#{studentForm.firstName}" required="true" label="first_name" />
+      <h:outputLabel for="last_name" value="Lastname:" />
+      <p:inputText id="last_name" value="#{studentForm.lastName}" required="true" label="last_name" />
+      <h:outputLabel for="dob" value="Date of birth:" />
+      <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentForm.dob}">
+      </p:datePicker>
+      <h:outputLabel for="gender" value="Gender:" />
+      <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentForm.gender}">
+        <f:selectItem itemLabel="Male" itemValue="male" />
+        <f:selectItem itemLabel="Female" itemValue="female" />
+        <f:selectItem itemLabel="Other" itemValue="other" />
+      </h:selectOneMenu>
+      <h:outputLabel for="field" value="Field:" />
+      <p:inputText id="field" value="#{studentForm.field}" required="true" label="field" />
+      <h:outputLabel for="address" value="Address:" />
+      <p:inputText id="address" value="#{studentForm.address}" required="true" label="address" />
+      <h:outputLabel for="phone" value="Phone:" />
+      <p:inputText id="phone" value="#{studentForm.phone}" required="true" label="phone" />
+      <h:outputLabel for="email" value="Email:" />
+      <p:inputText id="email" value="#{studentForm.email}" required="true" label="email" />
+      <f:facet name="footer">
+        <div align="center">
+          <p:commandButton id="create_student_button_confirm" value="Create" update="main-content"
+            action="#{studentController.createStudent(studentForm)}" oncomplete="handleLoginRequest(xhr, status, args)" />
+          <p:commandButton type="button" value="Cancel" onclick="PF('dlg').hide()" update="growl" />
+        </div>
+      </f:facet>
+    </p:panelGrid>
+  </p:dialog>
+</ui:composition>
+</html>

@@ -56,7 +56,7 @@ public class StudentController implements Serializable {
 	}
 
 	private void clearStudentForm() {
-		studentForm.setAddress(null);
+		studentForm.setAddress("");
 		studentForm.setAvgScore(0);
 		studentForm.setCode(null);
 		studentForm.setCourses(null);
@@ -71,14 +71,14 @@ public class StudentController implements Serializable {
 	}
 
 	public void getCreateForm() {
-		studentForm = new StudentForm();
+		clearStudentForm();
 	}
 
 	public void createStudent(StudentForm studentForm) {
 		Student student = new Student();
 		ObjectMapper.convertToStudent(studentForm, student);
 		studentService.saveStudent(student);
-		
+
 		// update studentDtos for table student_list
 		studentDtos = studentService.findStudentsByPagination(pagination);
 		clearStudentForm();

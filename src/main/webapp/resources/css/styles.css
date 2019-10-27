@@ -19,11 +19,13 @@
 	line-height: 1.5;
 	min-height: 20px;
 }
-.wpsp-container{
-	background-color:#f1f1f1;
+
+.wpsp-container {
+	background-color: #f1f1f1;
 }
-wpsp-labelMain{
-	display:inline-block;
+
+wpsp-labelMain {
+	display: inline-block;
 }
 
 #student_list_table_head {
@@ -60,11 +62,13 @@ wpsp-labelMain{
 	margin-left: 40px;
 	margin-top: 17px;
 }
+
 .ui-datatable thead th {
-	height:50px;
-	font-size:1.1rem;
-	font-weight:600;
+	height: 50px;
+	font-size: 1.1rem;
+	font-weight: 600;
 }
-.ui-datatable{
-	text-align:center;
+
+.ui-datatable {
+	text-align: center;
 }

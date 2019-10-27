@@ -14,9 +14,9 @@
   <script type="text/javascript">
 			function handleLoginRequest(xhr, status, args) {
 				if (args.validationFailed) {
-					PF('dlg').show();
+					PF('dlg_create_student').show();
 				} else {
-					PF('dlg').hide();
+					PF('dlg_create_student').hide();
 				}
 			}
 
@@ -47,7 +47,7 @@
       <!-- Main content -->
       <div class="wpsp-container">
         <div id="contentHead">
-        <p:growl id="message" showDetail="true" />
+          <p:growl id="message" showDetail="true" />
           <ui:insert name="contentHead">
             <ui:include src="/templates/contentHead.xhtml" />
           </ui:insert>
