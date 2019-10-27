@@ -60,7 +60,7 @@ public class StudentController implements Serializable {
 		studentForm.setAvgScore(0);
 		studentForm.setCode(null);
 		studentForm.setCourses(null);
-		studentForm.setDOB(null);
+		studentForm.setDob(null);
 		studentForm.setEmail(null);
 		studentForm.setField(null);
 		studentForm.setFirstName(null);

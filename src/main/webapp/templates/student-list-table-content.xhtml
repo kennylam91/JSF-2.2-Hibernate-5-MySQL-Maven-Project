@@ -19,11 +19,14 @@
         <p:column headerText="Lastname" style="width:120px">
           <h:outputText value="#{student.lastName}" />
         </p:column>
+        <p:column headerText="Gender" style="width:100px">
+          <h:outputText value="#{student.gender}" />
+        </p:column>
         <p:column headerText="Field" style="width:100px">
           <h:outputText value="#{student.field}" />
         </p:column>
         <p:column headerText="DOB">
-          <h:outputText value="#{student.DOB}">
+          <h:outputText value="#{student.dob}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
@@ -42,8 +45,12 @@
               action="#{studentController.getStudentDetail(student.id)}">
             </p:commandButton>
             <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus"
-              action="#{studentController.deleteStudent(student.id)}">
+              action="#{studentController.deleteStudent(student.id)}" update="main-content">
+              <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
             </p:commandButton>
+            <ui:insert name="dialog_delete_student">
+              <ui:include src="/templates/dialog_delete_student.xhtml"></ui:include>
+            </ui:insert>
           </h:form>
         </p:column>
       </div>

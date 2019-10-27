@@ -12,7 +12,7 @@ public class ObjectMapper {
 	public static void convertToStudent(StudentForm studentForm, Student student) {
 		student.setFirstName(studentForm.getFirstName());
 		student.setLastName(studentForm.getLastName());
-		student.setDOB(studentForm.getDOB());
+		student.setDob(studentForm.getDob());
 		student.setEmail(studentForm.getEmail());
 		student.setPhone(studentForm.getPhone());
 		student.setNote(studentForm.getNote());
@@ -33,13 +33,11 @@ public class ObjectMapper {
 		studentForm.setPhone(student.getPhone());
 		studentForm.setField(student.getField());
 		studentForm.setId(student.getId());
-		studentForm.setDOB(student.getDOB());
+		studentForm.setDob(student.getDob());
 		studentForm.setCode(student.getCode());
 		studentForm.setAvgScore(student.getAvgScore());
 		studentForm.setAddress(student.getAddress());
 		studentForm.setCourses(student.getCourses());
 	}
-	
-	
 
 }

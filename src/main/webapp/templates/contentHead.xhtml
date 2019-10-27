@@ -34,8 +34,14 @@
           <h:outputLabel for="last_name" value="Lastname:" />
           <p:inputText id="last_name" value="#{studentForm.lastName}" required="true" label="last_name" />
           <h:outputLabel for="dob" value="Date of birth:" />
-          <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentForm.DOB}">
+          <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentForm.dob}">
           </p:datePicker>
+          <h:outputLabel for="gender" value="Gender:" />
+          <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentForm.gender}">
+            <f:selectItem itemLabel="Male" itemValue="male" />
+            <f:selectItem itemLabel="Female" itemValue="female" />
+            <f:selectItem itemLabel="Other" itemValue="other" />
+          </h:selectOneMenu>
           <h:outputLabel for="field" value="Field:" />
           <p:inputText id="field" value="#{studentForm.field}" required="true" label="field" />
           <h:outputLabel for="address" value="Address:" />

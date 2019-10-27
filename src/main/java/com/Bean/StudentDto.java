@@ -26,8 +26,9 @@ public class StudentDto implements Serializable {
 	private String code;
 	private String firstName;
 	private String lastName;
+	private String gender;
 	private String field;
-	private Date DOB;
+	private Date dob;
 	private String phone;
 	private String email;
 	private String note;

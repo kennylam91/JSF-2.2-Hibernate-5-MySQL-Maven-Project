@@ -45,7 +45,10 @@ public class Student {
 	private String lastName;
 
 	@Column(name = "dob", nullable = false)
-	private Date DOB;
+	private Date dob;
+
+	@Column(name = "gender", nullable = false)
+	private String gender;
 
 	@Column(name = "field", nullable = false)
 	private String field;

@@ -29,12 +29,11 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	
 	@SuppressWarnings("unchecked")
 	public List<StudentDto> findAllStudents() {
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("select new "
-				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "
+				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
 				+ "from Student s " + "order by s.code ");
 		query.setMaxResults(20);
 		List<StudentDto> studentDtoList = query.list();
@@ -49,38 +48,26 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 		String fieldSearch = getStudentField(pagination.getSearchField());
 		Session session = this.sessionFactory.openSession();
 		Query query;
-		if(pagination.getSearchField().equals("all")) {
-			query = session.createQuery(
-					"select new "+
-					"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "+
-					"from Student s " + 
-					"where s.code like :searchKeyword or" + " " + 
-					"s.firstName like :searchKeyword or" + " " + 
-					"s.lastName like :searchKeyword or" + " " + 
-					"s.field like :searchKeyword or" + " " + 
-					"s.DOB like :searchKeyword or" + " " + 
-					"s.phone like :searchKeyword or" + " " + 
-					"s.email like :searchKeyword or" + " " +
-					"s.avgScore like :searchKeyword or" + " " +
-					"s.note like :searchKeyword " + " " + 
-					"order by "+orderedBy + " " + 
-					ascOrDesc + ",s.code asc");
+		if (pagination.getSearchField().equals("all")) {
+			query = session.createQuery("select new "
+					+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
+					+ "from Student s " + "where s.code like :searchKeyword or" + " "
+					+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or" + " "
+					+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or" + " "
+					+ "s.dob like :searchKeyword or" + " " + "s.phone like :searchKeyword or" + " "
+					+ "s.email like :searchKeyword or" + " " + "s.avgScore like :searchKeyword or" + " "
+					+ "s.note like :searchKeyword " + " " + "order by " + orderedBy + " " + ascOrDesc + ",s.code asc");
+
+			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+		} else {
+			query = session.createQuery("select new "
+					+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
+					+ "from Student s " + "where " + fieldSearch + " " + "like :searchKeyword" + " " + "order by "
+					+ orderedBy + " " + ascOrDesc + ",s.code asc");
 
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 		}
-		else {
-			query = session.createQuery(
-					"select new "+
-					"com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.field,s.DOB,s.phone,s.email,s.note,s.avgScore) "+
-					"from Student s " + 
-					"where " + fieldSearch + " " + 
-					"like :searchKeyword" + " " + 
-					"order by "+orderedBy + " " + 
-					ascOrDesc + ",s.code asc");
 
-			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
-		}
-		
 		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
 		query.setMaxResults(pagination.getRowsPerPage());
 		List<StudentDto> studentDtoList = query.list();
@@ -136,10 +123,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 
 //			Student student = session.get(Student.class, studentId);
 			Query query = session
-					.createQuery(
-							"select s from Student s " + 
-							"left join fetch s.courses " + 
-							"where s.id = :studentId")
+					.createQuery("select s from Student s " + "left join fetch s.courses " + "where s.id = :studentId")
 					.setParameter("studentId", studentId);
 			Student student = (Student) query.uniqueResult();
 			transaction.commit();
@@ -166,6 +150,8 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 			return "s.field";
 		case "dob":
 			return "s.dob";
+		case "gender":
+			return "s.gender";
 		case "phone":
 			return "email";
 		case "avgScore":

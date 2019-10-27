@@ -22,6 +22,7 @@ public class GenerateData {
 	private static final String[] FIELD_COLLECTION = { "JAVA", "PHP", "PYTHON" };
 	private static final String[] ADDRESS_COLLECTION = { "Ha Noi", "Hai Phong", "Ho Chi Minh", "Da Nang", "Hue",
 			"Can Tho", "Quang Ninh" };
+	private static final String[] GENDER_COLLECTION = { "male", "female", "other" };
 
 	public static void main(String[] args) {
 		/*
@@ -31,7 +32,7 @@ public class GenerateData {
 		 * getRandomDOB() + "\n" + "field: " + getRandomField() + "\n" + "phone: " +
 		 * getRandomPhone() + "\n" + "email: " + getRandomEmail());
 		 */
-		insertStudentSQL(1000);
+		insertStudentSQL(500);
 
 	}
 
@@ -92,6 +93,10 @@ public class GenerateData {
 		return email.toString();
 	}
 
+	private static String getRandomGender() {
+		return GENDER_COLLECTION[getRandomNumberBetween(0, GENDER_COLLECTION.length - 1)];
+	}
+
 	private static void insertStudentSQL(int studentNumber) {
 		Student student = new Student();
 		StudentRepository repo = new StudentRepositoryImpl();
@@ -102,8 +107,9 @@ public class GenerateData {
 			student.setAddress(getRandomAddress());
 			student.setCode(getRandomStudentCode(8));
 			student.setLastName(lastName);
+			student.setGender(getRandomGender());
 			student.setField(getRandomField());
-			student.setDOB(getRandomDOB());
+			student.setDob(getRandomDOB());
 			student.setPhone(getRandomPhone());
 			student.setEmail(getRandomEmail(firstName, lastName));
 			repo.saveStudent(student);
