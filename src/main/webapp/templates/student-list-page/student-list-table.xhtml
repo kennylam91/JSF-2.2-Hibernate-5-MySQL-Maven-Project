@@ -11,11 +11,11 @@
       rowKey="student.Id" selection="#{studentController.selectedStudentDtos}"
       styleClass="wpsp-table dataTable dtr-inline">
       <ui:insert name="table-content">
-        <ui:include src="/templates/student-list-table-content.xhtml"></ui:include>
+        <ui:include src="/templates/student-list-page/student-list-table-content.xhtml"></ui:include>
       </ui:insert>
       <f:facet name="footer">
         <ui:insert name="table-content">
-          <ui:include src="/templates/student-list-table-footer.xhtml"></ui:include>
+          <ui:include src="/templates/student-list-page/student-list-table-footer.xhtml"></ui:include>
         </ui:insert>
       </f:facet>
     </p:dataTable>

@@ -8,9 +8,15 @@
 </h:head>
 <h:body>
   <ui:composition template="templates/commonLayout.xhtml">
+    <ui:define name="title">Dashboard</ui:define>
+    <ui:define name="contentHead">
+      <ui:insert>
+        <ui:include src="templates/dashboard/contentHead.xhtml"></ui:include>
+      </ui:insert>
+    </ui:define>
     <ui:define name="contentBody">
       <ui:insert>
-        <ui:include src="templates/dashboard_row_content.html"></ui:include>
+        <ui:include src="templates/dashboard/dashboard_row_content.html"></ui:include>
       </ui:insert>
     </ui:define>
   </ui:composition>
