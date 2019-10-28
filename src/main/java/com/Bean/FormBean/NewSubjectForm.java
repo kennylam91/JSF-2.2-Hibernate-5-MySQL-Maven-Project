@@ -24,6 +24,8 @@ public class NewSubjectForm implements Serializable {
 	private String code;
 
 	private String name;
+	
+	private String field;
 
 	private String description;
 

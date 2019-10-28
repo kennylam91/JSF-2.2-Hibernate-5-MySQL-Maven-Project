@@ -16,6 +16,9 @@
         <p:column headerText="Name" style="width:100px">
           <h:outputText value="#{subject.name}" />
         </p:column>
+        <p:column headerText="Field" style="width:100px">
+          <h:outputText value="#{subject.field}" />
+        </p:column>
         <p:column headerText="Description" style="width:80px">
           <h:outputText value="#{subject.description}" />
         </p:column>
@@ -24,8 +27,7 @@
         </p:column>
         <p:column headerText="Action" style="width:65px">
           <h:form>
-            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
-              action="#{subjectController.getSubjectDetail(subject.id)}">
+            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info">
             </p:commandButton>
             <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus"
               action="#{subjectController.deleteSubject(subject.id)}" update="main-content">

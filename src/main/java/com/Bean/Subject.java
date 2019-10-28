@@ -42,12 +42,14 @@ public class Subject implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 
+	@Column(name = "field", nullable = true)
+	private String field;
+
 	@Column(name = "description", nullable = true)
 	private String description;
 
 	@Column(name = "coefficient", nullable = false)
 	private float coefficient;
-
 
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<>();

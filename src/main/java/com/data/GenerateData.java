@@ -39,10 +39,14 @@ public class GenerateData {
 			"PHP Basic", "Data Struture Basic", "Algorithm Basic", "Java Advanced", "PHP Advanced", "Python Basic",
 			"Python advanced" };
 
+	private static final String[] SUBJECT_FIELD_COLLECTION = { "BASIC", "BASIC", "JAVA", "PHP", "BASIC", "BASIC",
+			"JAVA", "PHP", "PYTHON", "PYTHON" };
+
 	public static void main(String[] args) {
+		insertSubjectSQL(10);
 
 		/*
-		 * insertStudentSQL(50); insertSubjectSQL(10);
+		 * insertStudentSQL(50);
 		 */
 
 		/*
@@ -50,16 +54,18 @@ public class GenerateData {
 		 * subjects = subjectController.getSubjects();
 		 */
 
-		SubjectService subjectService = new SubjectServiceImpl();
-		List<Subject> subjects = subjectService.findAllSubjects();
+		/*
+		 * SubjectService subjectService = new SubjectServiceImpl(); List<Subject>
+		 * subjects = subjectService.findAllSubjects();
+		 */
 
 		/*
 		 * SubjectRepository subjectRepo = new SubjectRepositoryImpl(); List<Subject>
 		 * subjects = subjectRepo.findAllSubjects();
 		 */
-		for (Subject subject : subjects) {
-			System.out.println(subject);
-		}
+		/*
+		 * for (Subject subject : subjects) { System.out.println(subject); }
+		 */
 
 	}
 
@@ -150,6 +156,7 @@ public class GenerateData {
 			subject.setCode(getRandomCode(4));
 			subject.setCoefficient(getRandomCoefficient());
 			subject.setName(SUBJECT_NAME_COLLECTION[i]);
+			subject.setField(SUBJECT_FIELD_COLLECTION[i]);
 			System.out.println(subjectRepo.saveSubject(subject));
 		}
 
