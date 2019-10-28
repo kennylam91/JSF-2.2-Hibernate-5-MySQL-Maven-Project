@@ -23,6 +23,7 @@ public class ObjectMapper {
 		student.setAvgScore(studentForm.getAvgScore());
 		student.setAddress(studentForm.getAddress());
 		student.setCourses(studentForm.getCourses());
+		student.setGender(studentForm.getGender());
 
 	}
 
@@ -39,6 +40,7 @@ public class ObjectMapper {
 		studentForm.setAvgScore(student.getAvgScore());
 		studentForm.setAddress(student.getAddress());
 		studentForm.setCourses(student.getCourses());
+		studentForm.setGender(student.getGender());
 	}
 
 	public static Student convertToStudentFromNewStudentForm(NewStudentForm newStudentForm) {
