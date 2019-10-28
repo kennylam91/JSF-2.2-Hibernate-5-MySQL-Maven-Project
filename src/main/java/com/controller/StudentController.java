@@ -55,7 +55,6 @@ public class StudentController implements Serializable {
 
 	public String getStudentListForm() {
 		studentDtos = studentService.findStudentsByPagination(pagination);
-		System.out.println(pagination);
 		return "student_list?faces-redirect=true";
 	}
 
@@ -89,7 +88,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void onPaginationChange() {
-		logger.info(pagination.toString());
+//		System.out.println(pagination.toString());
 		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 

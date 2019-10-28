@@ -107,12 +107,11 @@
                       <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
                       <f:selectItem itemLabel="Note" itemValue="note" />
                     </h:selectOneMenu>
-                    <p:inputText styleClass="wpsp-input-sm" id="search_keyword" onkeyup=""
-                      style="width:160px; display:inline;" value="#{studentController.pagination.searchKeyword}"
-                      placeholder="Search keyword">
-                      <p:ajax event="change" listener="#{studentController.onPaginationChange}" update="main-content" />
+                    <p:inputText styleClass="wpsp-input-sm" id="search_keyword" style="width:160px; display:inline;"
+                      value="#{studentController.pagination.searchKeyword}" placeholder="Search keyword">
                     </p:inputText>
-                    <p:commandButton icon="pi pi-search" styleClass="white-button" style="height:31px;"/>
+                    <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
+                      action="#{studentController.onPaginationChange}" style="height:31px;" />
                   </div>
                 </h:form>
               </div>
