@@ -48,8 +48,6 @@ public class Subject implements Serializable {
 	@Column(name = "coefficient", nullable = false)
 	private float coefficient;
 
-	@Column(name = "score", nullable = true)
-	private float score;
 
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<>();

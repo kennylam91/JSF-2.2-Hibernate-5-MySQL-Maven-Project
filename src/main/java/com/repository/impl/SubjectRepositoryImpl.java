@@ -1,11 +1,14 @@
 package com.repository.impl;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -58,20 +61,94 @@ public class SubjectRepositoryImpl implements SubjectRepository, Serializable {
 
 	@Override
 	public void updateSubject(Subject subject) {
-		// TODO Auto-generated method stub
+		Session session = null;
+		Transaction transaction = null;
+
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(subject);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error("exception:", e);
+		} finally {
+			if (session != null)
+				session.close();
+		}
 
 	}
 
 	@Override
-	public void deleteSubject(Long subjectId) {
-		// TODO Auto-generated method stub
+	public void deleteSubject(Subject subject) {
+		Session session = null;
+		Transaction transaction = null;
+
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.delete(subject);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error("exception:", e);
+		} finally {
+			if (session != null)
+				session.close();
+		}
 
 	}
 
 	@Override
 	public Subject findSubjectById(Long subjectId) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+		Transaction transaction = null;
+
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Select s from Subject s where s.id = :subjectId");
+			query.setParameter("subjectId", subjectId);
+			Subject subject = (Subject) query.uniqueResult();
+			transaction.commit();
+			return subject;
+
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error("exception:", e);
+			return null;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	@Override
+	public List<Subject> findAllSubjects() {
+		Session session = null;
+		Transaction transaction = null;
+
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Select s from Subject s");
+			@SuppressWarnings("unchecked")
+			List<Subject> subjects = query.list();
+			transaction.commit();
+			return subjects;
+
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error("exception:", e);
+			return Collections.emptyList();
+		} finally {
+			if (session != null)
+				session.close();
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package com.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import com.Bean.Student;
@@ -37,8 +38,15 @@ public class GenerateData {
 
 	public static void main(String[] args) {
 
-//		insertStudentSQL(50);
-		insertSubjectSQL(10);
+		/*
+		 * insertStudentSQL(50); insertSubjectSQL(10);
+		 */
+
+		SubjectRepository subjectRepo = new SubjectRepositoryImpl();
+		List<Subject> subjects = subjectRepo.findAllSubjects();
+		for (Subject subject : subjects) {
+			System.out.println(subject);
+		}
 
 	}
 

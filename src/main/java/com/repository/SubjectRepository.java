@@ -10,9 +10,9 @@ public interface SubjectRepository {
 
 	void updateSubject(Subject subject);
 
-	void deleteSubject(Long subjectId);
+	void deleteSubject(Subject subject);
 
 	Subject findSubjectById(Long subjectId);
 
-//	List<SubjectDto> findAllSubjects();
+	List<Subject> findAllSubjects();
 }
