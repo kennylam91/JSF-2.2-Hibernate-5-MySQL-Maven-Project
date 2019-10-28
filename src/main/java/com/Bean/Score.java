@@ -22,6 +22,8 @@ import lombok.Setter;
 @Table(name = "scores")
 public class Score implements Serializable {
 
+	private static final long serialVersionUID = 3871552378550369769L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

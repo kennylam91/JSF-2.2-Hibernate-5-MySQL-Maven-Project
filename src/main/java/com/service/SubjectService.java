@@ -1,10 +1,11 @@
 package com.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.Bean.Subject;
 
-public interface SubjectService {
+public interface SubjectService extends Serializable {
 
 	Long saveSubject(Subject subject);
 

@@ -7,10 +7,13 @@ import java.util.Random;
 
 import com.Bean.Student;
 import com.Bean.Subject;
+import com.controller.SubjectController;
 import com.repository.StudentRepository;
 import com.repository.SubjectRepository;
 import com.repository.impl.StudentRepositoryImpl;
 import com.repository.impl.SubjectRepositoryImpl;
+import com.service.SubjectService;
+import com.service.impl.SubjectServiceImpl;
 
 public class GenerateData {
 
@@ -42,8 +45,18 @@ public class GenerateData {
 		 * insertStudentSQL(50); insertSubjectSQL(10);
 		 */
 
-		SubjectRepository subjectRepo = new SubjectRepositoryImpl();
-		List<Subject> subjects = subjectRepo.findAllSubjects();
+		/*
+		 * SubjectController subjectController = new SubjectController(); List<Subject>
+		 * subjects = subjectController.getSubjects();
+		 */
+
+		SubjectService subjectService = new SubjectServiceImpl();
+		List<Subject> subjects = subjectService.findAllSubjects();
+
+		/*
+		 * SubjectRepository subjectRepo = new SubjectRepositoryImpl(); List<Subject>
+		 * subjects = subjectRepo.findAllSubjects();
+		 */
 		for (Subject subject : subjects) {
 			System.out.println(subject);
 		}

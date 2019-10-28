@@ -1,6 +1,5 @@
 package com.service.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -20,11 +19,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @ManagedBean(name = "subjectService")
 @SessionScoped
-public class SubjectServiceImpl implements Serializable, SubjectService {
+public class SubjectServiceImpl implements SubjectService {
 
 	private static final long serialVersionUID = -4568732441570624725L;
 
-	@ManagedProperty(value = "subjectRepository")
+	@ManagedProperty(value = "#{subjectRepository}")
 	private SubjectRepository subjectRepository;
 
 	@Override

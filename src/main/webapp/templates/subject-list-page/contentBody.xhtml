@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<head>
+</head>
+<body>
+  <ui:composition>
+    <div class="wpsp-card">
+      <f:event listener="#{subjectController.getSubjects()}" type="preRenderView" />
+      <div class="wpsp-card-head">
+        <div class="subject-inner wpsp-left wpsp-class-filter">
+          <div class="subject-inner wpsp-left wpsp-class-filter">
+            <!-- Not use, need to develop more -->
+            <h:form id="filter_by_field">
+              <label class="wpsp-labelMain">Select Field</label>
+              <h:selectOneMenu styleClass=" select_input" id="search_field"
+                value="#{studentController.pagination.searchKeyword}"
+                style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
+                <f:selectItem itemLabel="PHP" itemValue="PHP" />
+                <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
+                <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
+                <!-- <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
+                  update="main-content" /> -->
+              </h:selectOneMenu>
+            </h:form>
+          </div>
+        </div>
+        <div class="wpsp-right wpsp-import-export">
+          <div class="wpsp-btn-lists" disabled="disabled" title="Please Purchase This Add-on">
+            <div class="wpsp-btn-list" wpsp-tooltip="Please Purchase This Add-on">
+              <div class="wpsp-button-group wpsp-dropdownmain wpsp-left">
+                <button type="button" class="wpsp-btn wpsp-btn-success print" id="PrintStudent" disabled="disabled"
+                  title="">
+                  <i class="fa fa-print"></i> Print
+                </button>
+                <button type="button" class="wpsp-btn wpsp-btn-success wpsp-dropdown-toggle" disabled="disabled"
+                  title="">
+                  <!-- <span class="sr-only">Toggle Dropdown</span> -->
+                </button>
+                <div class="wpsp-dropdown wpsp-dropdown-md">
+                  <ul>
+                    <li class="wpsp-drop-title wpsp-checkList">Select Columns to Print</li>
+                    <form id="StudentColumnForm" name="StudentColumnForm">
+                      <li class="wpsp-checkList"><input type="checkbox" name="StudentColumn[]" value="s_phone"
+                        id="s_phone" checked="checked" /> <label for="s_phone">Phone Number</label></li> <input
+                        type="hidden" name="ClassID" value="0" /> <input type="hidden" name="exportstudent"
+                        value="exportstudent" />
+                    </form>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="wpsp-btn-list" wpsp-tooltip="Please Purchase This Add-on">
+              <button id="ImportStudent" class="wpsp-btn wpsp-dark-btn wpsp-popclick impt" disabled="disabled" title=""
+                data-pop="ImportModal">
+                <i class="fa fa-upload"></i> Import
+              </button>
+            </div>
+            <div class="wpsp-btn-list" wpsp-tooltip="Please Purchase This Add-on">
+              <div class="wpsp-dropdownmain wpsp-button-group">
+                <button type="button" class="wpsp-btn print" id="ExportStudents" disabled="disabled" title="">
+                  <i class="fa fa-download"></i> Export
+                </button>
+                <button type="button" class="wpsp-btn wpsp-btn-blue wpsp-dropdown-toggle" disabled="disabled" title="">
+                  <!-- <span class="sr-only">Toggle Dropdown</span> -->
+                </button>
+                <div id="exportcontainer" style="display: none;"></div>
+                <div class="wpsp-dropdown wpsp-dropdown-md wpsp-dropdown-right">
+                  <ul>
+                    <li class="wpsp-drop-title wpsp-checkList">Select Columns to Export</li>
+                    <form id="ExportColumnForm" name="ExportStudentColumn">
+                      <li class="wpsp-checkList"><input type="checkbox" name="StudentColumn[]" value="s_rollno"
+                        id="s_rollno" checked="checked" /> <label class="wpsp-label" for="s_rollno">Roll Number</label></li>
+                      <li class="wpsp-checkList"><input type="checkbox" name="StudentColumn[]" value="s_phone"
+                        id="s_phone" checked="checked" /> <label class="wpsp-label" for="s_phone">Phone Number</label></li>
+                      <input type="hidden" name="ClassID" value="0" /> <input type="hidden" name="exportstudent"
+                        value="exportstudent" />
+                    </form>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wpsp-card-body">
+        <div class="subject-head">
+          <!-- Search Function -->
+          <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="wpsp-dataTable-top">
+              <div id="student_table_filter" class="dataTables_filter">
+                <h:form class="wpsp-label" style="margin-right: 10px;">
+                  <h:selectOneMenu styleClass=" select_input" style="width:115px;display:inline;" id="search_field"
+                    value="#{studentController.pagination.searchField}">
+                    <f:selectItem itemLabel="Select Field" itemValue="all" itemDisabled="true"></f:selectItem>
+                    <f:selectItem itemLabel="Code" itemValue="code" />
+                    <f:selectItem itemLabel="FirstName" itemValue="firstName" />
+                    <f:selectItem itemLabel="LastName" itemValue="lastName" />
+                    <f:selectItem itemLabel="Field" itemValue="field" />
+                    <f:selectItem itemLabel="Dob" itemValue="dob" />
+                    <f:selectItem itemLabel="Phone" itemValue="phone" />
+                    <f:selectItem itemLabel="Email" itemValue="email" />
+                    <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
+                    <f:selectItem itemLabel="Note" itemValue="note" />
+                    <f:selectItem itemLabel="All" itemValue="all" />
+                  </h:selectOneMenu>
+                  <p:inputText styleClass="wpsp-input-sm" id="search_keyword" onkeyup=""
+                    style="width:180px; display:inline;" value="#{studentController.pagination.searchKeyword}"
+                    placeholder="Search keyword">
+                    <p:ajax event="change" listener="#{studentController.onPaginationChange}" update="main-content" />
+                  </p:inputText>
+                </h:form>
+              </div>
+              <div class="wpsp-bulkaction">
+                <select name="bulkaction" class="select_input" id="bulkaction">
+                  <option value="">Select Action</option>
+                  <option value="bulkUsersDelete">Delete</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <ui:insert name="subject-list-table">
+                <ui:include src="/templates/subject-list-page/subject_list_table.xhtml"></ui:include>
+              </ui:insert>
+            </div>
+            <h:form id="record_search_status">
+              <label class="wpsp-labelMain"> <h:outputText
+                  value="Show from record #{studentController.pagination.firstRowIndexOnPage} to 
+                  record #{studentController.pagination.lastRowIndexOnPage}.">
+                </h:outputText>
+              </label>
+            </h:form>
+            <!-- <table id="student_table" class="wpsp-table dataTable dtr-inline"
+              cellspacing="0" width="100%" style="width: 100%;" role="grid"
+              aria-describedby="student_table_info"> -->
+            <!--  </table> -->
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  </ui:composition>
+</body>
+</html>

@@ -23,7 +23,7 @@ public class SubjectController implements Serializable {
 
 	private static final long serialVersionUID = 5245246925977536252L;
 
-	@ManagedProperty(value = "subjectService")
+	@ManagedProperty(value = "#{subjectService}")
 	private SubjectService subjectService;
 
 	private List<Subject> subjects;
