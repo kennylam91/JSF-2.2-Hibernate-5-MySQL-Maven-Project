@@ -51,9 +51,15 @@ public class Course {
 
 	@Column(name = "status", nullable = false)
 	private Boolean status;
+	
+	@Column(name = "teacher", nullable = true)
+	private String teacher;
+	
+	@Column(name = "capacity", nullable = true)
+	private int capacity;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	Set<Student> students = new HashSet<Student>();
+	Set<Student> students = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id", nullable = false)

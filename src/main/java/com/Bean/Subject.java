@@ -49,6 +49,6 @@ public class Subject {
 	private float score;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	private Set<Course> courses = new HashSet<Course>();
+	private Set<Course> courses = new HashSet<>();
 
 }

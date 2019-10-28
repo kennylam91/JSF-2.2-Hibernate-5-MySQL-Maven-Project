@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.Bean.Student;
 import com.repository.StudentRepository;
-import com.repository.StudentRepositoryImpl;
+import com.repository.impl.StudentRepositoryImpl;
 
 public class GenerateData {
 
@@ -22,17 +22,13 @@ public class GenerateData {
 	private static final String[] FIELD_COLLECTION = { "JAVA", "PHP", "PYTHON" };
 	private static final String[] ADDRESS_COLLECTION = { "Ha Noi", "Hai Phong", "Ho Chi Minh", "Da Nang", "Hue",
 			"Can Tho", "Quang Ninh" };
-	private static final String[] GENDER_COLLECTION = { "male", "female", "other" };
+	private static final String[] GENDER_COLLECTION = { "male", "female", "other", "male", "female", "male", "female",
+			"male", "female", "male", "female", "male", "female", "male", "female", "male", "female", "male",
+			"female" };
 
 	public static void main(String[] args) {
-		/*
-		 * System.out.println("auto generate student:"); System.out.println("code: " +
-		 * getRandomStudentCode(8) + "\n" + "firstname: " + getRandomStudentFirstname()
-		 * + "\n" + "lastname: " + getRandomStudentLastname() + "\n" + "dob: " +
-		 * getRandomDOB() + "\n" + "field: " + getRandomField() + "\n" + "phone: " +
-		 * getRandomPhone() + "\n" + "email: " + getRandomEmail());
-		 */
-		insertStudentSQL(500);
+		
+		insertStudentSQL(100);
 
 	}
 

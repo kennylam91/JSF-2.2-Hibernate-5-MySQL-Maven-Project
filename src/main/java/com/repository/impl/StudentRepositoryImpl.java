@@ -1,9 +1,11 @@
-package com.repository;
+package com.repository.impl;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +14,8 @@ import org.hibernate.Transaction;
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
+import com.controller.StudentController;
+import com.repository.StudentRepository;
 import com.util.HibernateUtil;
 
 import lombok.Getter;
@@ -26,6 +30,8 @@ import lombok.Setter;
 public class StudentRepositoryImpl implements Serializable, StudentRepository {
 
 	private static final long serialVersionUID = -6478480089267477363L;
+
+	private static final Logger logger = Logger.getLogger(StudentController.class);
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -98,9 +104,10 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			e.printStackTrace();
+			logger.error("exception: ", e);
 		} finally {
-			session.close();
+			if (session != null)
+				session.close();
 		}
 	}
 

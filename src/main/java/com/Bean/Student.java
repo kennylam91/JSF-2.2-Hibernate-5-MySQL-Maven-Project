@@ -69,6 +69,6 @@ public class Student {
 	private float avgScore;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Course> courses = new HashSet<Course>();
+	private Set<Course> courses = new HashSet<>();
 
 }

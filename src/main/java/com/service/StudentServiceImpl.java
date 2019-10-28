@@ -11,7 +11,7 @@ import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.repository.StudentRepository;
-import com.repository.StudentRepositoryImpl;
+import com.repository.impl.StudentRepositoryImpl;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
