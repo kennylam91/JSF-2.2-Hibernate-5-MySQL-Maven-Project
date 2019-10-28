@@ -1,6 +1,5 @@
 package com.repository.impl;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.Bean.Subject;
-import com.controller.StudentController;
 import com.repository.SubjectRepository;
 import com.util.HibernateUtil;
 
@@ -27,9 +25,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @ManagedBean(name = "subjectRepository")
 @SessionScoped
-public class SubjectRepositoryImpl implements SubjectRepository, Serializable {
+public class SubjectRepositoryImpl implements SubjectRepository {
 
-	private static final long serialVersionUID = 6441286228975302099L;
+	private static final long serialVersionUID = -1428662570058705569L;
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 

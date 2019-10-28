@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@ManagedBean(name = "subjectServiceImpl")
+@ManagedBean(name = "subjectService")
 @SessionScoped
 public class SubjectServiceImpl implements Serializable, SubjectService {
 

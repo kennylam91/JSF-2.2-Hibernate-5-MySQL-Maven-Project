@@ -1,6 +1,5 @@
 package com.repository.impl;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,9 +13,7 @@ import org.hibernate.Transaction;
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
-import com.controller.StudentController;
 import com.repository.StudentRepository;
-import com.repository.SubjectRepository;
 import com.util.HibernateUtil;
 
 import lombok.Getter;
@@ -28,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @ManagedBean(name = "studentRepository")
 @SessionScoped
-public class StudentRepositoryImpl implements Serializable, StudentRepository {
+public class StudentRepositoryImpl implements StudentRepository {
 
 	private static final long serialVersionUID = -6478480089267477363L;
 
