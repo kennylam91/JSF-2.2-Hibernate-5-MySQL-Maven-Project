@@ -1,4 +1,4 @@
-package com.service;
+package com.service.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.repository.StudentRepository;
 import com.repository.impl.StudentRepositoryImpl;
+import com.service.StudentService;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
