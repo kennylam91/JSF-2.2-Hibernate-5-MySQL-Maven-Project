@@ -8,6 +8,11 @@
 </h:head>
 <h:body>
   <ui:composition template="templates/commonLayout.xhtml">
+    <ui:define name="contentBody">
+      <ui:insert>
+        <ui:include src="templates/dashboard_row_content.html"></ui:include>
+      </ui:insert>
+    </ui:define>
   </ui:composition>
 </h:body>
 </html>

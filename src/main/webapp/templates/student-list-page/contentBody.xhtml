@@ -8,6 +8,7 @@
 <body>
   <ui:composition>
     <div class="wpsp-card">
+      <f:event listener="#{studentController.onPaginationChange()}" type="preRenderView" />
       <div class="wpsp-card-head">
         <div class="subject-inner wpsp-left wpsp-class-filter">
           <div class="subject-inner wpsp-left wpsp-class-filter">
@@ -165,8 +166,7 @@
                   <p:inputText styleClass="wpsp-input-sm" id="search_keyword" onkeyup=""
                     style="width:180px; display:inline;" value="#{studentController.pagination.searchKeyword}"
                     placeholder="Search keyword">
-                    <p:ajax event="change" listener="#{studentController.onPaginationChange}"
-                      update="main-content" />
+                    <p:ajax event="change" listener="#{studentController.onPaginationChange}" update="main-content" />
                   </p:inputText>
                 </h:form>
               </div>
@@ -185,7 +185,7 @@
             <h:form id="record_search_status">
               <label class="wpsp-labelMain"> <h:outputText
                   value="Show from record #{studentController.pagination.firstRowIndexOnPage} to 
-                  record #{studentController.pagination.lastRowIndexOnPage}." >
+                  record #{studentController.pagination.lastRowIndexOnPage}.">
                 </h:outputText>
               </label>
             </h:form>

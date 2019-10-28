@@ -20,7 +20,7 @@
 	</context-param>
 	<!-- Welcome page -->
 	<welcome-file-list>
-		<welcome-file>faces/student_list.xhtml</welcome-file>
+		<welcome-file>faces/dashboard.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- Install slf4j bridge handler -->
