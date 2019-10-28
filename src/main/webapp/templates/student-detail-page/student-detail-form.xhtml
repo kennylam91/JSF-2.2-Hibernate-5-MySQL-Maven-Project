@@ -7,17 +7,17 @@
 </h:head>
 <h:body>
   <ui:composition>
-    <div>
-      <h:form id="student-detail-form" styleClass="mt-5">
+    <div class="wpsp-card">
+      <h:form id="student-detail-form" style="padding:2rem;">
         <h3 class="wpsp-card-title">STUDENT DETAILS</h3>
-        <p:panelGrid columns="2" style="width:550px;margin-top:20px;">
+        <p:panelGrid columns="2" style="margin-top:1rem;">
           <f:facet name="header">
             <p:outputLabel value="PERSONAL INFORMATION"></p:outputLabel>
           </f:facet>
           <p:outputLabel>Student Code:</p:outputLabel>
           <h:outputText value="#{studentForm.code}" id="studentCode" required="true" style="padding: 0 5px;" />
           <!-- <p:message for="studentCode" /> -->
-          <p:outputLabel for="firstName">Firstname:</p:outputLabel>
+          <p:outputLabel>Firstname:</p:outputLabel>
           <p:inplace editor="true">
             <p:inputText value="#{studentForm.firstName}" id="firstName" required="true" />
           </p:inplace>
@@ -78,9 +78,10 @@
           <!-- <p:message for="courses" /> -->
           <f:facet name="footer">
             <div align="center">
-              <p:commandButton value="Save Student" styleClass="save" action="#{studentController.update(studentForm)}" />
-              <p:commandButton action="#{studentController.getStudentListForm}" value="Back To List"
-                style="margin-left:20px;">
+              <p:commandButton value="Save" styleClass="save" action="#{studentController.update(studentForm)}"
+                style="width:110px" />
+              <p:commandButton action="#{studentController.getStudentListForm}" value="Student List"
+                style="margin-left:10px;width:115px">
               </p:commandButton>
             </div>
           </f:facet>
