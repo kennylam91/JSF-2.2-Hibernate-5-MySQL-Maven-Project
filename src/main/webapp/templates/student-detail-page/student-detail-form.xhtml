@@ -7,10 +7,10 @@
 </h:head>
 <h:body>
   <ui:composition>
-    <div class="wpsp-card">
-      <h:form id="student-detail-form" style="padding:2rem;">
-        <h3 class="wpsp-card-title">STUDENT DETAILS</h3>
-        <p:panelGrid columns="2" style="margin-top:1rem;">
+    <div class="wpsp-card" style="padding: 2rem;">
+      <h3 class="wpsp-card-title">STUDENT DETAILS</h3>
+      <h:form id="student-detail-form" styleClass="ui-g">
+        <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
           <f:facet name="header">
             <p:outputLabel value="PERSONAL INFORMATION"></p:outputLabel>
           </f:facet>
@@ -85,6 +85,12 @@
               </p:commandButton>
             </div>
           </f:facet>
+        </p:panelGrid>
+        <p:panelGrid styleClass="ui-g-8" columns="2" style="padding-top:1rem;padding-left:1rem;display:inline-block;">
+          <f:facet name="header">
+            <p:outputLabel value="LEARNING INFORMATION"></p:outputLabel>
+          </f:facet>
+        #{studentForm.courses}
         </p:panelGrid>
       </h:form>
     </div>
