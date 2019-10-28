@@ -9,37 +9,34 @@
   <ui:composition>
     <div id="student-list-table-content">
       <div>
-        <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:50px;" />
-        <p:column headerText="Code" style="width:110px">
+        <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
+        <p:column headerText="Code" style="width:70px">
           <h:outputText value="#{student.code}" />
         </p:column>
-        <p:column headerText="Firstname" style="width:120px">
+        <p:column headerText="Firstname" style="width:100px">
           <h:outputText value="#{student.firstName}" />
         </p:column>
-        <p:column headerText="Lastname" style="width:120px">
+        <p:column headerText="Lastname" style="width:80px">
           <h:outputText value="#{student.lastName}" />
         </p:column>
-        <p:column headerText="Gender" style="width:100px">
+        <p:column headerText="Gender" style="width:60px">
           <h:outputText value="#{student.gender}" />
         </p:column>
-        <p:column headerText="Field" style="width:100px">
+        <p:column headerText="Field" style="width:65px">
           <h:outputText value="#{student.field}" />
         </p:column>
-        <p:column headerText="DOB">
+        <p:column headerText="DOB" style="width:75px;">
           <h:outputText value="#{student.dob}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="Phone">
-          <h:outputText value="#{student.phone}" />
-        </p:column>
         <p:column headerText="Email">
           <h:outputText value="#{student.email}" />
         </p:column>
-        <p:column headerText="Avg Score" style="width:110px;">
+        <p:column headerText="Score" style="width:50px;">
           <h:outputText value="#{student.avgScore}" />
         </p:column>
-        <p:column headerText="Action" style="width:115px">
+        <p:column headerText="Action" style="width:65px">
           <h:form>
             <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
               action="#{studentController.getStudentDetail(student.id)}">
