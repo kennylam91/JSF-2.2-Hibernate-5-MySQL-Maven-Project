@@ -8,7 +8,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.Bean.Subject;
+import com.Bean.FormBean.NewSubjectForm;
 import com.service.SubjectService;
+import com.util.ObjectMapper;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,9 @@ public class SubjectController implements Serializable {
 	@ManagedProperty(value = "#{subjectService}")
 	private SubjectService subjectService;
 
+	@ManagedProperty(value = "#{newSubjectForm}")
+	private NewSubjectForm newSubjectForm;
+
 	private List<Subject> subjects;
 
 	public List<Subject> getSubjects() {
@@ -38,6 +43,11 @@ public class SubjectController implements Serializable {
 
 	public Subject getSubjectDetail(Long subjectId) {
 		return subjectService.findSubjectById(subjectId);
+	}
+
+	public Long createSubject(NewSubjectForm newSubjectForm) {
+		Subject subject = ObjectMapper.convertToSubjectFromNewSubjectForm(newSubjectForm);
+		return subjectService.saveSubject(subject);
 	}
 
 }
