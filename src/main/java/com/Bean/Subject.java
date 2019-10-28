@@ -1,5 +1,6 @@
 package com.Bean;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
@@ -27,7 +28,9 @@ import lombok.ToString;
 @Table(name = "subjects")
 @ManagedBean(name = "subject")
 @SessionScoped
-public class Subject {
+public class Subject implements Serializable {
+
+	private static final long serialVersionUID = 3073718612735697210L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

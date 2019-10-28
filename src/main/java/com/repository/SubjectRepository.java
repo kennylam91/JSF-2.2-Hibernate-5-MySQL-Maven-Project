@@ -6,7 +6,7 @@ import com.Bean.Subject;
 
 public interface SubjectRepository {
 
-	void saveSubject(Subject subject);
+	Long saveSubject(Subject subject);
 
 	void updateSubject(Subject subject);
 

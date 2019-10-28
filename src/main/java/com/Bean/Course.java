@@ -1,5 +1,6 @@
 package com.Bean;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +29,7 @@ import lombok.Setter;
 @Table(name = "courses")
 @ManagedBean(name = "course")
 @SessionScoped
-public class Course {
+public class Course  implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

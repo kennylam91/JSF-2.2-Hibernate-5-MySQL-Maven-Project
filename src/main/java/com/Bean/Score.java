@@ -1,5 +1,7 @@
 package com.Bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "scores")
-public class Score {
+public class Score implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -16,6 +16,7 @@ import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.controller.StudentController;
 import com.repository.StudentRepository;
+import com.repository.SubjectRepository;
 import com.util.HibernateUtil;
 
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class StudentRepositoryImpl implements Serializable, StudentRepository {
 
 	private static final long serialVersionUID = -6478480089267477363L;
 
-	private static final Logger logger = Logger.getLogger(StudentController.class);
+	private static final Logger logger = Logger.getLogger(StudentRepositoryImpl.class);
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 

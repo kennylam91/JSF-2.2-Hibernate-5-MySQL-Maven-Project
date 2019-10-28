@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.Random;
 
 import com.Bean.Student;
+import com.Bean.Subject;
 import com.repository.StudentRepository;
+import com.repository.SubjectRepository;
 import com.repository.impl.StudentRepositoryImpl;
+import com.repository.impl.SubjectRepositoryImpl;
 
 public class GenerateData {
 
@@ -26,9 +29,16 @@ public class GenerateData {
 			"male", "female", "male", "female", "male", "female", "male", "female", "male", "female", "male",
 			"female" };
 
+	private static final float[] COEFFICIENT_COLLECTION = { 2.0f, 3.0f, 4.0f, 5.0f };
+
+	private static final String[] SUBJECT_NAME_COLLECTION = { "Basic Programming", "Web Basic", "Java Basic",
+			"PHP Basic", "Data Struture Basic", "Algorithm Basic", "Java Advanced", "PHP Advanced", "Python Basic",
+			"Python advanced" };
+
 	public static void main(String[] args) {
-		
-		insertStudentSQL(100);
+
+		insertStudentSQL(50);
+		insertSubjectSQL(10);
 
 	}
 
@@ -53,7 +63,7 @@ public class GenerateData {
 		return calendar.getTime();
 	}
 
-	private static String getRandomStudentCode(int length) {
+	private static String getRandomCode(int length) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			int j = getRandomNumberBetween(0, 35);
@@ -101,7 +111,7 @@ public class GenerateData {
 			String lastName = getRandomStudentLastname();
 			student.setFirstName(firstName);
 			student.setAddress(getRandomAddress());
-			student.setCode(getRandomStudentCode(8));
+			student.setCode(getRandomCode(8));
 			student.setLastName(lastName);
 			student.setGender(getRandomGender());
 			student.setField(getRandomField());
@@ -110,25 +120,25 @@ public class GenerateData {
 			student.setEmail(getRandomEmail(firstName, lastName));
 			repo.saveStudent(student);
 		}
+	}
 
-		/*
-		 * StringBuilder finalSql = new StringBuilder(); for (int i = 0; i <
-		 * studentNumber; i++) { StringBuilder sql = new StringBuilder(
-		 * "INSERT INTO `test`.`students` (`dob`, `address`, `avg_score`, `code`, `email`, `field`, `first_name`, `last_name`, `phone`) VALUES ("
-		 * ); sql.append("'").append(getRandomDOB()).append("',").append("'").append(
-		 * getRandomAddress()).append("',")
-		 * .append("'").append(String.valueOf(random.nextFloat() *
-		 * 10)).append("',").append("'")
-		 * .append(getRandomStudentCode(8)).append("',").append("'").append(
-		 * getRandomEmail()).append("',")
-		 * .append("'").append(getRandomField()).append("',").append("'").append(
-		 * getRandomStudentFirstname())
-		 * .append("',").append("'").append(getRandomStudentLastname()).append("',").
-		 * append("'") .append(getRandomPhone()).append("');");
-		 * 
-		 * finalSql.append(sql); }
-		 * 
-		 * return finalSql.toString();
-		 */
+	private static void insertSubjectSQL(int subjectNumber) {
+		Subject subject = new Subject();
+		SubjectRepository subjectRepo = new SubjectRepositoryImpl();
+		for (int i = 0; i < subjectNumber; i++) {
+			subject.setCode(getRandomCode(4));
+			subject.setCoefficient(getRandomCoefficient());
+			subject.setName(SUBJECT_NAME_COLLECTION[i]);
+			System.out.println(subjectRepo.saveSubject(subject));
+		}
+
+	}
+
+	private static float getRandomCoefficient() {
+		return COEFFICIENT_COLLECTION[getRandomNumberBetween(0, COEFFICIENT_COLLECTION.length - 1)];
+	}
+
+	private static String getRandomSubjectName() {
+		return SUBJECT_NAME_COLLECTION[getRandomNumberBetween(0, SUBJECT_NAME_COLLECTION.length - 1)];
 	}
 }

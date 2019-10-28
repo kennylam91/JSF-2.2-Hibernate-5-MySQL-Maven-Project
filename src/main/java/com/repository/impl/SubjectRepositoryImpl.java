@@ -28,26 +28,27 @@ public class SubjectRepositoryImpl implements SubjectRepository, Serializable {
 
 	private static final long serialVersionUID = 6441286228975302099L;
 
-	private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	private static final Logger logger = Logger.getLogger(StudentController.class);
+	private static final Logger logger = Logger.getLogger(SubjectRepositoryImpl.class);
 
 	@Override
-	public void saveSubject(Subject subject) {
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.saveOrUpdate(subject);
-		} catch (Exception e) {
-			if (transaction != null)
-				transaction.rollback();
-			logger.error("exception: ", e);
-		} finally {
-			if (session != null)
-				session.close();
-		}
+	public Long saveSubject(Subject subject) {
+		/*
+		 * Session session = null; Transaction transaction = null; try { session =
+		 * sessionFactory.openSession(); transaction = session.beginTransaction();
+		 * return (Long) session.save(subject);
+		 * 
+		 * } catch (Exception e) { if (transaction != null) transaction.rollback();
+		 * logger.error("exception: ", e); return null; } finally { if (session != null)
+		 * session.close(); }
+		 */
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Long id = (Long) session.save(subject);
+		transaction.commit();
+		session.close();
+		return id;
 	}
 
 	@Override
