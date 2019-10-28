@@ -34,21 +34,26 @@ public class SubjectRepositoryImpl implements SubjectRepository, Serializable {
 
 	@Override
 	public Long saveSubject(Subject subject) {
-		/*
-		 * Session session = null; Transaction transaction = null; try { session =
-		 * sessionFactory.openSession(); transaction = session.beginTransaction();
-		 * return (Long) session.save(subject);
-		 * 
-		 * } catch (Exception e) { if (transaction != null) transaction.rollback();
-		 * logger.error("exception: ", e); return null; } finally { if (session != null)
-		 * session.close(); }
-		 */
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		Long id = (Long) session.save(subject);
-		transaction.commit();
-		session.close();
-		return id;
+
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Long subjectId = (Long) session.save(subject);
+			transaction.commit();
+			return subjectId;
+
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error("exception: ", e);
+			return null;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
 	}
 
 	@Override

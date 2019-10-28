@@ -37,7 +37,7 @@ public class GenerateData {
 
 	public static void main(String[] args) {
 
-		insertStudentSQL(50);
+//		insertStudentSQL(50);
 		insertSubjectSQL(10);
 
 	}
