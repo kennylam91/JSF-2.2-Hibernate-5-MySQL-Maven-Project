@@ -32,4 +32,12 @@ public class SubjectController implements Serializable {
 		return subjectService.findAllSubjects();
 	}
 
+	public void deleteSubject(Long subjectId) throws Exception {
+		subjectService.deleteSubject(subjectId);
+	}
+
+	public Subject getSubjectDetail(Long subjectId) {
+		return subjectService.findSubjectById(subjectId);
+	}
+
 }
