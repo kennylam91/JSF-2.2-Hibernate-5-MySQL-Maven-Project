@@ -1,5 +1,6 @@
 package com.Bean.FormBean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
@@ -14,8 +15,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @ManagedBean(name = "newCourseForm")
 @SessionScoped
-public class NewCourseForm {
+public class NewCourseForm implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8355552067761168001L;
 	private String code;
 	private String name;
 	private Date beginTime;

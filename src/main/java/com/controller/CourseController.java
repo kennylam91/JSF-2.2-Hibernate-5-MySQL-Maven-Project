@@ -24,13 +24,16 @@ import lombok.Setter;
 public class CourseController implements Serializable {
 
 	private static final long serialVersionUID = 4251571962723500481L;
-	private List<Course> course;
+	private List<Course> courses;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
 
 	@ManagedProperty(value = "#{newCourseForm}")
 	private NewCourseForm newCourseForm;
+
+	@ManagedProperty(value = "#{course}")
+	private Course course;
 
 	public List<Course> getCourses() {
 		return courseService.findAllCourses();
@@ -47,6 +50,13 @@ public class CourseController implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getCourseDetail(Long courseId) {
+		course = courseService.findCourseById(courseId);
+		
+		System.out.println(course);
+		return "course_detail?faces-redirect=true";
 	}
 
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+  <ui:composition>
+    <div class="wpsp-card" style="padding: 2rem;">
+      <h3 class="wpsp-card-title">COURSE DETAILS</h3>
+      <h:outputText value="#{course.toString()}"></h:outputText>
+      <h:form id="course-detail-form" styleClass="ui-g">
+        <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
+          <f:facet name="header">
+            <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
+          </f:facet>
+          <p:outputLabel>Course Code:</p:outputLabel>
+          <h:outputText value="#{courseController.course.code}" id="courseCode" required="true" style="padding: 0 5px;" />
+          <!-- <p:message for="courseCode" /> -->
+          <p:outputLabel>Name:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:inputText value="#{courseController.course.name}" id="name" required="true" />
+          </p:inplace>
+          <!-- <p:message for="firstName" /> -->
+          <p:outputLabel>Subject:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:inputText value="#{courseController.course.subject}" id="subject" required="true" />
+          </p:inplace>
+          <p:outputLabel>Begin time:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true" value="#{courseController.course.beginTime}"
+              showOn="button">
+              <f:convertDateTime pattern="dd/MM/yyyy" />
+            </p:calendar>
+          </p:inplace>
+          <!-- <p:message for="dob" /> -->
+          <p:outputLabel>Finish time:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:calendar id="finishTime" pattern="dd/MM/yyyy" required="true"
+              value="#{courseController.course.finishTime}" showOn="button">
+              <f:convertDateTime pattern="dd/MM/yyyy" />
+            </p:calendar>
+          </p:inplace>
+          <p:outputLabel>Status:</p:outputLabel>
+          <p:inplace editor="true">
+            <h:selectOneMenu id="status" styleClass="select_input" value="#{courseController.course.status}">
+              <f:selectItem itemLabel="Registering" itemValue="registering" />
+              <f:selectItem itemLabel="Studying" itemValue="studying" />
+              <f:selectItem itemLabel="Completed" itemValue="completed" />
+            </h:selectOneMenu>
+          </p:inplace>
+          <!-- <p:message for="field" /> -->
+          <p:outputLabel>Teacher:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:inputText value="#{courseController.course.teacher}" id="teacher" />
+          </p:inplace>
+          <!-- <p:message for="address" /> -->
+          <p:outputLabel>Capacity:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:inputText value="#{courseController.course.capacity}" id="capacity" required="true" />
+          </p:inplace>
+          <!-- <p:message for="phone" /> -->
+          <p:outputLabel>Description:</p:outputLabel>
+          <p:inplace editor="true">
+            <p:inputText value="#{courseController.course.description}" id="description" required="true" />
+          </p:inplace>
+          <f:facet name="footer">
+            <div align="center">
+              <p:commandButton value="Save" styleClass="save" action="#{courseController.update(course)}"
+                style="width:110px" />
+              <p:linkButton outcome="course_list?faces-redirect=true" value="Course List"
+                style="margin-left:10px;width:115px">
+              </p:linkButton>
+            </div>
+          </f:facet>
+        </p:panelGrid>
+        <p:panelGrid styleClass="ui-g-8" columns="2" style="padding-top:1rem;padding-left:1rem;display:inline-block;">
+          <f:facet name="header">
+            <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
+          </f:facet>
+        #{course.students}
+        </p:panelGrid>
+      </h:form>
+    </div>
+  </ui:composition>
+</h:body>
+</html>

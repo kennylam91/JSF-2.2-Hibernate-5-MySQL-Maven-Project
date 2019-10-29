@@ -37,7 +37,7 @@
         </p:column>
         <p:column headerText="Action" style="width:65px">
           <h:form>
-            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
+            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info" update="main-content"
               action="#{courseController.getCourseDetail(course.id)}" style="color:green;">
             </p:commandButton>
             <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
