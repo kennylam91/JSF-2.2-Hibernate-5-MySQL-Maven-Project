@@ -8,7 +8,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.Bean.Course;
+import com.Bean.FormBean.NewCourseForm;
 import com.service.CourseService;
+import com.util.ObjectMapper;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +29,16 @@ public class CourseController implements Serializable {
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
 
+	@ManagedProperty(value = "#{newCourseForm}")
+	private NewCourseForm newCourseForm;
+
 	public List<Course> getCourses() {
 		return courseService.findAllCourses();
+	}
+
+	public void createCourse(NewCourseForm newCourseForm) {
+		Course course = ObjectMapper.convertToCourseFromNewCourseForm(newCourseForm);
+		Long newCourseId = courseService.saveCourse(course);
 	}
 
 }

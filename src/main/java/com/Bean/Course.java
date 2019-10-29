@@ -49,7 +49,7 @@ public class Course  implements Serializable{
 	private Date beginTime;
 
 	@Column(name = "finish_time", nullable = true)
-	private Calendar finishTime;
+	private Date finishTime;
 
 	@Column(name = "status", nullable = false)
 	private String status;

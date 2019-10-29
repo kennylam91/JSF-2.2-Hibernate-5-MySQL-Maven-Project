@@ -3,38 +3,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-  <p:dialog header="Create Student" widgetVar="dlg_create_student" resizable="false">
-    <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
+  <p:dialog header="Create Course" widgetVar="dlg_create_course" resizable="false">
+    <p:panelGrid id="create_course_form" columns="2" cellpadding="5">
       <h:outputLabel for="code" value="Code:" />
-      <p:inputText id="code" value="#{newStudentForm.code}" required="true" />
-      <h:outputLabel for="first_name" value="Firstname:" />
-      <p:inputText id="first_name" value="#{newStudentForm.firstName}" required="true" label="first_name" />
-      <h:outputLabel for="last_name" value="Lastname:" />
-      <p:inputText id="last_name" value="#{newStudentForm.lastName}" required="true" label="last_name" />
-      <h:outputLabel for="dob" value="Date of birth:" />
-      <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{newStudentForm.dob}">
+      <p:inputText id="code" value="#{newCourseForm.code}" required="true" />
+      <h:outputLabel for="name" value="Name:" />
+      <p:inputText id="name" value="#{newCourseForm.name}" required="true" label="name" />
+      <h:outputLabel for="beginTime" value="Begin Time:" />
+      <p:datePicker id="beginTime" pattern="dd/MM/yyyy" value="#{newCourseForm.beginTime}">
       </p:datePicker>
-      <h:outputLabel for="gender" value="Gender:" />
-      <h:selectOneMenu id="gender" styleClass="select_input" value="#{newStudentForm.gender}">
-        <f:selectItem itemLabel="Male" itemValue="male" />
-        <f:selectItem itemLabel="Female" itemValue="female" />
-        <f:selectItem itemLabel="Other" itemValue="other" />
+      <h:outputLabel for="status" value="Status" />
+      <h:selectOneMenu id="status" styleClass="select_input" value="#{newCourseForm.status}">
+        <f:selectItem itemLabel="Registering" itemValue="registering" />
+        <f:selectItem itemLabel="Studying" itemValue="studying" />
+        <f:selectItem itemLabel="Completed" itemValue="completed" />
       </h:selectOneMenu>
-      <h:outputLabel for="field" value="Field:" />
-      <p:inputText id="field" value="#{newStudentForm.field}" required="true" label="field" />
-      <h:outputLabel for="address" value="Address:" />
-      <p:inputText id="address" value="#{newStudentForm.address}" required="true" label="address" />
-      <h:outputLabel for="phone" value="Phone:" />
-      <p:inputText id="phone" value="#{newStudentForm.phone}" required="true" label="phone" />
-      <h:outputLabel for="email" value="Email:" />
-      <p:inputText id="email" value="#{newStudentForm.email}" required="true" label="email" />
+      <h:outputLabel for="teacher" value="Teacher:" />
+      <p:inputText id="teacher" value="#{newCourseForm.teacher}" required="true" label="teacher" />
+      <h:outputLabel for="capacity" value="Capacity:" />
+      <p:inputText id="capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
       <f:facet name="footer">
-        <div align="center">
-          <p:commandButton id="create_student_button_confirm" value="Create" update="main-content create_student_form"
-            action="#{studentController.createStudent(newStudentForm)}"
-            oncomplete="handleLoginRequest(xhr, status, args)" />
-          <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_student').hide()" update="growl" />
-        </div>
+      <div align="center">
+        <p:commandButton id="create_course_button_confirm" value="Create" update="main-content create_course_form"
+          action="#{courseController.createCourse(newCourseForm)}"
+          oncomplete="handleCreateCourseDialogRequest(xhr, status, args)" />
+        <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_course').hide()" update="growl" />
+      </div>
       </f:facet>
     </p:panelGrid>
   </p:dialog>

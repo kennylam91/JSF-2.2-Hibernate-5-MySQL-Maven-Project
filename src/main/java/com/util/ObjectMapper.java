@@ -2,9 +2,11 @@ package com.util;
 
 import org.modelmapper.ModelMapper;
 
+import com.Bean.Course;
 import com.Bean.Student;
 import com.Bean.StudentForm;
 import com.Bean.Subject;
+import com.Bean.FormBean.NewCourseForm;
 import com.Bean.FormBean.NewStudentForm;
 import com.Bean.FormBean.NewSubjectForm;
 
@@ -51,6 +53,10 @@ public class ObjectMapper {
 
 	public static Subject convertToSubjectFromNewSubjectForm(NewSubjectForm newSubjectForm) {
 		return modelMapper.map(newSubjectForm, Subject.class);
+	}
+
+	public static Course convertToCourseFromNewCourseForm(NewCourseForm newCourseForm) {
+		return modelMapper.map(newCourseForm, Course.class);
 	}
 
 }
