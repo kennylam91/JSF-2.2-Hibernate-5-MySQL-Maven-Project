@@ -1,10 +1,12 @@
 package com.repository.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -51,26 +53,97 @@ public class CourseRepositoryImpl implements CourseRepository {
 
 	@Override
 	public void updateCourse(Course course) {
-		// TODO Auto-generated method stub
-
+		Transaction transaction = null;
+		Session session = null;
+		boolean committed = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(course);
+			transaction.commit();
+			committed = true;
+		} finally {
+			if (session != null) {
+				if (!committed && transaction != null)
+					transaction.rollback();
+				session.close();
+			}
+		}
 	}
 
 	@Override
 	public void deleteCourse(Course course) {
-		// TODO Auto-generated method stub
+		Transaction transaction = null;
+		Session session = null;
+		boolean committed = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.delete(course);
+			transaction.commit();
+			committed = true;
+
+		} finally {
+			if (session != null) {
+				if (!committed && transaction != null)
+					transaction.rollback();
+				session.close();
+			}
+		}
 
 	}
 
 	@Override
 	public Course findCourseById(Long courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		Transaction transaction = null;
+		Session session = null;
+		boolean committed = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Select c from Course c where c.id = :courseId");
+			query.setParameter("courseId", courseId);
+			@SuppressWarnings("unchecked")
+			List<Course> courses = query.list();
+			transaction.commit();
+			committed = true;
+			if (!courses.isEmpty())
+				return courses.get(0);
+			else
+				return null;
+		} finally {
+			if (session != null) {
+				if (!committed && transaction != null)
+					transaction.rollback();
+				session.close();
+			}
+		}
 	}
 
 	@Override
 	public List<Course> findAllCourses() {
-		// TODO Auto-generated method stub
-		return null;
+		Transaction transaction = null;
+		Session session = null;
+		boolean committed = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Select c from Course c");
+			@SuppressWarnings("unchecked")
+			List<Course> courses = query.list();
+			transaction.commit();
+			committed = true;
+			if (!courses.isEmpty())
+				return courses;
+			else
+				return Collections.emptyList();
+		} finally {
+			if (session != null) {
+				if (!committed && transaction != null)
+					transaction.rollback();
+				session.close();
+			}
+		}
 	}
 
 }
