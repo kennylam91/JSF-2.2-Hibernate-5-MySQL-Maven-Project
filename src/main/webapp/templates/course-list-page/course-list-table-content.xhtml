@@ -7,46 +7,45 @@
 </head>
 <body>
   <ui:composition>
-    <div id="student-list-table-content">
+    <div id="course-list-table-content">
       <div>
         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
         <p:column headerText="Code" style="width:70px">
-          <h:outputText value="#{student.code}" />
+          <h:outputText value="#{course.code}" />
         </p:column>
-        <p:column headerText="Firstname" style="width:100px">
-          <h:outputText value="#{student.firstName}" />
+        <p:column headerText="Name" style="width:100px">
+          <h:outputText value="#{course.name}" />
         </p:column>
-        <p:column headerText="Lastname" style="width:80px">
-          <h:outputText value="#{student.lastName}" />
-        </p:column>
-        <p:column headerText="Gender" style="width:60px">
-          <h:outputText value="#{student.gender}" />
-        </p:column>
-        <p:column headerText="Field" style="width:65px">
-          <h:outputText value="#{student.field}" />
-        </p:column>
-        <p:column headerText="DOB" style="width:75px;">
-          <h:outputText value="#{student.dob}">
+        <p:column headerText="BeginTime" style="width:90px;">
+          <h:outputText value="#{course.beginTime}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="Email">
-          <h:outputText value="#{student.email}" />
+        <p:column headerText="FinishTime" style="width:90px;">
+          <h:outputText value="#{course.finishTime}">
+            <f:convertDateTime pattern="dd/MM/yyyy" />
+          </h:outputText>
         </p:column>
-        <p:column headerText="Score" style="width:50px;">
-          <h:outputText value="#{student.avgScore}" />
+        <p:column headerText="Status">
+          <h:outputText value="#{course.status}" />
+        </p:column>
+        <p:column headerText="Teacher">
+          <h:outputText value="#{course.teacher}" />
+        </p:column>
+        <p:column headerText="Capacity" style="width:80px;">
+          <h:outputText value="#{course.capacity}" />
         </p:column>
         <p:column headerText="Action" style="width:65px">
           <h:form>
             <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
-              action="#{studentController.getStudentDetail(student.id)}" style="color:green;">
+              action="#{courseController.getCourseDetail(course.id)}" style="color:green;">
             </p:commandButton>
             <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
-              action="#{studentController.deleteStudent(student.id)}" update="main-content">
+              action="#{courseController.deleteCourse(course.id)}" update="main-content">
               <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
             </p:commandButton>
-            <ui:insert name="dialog_delete_student">
-              <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
+            <ui:insert name="dialog_delete_course">
+              <ui:include src="/templates/course-list-page/dialog-delete-course.xhtml"></ui:include>
             </ui:insert>
           </h:form>
         </p:column>

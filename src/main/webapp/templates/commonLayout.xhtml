@@ -31,6 +31,14 @@
 				}
 			}
 
+			function handleCreateCourseDialogRequest(xhr, status, args) {
+				if (args.validationFailed) {
+					PF('dlg_create_course').show();
+				} else {
+					PF('dlg_create_course').hide();
+				}
+			}
+
 			jQuery(function($) {
 				ajax_url = 'https://demo.wpschoolpress.com/wp-admin/admin-ajax.php';
 				date_format = 'mm/dd/yy';
