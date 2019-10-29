@@ -26,7 +26,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "courses")
 @ManagedBean(name = "course")
@@ -69,5 +68,12 @@ public class Course implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id", nullable = true)
 	private Subject subject;
+
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	
 
 }

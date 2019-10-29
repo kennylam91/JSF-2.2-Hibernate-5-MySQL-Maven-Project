@@ -71,4 +71,5 @@ public class Student {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Course> courses = new HashSet<>();
 
+	
 }
