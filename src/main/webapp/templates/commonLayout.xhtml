@@ -65,14 +65,17 @@
     <!-- Main content -->
     <div class="wpsp-container">
       <div id="contentHead">
-        <ui:insert name="contentHead">
-          <ui:include src="/templates/student-list-page/contentHead.xhtml" />
-        </ui:insert>
+        <!-- <ui:insert name="contentHead">
+                    <ui:include src="/templates/student-list-page/contentHead.xhtml" />
+          <ui:include src="#{navigation.mainContentHead}" />
+        </ui:insert> -->
+        <ui:include src="#{navigation.mainContentHead}" />
       </div>
       <div id="contentBody">
-        <ui:insert name="contentBody">
+        <!-- <ui:insert name="contentBody">
           <ui:include src="/templates/student-list-page/contentBody.xhtml" />
-        </ui:insert>
+        </ui:insert> -->
+        <ui:include src="#{navigation.mainContentBody}" />
       </div>
     </div>
     <div id="main-footer">
