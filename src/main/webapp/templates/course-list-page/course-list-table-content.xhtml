@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<head>
+<title><ui:insert name="title">Default title</ui:insert></title>
+</head>
+<body>
+  <ui:composition>
+    <div id="student-list-table-content">
+      <div>
+        <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
+        <p:column headerText="Code" style="width:70px">
+          <h:outputText value="#{student.code}" />
+        </p:column>
+        <p:column headerText="Firstname" style="width:100px">
+          <h:outputText value="#{student.firstName}" />
+        </p:column>
+        <p:column headerText="Lastname" style="width:80px">
+          <h:outputText value="#{student.lastName}" />
+        </p:column>
+        <p:column headerText="Gender" style="width:60px">
+          <h:outputText value="#{student.gender}" />
+        </p:column>
+        <p:column headerText="Field" style="width:65px">
+          <h:outputText value="#{student.field}" />
+        </p:column>
+        <p:column headerText="DOB" style="width:75px;">
+          <h:outputText value="#{student.dob}">
+            <f:convertDateTime pattern="dd/MM/yyyy" />
+          </h:outputText>
+        </p:column>
+        <p:column headerText="Email">
+          <h:outputText value="#{student.email}" />
+        </p:column>
+        <p:column headerText="Score" style="width:50px;">
+          <h:outputText value="#{student.avgScore}" />
+        </p:column>
+        <p:column headerText="Action" style="width:65px">
+          <h:form>
+            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
+              action="#{studentController.getStudentDetail(student.id)}" style="color:green;">
+            </p:commandButton>
+            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
+              action="#{studentController.deleteStudent(student.id)}" update="main-content">
+              <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+            </p:commandButton>
+            <ui:insert name="dialog_delete_student">
+              <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
+            </ui:insert>
+          </h:form>
+        </p:column>
+      </div>
+    </div>
+  </ui:composition>
+</body>
+</html>

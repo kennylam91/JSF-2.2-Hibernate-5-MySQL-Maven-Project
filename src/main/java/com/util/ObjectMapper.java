@@ -2,10 +2,10 @@ package com.util;
 
 import org.modelmapper.ModelMapper;
 
-import com.Bean.NewStudentForm;
 import com.Bean.Student;
 import com.Bean.StudentForm;
 import com.Bean.Subject;
+import com.Bean.FormBean.NewStudentForm;
 import com.Bean.FormBean.NewSubjectForm;
 
 public class ObjectMapper {

@@ -8,11 +8,11 @@ import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
 
-import com.Bean.NewStudentForm;
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
 import com.Bean.StudentForm;
+import com.Bean.FormBean.NewStudentForm;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 

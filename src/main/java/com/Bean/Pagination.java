@@ -32,7 +32,7 @@ public class Pagination implements Serializable{
 
 	private static final int ROWS_PER_PAGE_DEFAULT = 10;
 
-	private static final String SEARCH_FIELD_DEFAULT = "field";
+	private static final String SEARCH_FIELD_DEFAULT = "all";
 
 	private int rowsPerPage = ROWS_PER_PAGE_DEFAULT;
 

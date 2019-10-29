@@ -1,4 +1,4 @@
-package com.Bean;
+package com.Bean.FormBean;
 
 import java.io.Serializable;
 import java.util.Date;

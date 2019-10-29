@@ -3,12 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
-<title><ui:insert name="title">Student System</ui:insert></title>
 </head>
 <body>
   <ui:composition>
     <div class="wpsp-card">
-      <f:event listener="#{studentController.onPaginationChange()}" type="preRenderView" />
+      <f:event listener="#{courseController.getCourses()}" type="preRenderView" />
       <div class="wpsp-card-head">
         <div class="subject-inner wpsp-left wpsp-class-filter">
           <div class="subject-inner wpsp-left wpsp-class-filter">
@@ -98,32 +97,30 @@
               <div id="student_order" class="ui-g-4">
                 <div class=" align_center">
                   <h:form id="order">
-                    
-                      <label class="wpsp-labelMain">Order by</label>
-                      <h:selectOneMenu id="ordered_by" styleClass="select_input"
-                        style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem"
-                        value="#{studentController.pagination.orderBy}">
-                        <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
-                          update="main-content" />
-                        <f:selectItem itemLabel="code" itemValue="code" />
-                        <f:selectItem itemLabel="firstName" itemValue="firstName" />
-                        <f:selectItem itemLabel="lastName" itemValue="lastName" />
-                        <f:selectItem itemLabel="field" itemValue="field" />
-                        <f:selectItem itemLabel="dob" itemValue="dob" />
-                        <f:selectItem itemLabel="phone" itemValue="phone" />
-                        <f:selectItem itemLabel="email" itemValue="email" />
-                        <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
-                        <f:selectItem itemLabel="note" itemValue="note" />
-                      </h:selectOneMenu>
-                      <h:selectOneMenu id="asc_or_desc" value="#{studentController.pagination.ascOrDesc}"
-                        styleClass="select_input"
-                        style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem">
-                        <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
-                          update="main-content" />
-                        <f:selectItem itemLabel="asc" itemValue="asc" />
-                        <f:selectItem itemLabel="desc" itemValue="desc" />
-                      </h:selectOneMenu>
-                    
+                    <label class="wpsp-labelMain">Order by</label>
+                    <h:selectOneMenu id="ordered_by" styleClass="select_input"
+                      style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem"
+                      value="#{studentController.pagination.orderBy}">
+                      <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
+                        update="main-content" />
+                      <f:selectItem itemLabel="code" itemValue="code" />
+                      <f:selectItem itemLabel="firstName" itemValue="firstName" />
+                      <f:selectItem itemLabel="lastName" itemValue="lastName" />
+                      <f:selectItem itemLabel="field" itemValue="field" />
+                      <f:selectItem itemLabel="dob" itemValue="dob" />
+                      <f:selectItem itemLabel="phone" itemValue="phone" />
+                      <f:selectItem itemLabel="email" itemValue="email" />
+                      <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
+                      <f:selectItem itemLabel="note" itemValue="note" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu id="asc_or_desc" value="#{studentController.pagination.ascOrDesc}"
+                      styleClass="select_input"
+                      style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem">
+                      <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
+                        update="main-content" />
+                      <f:selectItem itemLabel="asc" itemValue="asc" />
+                      <f:selectItem itemLabel="desc" itemValue="desc" />
+                    </h:selectOneMenu>
                   </h:form>
                 </div>
               </div>
@@ -154,8 +151,8 @@
               </div>
             </div>
             <div>
-              <ui:insert name="student-list-table">
-                <ui:include src="/templates/student-list-page/student-list-table.xhtml"></ui:include>
+              <ui:insert name="course-list-table">
+                <ui:include src="/templates/course-list-page/course-list-table.xhtml"></ui:include>
               </ui:insert>
             </div>
             <h:form id="record_search_status">
@@ -165,10 +162,6 @@
                 </h:outputText>
               </label>
             </h:form>
-            <!-- <table id="student_table" class="wpsp-table dataTable dtr-inline"
-							cellspacing="0" width="100%" style="width: 100%;" role="grid"
-							aria-describedby="student_table_info"> -->
-            <!-- 	</table> -->
           </div>
         </div>
       </div>

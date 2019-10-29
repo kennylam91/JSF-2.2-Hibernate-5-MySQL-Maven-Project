@@ -44,7 +44,7 @@ public class Course  implements Serializable{
 	@Column(name = "description", nullable = true)
 	private String description;
 
-	@Column(name = "begin_time", nullable = false)
+	@Column(name = "begin_time", nullable = true)
 	private Calendar beginTime;
 
 	@Column(name = "finish_time", nullable = true)
