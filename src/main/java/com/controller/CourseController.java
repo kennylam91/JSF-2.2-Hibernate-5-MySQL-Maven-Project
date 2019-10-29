@@ -41,4 +41,12 @@ public class CourseController implements Serializable {
 		Long newCourseId = courseService.saveCourse(course);
 	}
 
+	public void deleteCourse(Long courseId) {
+		try {
+			courseService.deleteCourse(courseId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
