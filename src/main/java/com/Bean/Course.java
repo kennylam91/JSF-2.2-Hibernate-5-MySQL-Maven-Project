@@ -2,6 +2,7 @@ package com.Bean;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
@@ -45,13 +46,13 @@ public class Course  implements Serializable{
 	private String description;
 
 	@Column(name = "begin_time", nullable = true)
-	private Calendar beginTime;
+	private Date beginTime;
 
 	@Column(name = "finish_time", nullable = true)
 	private Calendar finishTime;
 
 	@Column(name = "status", nullable = false)
-	private Boolean status;
+	private String status;
 	
 	@Column(name = "teacher", nullable = true)
 	private String teacher;
@@ -63,7 +64,7 @@ public class Course  implements Serializable{
 	Set<Student> students = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "subject_id", nullable = false)
+	@JoinColumn(name = "subject_id", nullable = true)
 	private Subject subject;
 
 }

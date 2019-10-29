@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import com.Bean.Course;
 import com.Bean.Student;
 import com.Bean.Subject;
 import com.controller.SubjectController;
+import com.repository.CourseRepository;
 import com.repository.StudentRepository;
 import com.repository.SubjectRepository;
+import com.repository.impl.CourseRepositoryImpl;
 import com.repository.impl.StudentRepositoryImpl;
 import com.repository.impl.SubjectRepositoryImpl;
 import com.service.SubjectService;
@@ -43,11 +46,18 @@ public class GenerateData {
 			"JAVA", "PHP", "PYTHON", "PYTHON" };
 
 	public static void main(String[] args) {
-		insertSubjectSQL(10);
 
 		/*
-		 * insertStudentSQL(50);
+		 * Course course = new Course(); course.setCode("Alkf29");
+		 * course.setName("Java Core 01"); course.setStatus("Registering");
+		 * course.setBeginTime(getRandomDOB());
+		 * 
+		 * CourseRepository courseRepo = new CourseRepositoryImpl();
+		 * courseRepo.saveCourse(course);
 		 */
+		insertSubjectSQL(10);
+
+		insertStudentSQL(50);
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -157,7 +167,6 @@ public class GenerateData {
 			subject.setCoefficient(getRandomCoefficient());
 			subject.setName(SUBJECT_NAME_COLLECTION[i]);
 			subject.setField(SUBJECT_FIELD_COLLECTION[i]);
-			System.out.println(subjectRepo.saveSubject(subject));
 		}
 
 	}
