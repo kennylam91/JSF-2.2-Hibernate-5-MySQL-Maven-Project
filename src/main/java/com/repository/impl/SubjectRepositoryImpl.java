@@ -149,4 +149,29 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		}
 	}
 
+	@Override
+	public Subject findSubjectByName(String name) {
+		Session session = null;
+		Transaction transaction = null;
+
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Select s from Subject s where s.name = :name");
+			query.setParameter("name", name.trim());
+			Subject subject = (Subject) query.uniqueResult();
+			transaction.commit();
+			return subject;
+
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error("exception:", e);
+			return null;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 }

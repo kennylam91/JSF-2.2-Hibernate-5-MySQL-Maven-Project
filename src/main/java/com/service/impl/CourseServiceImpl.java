@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import com.Bean.Course;
 import com.repository.CourseRepository;
 import com.service.CourseService;
+import com.service.SubjectService;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,14 +26,17 @@ public class CourseServiceImpl implements CourseService {
 	@ManagedProperty(value = "#{courseRepository}")
 	private CourseRepository courseRepository;
 
+	@ManagedProperty(value = "#{subjectService}")
+	private SubjectService subjectService;
+
 	@Override
 	public Long saveCourse(Course course) {
 		return courseRepository.saveCourse(course);
 	}
 
 	@Override
-	public void updateCourse(Course course, Long courseId) throws Exception {
-		Course courseFound = courseRepository.findCourseById(courseId);
+	public void updateCourse(Course course) throws Exception {
+		Course courseFound = courseRepository.findCourseById(course.getId());
 		if (courseFound == null) {
 			throw new Exception("CourseId not found");
 		} else {

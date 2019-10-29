@@ -9,7 +9,7 @@ public interface CourseService extends Serializable {
 
 	Long saveCourse(Course course);
 
-	void updateCourse(Course course, Long courseId) throws Exception;
+	void updateCourse(Course course) throws Exception;
 
 	void deleteCourse(Long courseId) throws Exception;
 

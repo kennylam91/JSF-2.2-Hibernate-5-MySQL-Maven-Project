@@ -54,8 +54,18 @@ public class Subject implements Serializable {
 	private Set<Course> courses = new HashSet<>();
 
 	@Override
+	public boolean equals(Object other) {
+		return (other instanceof Subject) && (id != null) ? id.equals(((Subject) other).id) : (other == this);
+	}
+
+	@Override
+	public int hashCode() {
+		return (id != null) ? (this.getClass().hashCode() + id.hashCode()) : super.hashCode();
+	}
+
+	@Override
 	public String toString() {
-		return name;
+		return id.toString();
 	}
 
 }

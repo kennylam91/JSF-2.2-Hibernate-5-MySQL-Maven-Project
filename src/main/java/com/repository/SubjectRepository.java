@@ -16,4 +16,6 @@ public interface SubjectRepository extends Serializable {
 	Subject findSubjectById(Long subjectId);
 
 	List<Subject> findAllSubjects();
+	
+	Subject findSubjectByName(String name);
 }

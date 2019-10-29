@@ -8,8 +8,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.Bean.Course;
+import com.Bean.Subject;
 import com.Bean.FormBean.NewCourseForm;
 import com.service.CourseService;
+import com.service.SubjectService;
 import com.util.ObjectMapper;
 
 import lombok.Getter;
@@ -28,6 +30,9 @@ public class CourseController implements Serializable {
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
+
+	@ManagedProperty(value = "#{subjectService}")
+	private SubjectService subjectService;
 
 	@ManagedProperty(value = "#{newCourseForm}")
 	private NewCourseForm newCourseForm;
@@ -52,11 +57,24 @@ public class CourseController implements Serializable {
 		}
 	}
 
+	public void updateCourse() {
+		try {
+			courseService.updateCourse(course);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	public String getCourseDetail(Long courseId) {
 		course = courseService.findCourseById(courseId);
-		
-		System.out.println(course);
 		return "course_detail?faces-redirect=true";
+	}
+
+	public void setSubjectToCourse(Long subjectId) {
+		Subject subject = subjectService.findSubjectById(subjectId);
+		course.setSubject(subject);
 	}
 
 }

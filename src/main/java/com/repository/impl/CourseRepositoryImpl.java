@@ -60,6 +60,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.update(course);
+			System.out.println("update: " + course);
 			transaction.commit();
 			committed = true;
 		} finally {
