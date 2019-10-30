@@ -5,16 +5,17 @@
 <ui:composition>
   <p:dialog header="Create Subject" widgetVar="dlg_create_subject" resizable="false">
     <p:panelGrid id="create_subject_form" columns="2" cellpadding="5">
-      <h:outputLabel for="code" value="Code:" />
-      <p:inputText id="code" value="#{newSubjectForm.code}" required="true" />
-      <h:outputLabel for="name" value="Name:" />
-      <p:inputText id="name" value="#{newSubjectForm.name}" required="true" label="name" />
-      <h:outputLabel for="field" value="Field:" />
-      <p:inputText id="field" value="#{newSubjectForm.field}" required="true" label="field" />
-      <h:outputLabel for="description" value="Description: " />
-      <p:inputText id="description" value="#{newSubjectForm.description}" label="description" />
-      <h:outputLabel for="coefficient" value="Coefficient: " />
-      <p:inputText id="coefficient" value="#{newSubjectForm.coefficient}" required="true" label="coefficient" />
+      <h:outputLabel for="create_subject_code" value="Code:" />
+      <p:inputText id="create_subject_code" value="#{newSubjectForm.code}" required="true" />
+      <h:outputLabel for="create_subject_name" value="Name:" />
+      <p:inputText id="create_subject_name" value="#{newSubjectForm.name}" required="true" label="name" />
+      <h:outputLabel for="create_subject_field" value="Field:" />
+      <p:inputText id="create_subject_field" value="#{newSubjectForm.field}" required="true" label="field" />
+      <h:outputLabel for="create_subject_description" value="Description: " />
+      <p:inputText id="create_subject_description" value="#{newSubjectForm.description}" label="description" />
+      <h:outputLabel for="create_subject_coefficient" value="Coefficient: " />
+      <p:inputText id="create_subject_coefficient" value="#{newSubjectForm.coefficient}" required="true"
+        label="coefficient" />
       <f:facet name="footer">
         <div align="center">
           <p:commandButton id="create_subject_button_confirm" value="Create" update="main-content create_subject_form"

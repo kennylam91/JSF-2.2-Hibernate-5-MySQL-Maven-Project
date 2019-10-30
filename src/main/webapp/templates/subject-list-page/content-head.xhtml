@@ -7,26 +7,23 @@
 </head>
 <body>
   <ui:composition>
-    <h:form>
-      <div class="wpsp-pageHead">
-        <h1 class="wpsp-pagetitle">Subjects Management</h1>
-        <div class="wpsp-right">
-          <ol class="wpsp-breadcrumb">
-            <li><p:link outcome="dashboard">Dashboard</p:link></li>
-            <li><p:link outcome="subject_list">
-                <span class="active">Subjects</span>
-              </p:link></li>
-          </ol>
-          <p:commandButton id="create_subject_button" styleClass="wpsp-btn"
-            style="height:2.5rem; width:135px;padding:0;background-color: #00bdda;border-color: #00bdda;"
-            value="New Subject" onclick="PF('dlg_create_subject').show()" icon="pi pi-plus-circle">
-          </p:commandButton>
-        </div>
+    <div class="wpsp-pageHead">
+      <h1 class="wpsp-pagetitle">Subjects Management</h1>
+      <div class="wpsp-right">
+        <ol class="wpsp-breadcrumb">
+          <li><p:commandLink action="#{navigation.navigateToDashboard()}" update="main-content">Dashboard
+            </p:commandLink></li>
+          <li><p:commandLink action="#{navigation.navigateToSubjectList()}" update="main-content">
+              <span class="active">Subjects</span>
+            </p:commandLink></li>
+        </ol>
+        <p:commandButton id="create_subject_button" styleClass="wpsp-btn"
+          style="height:2.5rem; width:135px;padding:0;background-color: #00bdda;border-color: #00bdda;"
+          value="New Subject" onclick="PF('dlg_create_subject').show()" icon="pi pi-plus-circle">
+        </p:commandButton>
       </div>
-      <ui:insert name="dialog_create_subject">
-        <ui:include src="/templates/subject-list-page/dialog_create_subject.xhtml"></ui:include>
-      </ui:insert>
-    </h:form>
+    </div>
+    
   </ui:composition>
 </body>
 </html>

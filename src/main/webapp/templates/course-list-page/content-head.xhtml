@@ -7,24 +7,22 @@
 </head>
 <body>
   <ui:composition>
-    <h:form>
-      <div class="wpsp-pageHead">
-        <h1 class="wpsp-pagetitle">Courses Management</h1>
-        <div class="wpsp-right">
-          <ol class="wpsp-breadcrumb">
-            <li><p:link outcome="dashboard">Dashboard</p:link></li>
-            <li><p:link outcome="course_list">
-                <span class="active">Courses</span>
-              </p:link></li>
-          </ol>
-          <p:commandButton id="create_course_button" styleClass="wpsp-btn"
-            style="height:2.5rem; width:135px;padding:0;background-color: #00bdda;border-color: #00bdda;"
-            value="New Course" onclick="PF('dlg_create_course').show()" icon="pi pi-plus-circle">
-          </p:commandButton>
-        </div>
+    <div class="wpsp-pageHead">
+      <h1 class="wpsp-pagetitle">Courses Management</h1>
+      <div class="wpsp-right">
+        <ol class="wpsp-breadcrumb">
+          <li><p:commandLink action="#{navigation.navigateToDashboard()}" update="main-content">Dashboard 
+            </p:commandLink></li>
+          <li><p:commandLink action="#{navigation.navigateToCourseList()}" update="main-content">
+              <span class="active">Courses</span>
+            </p:commandLink></li>
+        </ol>
+        <p:commandButton id="create_course_button" styleClass="wpsp-btn"
+          style="height:2.5rem; width:135px;padding:0;background-color: #00bdda;border-color: #00bdda;"
+          value="New Course" onclick="PF('dlg_create_course').show()" icon="pi pi-plus-circle">
+        </p:commandButton>
       </div>
-      
-    </h:form>
+    </div>
   </ui:composition>
 </body>
 </html>
