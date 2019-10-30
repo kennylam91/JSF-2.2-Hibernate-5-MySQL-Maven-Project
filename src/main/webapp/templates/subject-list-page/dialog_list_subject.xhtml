@@ -7,7 +7,7 @@
     <p:dataTable value="#{subjectController.subjects}" var="subject" id="subject_list_table" rowKey="#{subject.id}"
       styleClass="wpsp-table dataTable dtr-inline" selectionMode="single"
       selection="#{subjectController.selectedSubject}">
-      <p:ajax event="rowSelect" listener="#{subjectController.onSubjectRowSelect}" update="create_course_dialog_form" />
+      <p:ajax event="rowSelect" listener="#{subjectController.onSubjectRowSelect}" update="main-content" />
       <p:column headerText="Code" style="width:70px">
         <h:outputText value="#{subject.code}" />
       </p:column>

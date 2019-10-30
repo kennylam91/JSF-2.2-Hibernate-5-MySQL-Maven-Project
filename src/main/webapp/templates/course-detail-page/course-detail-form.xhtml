@@ -23,13 +23,19 @@
           </p:inplace>
           <!-- <p:message for="firstName" /> -->
           <p:outputLabel>Subject:</p:outputLabel>
+          <h:panelGroup>
+            <h:outputLabel id="new_course_subject" value="#{newCourseForm.subject}">
+            </h:outputLabel>
+            <p:commandLink onclick="PF('dlg_list_subject').show()" value="Edit" style="margin-left:10px;color:red;">
+            </p:commandLink>
+          </h:panelGroup>
           <!-- <p:inplace editor="true"> -->
-          <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
+          <!-- <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
             value="#{courseController.course.subject}">
             <f:selectItems value="#{subjectController.subjects}" var="subject" itemLabel="#{subject.name}"
               itemValue="#{subject}">
             </f:selectItems>
-          </h:selectOneMenu>
+          </h:selectOneMenu> -->
           <!--  </p:inplace> -->
           <p:outputLabel>Begin time:</p:outputLabel>
           <p:inplace editor="true">

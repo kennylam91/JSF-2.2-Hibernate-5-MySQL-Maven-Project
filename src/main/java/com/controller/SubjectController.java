@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
+import com.Bean.Navigation;
 import com.Bean.Subject;
 import com.Bean.FormBean.NewCourseForm;
 import com.Bean.FormBean.NewSubjectForm;
@@ -39,6 +40,9 @@ public class SubjectController implements Serializable {
 	@ManagedProperty(value = "#{newCourseForm}")
 	private NewCourseForm newCourseForm;
 
+	@ManagedProperty(value = "#{navigation}")
+	private Navigation navigation;
+
 	private List<Subject> subjects;
 
 	private Subject selectedSubject;
@@ -61,9 +65,10 @@ public class SubjectController implements Serializable {
 	}
 
 	public void onSubjectRowSelect(SelectEvent event) {
-		System.out.println((Subject) event.getObject());
 		newCourseForm.setSubject((Subject) event.getObject());
-		PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
+		if (navigation.getMainContentBody().equals("/templates/course-list-page/content-body.xhtml")) {
+			PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
+			System.out.println("true");
+		}
 	}
-
 }

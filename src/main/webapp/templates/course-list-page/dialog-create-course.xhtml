@@ -27,8 +27,11 @@
         <h:outputLabel for="new_course_capacity" value="Capacity:" />
         <p:inputText id="new_course_capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
         <h:outputLabel for="new_course_subject" value="Subject:" />
-        <h:outputLabel id="new_course_subject" onclick="PF('dlg_list_subject').show()" value="#{newCourseForm.subject}">
-        </h:outputLabel>
+        <h:panelGroup>
+          <h:outputLabel id="new_course_subject" value="#{newCourseForm.subject}">
+          </h:outputLabel>
+          <p:commandLink onclick="PF('dlg_list_subject').show()" value="Edit" style="margin-left:10px; color:red"></p:commandLink>
+        </h:panelGroup>
         <f:facet name="footer">
           <div align="center">
             <p:commandButton id="create_course_button_confirm" value="Create" update="main-content create_course_form"
