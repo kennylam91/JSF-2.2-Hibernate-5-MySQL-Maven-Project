@@ -24,13 +24,17 @@ public class Navigation implements Serializable {
 	public void navigateToStudentList() {
 		mainContentHead = "/templates/student-list-page/contentHead.xhtml";
 		mainContentBody = "/templates/student-list-page/contentBody.xhtml";
-		System.out.println("student list:" + mainContentHead);
 	}
 
 	public void navigateToDashboard() {
 		mainContentHead = "/templates/dashboard/contentHead.xhtml";
 		mainContentBody = "/templates/dashboard/dashboard_row_content.xhtml";
-		System.out.println("dashboard:" + mainContentHead);
+	}
+
+	public void navigateToCourseList() {
+		mainContentHead = "/templates/course-list-page/content-head.xhtml";
+		mainContentBody = "/templates/course-list-page/content-body.xhtml";
+		System.out.println("navigateToCourseList");
 	}
 
 }
