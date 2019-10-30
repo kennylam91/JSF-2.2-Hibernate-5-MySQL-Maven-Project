@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
 
+import com.Bean.Navigation;
 import com.Bean.Pagination;
 import com.Bean.Student;
 import com.Bean.StudentDto;
@@ -47,6 +48,9 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{newStudentForm}")
 	private NewStudentForm newStudentForm;
 
+	@ManagedProperty(value = "#{navigation}")
+	private Navigation navigation;
+
 	private List<StudentDto> studentDtos;
 
 	private List<StudentDto> selectedStudentDtos;
@@ -76,11 +80,10 @@ public class StudentController implements Serializable {
 		return "student_list";
 	}
 
-	public String getStudentDetail(Long studentId) throws Exception {
+	public void getStudentDetail(Long studentId) throws Exception {
 		Student student = studentService.findStudentById(studentId);
 		ObjectMapper.convertToStudentForm(student, studentForm);
-		logger.info(studentForm);
-		return "student_detail?faces-redirect=true";
+		navigation.navigateToStudentDetail();
 	}
 
 	public void update(StudentForm studentForm) throws Exception {

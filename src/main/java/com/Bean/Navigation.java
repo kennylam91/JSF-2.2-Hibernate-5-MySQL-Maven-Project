@@ -41,4 +41,9 @@ public class Navigation implements Serializable {
 		mainContentBody = "/templates/subject-list-page/content-body.xhtml";
 	}
 
+	public void navigateToStudentDetail() {
+		mainContentBody = "/templates/student-detail-page/student-detail-form.xhtml";
+		System.out.println("navigateToStudentDetail");
+	}
+
 }

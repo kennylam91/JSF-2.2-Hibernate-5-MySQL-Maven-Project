@@ -37,18 +37,18 @@
           <h:outputText value="#{student.avgScore}" />
         </p:column>
         <p:column headerText="Action" style="width:65px">
-          <h:form>
-            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info"
-              action="#{studentController.getStudentDetail(student.id)}" style="color:green;">
-            </p:commandButton>
-            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
-              action="#{studentController.deleteStudent(student.id)}" update="main-content">
-              <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
-            </p:commandButton>
-            <ui:insert name="dialog_delete_student">
-              <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
-            </ui:insert>
-          </h:form>
+              <p:commandLink  title="Detail1" id="detail_button" update="main-content"
+                actionListener="#{studentController.getStudentDetail(student.id)}" style="color:green;">
+                <i class="pi pi-info"></i>
+              </p:commandLink >
+              <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
+                action="#{studentController.deleteStudent(student.id)}" update="main-content">
+                <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+              </p:commandButton>
+              <ui:insert name="dialog_delete_student">
+                <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
+              </ui:insert>
+
         </p:column>
       </div>
     </div>
