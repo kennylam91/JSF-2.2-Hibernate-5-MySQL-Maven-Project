@@ -2,6 +2,8 @@ package com.controller;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -88,8 +90,8 @@ public class StudentController implements Serializable {
 	}
 
 	public void onPaginationChange() {
-//		System.out.println(pagination.toString());
 		studentDtos = studentService.findStudentsByPagination(pagination);
+		System.out.println("onPaginationChange");
 	}
 
 	public void getPreviousPage() {
@@ -128,6 +130,11 @@ public class StudentController implements Serializable {
 		studentForm.setLastName(null);
 		studentForm.setNote(null);
 		studentForm.setPhone(null);
+	}
+
+	@PostConstruct
+	public void init() {
+		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 
 }

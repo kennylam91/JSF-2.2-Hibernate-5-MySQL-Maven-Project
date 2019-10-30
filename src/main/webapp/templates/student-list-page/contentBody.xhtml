@@ -8,7 +8,6 @@
 <body>
   <ui:composition>
     <div class="wpsp-card">
-      <f:event listener="#{studentController.onPaginationChange()}" type="preRenderView" />
       <div class="wpsp-card-head">
         <div class="subject-inner wpsp-left wpsp-class-filter">
           <div class="subject-inner wpsp-left wpsp-class-filter">
@@ -98,32 +97,30 @@
               <div id="student_order" class="ui-g-4">
                 <div class=" align_center">
                   <h:form id="order">
-                    
-                      <label class="wpsp-labelMain">Order by</label>
-                      <h:selectOneMenu id="ordered_by" styleClass="select_input"
-                        style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem"
-                        value="#{studentController.pagination.orderBy}">
-                        <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
-                          update="main-content" />
-                        <f:selectItem itemLabel="code" itemValue="code" />
-                        <f:selectItem itemLabel="firstName" itemValue="firstName" />
-                        <f:selectItem itemLabel="lastName" itemValue="lastName" />
-                        <f:selectItem itemLabel="field" itemValue="field" />
-                        <f:selectItem itemLabel="dob" itemValue="dob" />
-                        <f:selectItem itemLabel="phone" itemValue="phone" />
-                        <f:selectItem itemLabel="email" itemValue="email" />
-                        <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
-                        <f:selectItem itemLabel="note" itemValue="note" />
-                      </h:selectOneMenu>
-                      <h:selectOneMenu id="asc_or_desc" value="#{studentController.pagination.ascOrDesc}"
-                        styleClass="select_input"
-                        style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem">
-                        <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
-                          update="main-content" />
-                        <f:selectItem itemLabel="asc" itemValue="asc" />
-                        <f:selectItem itemLabel="desc" itemValue="desc" />
-                      </h:selectOneMenu>
-                    
+                    <label class="wpsp-labelMain">Order by</label>
+                    <h:selectOneMenu id="ordered_by" styleClass="select_input"
+                      style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem"
+                      value="#{studentController.pagination.orderBy}">
+                      <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
+                        update="main-content" />
+                      <f:selectItem itemLabel="code" itemValue="code" />
+                      <f:selectItem itemLabel="firstName" itemValue="firstName" />
+                      <f:selectItem itemLabel="lastName" itemValue="lastName" />
+                      <f:selectItem itemLabel="field" itemValue="field" />
+                      <f:selectItem itemLabel="dob" itemValue="dob" />
+                      <f:selectItem itemLabel="phone" itemValue="phone" />
+                      <f:selectItem itemLabel="email" itemValue="email" />
+                      <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
+                      <f:selectItem itemLabel="note" itemValue="note" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu id="asc_or_desc" value="#{studentController.pagination.ascOrDesc}"
+                      styleClass="select_input"
+                      style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem">
+                      <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
+                        update="main-content" />
+                      <f:selectItem itemLabel="asc" itemValue="asc" />
+                      <f:selectItem itemLabel="desc" itemValue="desc" />
+                    </h:selectOneMenu>
                   </h:form>
                 </div>
               </div>

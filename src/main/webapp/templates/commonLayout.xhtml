@@ -64,23 +64,12 @@
   <h:panelGroup class="wpsp-wrapper" id="main-content" layout="block">
     <!-- Main content -->
     <div class="wpsp-container">
-      <!-- <div id="contentHead"> -->
-      <!-- <ui:insert name="contentHead">
-                    <ui:include src="/templates/student-list-page/contentHead.xhtml" />
-          <ui:include src="#{navigation.mainContentHead}" />
-        </ui:insert> -->
       <ui:insert name="contentHead">
         <ui:include src="#{navigation.mainContentHead}" />
       </ui:insert>
-      <!-- </div> -->
-      <!--  <div id="contentBody"> -->
-      <!-- <ui:insert name="contentBody">
-          <ui:include src="/templates/student-list-page/contentBody.xhtml" />
-        </ui:insert> -->
       <ui:insert name="contentBody">
         <ui:include src="#{navigation.mainContentBody}" />
       </ui:insert>
-      <!-- </div> -->
     </div>
     <div id="main-footer">
       <ui:insert name="contentFooter">
