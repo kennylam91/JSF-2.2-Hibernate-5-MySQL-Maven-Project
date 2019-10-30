@@ -74,10 +74,9 @@ public class StudentController implements Serializable {
 
 	}
 
-	public String deleteStudent(Long studentId) throws Exception {
+	public void deleteStudent(Long studentId) throws Exception {
 		studentService.deleteStudent(studentId);
 		studentDtos = studentService.findAllStudents();
-		return "student_list";
 	}
 
 	public void getStudentDetail(Long studentId) throws Exception {
