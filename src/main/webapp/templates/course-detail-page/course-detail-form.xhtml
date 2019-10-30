@@ -24,9 +24,10 @@
           <!-- <p:message for="firstName" /> -->
           <p:outputLabel>Subject:</p:outputLabel>
           <h:panelGroup>
-            <h:outputText id="new_course_subject" value="#{newCourseForm.subject}">
+            <h:outputText id="new_course_subject" value="#{courseController.course.subject}">
             </h:outputText>
-            <p:commandLink onclick="PF('dlg_list_subject').show()" action="#{courseController.activeEditMode}" value="Edit" style="margin-left:10px;color:red;">
+            <p:commandLink onclick="PF('dlg_list_subject').show()" action="#{courseController.activeEditMode}"
+              value="Edit" style="margin-left:10px;color:red;">
             </p:commandLink>
           </h:panelGroup>
           <!-- <p:inplace editor="true"> -->

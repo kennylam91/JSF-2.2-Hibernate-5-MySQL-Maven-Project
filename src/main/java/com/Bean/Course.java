@@ -73,7 +73,5 @@ public class Course implements Serializable {
 	public String toString() {
 		return name;
 	}
-	
-	
 
 }

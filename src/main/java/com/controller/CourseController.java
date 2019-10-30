@@ -64,6 +64,7 @@ public class CourseController implements Serializable {
 
 	public void updateCourse() {
 		try {
+			System.out.println(course);
 			courseService.updateCourse(course);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -84,6 +85,7 @@ public class CourseController implements Serializable {
 	}
 
 	public void getCourseListView() {
+		courses = courseService.findAllCourses();
 		navigation.navigateToCourseList();
 	}
 

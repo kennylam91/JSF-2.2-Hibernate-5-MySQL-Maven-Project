@@ -68,10 +68,12 @@ public class SubjectController implements Serializable {
 	}
 
 	public void onSubjectRowSelect(SelectEvent event) {
-		newCourseForm.setSubject((Subject) event.getObject());
+
 		if (!courseController.isEditMode()) {
 			PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
-			System.out.println("true");
+			newCourseForm.setSubject((Subject) event.getObject());
+		} else {
+			courseController.getCourse().setSubject((Subject) event.getObject());
 		}
 	}
 }
