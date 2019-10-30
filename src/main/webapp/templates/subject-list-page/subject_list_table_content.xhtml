@@ -27,9 +27,9 @@
         </p:column>
         <p:column headerText="Action" style="width:65px">
           <h:form>
-            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info">
+            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info" style="color:#007ad9">
             </p:commandButton>
-            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus"
+            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
               action="#{subjectController.deleteSubject(subject.id)}" update="main-content">
               <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
             </p:commandButton>
