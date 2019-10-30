@@ -28,8 +28,8 @@
         <p:inputText id="new_course_capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
         <h:outputLabel for="new_course_subject" value="Subject:" />
         <h:panelGroup>
-          <h:outputLabel id="new_course_subject" value="#{newCourseForm.subject}">
-          </h:outputLabel>
+          <h:outputText id="new_course_subject" value="#{newCourseForm.subject}" style="width:100%">
+          </h:outputText>
           <p:commandLink onclick="PF('dlg_list_subject').show()" value="Edit" style="margin-left:10px; color:red"></p:commandLink>
         </h:panelGroup>
         <f:facet name="footer">

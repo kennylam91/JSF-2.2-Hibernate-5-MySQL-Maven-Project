@@ -16,6 +16,9 @@
         <p:column headerText="Name" style="width:100px">
           <h:outputText value="#{course.name}" />
         </p:column>
+        <p:column headerText="Subject" style="width:100px">
+          <h:outputText value="#{course.subject.name}" />
+        </p:column>
         <p:column headerText="BeginTime" style="width:90px;">
           <h:outputText value="#{course.beginTime}">
             <f:convertDateTime pattern="dd/MM/yyyy" />

@@ -28,6 +28,7 @@ public class CourseController implements Serializable {
 
 	private static final long serialVersionUID = 4251571962723500481L;
 	private List<Course> courses;
+	private boolean editMode = false;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
@@ -68,6 +69,7 @@ public class CourseController implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		editMode = false;
 
 	}
 
@@ -83,6 +85,10 @@ public class CourseController implements Serializable {
 
 	public void getCourseListView() {
 		navigation.navigateToCourseList();
+	}
+
+	public void activeEditMode() {
+		editMode = true;
 	}
 
 }

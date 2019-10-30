@@ -43,6 +43,9 @@ public class SubjectController implements Serializable {
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
 
+	@ManagedProperty(value = "#{courseController}")
+	private CourseController courseController;
+
 	private List<Subject> subjects;
 
 	private Subject selectedSubject;
@@ -66,7 +69,7 @@ public class SubjectController implements Serializable {
 
 	public void onSubjectRowSelect(SelectEvent event) {
 		newCourseForm.setSubject((Subject) event.getObject());
-		if (navigation.getMainContentBody().equals("/templates/course-list-page/content-body.xhtml")) {
+		if (!courseController.isEditMode()) {
 			PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
 			System.out.println("true");
 		}
