@@ -3,34 +3,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-  <p:dialog header="Create Course" widgetVar="dlg_create_course" resizable="false">
-    <p:panelGrid id="create_course_form" columns="2" cellpadding="5">
-      <h:outputLabel for="new_course_code" value="Code:" />
-      <p:inputText id="new_course_code" value="#{newCourseForm.code}" required="true" />
-      <h:outputLabel for="new_course_name" value="Name:" />
-      <p:inputText id="new_course_name" value="#{newCourseForm.name}" required="true" label="name" />
-      <h:outputLabel for="new_course_beginTime" value="Begin Time:" />
-      <p:datePicker id="new_course_beginTime" pattern="dd/MM/yyyy" value="#{newCourseForm.beginTime}">
-      </p:datePicker>
-      <h:outputLabel for="new_course_status" value="Status" />
-      <h:selectOneMenu id="new_course_status" styleClass="select_input" value="#{newCourseForm.status}">
-        <f:selectItem itemLabel="Registering" itemValue="registering" />
-        <f:selectItem itemLabel="Studying" itemValue="studying" />
-        <f:selectItem itemLabel="Completed" itemValue="completed" />
-      </h:selectOneMenu>
-      <h:outputLabel for="new_course_teacher" value="Teacher:" />
-      <p:inputText id="new_course_teacher" value="#{newCourseForm.teacher}" required="true" label="teacher" />
-      <h:outputLabel for="new_course_capacity" value="Capacity:" />
-      <p:inputText id="new_course_capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
-      <f:facet name="footer">
-        <div align="center">
-          <p:commandButton id="create_course_button_confirm" value="Create" update="main-content create_course_form"
-            action="#{courseController.createCourse(newCourseForm)}"
-            oncomplete="handleCreateCourseDialogRequest(xhr, status, args)" />
-          <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_course').hide()" update="growl" />
-        </div>
-      </f:facet>
-    </p:panelGrid>
-  </p:dialog>
+  <h:form>
+    <p:dialog header="Create Course" widgetVar="dlg_create_course" resizable="false">
+      <p:panelGrid id="create_course_form" columns="2" cellpadding="5">
+        <h:outputLabel for="new_course_code" value="Code:" />
+        <p:inputText id="new_course_code" value="#{newCourseForm.code}" required="true" />
+        <h:outputLabel for="new_course_name" value="Name:" />
+        <p:inputText id="new_course_name" value="#{newCourseForm.name}" required="true" label="name" />
+        <h:outputLabel for="new_course_beginTime" value="Begin Time:" />
+        <p:datePicker id="new_course_beginTime" pattern="dd/MM/yyyy" value="#{newCourseForm.beginTime}">
+        </p:datePicker>
+        <h:outputLabel for="new_course_status" value="Status" />
+        <h:selectOneMenu id="new_course_status" styleClass="select_input" value="#{newCourseForm.status}">
+          <f:selectItem itemLabel="Registering" itemValue="registering" />
+          <f:selectItem itemLabel="Studying" itemValue="studying" />
+          <f:selectItem itemLabel="Completed" itemValue="completed" />
+        </h:selectOneMenu>
+        <h:outputLabel for="new_course_teacher" value="Teacher:" />
+        <p:inputText id="new_course_teacher" value="#{newCourseForm.teacher}" required="true" label="teacher" />
+        <h:outputLabel for="new_course_capacity" value="Capacity:" />
+        <p:inputText id="new_course_capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
+        <f:facet name="footer">
+          <div align="center">
+            <p:commandButton id="create_course_button_confirm" value="Create" update="main-content create_course_form"
+              action="#{courseController.createCourse(newCourseForm)}"
+              oncomplete="handleCreateCourseDialogRequest(xhr, status, args)" />
+            <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_course').hide()" update="growl" />
+          </div>
+        </f:facet>
+      </p:panelGrid>
+    </p:dialog>
+  </h:form>
 </ui:composition>
 </html>
