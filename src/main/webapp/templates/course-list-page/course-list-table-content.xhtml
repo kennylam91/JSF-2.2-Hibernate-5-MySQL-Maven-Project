@@ -36,7 +36,6 @@
           <h:outputText value="#{course.capacity}" />
         </p:column>
         <p:column headerText="Action" style="width:65px">
-          <h:form>
             <p:commandButton title="Detail" id="detail_button" icon="pi pi-info" update="main-content"
               action="#{courseController.getCourseDetail(course.id)}" style="color:green;">
             </p:commandButton>
@@ -47,7 +46,6 @@
             <ui:insert name="dialog_delete_course">
               <ui:include src="/templates/course-list-page/dialog-delete-course.xhtml"></ui:include>
             </ui:insert>
-          </h:form>
         </p:column>
       </div>
     </div>

@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.Bean.Course;
+import com.Bean.Navigation;
 import com.Bean.Subject;
 import com.Bean.FormBean.NewCourseForm;
 import com.service.CourseService;
@@ -40,6 +41,9 @@ public class CourseController implements Serializable {
 	@ManagedProperty(value = "#{course}")
 	private Course course;
 
+	@ManagedProperty(value = "#{navigation}")
+	private Navigation navigation;
+
 	public List<Course> getCourses() {
 		return courseService.findAllCourses();
 	}
@@ -67,14 +71,18 @@ public class CourseController implements Serializable {
 
 	}
 
-	public String getCourseDetail(Long courseId) {
+	public void getCourseDetail(Long courseId) {
 		course = courseService.findCourseById(courseId);
-		return "course_detail?faces-redirect=true";
+		navigation.navigateToCourseDetail();
 	}
 
 	public void setSubjectToCourse(Long subjectId) {
 		Subject subject = subjectService.findSubjectById(subjectId);
 		course.setSubject(subject);
+	}
+
+	public void getCourseListView() {
+		navigation.navigateToCourseList();
 	}
 
 }
