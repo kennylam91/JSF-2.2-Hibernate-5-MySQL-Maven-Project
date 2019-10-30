@@ -13,6 +13,9 @@
         <h:outputLabel for="new_course_beginTime" value="Begin Time:" />
         <p:datePicker id="new_course_beginTime" pattern="dd/MM/yyyy" value="#{newCourseForm.beginTime}">
         </p:datePicker>
+        <h:outputLabel for="new_course_finishTime" value="Finish Time:" />
+        <p:datePicker id="new_course_finishTime" pattern="dd/MM/yyyy" value="#{newCourseForm.finishTime}">
+        </p:datePicker>
         <h:outputLabel for="new_course_status" value="Status" />
         <h:selectOneMenu id="new_course_status" styleClass="select_input" value="#{newCourseForm.status}">
           <f:selectItem itemLabel="Registering" itemValue="registering" />
@@ -23,6 +26,10 @@
         <p:inputText id="new_course_teacher" value="#{newCourseForm.teacher}" required="true" label="teacher" />
         <h:outputLabel for="new_course_capacity" value="Capacity:" />
         <p:inputText id="new_course_capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
+        <h:outputLabel for="new_course_subject" value="Subject:" />
+        <p:commandLink onclick="PF('dlg_list_subject').show()" value="button"></p:commandLink>
+        <!-- <p:inputText id="new_course_subject" value="#{newCourseForm.subject}" onblur="PL('dlg_list_subject').show()"> -->
+        <!-- </p:inputText> -->
         <f:facet name="footer">
           <div align="center">
             <p:commandButton id="create_course_button_confirm" value="Create" update="main-content create_course_form"

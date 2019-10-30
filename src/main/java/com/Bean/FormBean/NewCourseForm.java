@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.Bean.Subject;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @ManagedBean(name = "newCourseForm")
 @SessionScoped
-public class NewCourseForm implements Serializable{
+public class NewCourseForm implements Serializable {
 
 	/**
 	 * 
@@ -24,8 +26,10 @@ public class NewCourseForm implements Serializable{
 	private String code;
 	private String name;
 	private Date beginTime;
+	private Date finishTime;
 	private String status;
 	private String teacher;
 	private int capacity;
+	private Subject subject;
 
 }
