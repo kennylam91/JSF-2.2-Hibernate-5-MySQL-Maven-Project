@@ -34,7 +34,11 @@ public class Navigation implements Serializable {
 	public void navigateToCourseList() {
 		mainContentHead = "/templates/course-list-page/content-head.xhtml";
 		mainContentBody = "/templates/course-list-page/content-body.xhtml";
-		System.out.println("navigateToCourseList");
+	}
+
+	public void navigateToSubjectList() {
+		mainContentHead = "/templates/subject-list-page/content-head.xhtml";
+		mainContentBody = "/templates/subject-list-page/content-body.xhtml";
 	}
 
 }
