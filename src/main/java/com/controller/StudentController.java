@@ -93,7 +93,6 @@ public class StudentController implements Serializable {
 
 	public void onPaginationChange() {
 		studentDtos = studentService.findStudentsByPagination(pagination);
-		System.out.println("onPaginationChange");
 	}
 
 	public void getPreviousPage() {

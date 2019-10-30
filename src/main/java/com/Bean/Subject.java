@@ -23,6 +23,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "subjects")
 @ManagedBean(name = "subject")

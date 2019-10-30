@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-  <h:form>
+  <h:form id="create_course_dialog_form">
     <p:dialog header="Create Course" widgetVar="dlg_create_course" resizable="false">
       <p:panelGrid id="create_course_form" columns="2" cellpadding="5">
         <h:outputLabel for="new_course_code" value="Code:" />
@@ -27,9 +27,8 @@
         <h:outputLabel for="new_course_capacity" value="Capacity:" />
         <p:inputText id="new_course_capacity" value="#{newCourseForm.capacity}" required="true" label="capacity" />
         <h:outputLabel for="new_course_subject" value="Subject:" />
-        <p:commandLink onclick="PF('dlg_list_subject').show()" value="button"></p:commandLink>
-        <!-- <p:inputText id="new_course_subject" value="#{newCourseForm.subject}" onblur="PL('dlg_list_subject').show()"> -->
-        <!-- </p:inputText> -->
+        <h:outputLabel id="new_course_subject" onclick="PF('dlg_list_subject').show()" value="#{newCourseForm.subject}">
+        </h:outputLabel>
         <f:facet name="footer">
           <div align="center">
             <p:commandButton id="create_course_button_confirm" value="Create" update="main-content create_course_form"

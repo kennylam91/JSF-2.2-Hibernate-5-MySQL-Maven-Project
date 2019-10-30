@@ -6,8 +6,13 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 
 import com.Bean.Subject;
+import com.Bean.FormBean.NewCourseForm;
 import com.Bean.FormBean.NewSubjectForm;
 import com.service.SubjectService;
 import com.util.ObjectMapper;
@@ -31,7 +36,12 @@ public class SubjectController implements Serializable {
 	@ManagedProperty(value = "#{newSubjectForm}")
 	private NewSubjectForm newSubjectForm;
 
+	@ManagedProperty(value = "#{newCourseForm}")
+	private NewCourseForm newCourseForm;
+
 	private List<Subject> subjects;
+
+	private Subject selectedSubject;
 
 	public List<Subject> getSubjects() {
 		return subjectService.findAllSubjects();
@@ -48,6 +58,12 @@ public class SubjectController implements Serializable {
 	public Long createSubject(NewSubjectForm newSubjectForm) {
 		Subject subject = ObjectMapper.convertToSubjectFromNewSubjectForm(newSubjectForm);
 		return subjectService.saveSubject(subject);
+	}
+
+	public void onSubjectRowSelect(SelectEvent event) {
+		System.out.println((Subject) event.getObject());
+		newCourseForm.setSubject((Subject) event.getObject());
+		PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
 	}
 
 }
