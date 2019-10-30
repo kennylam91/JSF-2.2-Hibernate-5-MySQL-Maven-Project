@@ -3,18 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-  <p:dialog header="Subject List" widgetVar="dlg_list_subject" resizable="false" width="500px" height="500px">
-    <p:dataTable value="#{subjectController.subjects}" var="subject" id="subject_list_table" rowKey="#{subject.id}"
+  <p:dialog header="Subject List" widgetVar="dlg_list_subject" resizable="false" width="600px" height="500px">
+    <p:dataTable value="#{subjectController.subjects}" var="subject" rowKey="#{subject.id}"
       styleClass="wpsp-table dataTable dtr-inline" selectionMode="single"
       selection="#{subjectController.selectedSubject}">
       <p:ajax event="rowSelect" listener="#{subjectController.onSubjectRowSelect}" update="main-content" />
-      <p:column headerText="Code" style="width:70px">
+      <p:column headerText="Code">
         <h:outputText value="#{subject.code}" />
       </p:column>
-      <p:column headerText="Name" style="width:100px">
+      <p:column headerText="Name">
         <h:outputText value="#{subject.name}" />
       </p:column>
-      <p:column headerText="Field" style="width:100px">
+      <p:column headerText="Field">
         <h:outputText value="#{subject.field}" />
       </p:column>
     </p:dataTable>
