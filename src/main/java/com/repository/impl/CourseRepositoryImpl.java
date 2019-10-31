@@ -171,6 +171,8 @@ public class CourseRepositoryImpl implements CourseRepository {
 						+ "order by " + orderedBy + " " + ascOrDesc + ",c.code asc");
 			}
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
+			query.setMaxResults(pagination.getRowsPerPage());
 			@SuppressWarnings("unchecked")
 			List<Course> courses = query.list();
 			transaction.commit();

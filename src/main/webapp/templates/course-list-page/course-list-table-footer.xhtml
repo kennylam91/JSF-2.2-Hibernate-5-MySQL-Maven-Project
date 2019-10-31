@@ -9,11 +9,11 @@
   <ui:composition>
     <h:form id="rows_page_form">
       <p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;" title="previous_page"
-        action="#{studentController.getPreviousPage}" update="main-content">
+        action="#{courseController.getPreviousPage}" update="main-content">
       </p:commandButton>
       <label class="wpsp-labelMain">Rows: </label>
       <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
-        value="#{courseController.paginationCourseList.rowsPerPage}">
+        value="#{paginationCourseList.rowsPerPage}">
         <p:ajax event="valueChange" listener="#{courseController.onPaginationChange}" update="main-content" />
         <f:selectItem itemLabel="10" itemValue="10" />
         <f:selectItem itemLabel="20" itemValue="20" />

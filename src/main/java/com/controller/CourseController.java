@@ -130,4 +130,18 @@ public class CourseController implements Serializable {
 		System.out.println(courses);
 	}
 
+	public void getPreviousPage() {
+		int currentPage = paginationCourseList.getPage();
+		if (currentPage > 1) {
+			paginationCourseList.setPage(currentPage - 1);
+		}
+		onPaginationChange();
+	}
+
+	public void getNextPage() {
+		int currentPage = paginationCourseList.getPage();
+		paginationCourseList.setPage(currentPage + 1);
+		onPaginationChange();
+	}
+
 }
