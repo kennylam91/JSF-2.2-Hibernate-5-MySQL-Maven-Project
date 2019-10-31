@@ -162,7 +162,7 @@ a:focus {
 .wpsp-wrapper {
   max-width: 100%;
   overflow: hidden;
-  margin-left: 240px;
+  margin-left: 220px;
 }
 
 .wpsp-header {
@@ -185,7 +185,7 @@ a:focus {
   float: left;
   display: table;
   height: 100%;
-  width: 240px;
+  width: 220px;
   background-color: #fff;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   text-decoration: none;
@@ -234,7 +234,7 @@ a:focus {
 
 /* Sidebar Navigation */
 .wpsp-sidebar {
-  width: 240px;
+  width: 220px;
   height: 100%;
   position: fixed;
   left: 0;
@@ -706,8 +706,8 @@ a:focus {
 .wpsp-pageHead {
   display: block;
   background-color: #fff;
-  padding: 10px 42px;
-  margin: 0 -42px 40px -42px;
+  padding: 5px 40px;
+  margin: 0 -30px 30px -42px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
 }
 
@@ -799,7 +799,7 @@ a:focus {
 /* Content Part style */
 .wpsp-container {
   margin-top: 85px;
-  padding: 0 40px;
+  padding: 0 30px;
 }
 
 .wpsp-colorBox {
@@ -894,13 +894,13 @@ a:focus {
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0px 0px 7.76px 0.24px rgba(0, 0, 0, 0.02);
-  padding: 0;
+  padding: 1.5rem;
   margin-bottom: 30px;
 }
 
 .wpsp-card-head {
   display: block;
-  padding: 25px 25px 0 25px;
+  padding: 10px 25px 0 25px;
 }
 
 .wpsp-card-title {
@@ -956,7 +956,7 @@ a:focus {
   display: inline-block;
   vertical-align: top;
   width: 100%;
-  padding: 25px;
+  padding: 10px;
 }
 
 /* Table style */
@@ -1712,7 +1712,7 @@ label.error {
   -moz-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  color: $white;
+  color: white;
 }
 
 @-webkit-keyframes spinner {
@@ -2895,4 +2895,4 @@ td.drop.droppable {
 }
 .is-dismissible{display: none !important;}
  #your-profile .user-pass2-wrap{display: none !important;}
-      #your-profile .user-pass1-wrap{display: none !important;}}
+      #your-profile .user-pass1-wrap{display: none !important;}
