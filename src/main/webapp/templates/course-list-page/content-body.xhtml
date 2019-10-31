@@ -97,21 +97,19 @@
                 <h:form class="wpsp-label" style="float:right;">
                   <div class="ui-inputgroup">
                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
-                      value="#{courseController.paginationCourseList.searchField}">
+                      value="#{paginationCourseList.searchField}">
                       <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
                       <f:selectItem itemLabel="All" itemValue="all" />
                       <f:selectItem itemLabel="Code" itemValue="code" />
-                      <f:selectItem itemLabel="FirstName" itemValue="firstName" />
-                      <f:selectItem itemLabel="LastName" itemValue="lastName" />
-                      <f:selectItem itemLabel="Field" itemValue="field" />
-                      <f:selectItem itemLabel="Dob" itemValue="dob" />
-                      <f:selectItem itemLabel="Phone" itemValue="phone" />
-                      <f:selectItem itemLabel="Email" itemValue="email" />
-                      <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
-                      <f:selectItem itemLabel="Note" itemValue="note" />
+                      <f:selectItem itemLabel="Name" itemValue="name" />
+                      <f:selectItem itemLabel="Status" itemValue="status" />
+                      <f:selectItem itemLabel="Teacher" itemValue="teacher" />
+                      <f:selectItem itemLabel="Capacity" itemValue="capacity" />
+                      <f:selectItem itemLabel="Description" itemValue="description" />
+                      <f:selectItem itemLabel="Subject" itemValue="subject" />
                     </h:selectOneMenu>
                     <p:inputText id="search_keyword" style="width:160px;height:31px"
-                      value="#{courseController.paginationCourseList.searchKeyword}" placeholder="Search keyword">
+                      value="#{paginationCourseList.searchKeyword}" placeholder="Search keyword">
                     </p:inputText>
                     <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
                       action="#{courseController.onPaginationChange}" style="height:31px;" />

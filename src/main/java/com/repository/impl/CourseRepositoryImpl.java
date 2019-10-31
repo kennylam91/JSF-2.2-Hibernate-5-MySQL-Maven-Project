@@ -160,13 +160,12 @@ public class CourseRepositoryImpl implements CourseRepository {
 			String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 			String fieldSearch = getCourseField(pagination.getSearchField());
 			Query query;
-			if (pagination.getOrderBy().equals("all")) {
+			if (pagination.getSearchField().equals("all")) {
 				query = session.createQuery("Select c from Course c where " + "c.code like :searchKeyword or "
-						+ "c.name like :searchKeyword or " + "c.beginTime like :searchKeyword or "
-						+ "c.finishTime like :searchKeyword or " + "c.status like :searchKeyword or "
-						+ "c.teacher like :searchKeyword or " + "c.capacity like :searchKeyword or "
-						+ "c.description like :searchKeyword or " + "c.subject.name like :searchKeyword " + "order by "
-						+ orderedBy + " " + ascOrDesc + ",c.code asc");
+						+ "c.name like :searchKeyword or " + "c.status like :searchKeyword or "
+						+ "c.teacher like :searchKeyword or " + "c.description like :searchKeyword or "
+						+ "c.subject.name like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc
+						+ ",c.code asc");
 			} else {
 				query = session.createQuery("Select c from Course c where " + fieldSearch + " " + "like :searchKeyword "
 						+ "order by " + orderedBy + " " + ascOrDesc + ",c.code asc");
@@ -201,10 +200,6 @@ public class CourseRepositoryImpl implements CourseRepository {
 		switch (orderBy) {
 		case "name":
 			return "c.name";
-		case "beginTime":
-			return "c.beginTime";
-		case "finishTime":
-			return "c.finishTime";
 		case "status":
 			return "c.status";
 		case "teacher":
