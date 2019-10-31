@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.beans.Course;
+import com.beans.pagination.Pagination;
 
-public interface CourseRepository extends Serializable{
-	
+public interface CourseRepository extends Serializable {
+
 	Long saveCourse(Course course);
 
 	void updateCourse(Course course);
@@ -16,5 +17,7 @@ public interface CourseRepository extends Serializable{
 	Course findCourseById(Long courseId);
 
 	List<Course> findAllCourses();
+
+	List<Course> findAllCourses(Pagination pagination);
 
 }

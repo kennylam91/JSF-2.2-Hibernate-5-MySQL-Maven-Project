@@ -2,9 +2,6 @@ package com.beans.pagination;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Pagination {
+public abstract class Pagination implements Serializable {
+
+	private static final long serialVersionUID = -2722338427194816646L;
 
 	private static final String SEARCH_KEYWORD_DEFAULT = "";
 

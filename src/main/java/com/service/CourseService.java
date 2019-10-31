@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.beans.Course;
+import com.beans.pagination.Pagination;
 
 public interface CourseService extends Serializable {
 
@@ -16,4 +17,6 @@ public interface CourseService extends Serializable {
 	Course findCourseById(Long courseId);
 
 	List<Course> findAllCourses();
+
+	List<Course> findAllCourses(Pagination pagination);
 }

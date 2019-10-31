@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.beans.Course;
+import com.beans.pagination.Pagination;
 import com.repository.CourseRepository;
 import com.util.HibernateUtil;
 
@@ -130,6 +131,49 @@ public class CourseRepositoryImpl implements CourseRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("Select c from Course c");
+			@SuppressWarnings("unchecked")
+			List<Course> courses = query.list();
+			transaction.commit();
+			committed = true;
+			if (!courses.isEmpty())
+				return courses;
+			else
+				return Collections.emptyList();
+		} finally {
+			if (session != null) {
+				if (!committed && transaction != null)
+					transaction.rollback();
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public List<Course> findAllCourses(Pagination pagination) {
+		Transaction transaction = null;
+		Session session = null;
+		boolean committed = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			String orderedBy = getCourseField(pagination.getOrderBy());
+			String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
+			String fieldSearch = getCourseField(pagination.getSearchField());
+			Query query;
+			if (pagination.getOrderBy().equals("all")) {
+				query = session.createQuery("Select c from Course c where "+
+						"c.code like :searchKeyword or " +
+						"c.name like :searchKeyword or " +
+						"c.beginTime like :searchKeyword or " +
+						"c.finishTime like :searchKeyword or " +
+						"c.status like :searchKeyword or " +
+						"c.teacher like :searchKeyword or " +
+						"c.capacity like :searchKeyword or " +
+						"c.description like :searchKeyword or " +
+						"c.subject.name like :searchKeyword " +
+						"order by "+orderedBy+ " " + ascOrDesc + ",c.code asc");
+			}
+			query.setParameter("searchKeyword", pagination.getSearchKeyword());
 			@SuppressWarnings("unchecked")
 			List<Course> courses = query.list();
 			transaction.commit();

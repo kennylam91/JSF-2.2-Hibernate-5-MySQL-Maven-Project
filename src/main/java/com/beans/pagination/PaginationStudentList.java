@@ -7,4 +7,6 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class PaginationStudentList extends Pagination {
 
+	private static final long serialVersionUID = 7178035816978584438L;
+
 }

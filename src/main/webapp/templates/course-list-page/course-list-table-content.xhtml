@@ -17,26 +17,26 @@
         <p:column headerText="Name" style="width:100px" sortBy="#{course.name}" field="name">
           <h:outputText value="#{course.name}" />
         </p:column>
-        <p:column headerText="Subject" style="width:100px">
+        <p:column headerText="Subject" style="width:100px" sortBy="#{course.subject.name}" field="subject">
           <h:outputText value="#{course.subject.name}" />
         </p:column>
-        <p:column headerText="BeginTime" style="width:90px;">
+        <p:column headerText="BeginTime" style="width:90px;" sortBy="#{course.beginTime}" field="beginTime">
           <h:outputText value="#{course.beginTime}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="FinishTime" style="width:90px;">
+        <p:column headerText="FinishTime" style="width:90px;" sortBy="#{course.finishTime}" field="finishTime">
           <h:outputText value="#{course.finishTime}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="Status">
+        <p:column headerText="Status" sortBy="#{course.status}" field="status">
           <h:outputText value="#{course.status}" />
         </p:column>
-        <p:column headerText="Teacher">
+        <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher">
           <h:outputText value="#{course.teacher}" />
         </p:column>
-        <p:column headerText="Capacity" style="width:80px;">
+        <p:column headerText="Capacity" style="width:80px;" sortBy="#{course.capacity}" field="capacity">
           <h:outputText value="#{course.capacity}" />
         </p:column>
         <p:column headerText="Action" style="width:65px">

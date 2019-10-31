@@ -48,9 +48,8 @@ public class CourseController implements Serializable {
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
 
-	/*
-	 * @ManagedProperty(value = "#{pagination}") private Pagination pagination;
-	 */
+	@ManagedProperty(value = "#{paginationCourseList}")
+	private Pagination paginationCourseList;
 
 	public List<Course> getCourses() {
 		return courseService.findAllCourses();
@@ -114,7 +113,17 @@ public class CourseController implements Serializable {
 	}
 
 	public void onSort(SortEvent event) {
-		System.out.println(event.getSortColumn().getField());
+		paginationCourseList.setOrderBy(event.getSortColumn().getField());
+		if (event.isAscending()) {
+			paginationCourseList.setAscOrDesc("asc");
+		} else {
+			paginationCourseList.setAscOrDesc("desc");
+		}
+		onPaginationChange();
+	}
+
+	public void onPaginationChange() {
+		courses = courseService.findAllCourses(Pagination paginationCourseList);
 	}
 
 }

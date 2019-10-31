@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.beans.Course;
+import com.beans.pagination.Pagination;
 import com.repository.CourseRepository;
 import com.service.CourseService;
 import com.service.SubjectService;
@@ -73,6 +74,11 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<Course> findAllCourses() {
 		return courseRepository.findAllCourses();
+	}
+
+	@Override
+	public List<Course> findAllCourses(Pagination pagination) {
+		return courseRepository.findAllCourses(pagination);
 	}
 
 }
