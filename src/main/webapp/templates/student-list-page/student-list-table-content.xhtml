@@ -9,31 +9,33 @@
   <ui:composition>
     <div id="student-list-table-content">
       <div>
+        <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table"></p:ajax>
         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
-        <p:column headerText="Code" style="width:70px">
+        <f:facet name="header">Student List Table</f:facet>
+        <p:column headerText="Code" style="width:70px" sortBy="#{student.code}" field="code">
           <h:outputText value="#{student.code}" />
         </p:column>
-        <p:column headerText="Firstname" style="width:100px">
+        <p:column headerText="Firstname" style="width:100px" sortBy="#{student.firstName}" field="firstName">
           <h:outputText value="#{student.firstName}" />
         </p:column>
-        <p:column headerText="Lastname" style="width:80px">
+        <p:column headerText="Lastname" style="width:80px" sortBy="#{student.lastName}" field="lastName">
           <h:outputText value="#{student.lastName}" />
         </p:column>
-        <p:column headerText="Gender" style="width:60px">
+        <p:column headerText="Gender" style="width:60px" sortBy="#{student.gender}" field="gender">
           <h:outputText value="#{student.gender}" />
         </p:column>
-        <p:column headerText="Field" style="width:65px">
+        <p:column headerText="Field" style="width:65px" sortBy="#{student.field}" field="field">
           <h:outputText value="#{student.field}" />
         </p:column>
-        <p:column headerText="DOB" style="width:75px;">
+        <p:column headerText="DOB" style="width:75px;" sortBy="#{student.dob}" field="dob">
           <h:outputText value="#{student.dob}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="Email">
+        <p:column headerText="Email" sortBy="#{student.email}" field="email">
           <h:outputText value="#{student.email}" />
         </p:column>
-        <p:column headerText="Score" style="width:50px;">
+        <p:column headerText="Score" style="width:50px;" sortBy="#{student.avgScore}" field="avgScore">
           <h:outputText value="#{student.avgScore}" />
         </p:column>
         <p:column headerText="Action" style="width:65px">

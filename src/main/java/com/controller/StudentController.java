@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.data.SortEvent;
 
 import com.Bean.Navigation;
 import com.Bean.Pagination;
@@ -136,6 +137,16 @@ public class StudentController implements Serializable {
 	@PostConstruct
 	public void init() {
 		studentDtos = studentService.findStudentsByPagination(pagination);
+	}
+
+	public void onSort(SortEvent event) {
+		if (event.isAscending()) {
+			pagination.setAscOrDesc("asc");
+		} else {
+			pagination.setAscOrDesc("desc");
+		}
+		pagination.setOrderBy(event.getSortColumn().getField());
+		onPaginationChange();
 	}
 
 }
