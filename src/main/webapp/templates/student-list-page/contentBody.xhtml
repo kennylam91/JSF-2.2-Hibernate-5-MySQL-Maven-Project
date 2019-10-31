@@ -15,7 +15,7 @@
             <h:form id="filter_by_field">
               <label class="wpsp-labelMain">Select Field</label>
               <h:selectOneMenu styleClass="select_input" id="search_field"
-                value="#{studentController.pagination.searchKeyword}"
+                value="#{studentController.paginationStudentList.searchKeyword}"
                 style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
                 <f:selectItem itemLabel="PHP" itemValue="PHP" />
                 <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
@@ -98,7 +98,7 @@
                 <h:form class="wpsp-label" style="float:right;">
                   <div class="ui-inputgroup">
                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
-                      value="#{studentController.pagination.searchField}">
+                      value="#{studentController.paginationStudentList.searchField}">
                       <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
                       <f:selectItem itemLabel="All" itemValue="all" />
                       <f:selectItem itemLabel="Code" itemValue="code" />
@@ -112,7 +112,7 @@
                       <f:selectItem itemLabel="Note" itemValue="note" />
                     </h:selectOneMenu>
                     <p:inputText id="search_keyword" style="width:160px;height:31px"
-                      value="#{studentController.pagination.searchKeyword}" placeholder="Search keyword">
+                      value="#{studentController.paginationStudentList.searchKeyword}" placeholder="Search keyword">
                     </p:inputText>
                     <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
                       action="#{studentController.onPaginationChange}" style="height:31px;" />
@@ -127,8 +127,8 @@
             </div>
             <h:form id="record_search_status">
               <label class="wpsp-labelMain"> <h:outputText
-                  value="Show from record #{studentController.pagination.firstRowIndexOnPage} to 
-                  record #{studentController.pagination.lastRowIndexOnPage}.">
+                  value="Show from record #{studentController.paginationStudentList.firstRowIndexOnPage} to 
+                  record #{studentController.paginationStudentList.lastRowIndexOnPage}.">
                 </h:outputText>
               </label>
             </h:form>

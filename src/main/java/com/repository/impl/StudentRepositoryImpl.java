@@ -12,7 +12,7 @@ import org.hibernate.Transaction;
 
 import com.beans.Student;
 import com.beans.StudentDto;
-import com.beans.pagination.PaginationStudentList;
+import com.beans.pagination.Pagination;
 import com.repository.StudentRepository;
 import com.util.HibernateUtil;
 
@@ -46,7 +46,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<StudentDto> findStudentsByPagination(PaginationStudentList pagination) {
+	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
 		String orderedBy = getStudentField(pagination.getOrderBy());
 		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 		String fieldSearch = getStudentField(pagination.getSearchField());

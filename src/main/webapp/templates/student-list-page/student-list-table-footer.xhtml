@@ -13,14 +13,14 @@
       </p:commandButton>
       <label class="wpsp-labelMain">Rows: </label>
       <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
-        value="#{studentController.pagination.rowsPerPage}">
+        value="#{studentController.paginationStudentList.rowsPerPage}">
         <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="main-content" />
         <f:selectItem itemLabel="10" itemValue="10" />
         <f:selectItem itemLabel="20" itemValue="20" />
         <f:selectItem itemLabel="50" itemValue="50" />
       </h:selectOneMenu>
       <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
-          value="#{studentController.pagination.page}">
+          value="#{studentController.paginationStudentList.page}">
         </h:outputText></label>
       <p:commandButton icon="pi pi-chevron-right" styleClass="mx-2" title="next_page"
         action="#{studentController.getNextPage}" update="main-content">

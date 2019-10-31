@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.beans.Student;
 import com.beans.StudentDto;
-import com.beans.pagination.PaginationStudentList;
+import com.beans.pagination.Pagination;
 
 public interface StudentRepository extends Serializable {
 
@@ -22,6 +22,6 @@ public interface StudentRepository extends Serializable {
 
 	List<StudentDto> findAllStudents();
 
-	List<StudentDto> findStudentsByPagination(PaginationStudentList pagination);
+	List<StudentDto> findStudentsByPagination(Pagination pagination);
 
 }

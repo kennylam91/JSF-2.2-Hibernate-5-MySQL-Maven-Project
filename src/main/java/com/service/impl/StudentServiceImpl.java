@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.beans.Student;
 import com.beans.StudentDto;
-import com.beans.pagination.PaginationStudentList;
+import com.beans.pagination.Pagination;
 import com.repository.StudentRepository;
 import com.repository.impl.StudentRepositoryImpl;
 import com.service.StudentService;
@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	@Override
-	public List<StudentDto> findStudentsByPagination(PaginationStudentList pagination) {
+	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
 		return studentRepository.findStudentsByPagination(pagination);
 	}
 

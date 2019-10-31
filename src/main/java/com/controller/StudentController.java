@@ -16,7 +16,7 @@ import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.StudentForm;
 import com.beans.formbeans.NewStudentForm;
-import com.beans.pagination.PaginationStudentList;
+import com.beans.pagination.Pagination;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 
@@ -43,8 +43,8 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{studentService}")
 	private StudentServiceImpl studentService;
 
-	@ManagedProperty(value = "#{pagination}")
-	private PaginationStudentList pagination;
+	@ManagedProperty(value = "#{paginationStudentList}")
+	private Pagination paginationStudentList;
 
 	@ManagedProperty(value = "#{newStudentForm}")
 	private NewStudentForm newStudentForm;
@@ -56,12 +56,12 @@ public class StudentController implements Serializable {
 
 	private List<StudentDto> selectedStudentDtos;
 
-	public List<StudentDto> getStudentDtos(PaginationStudentList pagination) {
-		return studentService.findStudentsByPagination(pagination);
+	public List<StudentDto> getStudentDtos(Pagination paginationStudentList) {
+		return studentService.findStudentsByPagination(paginationStudentList);
 	}
 
 	public void getStudentListForm() {
-		studentDtos = studentService.findStudentsByPagination(pagination);
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		navigation.navigateToStudentList();
 	}
 
@@ -70,7 +70,7 @@ public class StudentController implements Serializable {
 		studentService.saveStudent(student);
 
 		// update studentDtos for table student_list
-		studentDtos = studentService.findStudentsByPagination(pagination);
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		clearNewStudenForm(newStudentForm);
 
 	}
@@ -93,19 +93,19 @@ public class StudentController implements Serializable {
 	}
 
 	public void onPaginationChange() {
-		studentDtos = studentService.findStudentsByPagination(pagination);
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
 	public void getPreviousPage() {
-		if (pagination.getPage() > 1) {
-			pagination.setPage(pagination.getPage() - 1);
-			studentDtos = studentService.findStudentsByPagination(pagination);
+		if (paginationStudentList.getPage() > 1) {
+			paginationStudentList.setPage(paginationStudentList.getPage() - 1);
+			studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		}
 	}
 
 	public void getNextPage() {
-		pagination.setPage(pagination.getPage() + 1);
-		studentDtos = studentService.findStudentsByPagination(pagination);
+		paginationStudentList.setPage(paginationStudentList.getPage() + 1);
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
 	private void clearNewStudenForm(NewStudentForm newStudentForm) {
@@ -136,16 +136,16 @@ public class StudentController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		studentDtos = studentService.findStudentsByPagination(pagination);
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
 	public void onSort(SortEvent event) {
 		if (event.isAscending()) {
-			pagination.setAscOrDesc("asc");
+			paginationStudentList.setAscOrDesc("asc");
 		} else {
-			pagination.setAscOrDesc("desc");
+			paginationStudentList.setAscOrDesc("desc");
 		}
-		pagination.setOrderBy(event.getSortColumn().getField());
+		paginationStudentList.setOrderBy(event.getSortColumn().getField());
 		onPaginationChange();
 	}
 
