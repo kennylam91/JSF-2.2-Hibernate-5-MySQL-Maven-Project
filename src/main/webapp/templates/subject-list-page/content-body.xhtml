@@ -15,7 +15,7 @@
             <h:form id="filter_by_field">
               <label class="wpsp-labelMain">Select Field</label>
               <h:selectOneMenu styleClass=" select_input" id="search_field"
-                value="#{studentController.pagination.searchKeyword}"
+                value="#{courseController.paginationCourseList.searchKeyword}"
                 style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
                 <f:selectItem itemLabel="PHP" itemValue="PHP" />
                 <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
@@ -92,7 +92,7 @@
               <div id="student_table_filter" class="dataTables_filter">
                 <h:form class="wpsp-label" style="margin-right: 10px;">
                   <h:selectOneMenu styleClass=" select_input" style="width:115px;display:inline;" id="search_field"
-                    value="#{studentController.pagination.searchField}">
+                    value="#{courseController.paginationCourseList.searchField}">
                     <f:selectItem itemLabel="Select Field" itemValue="all" itemDisabled="true"></f:selectItem>
                     <f:selectItem itemLabel="Code" itemValue="code" />
                     <f:selectItem itemLabel="FirstName" itemValue="firstName" />
@@ -106,9 +106,9 @@
                     <f:selectItem itemLabel="All" itemValue="all" />
                   </h:selectOneMenu>
                   <p:inputText styleClass="wpsp-input-sm" id="search_keyword" onkeyup=""
-                    style="width:180px; display:inline;" value="#{studentController.pagination.searchKeyword}"
+                    style="width:180px; display:inline;" value="#{courseController.paginationCourseList.searchKeyword}"
                     placeholder="Search keyword">
-                    <p:ajax event="change" listener="#{studentController.onPaginationChange}" update="main-content" />
+                    <p:ajax event="change" listener="#{courseController.onPaginationChange}" update="main-content" />
                   </p:inputText>
                 </h:form>
               </div>
@@ -126,8 +126,8 @@
             </div>
             <h:form id="record_search_status">
               <label class="wpsp-labelMain"> <h:outputText
-                  value="Show from record #{studentController.pagination.firstRowIndexOnPage} to 
-                  record #{studentController.pagination.lastRowIndexOnPage}.">
+                  value="Show from record #{courseController.paginationCourseList.firstRowIndexOnPage} to 
+                  record #{courseController.paginationCourseList.lastRowIndexOnPage}.">
                 </h:outputText>
               </label>
             </h:form>
