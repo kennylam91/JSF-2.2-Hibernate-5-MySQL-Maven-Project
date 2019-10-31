@@ -52,6 +52,19 @@ public class CourseController implements Serializable {
 	public void createCourse(NewCourseForm newCourseForm) {
 		Course course = ObjectMapper.convertToCourseFromNewCourseForm(newCourseForm);
 		Long newCourseId = courseService.saveCourse(course);
+		clearNewCourseForm();
+	}
+
+	private void clearNewCourseForm() {
+		newCourseForm.setBeginTime(null);
+		newCourseForm.setCapacity(0);
+		newCourseForm.setCode(null);
+		newCourseForm.setFinishTime(null);
+		newCourseForm.setName(null);
+		newCourseForm.setStatus(null);
+		newCourseForm.setSubject(null);
+		newCourseForm.setTeacher(null);
+
 	}
 
 	public void deleteCourse(Long courseId) {
