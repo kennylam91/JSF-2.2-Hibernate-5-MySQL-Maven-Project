@@ -7,52 +7,54 @@
 </head>
 <body>
   <ui:composition>
+    
     <div id="student-list-table-content">
-      <div>
-        <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table"></p:ajax>
-        <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
-        <f:facet name="header">
-          <h2>STUDENT LIST TABLE</h2>
-        </f:facet>
-        <p:column headerText="Code" style="width:75px" sortBy="#{student.code}" field="code">
-          <h:outputText value="#{student.code}" />
-        </p:column>
-        <p:column headerText="Firstname" style="width:100px" sortBy="#{student.firstName}" field="firstName">
-          <h:outputText value="#{student.firstName}" />
-        </p:column>
-        <p:column headerText="Lastname" style="width:100px" sortBy="#{student.lastName}" field="lastName">
-          <h:outputText value="#{student.lastName}" />
-        </p:column>
-        <p:column headerText="Gender" style="width:80px" sortBy="#{student.gender}" field="gender">
-          <h:outputText value="#{student.gender}" />
-        </p:column>
-        <p:column headerText="Field" style="width:60px" sortBy="#{student.field}" field="field">
-          <h:outputText value="#{student.field}" />
-        </p:column>
-        <p:column headerText="DOB" style="width:75px;" sortBy="#{student.dob}" field="dob">
-          <h:outputText value="#{student.dob}">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </h:outputText>
-        </p:column>
-        <p:column headerText="Email" sortBy="#{student.email}" field="email">
-          <h:outputText value="#{student.email}" />
-        </p:column>
-        <p:column headerText="Score" style="width:65px;" sortBy="#{student.avgScore}" field="avgScore">
-          <h:outputText value="#{student.avgScore}" />
-        </p:column>
-        <p:column headerText="Action" style="width:65px">
-          <p:commandButton id="detail_button" update="main-content" icon="pi pi-info"
-            action="#{studentController.getStudentDetail(student.id)}" style="color:#007ad9;">
-          </p:commandButton>
-          <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
-            action="#{studentController.deleteStudent(student.id)}" update="main-content">
-            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
-          </p:commandButton>
-          <ui:insert name="dialog_delete_student">
-            <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
-          </ui:insert>
-        </p:column>
-      </div>
+      <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
+      <f:facet name="header">
+        <h2>STUDENT LIST TABLE</h2> <p:commandButton actionListener="#{studentController.onActionForMultiChange}"
+      update=":form_student_list:student_list_table" value="Delete" process="student_list_table">
+    </p:commandButton>
+      </f:facet>
+      <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;">
+      </p:column>
+      <p:column headerText="Code" style="width:75px" sortBy="#{student.code}" field="code">
+        <h:outputText value="#{student.code}" />
+      </p:column>
+      <p:column headerText="Firstname" style="width:100px" sortBy="#{student.firstName}" field="firstName">
+        <h:outputText value="#{student.firstName}" />
+      </p:column>
+      <p:column headerText="Lastname" style="width:100px" sortBy="#{student.lastName}" field="lastName">
+        <h:outputText value="#{student.lastName}" />
+      </p:column>
+      <p:column headerText="Gender" style="width:80px" sortBy="#{student.gender}" field="gender">
+        <h:outputText value="#{student.gender}" />
+      </p:column>
+      <p:column headerText="Field" style="width:60px" sortBy="#{student.field}" field="field">
+        <h:outputText value="#{student.field}" />
+      </p:column>
+      <p:column headerText="DOB" style="width:75px;" sortBy="#{student.dob}" field="dob">
+        <h:outputText value="#{student.dob}">
+          <f:convertDateTime pattern="dd/MM/yyyy" />
+        </h:outputText>
+      </p:column>
+      <p:column headerText="Email" sortBy="#{student.email}" field="email">
+        <h:outputText value="#{student.email}" />
+      </p:column>
+      <p:column headerText="Score" style="width:65px;" sortBy="#{student.avgScore}" field="avgScore">
+        <h:outputText value="#{student.avgScore}" />
+      </p:column>
+      <p:column headerText="Action" style="width:65px">
+        <p:commandButton id="detail_button" update="main-content" icon="pi pi-info"
+          action="#{studentController.getStudentDetail(student.id)}" style="color:#007ad9;">
+        </p:commandButton>
+        <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
+          action="#{studentController.deleteStudent(student.id)}" update="main-content">
+          <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+        </p:commandButton>
+        <ui:insert name="dialog_delete_student">
+          <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
+        </ui:insert>
+      </p:column>
     </div>
   </ui:composition>
 </body>

@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Navigation;
@@ -20,6 +23,7 @@ import com.beans.pagination.Pagination;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 
+import antlr.debug.Event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,10 +58,21 @@ public class StudentController implements Serializable {
 
 	private List<StudentDto> studentDtos;
 
+	private StudentDto selectedStudentDto;
+
 	private List<StudentDto> selectedStudentDtos;
+
+	private String actionForMulti = "create";
 
 	public List<StudentDto> getStudentDtos(Pagination paginationStudentList) {
 		return studentService.findStudentsByPagination(paginationStudentList);
+	}
+
+	public List<StudentDto> getSelectedStudentDtos() {
+		if (selectedStudentDtos == null) {
+			selectedStudentDtos = new ArrayList<>();
+		}
+		return selectedStudentDtos;
 	}
 
 	public void getStudentListForm() {
@@ -148,5 +163,20 @@ public class StudentController implements Serializable {
 		paginationStudentList.setOrderBy(event.getSortColumn().getField());
 		onPaginationChange();
 	}
+
+	public void onActionForMultiChange() {
+		System.out.println("on action for multi change");
+		for (StudentDto studentDto : selectedStudentDtos) {
+			System.out.println(studentDto);
+		}
+	}
+
+	/*
+	 * public void onRowSelect(SelectEvent event) {
+	 * selectedStudentDtos.add((StudentDto) event.getObject()); }
+	 * 
+	 * public void onRowUnselect(UnselectEvent event) {
+	 * selectedStudentDtos.remove((StudentDto) event.getObject()); }
+	 */
 
 }
