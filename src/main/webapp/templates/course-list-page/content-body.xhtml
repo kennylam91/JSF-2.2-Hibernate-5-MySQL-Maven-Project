@@ -87,43 +87,13 @@
         <div class="subject-head">
           <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="wpsp-dataTable-top ui-g">
-              <div class="ui-g-4">
+              <div class="ui-g-6">
                 <select name="bulkaction" class="select_input" id="bulkaction">
                   <option value="">Select Action</option>
                   <option value="bulkUsersDelete">Delete</option>
                 </select>
               </div>
-              <div id="student_order" class="ui-g-4">
-                <div class=" align_center">
-                  <h:form id="order">
-                    <label class="wpsp-labelMain">Order by</label>
-                    <h:selectOneMenu id="ordered_by" styleClass="select_input"
-                      style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem"
-                      value="#{courseController.paginationCourseList.orderBy}">
-                      <p:ajax event="valueChange" listener="#{courseController.onPaginationChange}"
-                        update="main-content" />
-                      <f:selectItem itemLabel="code" itemValue="code" />
-                      <f:selectItem itemLabel="firstName" itemValue="firstName" />
-                      <f:selectItem itemLabel="lastName" itemValue="lastName" />
-                      <f:selectItem itemLabel="field" itemValue="field" />
-                      <f:selectItem itemLabel="dob" itemValue="dob" />
-                      <f:selectItem itemLabel="phone" itemValue="phone" />
-                      <f:selectItem itemLabel="email" itemValue="email" />
-                      <f:selectItem itemLabel="avgScore" itemValue="avgScore" />
-                      <f:selectItem itemLabel="note" itemValue="note" />
-                    </h:selectOneMenu>
-                    <h:selectOneMenu id="asc_or_desc" value="#{courseController.paginationCourseList.ascOrDesc}"
-                      styleClass="select_input"
-                      style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem">
-                      <p:ajax event="valueChange" listener="#{courseController.onPaginationChange}"
-                        update="main-content" />
-                      <f:selectItem itemLabel="asc" itemValue="asc" />
-                      <f:selectItem itemLabel="desc" itemValue="desc" />
-                    </h:selectOneMenu>
-                  </h:form>
-                </div>
-              </div>
-              <div id="student_table_filter" class=" ui-g-4">
+              <div id="student_table_filter" class=" ui-g-6">
                 <h:form class="wpsp-label" style="float:right;">
                   <div class="ui-inputgroup">
                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"

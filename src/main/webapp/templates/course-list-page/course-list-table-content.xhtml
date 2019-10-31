@@ -11,32 +11,32 @@
       <div>
         <p:ajax event="sort" listener="#{courseController.onSort}" update="course_list_table"></p:ajax>
         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
-        <p:column headerText="Code" style="width:70px" sortBy="#{course.code}" field="code">
+        <p:column headerText="Code" style="width:60px" sortBy="#{course.code}" field="code">
           <h:outputText value="#{course.code}" />
         </p:column>
         <p:column headerText="Name" style="width:100px" sortBy="#{course.name}" field="name">
           <h:outputText value="#{course.name}" />
         </p:column>
-        <p:column headerText="Subject" style="width:100px" sortBy="#{course.subject.name}" field="subject">
+        <p:column headerText="Subject" style="width:90px" sortBy="#{course.subject.name}" field="subject">
           <h:outputText value="#{course.subject.name}" />
         </p:column>
-        <p:column headerText="BeginTime" style="width:90px;" sortBy="#{course.beginTime}" field="beginTime">
+        <p:column headerText="BeginTime" style="width:105px;" sortBy="#{course.beginTime}" field="beginTime">
           <h:outputText value="#{course.beginTime}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="FinishTime" style="width:90px;" sortBy="#{course.finishTime}" field="finishTime">
+        <p:column headerText="FinishTime" style="width:110px;" sortBy="#{course.finishTime}" field="finishTime">
           <h:outputText value="#{course.finishTime}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="Status" sortBy="#{course.status}" field="status">
+        <p:column headerText="Status" sortBy="#{course.status}" field="status" style="width:70px;">
           <h:outputText value="#{course.status}" />
         </p:column>
         <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher">
           <h:outputText value="#{course.teacher}" />
         </p:column>
-        <p:column headerText="Capacity" style="width:80px;" sortBy="#{course.capacity}" field="capacity">
+        <p:column headerText="Cap" style="width:60px;" sortBy="#{course.capacity}" field="capacity">
           <h:outputText value="#{course.capacity}" />
         </p:column>
         <p:column headerText="Action" style="width:65px">
