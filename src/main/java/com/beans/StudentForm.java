@@ -1,37 +1,39 @@
-package com.Bean;
+package com.beans;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@ManagedBean(name = "studentDto")
+@ManagedBean(name = "studentForm")
 @SessionScoped
-public class StudentDto implements Serializable {
+public class StudentForm implements Serializable {
 
-	private static final long serialVersionUID = 8116736993772045415L;
-	private Long id;
+	private static final long serialVersionUID = -5939218400151972369L;
+
+	private Long Id;
 	private String code;
 	private String firstName;
 	private String lastName;
+	private Date dob;
 	private String gender;
 	private String field;
-	private Date dob;
+	private String address;
 	private String phone;
 	private String email;
 	private String note;
 	private float avgScore;
+	private Set<Course> courses;
 
 }

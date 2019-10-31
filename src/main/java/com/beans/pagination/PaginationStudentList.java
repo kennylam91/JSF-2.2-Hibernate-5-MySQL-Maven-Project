@@ -1,4 +1,4 @@
-package com.Bean;
+package com.beans.pagination;
 
 import java.io.Serializable;
 
@@ -18,7 +18,7 @@ import lombok.ToString;
 @ToString
 @ManagedBean(name = "pagination")
 @SessionScoped
-public class Pagination implements Serializable{
+public class PaginationStudentList implements Serializable{
 
 	private static final long serialVersionUID = -1964671145149488777L;
 

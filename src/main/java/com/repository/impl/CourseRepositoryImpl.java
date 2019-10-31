@@ -11,7 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.Bean.Course;
+import com.beans.Course;
 import com.repository.CourseRepository;
 import com.util.HibernateUtil;
 

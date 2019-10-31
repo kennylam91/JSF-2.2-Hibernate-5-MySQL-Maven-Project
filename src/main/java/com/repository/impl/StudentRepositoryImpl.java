@@ -10,9 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.Bean.Pagination;
-import com.Bean.Student;
-import com.Bean.StudentDto;
+import com.beans.Student;
+import com.beans.StudentDto;
+import com.beans.pagination.PaginationStudentList;
 import com.repository.StudentRepository;
 import com.util.HibernateUtil;
 
@@ -37,7 +37,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public List<StudentDto> findAllStudents() {
 		Session session = this.sessionFactory.openSession();
 		Query query = session.createQuery("select new "
-				+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
+				+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
 				+ "from Student s " + "order by s.code ");
 		query.setMaxResults(20);
 		List<StudentDto> studentDtoList = query.list();
@@ -46,7 +46,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
+	public List<StudentDto> findStudentsByPagination(PaginationStudentList pagination) {
 		String orderedBy = getStudentField(pagination.getOrderBy());
 		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 		String fieldSearch = getStudentField(pagination.getSearchField());
@@ -54,7 +54,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		Query query;
 		if (pagination.getSearchField().equals("all")) {
 			query = session.createQuery("select new "
-					+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
+					+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
 					+ "from Student s " + "where s.code like :searchKeyword or" + " "
 					+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or" + " "
 					+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or" + " "
@@ -65,7 +65,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 		} else {
 			query = session.createQuery("select new "
-					+ "com.Bean.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
+					+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
 					+ "from Student s " + "where " + fieldSearch + " " + "like :searchKeyword" + " " + "order by "
 					+ orderedBy + " " + ascOrDesc + ",s.code asc");
 

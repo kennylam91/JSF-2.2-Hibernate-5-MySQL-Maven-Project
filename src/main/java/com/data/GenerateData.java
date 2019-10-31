@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import com.Bean.Course;
-import com.Bean.Student;
-import com.Bean.Subject;
+import com.beans.Course;
+import com.beans.Student;
+import com.beans.Subject;
 import com.controller.SubjectController;
 import com.repository.CourseRepository;
 import com.repository.StudentRepository;

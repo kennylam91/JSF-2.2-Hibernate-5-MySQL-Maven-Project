@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.Bean.Subject;
+import com.beans.Subject;
 import com.repository.SubjectRepository;
 import com.util.HibernateUtil;
 

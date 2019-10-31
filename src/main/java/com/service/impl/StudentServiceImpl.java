@@ -7,9 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import com.Bean.Pagination;
-import com.Bean.Student;
-import com.Bean.StudentDto;
+import com.beans.Student;
+import com.beans.StudentDto;
+import com.beans.pagination.PaginationStudentList;
 import com.repository.StudentRepository;
 import com.repository.impl.StudentRepositoryImpl;
 import com.service.StudentService;
@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	@Override
-	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
+	public List<StudentDto> findStudentsByPagination(PaginationStudentList pagination) {
 		return studentRepository.findStudentsByPagination(pagination);
 	}
 

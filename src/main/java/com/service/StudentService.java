@@ -2,9 +2,9 @@ package com.service;
 
 import java.util.List;
 
-import com.Bean.Pagination;
-import com.Bean.Student;
-import com.Bean.StudentDto;
+import com.beans.Student;
+import com.beans.StudentDto;
+import com.beans.pagination.PaginationStudentList;
 
 public interface StudentService {
 
@@ -18,5 +18,5 @@ public interface StudentService {
 
 	List<StudentDto> findAllStudents();
 	
-	List<StudentDto> findStudentsByPagination(Pagination pagination);
+	List<StudentDto> findStudentsByPagination(PaginationStudentList pagination);
 }

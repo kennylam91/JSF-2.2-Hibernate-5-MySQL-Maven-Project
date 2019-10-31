@@ -9,11 +9,12 @@
   <ui:composition>
     <div id="course-list-table-content">
       <div>
+        <p:ajax event="sort" listener="#{courseController.onSort}" update="course_list_table"></p:ajax>
         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
-        <p:column headerText="Code" style="width:70px">
+        <p:column headerText="Code" style="width:70px" sortBy="#{course.code}" field="code">
           <h:outputText value="#{course.code}" />
         </p:column>
-        <p:column headerText="Name" style="width:100px">
+        <p:column headerText="Name" style="width:100px" sortBy="#{course.name}" field="name">
           <h:outputText value="#{course.name}" />
         </p:column>
         <p:column headerText="Subject" style="width:100px">

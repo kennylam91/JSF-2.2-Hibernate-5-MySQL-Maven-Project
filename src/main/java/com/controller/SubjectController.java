@@ -11,10 +11,10 @@ import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
-import com.Bean.Navigation;
-import com.Bean.Subject;
-import com.Bean.FormBean.NewCourseForm;
-import com.Bean.FormBean.NewSubjectForm;
+import com.beans.Navigation;
+import com.beans.Subject;
+import com.beans.formbeans.NewCourseForm;
+import com.beans.formbeans.NewSubjectForm;
 import com.service.SubjectService;
 import com.util.ObjectMapper;
 

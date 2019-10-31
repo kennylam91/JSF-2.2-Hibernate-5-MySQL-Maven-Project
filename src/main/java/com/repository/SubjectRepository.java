@@ -3,7 +3,7 @@ package com.repository;
 import java.io.Serializable;
 import java.util.List;
 
-import com.Bean.Subject;
+import com.beans.Subject;
 
 public interface SubjectRepository extends Serializable {
 

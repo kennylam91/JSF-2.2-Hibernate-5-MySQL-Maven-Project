@@ -3,7 +3,7 @@ package com.service;
 import java.io.Serializable;
 import java.util.List;
 
-import com.Bean.Course;
+import com.beans.Course;
 
 public interface CourseService extends Serializable {
 

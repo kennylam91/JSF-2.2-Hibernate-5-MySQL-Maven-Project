@@ -64,9 +64,9 @@ wpsp-labelMain {
 }
 
 .ui-datatable thead th {
-	height: 50px;
-	font-size: 1.1rem;
-	font-weight: 600;
+	height: 35px;
+	font-size: 1rem;
+	font-weight: 500;
 }
 
 .ui-datatable {

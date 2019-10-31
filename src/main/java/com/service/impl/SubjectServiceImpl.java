@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import com.Bean.Subject;
+import com.beans.Subject;
 import com.repository.SubjectRepository;
 import com.service.SubjectService;
 

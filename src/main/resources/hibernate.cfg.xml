@@ -24,9 +24,9 @@
 		</property>
 
 		<!-- Resource Mapping -->
-		<mapping class="com.Bean.Student" />
-		<mapping class="com.Bean.Subject" />
-		<mapping class="com.Bean.Course" />
-		<mapping class="com.Bean.Score" />
+		<mapping class="com.beans.Student" />
+		<mapping class="com.beans.Subject" />
+		<mapping class="com.beans.Course" />
+		<mapping class="com.beans.Score" />
 	</session-factory>
 </hibernate-configuration>

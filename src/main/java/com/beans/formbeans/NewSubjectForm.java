@@ -1,4 +1,4 @@
-package com.Bean.FormBean;
+package com.beans.formbeans;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import com.Bean.Course;
+import com.beans.Course;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

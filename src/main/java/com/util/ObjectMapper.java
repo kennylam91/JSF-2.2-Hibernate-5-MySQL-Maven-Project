@@ -2,13 +2,13 @@ package com.util;
 
 import org.modelmapper.ModelMapper;
 
-import com.Bean.Course;
-import com.Bean.Student;
-import com.Bean.StudentForm;
-import com.Bean.Subject;
-import com.Bean.FormBean.NewCourseForm;
-import com.Bean.FormBean.NewStudentForm;
-import com.Bean.FormBean.NewSubjectForm;
+import com.beans.Course;
+import com.beans.Student;
+import com.beans.StudentForm;
+import com.beans.Subject;
+import com.beans.formbeans.NewCourseForm;
+import com.beans.formbeans.NewStudentForm;
+import com.beans.formbeans.NewSubjectForm;
 
 public class ObjectMapper {
 

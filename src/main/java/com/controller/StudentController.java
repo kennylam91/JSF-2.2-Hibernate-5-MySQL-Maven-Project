@@ -11,12 +11,12 @@ import javax.faces.bean.SessionScoped;
 import org.apache.log4j.Logger;
 import org.primefaces.event.data.SortEvent;
 
-import com.Bean.Navigation;
-import com.Bean.Pagination;
-import com.Bean.Student;
-import com.Bean.StudentDto;
-import com.Bean.StudentForm;
-import com.Bean.FormBean.NewStudentForm;
+import com.beans.Navigation;
+import com.beans.Student;
+import com.beans.StudentDto;
+import com.beans.StudentForm;
+import com.beans.formbeans.NewStudentForm;
+import com.beans.pagination.PaginationStudentList;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 
@@ -44,7 +44,7 @@ public class StudentController implements Serializable {
 	private StudentServiceImpl studentService;
 
 	@ManagedProperty(value = "#{pagination}")
-	private Pagination pagination;
+	private PaginationStudentList pagination;
 
 	@ManagedProperty(value = "#{newStudentForm}")
 	private NewStudentForm newStudentForm;
@@ -56,7 +56,7 @@ public class StudentController implements Serializable {
 
 	private List<StudentDto> selectedStudentDtos;
 
-	public List<StudentDto> getStudentDtos(Pagination pagination) {
+	public List<StudentDto> getStudentDtos(PaginationStudentList pagination) {
 		return studentService.findStudentsByPagination(pagination);
 	}
 

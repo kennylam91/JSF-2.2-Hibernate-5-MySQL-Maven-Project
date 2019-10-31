@@ -3,7 +3,7 @@ package com.repository;
 import java.io.Serializable;
 import java.util.List;
 
-import com.Bean.Course;
+import com.beans.Course;
 
 public interface CourseRepository extends Serializable{
 	

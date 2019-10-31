@@ -7,10 +7,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import com.Bean.Course;
-import com.Bean.Navigation;
-import com.Bean.Subject;
-import com.Bean.FormBean.NewCourseForm;
+import org.primefaces.event.data.SortEvent;
+
+import com.beans.Course;
+import com.beans.Navigation;
+import com.beans.Subject;
+import com.beans.formbeans.NewCourseForm;
+import com.beans.pagination.PaginationStudentList;
 import com.service.CourseService;
 import com.service.SubjectService;
 import com.util.ObjectMapper;
@@ -44,6 +47,9 @@ public class CourseController implements Serializable {
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
+
+	@ManagedProperty(value = "#{pagination}")
+	private PaginationStudentList pagination;
 
 	public List<Course> getCourses() {
 		return courseService.findAllCourses();
@@ -104,6 +110,11 @@ public class CourseController implements Serializable {
 
 	public void activeEditMode() {
 		editMode = true;
+	}
+
+	public void onSort(SortEvent event) {
+		System.out.println(event.getSortColumn().getField());
+		System.out.println(pagination);
 	}
 
 }
