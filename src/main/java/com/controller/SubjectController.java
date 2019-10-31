@@ -62,9 +62,21 @@ public class SubjectController implements Serializable {
 		return subjectService.findSubjectById(subjectId);
 	}
 
-	public Long createSubject(NewSubjectForm newSubjectForm) {
+	public void createSubject() {
 		Subject subject = ObjectMapper.convertToSubjectFromNewSubjectForm(newSubjectForm);
-		return subjectService.saveSubject(subject);
+		Long subjectId = subjectService.saveSubject(subject);
+		clearNewSubjectForm();
+		
+	}
+
+	private void clearNewSubjectForm() {
+		newSubjectForm.setCode(null);
+		newSubjectForm.setCoefficient(0.0f);
+		newSubjectForm.setCourses(null);
+		newSubjectForm.setDescription(null);
+		newSubjectForm.setField(null);
+		newSubjectForm.setName(null);
+		
 	}
 
 	public void onSubjectRowSelect(SelectEvent event) {

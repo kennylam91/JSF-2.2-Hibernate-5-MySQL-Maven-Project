@@ -20,7 +20,7 @@
         <f:facet name="footer">
           <div align="center">
             <p:commandButton id="create_subject_button_confirm" value="Create" update="main-content create_subject_form"
-              action="#{subjectController.createSubject(newSubjectForm)}"
+              action="#{subjectController.createSubject()}"
               oncomplete="handleCreateSubjectDialogRequest(xhr, status, args)" />
             <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_subject').hide()" update="growl" />
           </div>
