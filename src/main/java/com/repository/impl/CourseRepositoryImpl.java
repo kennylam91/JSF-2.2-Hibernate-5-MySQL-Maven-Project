@@ -161,19 +161,17 @@ public class CourseRepositoryImpl implements CourseRepository {
 			String fieldSearch = getCourseField(pagination.getSearchField());
 			Query query;
 			if (pagination.getOrderBy().equals("all")) {
-				query = session.createQuery("Select c from Course c where "+
-						"c.code like :searchKeyword or " +
-						"c.name like :searchKeyword or " +
-						"c.beginTime like :searchKeyword or " +
-						"c.finishTime like :searchKeyword or " +
-						"c.status like :searchKeyword or " +
-						"c.teacher like :searchKeyword or " +
-						"c.capacity like :searchKeyword or " +
-						"c.description like :searchKeyword or " +
-						"c.subject.name like :searchKeyword " +
-						"order by "+orderedBy+ " " + ascOrDesc + ",c.code asc");
+				query = session.createQuery("Select c from Course c where " + "c.code like :searchKeyword or "
+						+ "c.name like :searchKeyword or " + "c.beginTime like :searchKeyword or "
+						+ "c.finishTime like :searchKeyword or " + "c.status like :searchKeyword or "
+						+ "c.teacher like :searchKeyword or " + "c.capacity like :searchKeyword or "
+						+ "c.description like :searchKeyword or " + "c.subject.name like :searchKeyword " + "order by "
+						+ orderedBy + " " + ascOrDesc + ",c.code asc");
+			} else {
+				query = session.createQuery("Select c from Course c where " + fieldSearch + " " + "like :searchKeyword "
+						+ "order by " + orderedBy + " " + ascOrDesc + ",c.code asc");
 			}
-			query.setParameter("searchKeyword", pagination.getSearchKeyword());
+			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 			@SuppressWarnings("unchecked")
 			List<Course> courses = query.list();
 			transaction.commit();
@@ -188,6 +186,37 @@ public class CourseRepositoryImpl implements CourseRepository {
 					transaction.rollback();
 				session.close();
 			}
+		}
+	}
+
+	private String getAscOrDescParameter(String ascOrDesc) {
+		if (ascOrDesc.toLowerCase().equals("asc")) {
+			return "asc";
+		} else {
+			return "desc";
+		}
+	}
+
+	private String getCourseField(String orderBy) {
+		switch (orderBy) {
+		case "name":
+			return "c.name";
+		case "beginTime":
+			return "c.beginTime";
+		case "finishTime":
+			return "c.finishTime";
+		case "status":
+			return "c.status";
+		case "teacher":
+			return "c.teacher";
+		case "capacity":
+			return "c.capacity";
+		case "description":
+			return "c.description";
+		case "subject":
+			return "c.subject";
+		default:
+			return "c.code";
 		}
 	}
 

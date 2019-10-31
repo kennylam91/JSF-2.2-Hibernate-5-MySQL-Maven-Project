@@ -3,6 +3,7 @@ package com.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -51,8 +52,9 @@ public class CourseController implements Serializable {
 	@ManagedProperty(value = "#{paginationCourseList}")
 	private Pagination paginationCourseList;
 
-	public List<Course> getCourses() {
-		return courseService.findAllCourses();
+	@PostConstruct
+	public void init() {
+		courses = courseService.findAllCourses(paginationCourseList);
 	}
 
 	public void createCourse(NewCourseForm newCourseForm) {
@@ -123,7 +125,9 @@ public class CourseController implements Serializable {
 	}
 
 	public void onPaginationChange() {
-		courses = courseService.findAllCourses(Pagination paginationCourseList);
+		courses = courseService.findAllCourses(paginationCourseList);
+		System.out.println(paginationCourseList);
+		System.out.println(courses);
 	}
 
 }
