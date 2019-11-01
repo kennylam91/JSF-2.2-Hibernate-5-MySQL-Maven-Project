@@ -118,22 +118,6 @@ public class StudentController implements Serializable {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
-	private void clearNewStudenForm(NewStudentForm newStudentForm) {
-		newStudentForm.setAddress(null);
-		newStudentForm.setCode(null);
-		newStudentForm.setDob(null);
-		newStudentForm.setEmail(null);
-		newStudentForm.setField(null);
-		newStudentForm.setFirstName(null);
-		newStudentForm.setLastName(null);
-		newStudentForm.setPhone(null);
-	}
-
-	@PostConstruct
-	public void init() {
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
-	}
-
 	public void onSort(SortEvent event) {
 		if (event.isAscending()) {
 			paginationStudentList.setAscOrDesc("asc");
@@ -146,7 +130,6 @@ public class StudentController implements Serializable {
 
 	public void onActionForMultiChange() {
 		studentService.deleteStudents(selectedStudentDtos);
-		System.out.println("delete");
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		selectedStudentDtos = new ArrayList<StudentDto>();
 
