@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<head>
+<title><ui:insert name="title">Default title</ui:insert></title>
+</head>
+<body>
+  <ui:composition>
+    <p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;" title="previous_page"
+      action="#{studentController.getPreviousPage}" update="form_student_list_dlg">
+    </p:commandButton>
+    <label class="wpsp-labelMain">Rows: </label>
+    <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
+      value="#{studentController.paginationStudentList.rowsPerPage}">
+      <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="form_student_list_dlg" />
+      <f:selectItem itemLabel="10" itemValue="10" />
+      <f:selectItem itemLabel="20" itemValue="20" />
+      <f:selectItem itemLabel="50" itemValue="50" />
+    </h:selectOneMenu>
+    <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
+        value="#{studentController.paginationStudentList.page}">
+      </h:outputText></label>
+    <p:commandButton icon="pi pi-chevron-right" styleClass="mx-2" title="next_page"
+      action="#{studentController.getNextPage}" update="form_student_list_dlg">
+    </p:commandButton>
+  </ui:composition>
+</body>
+</html>
