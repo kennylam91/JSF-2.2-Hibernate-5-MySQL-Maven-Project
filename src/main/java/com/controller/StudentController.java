@@ -10,8 +10,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Navigation;
@@ -23,7 +21,6 @@ import com.beans.pagination.Pagination;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 
-import antlr.debug.Event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,8 +38,7 @@ public class StudentController implements Serializable {
 
 	private static final Logger logger = Logger.getLogger(StudentController.class);
 
-	@ManagedProperty(value = "#{studentForm}")
-	private StudentForm studentForm;
+	private Student selectedStudent;
 
 	@ManagedProperty(value = "#{studentService}")
 	private StudentServiceImpl studentService;
@@ -83,6 +79,10 @@ public class StudentController implements Serializable {
 		navigation.navigateToStudentList();
 	}
 
+	public Student getSelectedStudentFromStudentDto() {
+		return studentService.findStudentById(selectedStudentDto.getId());
+	}
+
 	public void createStudent(NewStudentForm newStudentForm) {
 		Student student = ObjectMapper.convertToStudentFromNewStudentForm(newStudentForm);
 		studentService.saveStudent(student);
@@ -98,16 +98,14 @@ public class StudentController implements Serializable {
 		studentDtos = studentService.findAllStudents();
 	}
 
-	public void getStudentDetail(Long studentId) throws Exception {
-		Student student = studentService.findStudentById(studentId);
-		ObjectMapper.convertToStudentForm(student, studentForm);
+	public void getStudentDetail() throws Exception {
+		selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
 		navigation.navigateToStudentDetail();
 	}
 
-	public void update(StudentForm studentForm) throws Exception {
-		Student student = new Student();
-		ObjectMapper.convertToStudent(studentForm, student);
-		studentService.updateStudent(student);
+	public void update() throws Exception {
+		System.out.println("update: " + selectedStudent);
+		studentService.updateStudent(selectedStudent);
 	}
 
 	public void onPaginationChange() {
@@ -135,21 +133,6 @@ public class StudentController implements Serializable {
 		newStudentForm.setFirstName(null);
 		newStudentForm.setLastName(null);
 		newStudentForm.setPhone(null);
-	}
-
-	private void clearStudentForm() {
-		studentForm.setAddress(null);
-		studentForm.setAvgScore(0);
-		studentForm.setCode(null);
-		studentForm.setCourses(null);
-		studentForm.setDob(null);
-		studentForm.setEmail(null);
-		studentForm.setField(null);
-		studentForm.setFirstName(null);
-		studentForm.setId(null);
-		studentForm.setLastName(null);
-		studentForm.setNote(null);
-		studentForm.setPhone(null);
 	}
 
 	@PostConstruct

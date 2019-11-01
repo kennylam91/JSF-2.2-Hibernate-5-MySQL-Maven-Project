@@ -28,11 +28,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "courses")
-@ManagedBean(name = "course")
-@SessionScoped
-public class Course implements Serializable {
-
-	private static final long serialVersionUID = 8223570377101294949L;
+public class Course {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,10 +59,10 @@ public class Course implements Serializable {
 	private String description;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	Set<Student> students = new HashSet<>();
+	private Set<Student> students = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "subject_id", nullable = true)
+	@JoinColumn(name = "subject_id")
 	private Subject subject;
 
 	@Override

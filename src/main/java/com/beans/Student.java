@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,15 +27,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@ManagedBean(name = "student")
-@SessionScoped
 @Entity
 @Table(name = "students")
 public class Student {
 
+	@Column(name = "student_id", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 
 	@Column(name = "code", nullable = false)
 	private String code;
@@ -69,13 +70,16 @@ public class Student {
 	private float avgScore;
 
 	@ManyToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "student_course", 
+//		joinColumns = @JoinColumn(referencedColumnName = "student_id"), 
+//		inverseJoinColumns = @JoinColumn(referencedColumnName = "course_id"))
 	private Set<Course> courses = new HashSet<>();
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -88,10 +92,10 @@ public class Student {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

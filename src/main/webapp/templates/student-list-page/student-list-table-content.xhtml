@@ -77,7 +77,8 @@
       </p:column>
       <p:column headerText="Action" style="width:95px">
         <p:commandButton id="detail_button" update="main-content" icon="pi pi-info"
-          action="#{studentController.getStudentDetail(student.id)}" style="color:white;font-size:16px">
+          action="#{studentController.getStudentDetail}" style="color:white;font-size:16px">
+          <f:setPropertyActionListener value="#{student}" target="#{studentController.selectedStudentDto}"></f:setPropertyActionListener>
         </p:commandButton>
         <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;font-size:16px"
           action="#{studentController.deleteStudent(student.id)}" update="main-content">

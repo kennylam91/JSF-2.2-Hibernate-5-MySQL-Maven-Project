@@ -94,9 +94,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-
-			session.saveOrUpdate(student);
-
+			session.update(student);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {

@@ -26,12 +26,9 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "subjects")
-@ManagedBean(name = "subject")
-@SessionScoped
-public class Subject implements Serializable {
+public class Subject {
 
-	private static final long serialVersionUID = 3073718612735697210L;
-
+	@Column(name = "subject_id", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -51,7 +48,7 @@ public class Subject implements Serializable {
 	@Column(name = "coefficient", nullable = false)
 	private float coefficient;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "subject")
 	private Set<Course> courses = new HashSet<>();
 
 	@Override
