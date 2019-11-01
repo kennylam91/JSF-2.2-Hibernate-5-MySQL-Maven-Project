@@ -31,9 +31,8 @@ import lombok.ToString;
 @Table(name = "students")
 public class Student {
 
-	@Column(name = "student_id", nullable = false)
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "code", nullable = false)
@@ -71,8 +70,8 @@ public class Student {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "student_course", 
-		joinColumns = @JoinColumn(referencedColumnName = "student_id"), 
-		inverseJoinColumns = @JoinColumn(referencedColumnName = "course_id"))
+		joinColumns = @JoinColumn(referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
 	private Set<Course> courses = new HashSet<>();
 
 	@Override

@@ -119,23 +119,17 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	@Override
 	public void deleteStudentList(List<Long> Ids) {
-		Transaction transaction = null;
-		Session session = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-
-			session.createQuery("DELETE FROM Student s WHERE s.id IN (:Ids)").setParameter("Ids", Ids).executeUpdate();
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			logger.error("exception: ", e);
-		} finally {
-			if (session != null)
-				session.close();
-		}
+		/*
+		 * Transaction transaction = null; Session session = null; try { session =
+		 * HibernateUtil.getSessionFactory().openSession(); transaction =
+		 * session.beginTransaction();
+		 * 
+		 * session.createQuery("DELETE FROM Student s WHERE s.id IN (:Ids)").
+		 * setParameter("Ids", Ids).executeUpdate(); transaction.commit(); } catch
+		 * (Exception e) { if (transaction != null) { transaction.rollback(); }
+		 * logger.error("exception: ", e); } finally { if (session != null)
+		 * session.close(); }
+		 */
 
 	}
 
@@ -197,26 +191,19 @@ public class StudentRepositoryImpl implements StudentRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Student> findStudentsByIds(List<Long> Ids) {
-		Transaction transaction = null;
-		Session session = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-
-			List<Student> students = session.createQuery("SELECT s FROM Student s WHERE s.id IN (:Ids)")
-					.setParameter("Ids", Ids).list();
-			transaction.commit();
-			return students;
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			logger.error("exception: ", e);
-			return Collections.EMPTY_LIST;
-		} finally {
-			if (session != null)
-				session.close();
-		}
+		/*
+		 * Transaction transaction = null; Session session = null; try { session =
+		 * HibernateUtil.getSessionFactory().openSession(); transaction =
+		 * session.beginTransaction();
+		 * 
+		 * List<Student> students =
+		 * session.createQuery("SELECT s FROM Student s WHERE s.id IN (:Ids)")
+		 * .setParameter("Ids", Ids).list(); transaction.commit(); return students; }
+		 * catch (Exception e) { if (transaction != null) { transaction.rollback(); }
+		 * logger.error("exception: ", e); return Collections.EMPTY_LIST; } finally { if
+		 * (session != null) session.close(); }
+		 */
+		return Collections.EMPTY_LIST;
 	}
 
 }

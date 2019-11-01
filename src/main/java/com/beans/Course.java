@@ -27,9 +27,8 @@ import lombok.ToString;
 @Table(name = "courses")
 public class Course {
 
-	@Column(name = "course_id", nullable = false)
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "code", nullable = false)

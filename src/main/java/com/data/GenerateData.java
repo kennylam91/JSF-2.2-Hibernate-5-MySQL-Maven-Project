@@ -48,6 +48,7 @@ public class GenerateData {
 
 	public static void main(String[] args) {
 
+		
 		/*
 		 * Course course = new Course(); course.setCode("Alkf29");
 		 * course.setName("Java Core 01"); course.setStatus("Registering");
@@ -56,11 +57,12 @@ public class GenerateData {
 		 * CourseRepository courseRepo = new CourseRepositoryImpl();
 		 * courseRepo.saveCourse(course);
 		 */
-		/*
-		 * insertSubjectSQL(10);
-		 * 
-		 * insertStudentSQL(50);
-		 */
+		 
+
+//		 insertSubjectSQL(10);
+
+//		 insertStudentSQL(100);
+
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -72,12 +74,12 @@ public class GenerateData {
 		 * subjects = subjectService.findAllSubjects();
 		 */
 
-		StudentRepository repo = new StudentRepositoryImpl();
-		List<Long> studentIds = new ArrayList<>();
-		studentIds.add(new Long(13L));
-		studentIds.add(new Long(14L));
-		studentIds.add(new Long(15L));
-		repo.deleteStudentList(studentIds);
+		/*
+		 * StudentRepository repo = new StudentRepositoryImpl(); List<Long> studentIds =
+		 * new ArrayList<>(); studentIds.add(new Long(13L)); studentIds.add(new
+		 * Long(14L)); studentIds.add(new Long(15L));
+		 * repo.deleteStudentList(studentIds);
+		 */
 
 	}
 
@@ -169,7 +171,9 @@ public class GenerateData {
 			subject.setCoefficient(getRandomCoefficient());
 			subject.setName(SUBJECT_NAME_COLLECTION[i]);
 			subject.setField(SUBJECT_FIELD_COLLECTION[i]);
+			subjectRepo.saveSubject(subject);
 		}
+		
 
 	}
 
