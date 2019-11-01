@@ -1,11 +1,8 @@
 package com.beans;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,6 +27,7 @@ import lombok.ToString;
 @Table(name = "courses")
 public class Course {
 
+	@Column(name = "course_id", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -58,7 +56,7 @@ public class Course {
 	@Column(name = "description", nullable = true)
 	private String description;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "courses")
 	private Set<Student> students = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)

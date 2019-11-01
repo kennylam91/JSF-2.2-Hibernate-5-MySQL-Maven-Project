@@ -70,9 +70,9 @@ public class Student {
 	private float avgScore;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "student_course", 
-//		joinColumns = @JoinColumn(referencedColumnName = "student_id"), 
-//		inverseJoinColumns = @JoinColumn(referencedColumnName = "course_id"))
+	@JoinTable(name = "student_course", 
+		joinColumns = @JoinColumn(referencedColumnName = "student_id"), 
+		inverseJoinColumns = @JoinColumn(referencedColumnName = "course_id"))
 	private Set<Course> courses = new HashSet<>();
 
 	@Override
