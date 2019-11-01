@@ -52,9 +52,13 @@ public class CourseController implements Serializable {
 	@ManagedProperty(value = "#{paginationCourseList}")
 	private Pagination paginationCourseList;
 
-	@PostConstruct
-	public void init() {
-		courses = courseService.findAllCourses(paginationCourseList);
+	/*
+	 * @PostConstruct public void init() { courses =
+	 * courseService.findAllCourses(paginationCourseList); }
+	 */
+
+	public List<Course> getCourses() {
+		return courseService.findAllCourses(paginationCourseList);
 	}
 
 	public void createCourse(NewCourseForm newCourseForm) {
