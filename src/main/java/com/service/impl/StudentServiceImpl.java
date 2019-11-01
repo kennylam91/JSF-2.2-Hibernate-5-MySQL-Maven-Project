@@ -43,7 +43,8 @@ public class StudentServiceImpl implements StudentService, Serializable {
 
 	@Override
 	public void deleteStudent(Long studentId) {
-		studentRepository.deleteStudent(studentId);
+		Student student = studentRepository.findStudentById(studentId);
+		studentRepository.deleteStudent(student);
 	}
 
 	@Override

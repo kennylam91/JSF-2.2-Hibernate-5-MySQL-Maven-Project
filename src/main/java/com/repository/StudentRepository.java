@@ -16,7 +16,7 @@ public interface StudentRepository extends Serializable {
 
 	void updateStudent(Student student);
 
-	void deleteStudent(Long studentId);
+	void deleteStudent(Student student);
 
 	Student findStudentById(Long studentId);
 

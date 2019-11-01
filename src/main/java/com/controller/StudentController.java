@@ -83,14 +83,13 @@ public class StudentController implements Serializable {
 	}
 
 	public void createStudent() {
-		System.out.println(newStudent);
 		studentService.saveStudent(newStudent);
 
 	}
 
-	public void deleteStudent(Long studentId) throws Exception {
-		studentService.deleteStudent(studentId);
-		studentDtos = studentService.findAllStudents();
+	public void deleteStudent() throws Exception {
+		studentService.deleteStudent(selectedStudentDto.getId());
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
 	public void getStudentDetail() throws Exception {

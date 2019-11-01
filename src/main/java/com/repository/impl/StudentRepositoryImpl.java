@@ -107,13 +107,24 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 	}
 
-	public void deleteStudent(Long studentId) {
-		Session session = this.sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		Student student = session.get(Student.class, studentId);
-		session.delete(student);
-		transaction.commit();
-		session.close();
+	public void deleteStudent(Student student) {
+		Transaction transaction = null;
+		Session session = null;
+		boolean committed = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.delete(student);
+			transaction.commit();
+			committed = true;
+
+		} finally {
+			if (session != null) {
+				if (!committed && transaction != null)
+					transaction.rollback();
+				session.close();
+			}
+		}
 
 	}
 
