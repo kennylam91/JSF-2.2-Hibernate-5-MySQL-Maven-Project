@@ -46,8 +46,7 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{paginationStudentList}")
 	private Pagination paginationStudentList;
 
-	@ManagedProperty(value = "#{newStudentForm}")
-	private NewStudentForm newStudentForm;
+	private Student newStudent = new Student();
 
 	@ManagedProperty(value = "#{courseController}")
 	private CourseController courseController;
@@ -83,13 +82,9 @@ public class StudentController implements Serializable {
 		return studentService.findStudentById(selectedStudentDto.getId());
 	}
 
-	public void createStudent(NewStudentForm newStudentForm) {
-		Student student = ObjectMapper.convertToStudentFromNewStudentForm(newStudentForm);
-		studentService.saveStudent(student);
-
-		// update studentDtos for table student_list
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
-		clearNewStudenForm(newStudentForm);
+	public void createStudent() {
+		System.out.println(newStudent);
+		studentService.saveStudent(newStudent);
 
 	}
 

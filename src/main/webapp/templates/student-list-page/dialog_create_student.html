@@ -7,33 +7,32 @@
     <p:dialog header="Create Student" widgetVar="dlg_create_student" resizable="false">
       <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
         <h:outputLabel for="code" value="Code:" />
-        <p:inputText id="code" value="#{newStudentForm.code}" required="true" />
+        <p:inputText id="code" value="#{studentController.newStudent.code}" required="true" />
         <h:outputLabel for="first_name" value="Firstname:" />
-        <p:inputText id="first_name" value="#{newStudentForm.firstName}" required="true" label="first_name" />
+        <p:inputText id="first_name" value="#{studentController.newStudent.firstName}" required="true" label="first_name" />
         <h:outputLabel for="last_name" value="Lastname:" />
-        <p:inputText id="last_name" value="#{newStudentForm.lastName}" required="true" label="last_name" />
+        <p:inputText id="last_name" value="#{studentController.newStudent.lastName}" required="true" label="last_name" />
         <h:outputLabel for="dob" value="Date of birth:" />
-        <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{newStudentForm.dob}">
+        <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentController.newStudent.dob}">
         </p:datePicker>
         <h:outputLabel for="gender" value="Gender:" />
-        <h:selectOneMenu id="gender" styleClass="select_input" value="#{newStudentForm.gender}">
+        <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentController.newStudent.gender}">
           <f:selectItem itemLabel="Male" itemValue="male" />
           <f:selectItem itemLabel="Female" itemValue="female" />
           <f:selectItem itemLabel="Other" itemValue="other" />
         </h:selectOneMenu>
         <h:outputLabel for="field" value="Field:" />
-        <p:inputText id="field" value="#{newStudentForm.field}" required="true" label="field" />
+        <p:inputText id="field" value="#{studentController.newStudent.field}" required="true" label="field" />
         <h:outputLabel for="address" value="Address:" />
-        <p:inputText id="address" value="#{newStudentForm.address}" required="true" label="address" />
+        <p:inputText id="address" value="#{studentController.newStudent.address}" required="true" label="address" />
         <h:outputLabel for="phone" value="Phone:" />
-        <p:inputText id="phone" value="#{newStudentForm.phone}" required="true" label="phone" />
+        <p:inputText id="phone" value="#{studentController.newStudent.phone}" required="true" label="phone" />
         <h:outputLabel for="email" value="Email:" />
-        <p:inputText id="email" value="#{newStudentForm.email}" required="true" label="email" />
+        <p:inputText id="email" value="#{studentController.newStudent.email}" required="true" label="email" />
         <f:facet name="footer">
           <div align="center">
             <p:commandButton id="create_student_button_confirm" value="Create" update="main-content create_student_form"
-              action="#{studentController.createStudent(newStudentForm)}"
-              oncomplete="handleLoginRequest(xhr, status, args)" />
+              action="#{studentController.createStudent}" oncomplete="handleLoginRequest(xhr, status, args)" />
             <p:commandButton type="button" value="Cancel" onclick="PF('dlg_create_student').hide()" update="growl" />
           </div>
         </f:facet>

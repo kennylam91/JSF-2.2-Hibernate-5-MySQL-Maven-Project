@@ -8,10 +8,10 @@
 <body>
   <ui:composition>
     <h:form id="form_student_list">
+      <f:event listener="#{studentController.getStudentDtos()}" type="preRenderView" />
       <p:dataTable value="#{studentController.studentDtos}" var="student" reflow="true" id="student_list_table"
         rowKey="#{student.id}" selection="#{studentController.selectedStudentDtos}" multiViewState="true"
         styleClass="wpsp-table dataTable dtr-inline">
-        
         <ui:insert name="table-content">
           <ui:include src="/templates/student-list-page/student-list-table-content.xhtml"></ui:include>
         </ui:insert>
