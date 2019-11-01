@@ -73,20 +73,24 @@ wpsp-labelMain {
 	text-align: center;
 }
 
-.create-button{
+.create-button {
 	height: 35px;
-    width: 111px;
-    padding: 0;
-    background-color: #00bdda;
-    border-color: #00bdda;
-    font-size: 12px;
+	width: 111px;
+	padding: 0;
+	background-color: #00bdda;
+	border-color: #00bdda;
+	font-size: 12px;
 }
 
-body .ui-datatable .ui-datatable-data>tr>td{
+body .ui-datatable .ui-datatable-data>tr>td {
 	padding: 5px 5px;
 	font-size: 14px;
 }
 
-body .ui-datatable thead th{
+body .ui-datatable thead th {
 	padding: 10px 10px;
 }
+
+/* .ui-menu {
+	width: 6.5rem;
+} */

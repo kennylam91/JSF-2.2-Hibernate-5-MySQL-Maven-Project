@@ -11,13 +11,16 @@
       <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
       <f:facet name="header">
         <div class="wpsp-dataTable-top ui-g">
-          <div class="ui-g-6">
-            <p:menuButton id="action_for_multi" value="Options">
+          <div class="ui-g-4" align="left">
+            <p:menuButton id="action_for_multi" value="Options" >
               <p:menuitem actionListener="#{studentController.onActionForMultiChange}"
-                update=":form_student_list:student_list_table" value="Delete" process="student_list_table"></p:menuitem>
+                update=":form_student_list:student_list_table" value="Delete All" process="student_list_table"></p:menuitem>
             </p:menuButton>
           </div>
-          <div id="student_table_filter" class=" ui-g-6">
+          <div class="ui-g-4" >
+          <h2>STUDENT LIST TABLE</h2>
+          </div>
+          <div id="student_table_filter" class=" ui-g-4">
             <div class="wpsp-label" style="float: right;">
               <div class="ui-inputgroup">
                 <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
