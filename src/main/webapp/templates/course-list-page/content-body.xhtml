@@ -11,18 +11,16 @@
         <div class="subject-inner wpsp-left wpsp-class-filter">
           <div class="subject-inner wpsp-left wpsp-class-filter">
             <!-- Not use, need to develop more -->
-            <h:form id="filter_by_field">
-              <label class="wpsp-labelMain">Select Field</label>
-              <h:selectOneMenu styleClass="select_input" id="search_field"
-                value="#{courseController.paginationCourseList.searchKeyword}"
-                style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
-                <f:selectItem itemLabel="PHP" itemValue="PHP" />
-                <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
-                <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
-                <!-- <p:ajax event="valueChange" listener="#{courseController.onPaginationChange}"
-                  update="main-content" /> -->
-              </h:selectOneMenu>
-            </h:form>
+            <!-- <label class="wpsp-labelMain">Select Field</label>
+            <h:selectOneMenu styleClass="select_input" id="search_field"
+              value="#{courseController.paginationCourseList.searchKeyword}"
+              style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
+              <f:selectItem itemLabel="PHP" itemValue="PHP" />
+              <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
+              <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
+              <p:ajax event="valueChange" listener="#{courseController.onPaginationChange}"
+                  update="main-content" />
+            </h:selectOneMenu> -->
           </div>
         </div>
         <div class="wpsp-right wpsp-import-export">
@@ -86,16 +84,16 @@
       <div class="wpsp-card-body">
         <div class="subject-head">
           <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="wpsp-dataTable-top ui-g">
-              <div class="ui-g-6">
-                <select name="bulkaction" class="select_input" id="bulkaction">
-                  <option value="">Select Action</option>
-                  <option value="bulkUsersDelete">Delete</option>
-                </select>
-              </div>
-              <div id="student_table_filter" class=" ui-g-6">
-                <h:form class="wpsp-label" style="float:right;">
-                  <div class="ui-inputgroup">
+            <h:form id="form_course_list">
+              <div class="wpsp-dataTable-top ui-g">
+                <div class="ui-g-6">
+                  <select name="bulkaction" class="select_input" id="bulkaction">
+                    <option value="">Select Action</option>
+                    <option value="bulkUsersDelete">Delete</option>
+                  </select>
+                </div>
+                <div id="student_table_filter" class=" ui-g-6" align="right">
+                  <div class="ui-inputgroup" style="float:right">
                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
                       value="#{paginationCourseList.searchField}">
                       <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
@@ -114,15 +112,13 @@
                     <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
                       action="#{courseController.onPaginationChange}" style="height:31px;" />
                   </div>
-                </h:form>
+                </div>
               </div>
-            </div>
-            <div>
-              <ui:insert name="course-list-table">
-                <ui:include src="/templates/course-list-page/course-list-table.xhtml"></ui:include>
-              </ui:insert>
-            </div>
-            <h:form id="record_search_status">
+              <div>
+                <ui:insert name="course-list-table">
+                  <ui:include src="/templates/course-list-page/course-list-table.xhtml"></ui:include>
+                </ui:insert>
+              </div>
               <label class="wpsp-labelMain"> <h:outputText
                   value="Show from record #{courseController.paginationCourseList.firstRowIndexOnPage} to 
                   record #{courseController.paginationCourseList.lastRowIndexOnPage}.">
