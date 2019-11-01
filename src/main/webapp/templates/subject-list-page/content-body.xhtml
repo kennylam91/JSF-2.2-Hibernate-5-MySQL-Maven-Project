@@ -12,18 +12,16 @@
         <div class="subject-inner wpsp-left wpsp-class-filter">
           <div class="subject-inner wpsp-left wpsp-class-filter">
             <!-- Not use, need to develop more -->
-            <h:form id="filter_by_field">
-              <label class="wpsp-labelMain">Select Field</label>
-              <h:selectOneMenu styleClass=" select_input" id="search_field"
-                value="#{courseController.paginationCourseList.searchKeyword}"
-                style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
-                <f:selectItem itemLabel="PHP" itemValue="PHP" />
-                <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
-                <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
-                <!-- <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
+            <label class="wpsp-labelMain">Select Field</label>
+            <h:selectOneMenu styleClass=" select_input" id="cours_search_field"
+              value="#{courseController.paginationCourseList.searchKeyword}"
+              style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
+              <f:selectItem itemLabel="PHP" itemValue="PHP" />
+              <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
+              <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
+              <!-- <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
                   update="main-content" /> -->
-              </h:selectOneMenu>
-            </h:form>
+            </h:selectOneMenu>
           </div>
         </div>
         <div class="wpsp-right wpsp-import-export">
@@ -86,11 +84,11 @@
       </div>
       <div class="wpsp-card-body">
         <div class="subject-head">
-          <!-- Search Function -->
-          <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="wpsp-dataTable-top">
-              <div id="student_table_filter" class="dataTables_filter">
-                <h:form class="wpsp-label" style="margin-right: 10px;">
+          <h:form id="form_course_table">
+            <!-- Search Function -->
+            <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+              <div class="wpsp-dataTable-top">
+                <div id="student_table_filter" class="dataTables_filter">
                   <h:selectOneMenu styleClass=" select_input" style="width:115px;display:inline;" id="search_field"
                     value="#{courseController.paginationCourseList.searchField}">
                     <f:selectItem itemLabel="Select Field" itemValue="all" itemDisabled="true"></f:selectItem>
@@ -110,32 +108,26 @@
                     placeholder="Search keyword">
                     <p:ajax event="change" listener="#{courseController.onPaginationChange}" update="main-content" />
                   </p:inputText>
-                </h:form>
+                </div>
+                <div class="wpsp-bulkaction">
+                  <select name="bulkaction" class="select_input" id="bulkaction">
+                    <option value="">Select Action</option>
+                    <option value="bulkUsersDelete">Delete</option>
+                  </select>
+                </div>
               </div>
-              <div class="wpsp-bulkaction">
-                <select name="bulkaction" class="select_input" id="bulkaction">
-                  <option value="">Select Action</option>
-                  <option value="bulkUsersDelete">Delete</option>
-                </select>
+              <div>
+                <ui:insert name="subject-list-table">
+                  <ui:include src="/templates/subject-list-page/subject_list_table.xhtml"></ui:include>
+                </ui:insert>
               </div>
-            </div>
-            <div>
-              <ui:insert name="subject-list-table">
-                <ui:include src="/templates/subject-list-page/subject_list_table.xhtml"></ui:include>
-              </ui:insert>
-            </div>
-            <h:form id="record_search_status">
               <label class="wpsp-labelMain"> <h:outputText
                   value="Show from record #{courseController.paginationCourseList.firstRowIndexOnPage} to 
                   record #{courseController.paginationCourseList.lastRowIndexOnPage}.">
                 </h:outputText>
               </label>
-            </h:form>
-            <!-- <table id="student_table" class="wpsp-table dataTable dtr-inline"
-              cellspacing="0" width="100%" style="width: 100%;" role="grid"
-              aria-describedby="student_table_info"> -->
-            <!--  </table> -->
-          </div>
+            </div>
+          </h:form>
         </div>
       </div>
       <!-- /.box-body -->

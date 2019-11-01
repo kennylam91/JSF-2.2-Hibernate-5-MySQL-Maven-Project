@@ -10,13 +10,13 @@
     <div id="subject-list-table-content">
       <div>
         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
-        <p:column headerText="Code" style="width:70px">
+        <p:column headerText="Code" style="width:60px">
           <h:outputText value="#{subject.code}" />
         </p:column>
         <p:column headerText="Name" style="width:100px">
           <h:outputText value="#{subject.name}" />
         </p:column>
-        <p:column headerText="Field" style="width:100px">
+        <p:column headerText="Field" style="width:70px">
           <h:outputText value="#{subject.field}" />
         </p:column>
         <p:column headerText="Description" style="width:80px">
@@ -25,11 +25,11 @@
         <p:column headerText="Coefficient" style="width:60px">
           <h:outputText value="#{subject.coefficient}" />
         </p:column>
-        <p:column headerText="Action" style="width:65px">
+        <p:column headerText="Action" style="width:60px">
           <h:form>
-            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info" style="color:#007ad9">
+            <p:commandButton title="Detail" id="detail_button" icon="pi pi-info" style="color:white;font-size:16px">
             </p:commandButton>
-            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;"
+            <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;font-size:16px"
               action="#{subjectController.deleteSubject(subject.id)}" update="main-content">
               <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
             </p:commandButton>
