@@ -94,7 +94,22 @@
           <f:facet name="header">
             <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
           </f:facet>
-        #{course.students}
+          <p:dataTable id="course_student_list_table" var="student" value="#{courseController.course.students}"
+            selection="#{studentController.selectedStudentDtos}" rowKey="#{student.id}">
+            <p:column selectionMode="multiple" style="width:40px;text-align:center"></p:column>
+            <p:column headerText="Code">
+              <h:outputText value="#{student.code}"></h:outputText>
+            </p:column>
+            <p:column headerText="FirstName">
+              <h:outputText value="#{student.firstName}"></h:outputText>
+            </p:column>
+            <p:column headerText="LastName">
+              <h:outputText value="#{student.lastName}"></h:outputText>
+            </p:column>
+            <p:column headerText="Field">
+              <h:outputText value="#{student.field}"></h:outputText>
+            </p:column>
+          </p:dataTable>
         </p:panelGrid>
       </h:form>
     </div>

@@ -1,5 +1,6 @@
 package com.repository.impl;
 
+import java.util.Collections;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -193,6 +194,31 @@ public class StudentRepositoryImpl implements StudentRepository {
 		if (ascOrDesc.equalsIgnoreCase("desc"))
 			return "desc";
 		return "asc";
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Student> findStudentsByIds(List<Long> Ids) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+
+			List<Student> students = session.createQuery("SELECT s FROM Student s WHERE s.id IN (:Ids)")
+					.setParameter("Ids", Ids).list();
+			transaction.commit();
+			return students;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error("exception: ", e);
+			return Collections.EMPTY_LIST;
+		} finally {
+			if (session != null)
+				session.close();
+		}
 	}
 
 }

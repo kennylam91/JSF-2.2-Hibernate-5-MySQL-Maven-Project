@@ -53,6 +53,9 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{newStudentForm}")
 	private NewStudentForm newStudentForm;
 
+	@ManagedProperty(value = "#{courseController}")
+	private CourseController courseController;
+
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
 
@@ -168,7 +171,14 @@ public class StudentController implements Serializable {
 		studentService.deleteStudents(selectedStudentDtos);
 		System.out.println("delete");
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		selectedStudentDtos = new ArrayList<StudentDto>();
 
+	}
+
+	public void addStudentToCourse() {
+		List<Student> students = studentService.findStudentsByStudentDtos(selectedStudentDtos);
+		courseController.course.getStudents().addAll(students);
+		selectedStudentDtos = new ArrayList<StudentDto>();
 	}
 
 }

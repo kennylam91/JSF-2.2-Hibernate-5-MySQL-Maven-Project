@@ -44,7 +44,7 @@ public class CourseController implements Serializable {
 	private NewCourseForm newCourseForm;
 
 	@ManagedProperty(value = "#{course}")
-	private Course course;
+	public Course course;
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;

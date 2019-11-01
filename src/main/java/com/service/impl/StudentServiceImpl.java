@@ -27,8 +27,6 @@ public class StudentServiceImpl implements StudentService, Serializable {
 
 	private static final long serialVersionUID = -2495755716198044889L;
 
-	private List<Student> students;
-
 	@ManagedProperty(value = "#{studentRepository}")
 	StudentRepository studentRepository;
 
@@ -66,13 +64,24 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	@Override
-	public void deleteStudents(List<StudentDto> StudentDtos) {
-		List<Long> studentIds = new ArrayList<Long>();
-		for (StudentDto student : StudentDtos) {
-			studentIds.add(student.getId());
-		}
+	public void deleteStudents(List<StudentDto> studentDtos) {
+		List<Long> studentIds = getStudentIdsFromStudentDtos(studentDtos);
 		studentRepository.deleteStudentList(studentIds);
 
 	}
 
+	@Override
+	public List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos) {
+		List<Long> studentIds = getStudentIdsFromStudentDtos(studentDtos);
+		return studentRepository.findStudentsByIds(studentIds);
+
+	}
+
+	private List<Long> getStudentIdsFromStudentDtos(List<StudentDto> studentDtos) {
+		List<Long> studentIds = new ArrayList<Long>();
+		for (StudentDto student : studentDtos) {
+			studentIds.add(student.getId());
+		}
+		return studentIds;
+	}
 }

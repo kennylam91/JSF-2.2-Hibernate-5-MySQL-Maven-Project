@@ -21,4 +21,6 @@ public interface StudentService {
 	List<StudentDto> findStudentsByPagination(Pagination pagination);
 
 	void deleteStudents(List<StudentDto> StudentDtos);
+
+	List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos);
 }
