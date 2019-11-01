@@ -91,6 +91,9 @@ body .ui-datatable thead th {
 	padding: 10px 10px;
 }
 
-/* .ui-menu {
+.ui-menu {
 	width: 6.5rem;
-} */
+}
+.ui-datatable th.ui-state-active {
+	background: darkslategray;
+}
