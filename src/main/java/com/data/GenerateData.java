@@ -1,6 +1,7 @@
 package com.data;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -55,9 +56,11 @@ public class GenerateData {
 		 * CourseRepository courseRepo = new CourseRepositoryImpl();
 		 * courseRepo.saveCourse(course);
 		 */
-		insertSubjectSQL(10);
-
-		insertStudentSQL(50);
+		/*
+		 * insertSubjectSQL(10);
+		 * 
+		 * insertStudentSQL(50);
+		 */
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -69,13 +72,12 @@ public class GenerateData {
 		 * subjects = subjectService.findAllSubjects();
 		 */
 
-		/*
-		 * SubjectRepository subjectRepo = new SubjectRepositoryImpl(); List<Subject>
-		 * subjects = subjectRepo.findAllSubjects();
-		 */
-		/*
-		 * for (Subject subject : subjects) { System.out.println(subject); }
-		 */
+		StudentRepository repo = new StudentRepositoryImpl();
+		List<Long> studentIds = new ArrayList<>();
+		studentIds.add(new Long(13L));
+		studentIds.add(new Long(14L));
+		studentIds.add(new Long(15L));
+		repo.deleteStudentList(studentIds);
 
 	}
 

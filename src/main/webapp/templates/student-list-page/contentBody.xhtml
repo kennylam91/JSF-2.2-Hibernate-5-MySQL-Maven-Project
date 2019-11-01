@@ -87,42 +87,7 @@
       <div class="wpsp-card-body">
         <div class="subject-head">
           <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="wpsp-dataTable-top ui-g">
-              <div class="ui-g-6">
-                <h:selectOneMenu styleClass="select_input" id="action_for_multi"
-                  value="#{studentController.actionForMulti}"
-                  style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
-                  <f:selectItem itemLabel="Select Item" itemValue="select item" />
-                  <f:selectItem itemLabel="Delete" itemValue="delete" />
-                  <f:ajax event="valueChange" listener="#{studentController.onActionForMultiChange}"></f:ajax>
-                </h:selectOneMenu>
-              </div>
-              <div id="student_table_filter" class=" ui-g-6">
-                <div class="wpsp-label" style="float: right;">
-                  <div class="ui-inputgroup">
-                    <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
-                      value="#{studentController.paginationStudentList.searchField}">
-                      <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
-                      <f:selectItem itemLabel="All" itemValue="all" />
-                      <f:selectItem itemLabel="Code" itemValue="code" />
-                      <f:selectItem itemLabel="FirstName" itemValue="firstName" />
-                      <f:selectItem itemLabel="LastName" itemValue="lastName" />
-                      <f:selectItem itemLabel="Field" itemValue="field" />
-                      <f:selectItem itemLabel="Dob" itemValue="dob" />
-                      <f:selectItem itemLabel="Phone" itemValue="phone" />
-                      <f:selectItem itemLabel="Email" itemValue="email" />
-                      <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
-                      <f:selectItem itemLabel="Note" itemValue="note" />
-                    </h:selectOneMenu>
-                    <p:inputText id="search_keyword" style="width:160px;height:31px"
-                      value="#{studentController.paginationStudentList.searchKeyword}" placeholder="Search keyword">
-                    </p:inputText>
-                    <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
-                      action="#{studentController.onPaginationChange}" style="height:31px;" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             <div>
               
                 <ui:insert name="student-list-table">

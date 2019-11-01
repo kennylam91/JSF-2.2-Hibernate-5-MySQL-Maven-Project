@@ -165,18 +165,10 @@ public class StudentController implements Serializable {
 	}
 
 	public void onActionForMultiChange() {
-		System.out.println("on action for multi change");
-		for (StudentDto studentDto : selectedStudentDtos) {
-			System.out.println(studentDto);
-		}
-	}
+		studentService.deleteStudents(selectedStudentDtos);
+		System.out.println("delete");
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 
-	/*
-	 * public void onRowSelect(SelectEvent event) {
-	 * selectedStudentDtos.add((StudentDto) event.getObject()); }
-	 * 
-	 * public void onRowUnselect(UnselectEvent event) {
-	 * selectedStudentDtos.remove((StudentDto) event.getObject()); }
-	 */
+	}
 
 }

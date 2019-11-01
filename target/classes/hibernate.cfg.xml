@@ -17,11 +17,13 @@
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">Laichuyen1991@</property>
 
+
 		<!-- Hibernate Properties -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
+		<property name="hibernate.hql.bulk_id_strategy">org.hibernate.hql.spi.id.inline.InlineIdsSubSelectValueListBulkIdStrategy</property>
 
 		<!-- Resource Mapping -->
 		<mapping class="com.beans.Student" />

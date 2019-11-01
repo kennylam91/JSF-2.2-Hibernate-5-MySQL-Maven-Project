@@ -118,6 +118,28 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	}
 
+	@Override
+	public void deleteStudentList(List<Long> Ids) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+
+			session.createQuery("DELETE FROM Student s WHERE s.id IN (:Ids)").setParameter("Ids", Ids).executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error("exception: ", e);
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+	}
+
 	public Student findStudentById(Long studentId) {
 		Transaction transaction = null;
 		Session session = null;

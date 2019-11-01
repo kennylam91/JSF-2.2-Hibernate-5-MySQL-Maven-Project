@@ -17,6 +17,8 @@ public interface StudentService {
 	Student findStudentById(Long studentId);
 
 	List<StudentDto> findAllStudents();
-	
+
 	List<StudentDto> findStudentsByPagination(Pagination pagination);
+
+	void deleteStudents(List<StudentDto> StudentDtos);
 }

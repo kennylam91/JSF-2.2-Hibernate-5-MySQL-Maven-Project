@@ -24,4 +24,6 @@ public interface StudentRepository extends Serializable {
 
 	List<StudentDto> findStudentsByPagination(Pagination pagination);
 
+	void deleteStudentList(List<Long> StudentIdList);
+
 }

@@ -65,4 +65,14 @@ public class StudentServiceImpl implements StudentService, Serializable {
 		return studentRepository.findStudentsByPagination(pagination);
 	}
 
+	@Override
+	public void deleteStudents(List<StudentDto> StudentDtos) {
+		List<Long> studentIds = new ArrayList<Long>();
+		for (StudentDto student : StudentDtos) {
+			studentIds.add(student.getId());
+		}
+		studentRepository.deleteStudentList(studentIds);
+
+	}
+
 }
