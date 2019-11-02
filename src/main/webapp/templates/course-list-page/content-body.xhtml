@@ -28,7 +28,6 @@
       <div class="wpsp-card-body">
         <div class="subject-head">
           <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <h:form id="form_course_list">
               <f:event listener="#{courseController.getCourses}" type="preRenderView" />
               <ui:insert name="course-list-table">
                 <ui:include src="/templates/course-list-page/course-list-table.xhtml"></ui:include>
@@ -38,7 +37,6 @@
                   record #{courseController.paginationCourseList.lastRowIndexOnPage}.">
                 </h:outputText>
               </label>
-            </h:form>
           </div>
         </div>
       </div>

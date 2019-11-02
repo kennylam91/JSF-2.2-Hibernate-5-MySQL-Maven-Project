@@ -62,7 +62,7 @@ public class StudentController implements Serializable {
 
 	private String actionForMulti = "create";
 
-	public List<StudentDto> getStudentDtos(Pagination paginationStudentList) {
+	public List<StudentDto> getStudentDtos() {
 		return studentService.findStudentsByPagination(paginationStudentList);
 	}
 
