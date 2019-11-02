@@ -33,6 +33,8 @@ public class CourseController implements Serializable {
 	private static final long serialVersionUID = 4251571962723500481L;
 	private List<Course> courses;
 	private boolean editMode = false;
+	
+	private Course selectedCourse;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
@@ -42,9 +44,6 @@ public class CourseController implements Serializable {
 
 	@ManagedProperty(value = "#{newCourseForm}")
 	private NewCourseForm newCourseForm;
-
-	@ManagedProperty(value = "#{course}")
-	public Course course;
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
@@ -89,8 +88,7 @@ public class CourseController implements Serializable {
 
 	public void updateCourse() {
 		try {
-			System.out.println(course.getStudents());
-			courseService.updateCourse(course);
+			courseService.updateCourse(selectedCourse);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,14 +97,14 @@ public class CourseController implements Serializable {
 
 	}
 
-	public void getCourseDetail(Long courseId) {
-		course = courseService.findCourseById(courseId);
+	public void getCourseDetail() {
+		selectedCourse = courseService.findCourseById(selectedCourse.getId());
 		navigation.navigateToCourseDetail();
 	}
 
 	public void setSubjectToCourse(Long subjectId) {
 		Subject subject = subjectService.findSubjectById(subjectId);
-		course.setSubject(subject);
+		selectedCourse.setSubject(subject);
 	}
 
 	public void getCourseListView() {

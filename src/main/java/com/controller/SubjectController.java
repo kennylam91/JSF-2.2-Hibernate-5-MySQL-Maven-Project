@@ -85,7 +85,7 @@ public class SubjectController implements Serializable {
 			PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
 			newCourseForm.setSubject((Subject) event.getObject());
 		} else {
-			courseController.getCourse().setSubject((Subject) event.getObject());
+			courseController.getSelectedCourse().setSubject((Subject) event.getObject());
 		}
 	}
 }

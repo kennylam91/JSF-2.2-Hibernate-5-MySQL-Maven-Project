@@ -84,6 +84,7 @@ public class StudentController implements Serializable {
 
 	public void createStudent() {
 		studentService.saveStudent(newStudent);
+		newStudent = new Student();
 
 	}
 
@@ -138,7 +139,7 @@ public class StudentController implements Serializable {
 	public void addStudentToCourse() {
 		List<Student> students = studentService.findStudentsByStudentDtos(selectedStudentDtos);
 		for (Student student : students) {
-			courseController.course.addStudent(student);
+			courseController.getSelectedCourse().addStudent(student);
 		}
 		selectedStudentDtos = new ArrayList<StudentDto>();
 	}

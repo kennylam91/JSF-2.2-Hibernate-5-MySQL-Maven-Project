@@ -19,16 +19,16 @@
             <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
           </f:facet>
           <p:outputLabel>Course Code:</p:outputLabel>
-          <h:outputText value="#{courseController.course.code}" id="courseCode" required="true" style="padding: 0 5px;" />
+          <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true" style="padding: 0 5px;" />
           <!-- <p:message for="courseCode" /> -->
           <p:outputLabel>Name:</p:outputLabel>
           <p:inplace editor="true">
-            <p:inputText value="#{courseController.course.name}" id="name" required="true" />
+            <p:inputText value="#{courseController.selectedCourse.name}" id="name" required="true" />
           </p:inplace>
           <!-- <p:message for="firstName" /> -->
           <p:outputLabel>Subject:</p:outputLabel>
           <h:panelGroup>
-            <h:outputText id="new_course_subject" value="#{courseController.course.subject}">
+            <h:outputText id="new_course_subject" value="#{courseController.selectedCourse.subject}">
             </h:outputText>
             <p:commandLink onclick="PF('dlg_list_subject').show()" action="#{courseController.activeEditMode}"
               value="Edit" style="margin-left:10px;color:red;">
@@ -36,7 +36,7 @@
           </h:panelGroup>
           <!-- <p:inplace editor="true"> -->
           <!-- <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
-            value="#{courseController.course.subject}">
+            value="#{courseController.selectedCourse.subject}">
             <f:selectItems value="#{subjectController.subjects}" var="subject" itemLabel="#{subject.name}"
               itemValue="#{subject}">
             </f:selectItems>
@@ -44,7 +44,7 @@
           <!--  </p:inplace> -->
           <p:outputLabel>Begin time:</p:outputLabel>
           <p:inplace editor="true">
-            <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true" value="#{courseController.course.beginTime}"
+            <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true" value="#{courseController.selectedCourse.beginTime}"
               showOn="button">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </p:calendar>
@@ -52,14 +52,14 @@
           <!-- <p:message for="dob" /> -->
           <p:outputLabel>Finish time:</p:outputLabel>
           <p:inplace editor="true">
-            <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.course.finishTime}"
+            <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
               showOn="button">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </p:calendar>
           </p:inplace>
           <p:outputLabel>Status:</p:outputLabel>
           <p:inplace editor="true">
-            <h:selectOneMenu id="status" styleClass="select_input" value="#{courseController.course.status}">
+            <h:selectOneMenu id="status" styleClass="select_input" value="#{courseController.selectedCourse.status}">
               <f:selectItem itemLabel="Registering" itemValue="registering" />
               <f:selectItem itemLabel="Studying" itemValue="studying" />
               <f:selectItem itemLabel="Completed" itemValue="completed" />
@@ -68,17 +68,17 @@
           <!-- <p:message for="field" /> -->
           <p:outputLabel>Teacher:</p:outputLabel>
           <p:inplace editor="true">
-            <p:inputText value="#{courseController.course.teacher}" id="teacher" />
+            <p:inputText value="#{courseController.selectedCourse.teacher}" id="teacher" />
           </p:inplace>
           <!-- <p:message for="address" /> -->
           <p:outputLabel>Capacity:</p:outputLabel>
           <p:inplace editor="true">
-            <p:inputText value="#{courseController.course.capacity}" id="capacity" required="true" />
+            <p:inputText value="#{courseController.selectedCourse.capacity}" id="capacity" required="true" />
           </p:inplace>
           <!-- <p:message for="phone" /> -->
           <p:outputLabel>Description:</p:outputLabel>
           <p:inplace editor="true">
-            <p:inputText value="#{courseController.course.description}" id="description" />
+            <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
           </p:inplace>
           <f:facet name="footer">
             <div align="center">
@@ -94,7 +94,7 @@
           <f:facet name="header">
             <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
           </f:facet>
-          <p:dataTable id="course_student_list_table" var="student" value="#{courseController.course.students}"
+          <p:dataTable id="course_student_list_table" var="student" value="#{courseController.selectedCourse.students}"
             selection="#{studentController.selectedStudentDtos}" rowKey="#{student.id}">
             <p:column selectionMode="multiple" style="width:40px;text-align:center"></p:column>
             <p:column headerText="Code">
