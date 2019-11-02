@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -48,7 +47,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error("exception: ", e);
+			logger.error(e);
 			return null;
 		} finally {
 			if (session != null)
@@ -61,16 +60,15 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 	public void updateSubject(Subject subject) {
 		Session session = null;
 		Transaction transaction = null;
-
 		try {
-			session = this.sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.update(subject);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error("exception:", e);
+			logger.error(e);
 		} finally {
 			if (session != null)
 				session.close();
@@ -82,16 +80,15 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 	public void deleteSubject(Subject subject) {
 		Session session = null;
 		Transaction transaction = null;
-
 		try {
-			session = this.sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.delete(subject);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error("exception:", e);
+			logger.error(e);
 		} finally {
 			if (session != null)
 				session.close();
@@ -99,24 +96,24 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Subject findSubjectById(Long subjectId) {
 		Session session = null;
 		Transaction transaction = null;
-
 		try {
-			session = this.sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("Select s from Subject s where s.id = :subjectId");
+			org.hibernate.query.Query<Subject> query = session
+					.createQuery("Select s from Subject s where s.id = :subjectId");
 			query.setParameter("subjectId", subjectId);
-			Subject subject = (Subject) query.uniqueResult();
+			Subject subject = query.uniqueResult();
 			transaction.commit();
 			return subject;
-
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error("exception:", e);
+			logger.error(e);
 			return null;
 		} finally {
 			if (session != null)
@@ -124,16 +121,15 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Subject> findAllSubjects() {
 		Session session = null;
 		Transaction transaction = null;
-
 		try {
-			session = this.sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("Select s from Subject s");
-			@SuppressWarnings("unchecked")
+			org.hibernate.query.Query<Subject> query = session.createQuery("Select s from Subject s");
 			List<Subject> subjects = query.list();
 			transaction.commit();
 			return subjects;
@@ -141,7 +137,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error("exception:", e);
+			logger.error(e);
 			return Collections.emptyList();
 		} finally {
 			if (session != null)
@@ -149,24 +145,26 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Subject findSubjectByName(String name) {
 		Session session = null;
 		Transaction transaction = null;
 
 		try {
-			session = this.sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("Select s from Subject s where s.name = :name");
+			org.hibernate.query.Query<Subject> query = session
+					.createQuery("Select s from Subject s where s.name = :name");
 			query.setParameter("name", name.trim());
-			Subject subject = (Subject) query.uniqueResult();
+			Subject subject = query.uniqueResult();
 			transaction.commit();
 			return subject;
 
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error("exception:", e);
+			logger.error(e);
 			return null;
 		} finally {
 			if (session != null)

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -61,7 +60,6 @@ public class CourseRepositoryImpl implements CourseRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.update(course);
-			System.out.println("update: " + course.getStudents());
 			transaction.commit();
 			committed = true;
 		} finally {
@@ -95,6 +93,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Course findCourseById(Long courseId) {
 		Transaction transaction = null;
@@ -103,9 +102,9 @@ public class CourseRepositoryImpl implements CourseRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("Select c from Course c where c.id = :courseId");
+			org.hibernate.query.Query<Course> query = session
+					.createQuery("Select c from Course c where c.id = :courseId");
 			query.setParameter("courseId", courseId);
-			@SuppressWarnings("unchecked")
 			List<Course> courses = query.list();
 			transaction.commit();
 			committed = true;
@@ -121,7 +120,8 @@ public class CourseRepositoryImpl implements CourseRepository {
 			}
 		}
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Course> findAllCourses() {
 		Transaction transaction = null;
@@ -130,10 +130,9 @@ public class CourseRepositoryImpl implements CourseRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery(
+			org.hibernate.query.Query<Course> query = session.createQuery(
 					"Select c.id, c.name, c.subject.name, c.beginTime, c.finishTime, c.status, c.teacher, c.capacity "
-					+ "from Course c");
-			@SuppressWarnings("unchecked")
+							+ "from Course c");
 			List<Course> courses = query.list();
 			transaction.commit();
 			committed = true;
@@ -150,6 +149,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Course> findAllCourses(Pagination pagination) {
 		Transaction transaction = null;
@@ -161,7 +161,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 			String orderedBy = getCourseField(pagination.getOrderBy());
 			String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 			String fieldSearch = getCourseField(pagination.getSearchField());
-			Query query;
+			org.hibernate.query.Query<Course> query;
 			if (pagination.getSearchField().equals("all")) {
 				query = session.createQuery("Select c from Course c where " + "c.code like :searchKeyword or "
 						+ "c.name like :searchKeyword or " + "c.status like :searchKeyword or "
@@ -175,8 +175,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
 			query.setMaxResults(pagination.getRowsPerPage());
-			@SuppressWarnings("unchecked")
-			List<Course> courses = query.list();
+			List<Course> courses = query.getResultList();
 			transaction.commit();
 			committed = true;
 			if (!courses.isEmpty())
@@ -193,7 +192,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 	}
 
 	private String getAscOrDescParameter(String ascOrDesc) {
-		if (ascOrDesc.toLowerCase().equals("asc")) {
+		if (ascOrDesc.equalsIgnoreCase("asc")) {
 			return "asc";
 		} else {
 			return "desc";

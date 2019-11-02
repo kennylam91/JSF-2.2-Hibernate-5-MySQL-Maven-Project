@@ -6,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -34,16 +33,34 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+	private final String SELECT_NEW_STUDENTDTO_SQL = "select new "
+			+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
+			+ "from Student s ";
+
 	@SuppressWarnings("unchecked")
 	public List<StudentDto> findAllStudents() {
-		Session session = this.sessionFactory.openSession();
-		org.hibernate.query.Query<StudentDto> query = session.createQuery("select new "
-				+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
-				+ "from Student s " + "order by s.code ");
-		query.setMaxResults(20);
-		List<StudentDto> studentDtoList = query.list();
-		session.close();
-		return studentDtoList;
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			org.hibernate.query.Query<StudentDto> query = session
+					.createQuery(SELECT_NEW_STUDENTDTO_SQL + "order by s.code ");
+			query.setMaxResults(20);
+			List<StudentDto> studentDtoList = query.list();
+			transaction.commit();
+			return studentDtoList;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return Collections.emptyList();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -51,48 +68,72 @@ public class StudentRepositoryImpl implements StudentRepository {
 		String orderedBy = getStudentField(pagination.getOrderBy());
 		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 		String fieldSearch = getStudentField(pagination.getSearchField());
-		Session session = this.sessionFactory.openSession();
-		Query<StudentDto> query;
-		if (pagination.getSearchField().equals("all")) {
-			query = session.createQuery("select new "
-					+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
-					+ "from Student s " + "where s.code like :searchKeyword or" + " "
-					+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or" + " "
-					+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or" + " " + " "
-					+ "s.phone like :searchKeyword or" + " " + "s.email like :searchKeyword or" + " " + " "
-					+ "s.note like :searchKeyword " + " " + "order by " + orderedBy + " " + ascOrDesc + ",s.code asc");
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = this.sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			org.hibernate.query.Query query;
+			if (pagination.getSearchField().equalsIgnoreCase("all")) {
+				query = session.createQuery(SELECT_NEW_STUDENTDTO_SQL + "where s.code like :searchKeyword or" + " "
+						+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or "
+						+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or "
+						+ "s.phone like :searchKeyword or" + " " + "s.email like :searchKeyword or "
+						+ "s.note like :searchKeyword " + " " + "order by " + orderedBy + " " + ascOrDesc
+						+ ",s.code asc");
 
-			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
-		} else {
-			query = session.createQuery("select new "
-					+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
-					+ "from Student s " + "where " + fieldSearch + " " + "like :searchKeyword" + " " + "order by "
-					+ orderedBy + " " + ascOrDesc + ",s.code asc");
+				query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+			} else {
+				query = session.createQuery(SELECT_NEW_STUDENTDTO_SQL + "where " + fieldSearch + " "
+						+ "like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc + ",s.code asc");
 
-			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+				query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+			}
+
+			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
+			query.setMaxResults(pagination.getRowsPerPage());
+			List<StudentDto> studentDtoList = query.getResultList();
+			transaction.commit();
+			return studentDtoList;
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error(e);
+			return Collections.emptyList();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
 		}
 
-		query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
-		query.setMaxResults(pagination.getRowsPerPage());
-		List<StudentDto> studentDtoList = query.list();
-		session.close();
-		return studentDtoList;
 	}
 
 	public Long saveStudent(Student student) {
-		Session session = this.sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		Long id = (Long) session.save(student);
-		transaction.commit();
-		session.close();
-		return id;
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Long courseId = (Long) session.save(student);
+			transaction.commit();
+			return courseId;
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			logger.error(e);
+			return null;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 
 	public void updateStudent(Student student) {
 		Transaction transaction = null;
 		Session session = null;
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.update(student);
 			transaction.commit();
@@ -100,7 +141,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			logger.error("exception: ", e);
+			logger.error(e);
 		} finally {
 			if (session != null)
 				session.close();
@@ -110,18 +151,18 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public void deleteStudent(Student student) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.delete(student);
 			transaction.commit();
-			committed = true;
-
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}
@@ -130,50 +171,79 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	@Override
 	public void deleteStudentList(List<Long> Ids) {
-
 		Transaction transaction = null;
 		Session session = null;
+		boolean committed = false;
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-
 			session.createQuery("DELETE FROM Student s WHERE s.id IN (:Ids)").setParameter("Ids", Ids).executeUpdate();
 			transaction.commit();
+			committed = true;
 		} catch (Exception e) {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			logger.error("exception: ", e);
+			logger.error(e);
 		} finally {
-			if (session != null)
+			if (session != null) {
 				session.close();
+			}
 		}
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public Student findStudentById(Long studentId) {
 		Transaction transaction = null;
 		Session session = null;
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 
-//			Student student = session.get(Student.class, studentId);
-			Query<Student> query = session.createQuery("select s from Student s where s.id = :studentId")
+			org.hibernate.query.Query<Student> query = session
+					.createQuery("select s from Student s where s.id = :studentId")
 					.setParameter("studentId", studentId);
-			Student student = (Student) query.uniqueResult();
+			Student student = query.uniqueResult();
 			transaction.commit();
 			return student;
 		} catch (Exception e) {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			e.printStackTrace();
+			logger.error(e);
+			return null;
 		} finally {
-			session.close();
+			if (session != null) {
+				session.close();
+			}
 		}
+	}
 
-		return null;
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Student> findStudentsByIds(List<Long> Ids) {
+
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+
+			List<Student> students = session.createQuery("SELECT s FROM Student s WHERE s.id IN (:Ids)")
+					.setParameter("Ids", Ids).list();
+			transaction.commit();
+			return students;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return Collections.emptyList();
+		} finally {
+			if (session != null)
+				session.close();
+		}
 	}
 
 	private String getStudentField(String orderedBy) {
@@ -203,32 +273,6 @@ public class StudentRepositoryImpl implements StudentRepository {
 		if (ascOrDesc.equalsIgnoreCase("desc"))
 			return "desc";
 		return "asc";
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Student> findStudentsByIds(List<Long> Ids) {
-
-		Transaction transaction = null;
-		Session session = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-
-			List<Student> students = session.createQuery("SELECT s FROM Student s WHERE s.id IN (:Ids)")
-					.setParameter("Ids", Ids).list();
-			transaction.commit();
-			return students;
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			logger.error("exception: ", e);
-			return Collections.EMPTY_LIST;
-		} finally {
-			if (session != null)
-				session.close();
-		}
 	}
 
 }
