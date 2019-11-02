@@ -78,9 +78,9 @@ public class CourseController implements Serializable {
 
 	}
 
-	public void deleteCourse(Long courseId) {
+	public void deleteCourse() {
 		try {
-			courseService.deleteCourse(courseId);
+			courseService.deleteCourse(selectedCourse.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
