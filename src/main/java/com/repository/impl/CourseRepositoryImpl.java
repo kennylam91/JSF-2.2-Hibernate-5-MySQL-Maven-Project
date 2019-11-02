@@ -130,7 +130,9 @@ public class CourseRepositoryImpl implements CourseRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("Select c from Course c");
+			Query query = session.createQuery(
+					"Select c.id, c.name, c.subject.name, c.beginTime, c.finishTime, c.status, c.teacher, c.capacity "
+					+ "from Course c");
 			@SuppressWarnings("unchecked")
 			List<Course> courses = query.list();
 			transaction.commit();
