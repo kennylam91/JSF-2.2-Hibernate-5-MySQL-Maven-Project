@@ -37,22 +37,7 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public void updateCourse(Course course) throws Exception {
-		Course courseFound = courseRepository.findCourseById(course.getId());
-		if (courseFound == null) {
-			throw new Exception("CourseId not found");
-		} else {
-			courseFound.setBeginTime(course.getBeginTime());
-			courseFound.setCapacity(course.getCapacity());
-			courseFound.setCode(course.getCode());
-			courseFound.setDescription(course.getDescription());
-			courseFound.setFinishTime(course.getFinishTime());
-			courseFound.setName(course.getName());
-			courseFound.setStatus(course.getStatus());
-			courseFound.setStudents(course.getStudents());
-			courseFound.setSubject(course.getSubject());
-			courseFound.setTeacher(course.getTeacher());
-			courseRepository.updateCourse(courseFound);
-		}
+		courseRepository.updateCourse(course);
 	}
 
 	@Override

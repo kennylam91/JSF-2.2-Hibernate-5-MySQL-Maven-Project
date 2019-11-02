@@ -59,9 +59,9 @@ public class GenerateData {
 		 */
 		 
 
-//		 insertSubjectSQL(10);
+		 insertSubjectSQL(10);
 
-//		 insertStudentSQL(100);
+		 insertStudentSQL(100);
 
 
 		/*

@@ -89,7 +89,7 @@ public class CourseController implements Serializable {
 
 	public void updateCourse() {
 		try {
-			System.out.println(course);
+			System.out.println(course.getStudents());
 			courseService.updateCourse(course);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

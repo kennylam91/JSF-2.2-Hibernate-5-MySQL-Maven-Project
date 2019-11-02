@@ -137,7 +137,9 @@ public class StudentController implements Serializable {
 
 	public void addStudentToCourse() {
 		List<Student> students = studentService.findStudentsByStudentDtos(selectedStudentDtos);
-		courseController.course.getStudents().addAll(students);
+		for (Student student : students) {
+			courseController.course.addStudent(student);
+		}
 		selectedStudentDtos = new ArrayList<StudentDto>();
 	}
 
