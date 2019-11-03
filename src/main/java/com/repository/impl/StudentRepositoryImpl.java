@@ -73,9 +73,9 @@ public class StudentRepositoryImpl implements StudentRepository {
 		try {
 			session = this.sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			org.hibernate.query.Query query;
-			if (pagination.getSearchField().equalsIgnoreCase("all")) {
-				query = session.createQuery(SELECT_NEW_STUDENTDTO_SQL + "where s.code like :searchKeyword or" + " "
+			org.hibernate.query.Query<StudentDto> query;
+			if (pagination.getSearchField().equals("all")) {
+				query = session.createQuery(SELECT_NEW_STUDENTDTO_SQL + "where s.code like :searchKeyword or "
 						+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or "
 						+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or "
 						+ "s.phone like :searchKeyword or" + " " + "s.email like :searchKeyword or "
@@ -114,9 +114,9 @@ public class StudentRepositoryImpl implements StudentRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			Long courseId = (Long) session.save(student);
+			Long studentId = (Long) session.save(student);
 			transaction.commit();
-			return courseId;
+			return studentId;
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
@@ -173,13 +173,11 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public void deleteStudentList(List<Long> Ids) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.createQuery("DELETE FROM Student s WHERE s.id IN (:Ids)").setParameter("Ids", Ids).executeUpdate();
 			transaction.commit();
-			committed = true;
 		} catch (Exception e) {
 			if (transaction != null) {
 				transaction.rollback();
