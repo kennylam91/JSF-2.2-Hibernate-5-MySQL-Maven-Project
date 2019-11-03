@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.beans.Student;
@@ -13,8 +14,6 @@ import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
 import com.repository.StudentRepository;
 import com.repository.impl.StudentRepositoryImpl;
-import com.service.StudentService;
-import com.service.impl.StudentServiceImpl;
 
 import junit.framework.TestCase;
 
@@ -28,6 +27,7 @@ public class StudentRepositoryTest extends TestCase {
 	Long secondStudentId;
 	List<Long> studentIds = new ArrayList<>();
 	
+	@Before
 	protected void setUp() {
 		
 		Calendar firstCalendar = Calendar.getInstance();

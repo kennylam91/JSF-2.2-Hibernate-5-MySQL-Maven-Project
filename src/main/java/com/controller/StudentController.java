@@ -132,7 +132,7 @@ public class StudentController implements Serializable {
 	public void onActionForMultiChange() {
 		studentService.deleteStudents(selectedStudentDtos);
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
-		selectedStudentDtos = new ArrayList<StudentDto>();
+		selectedStudentDtos = new ArrayList<>();
 
 	}
 
@@ -141,7 +141,7 @@ public class StudentController implements Serializable {
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
 		}
-		selectedStudentDtos = new ArrayList<StudentDto>();
+		selectedStudentDtos = new ArrayList<>();
 	}
 
 }

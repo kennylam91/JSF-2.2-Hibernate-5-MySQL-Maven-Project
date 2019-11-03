@@ -14,6 +14,7 @@ import com.repository.StudentRepository;
 import com.repository.impl.StudentRepositoryImpl;
 import com.service.StudentService;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ManagedBean(name = "studentService")
 @SessionScoped
 public class StudentServiceImpl implements StudentService, Serializable {
@@ -79,7 +81,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	private List<Long> getStudentIdsFromStudentDtos(List<StudentDto> studentDtos) {
-		List<Long> studentIds = new ArrayList<Long>();
+		List<Long> studentIds = new ArrayList<>();
 		for (StudentDto student : studentDtos) {
 			studentIds.add(student.getId());
 		}
