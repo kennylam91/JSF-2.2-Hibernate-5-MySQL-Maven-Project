@@ -57,7 +57,7 @@ public class CourseController implements Serializable {
 	 */
 
 	public List<Course> getCourses() {
-		return courseService.findAllCourses(paginationCourseList);
+		return courseService.findAllCoursesByPagination(paginationCourseList);
 	}
 
 	public void createCourse(NewCourseForm newCourseForm) {
@@ -127,7 +127,7 @@ public class CourseController implements Serializable {
 	}
 
 	public void onPaginationChange() {
-		courses = courseService.findAllCourses(paginationCourseList);
+		courses = courseService.findAllCoursesByPagination(paginationCourseList);
 		System.out.println(paginationCourseList);
 		System.out.println(courses);
 	}

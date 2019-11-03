@@ -12,6 +12,8 @@ import com.repository.CourseRepository;
 import com.service.CourseService;
 import com.service.SubjectService;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ManagedBean(name = "courseService")
 @SessionScoped
 public class CourseServiceImpl implements CourseService {
@@ -62,8 +65,8 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<Course> findAllCourses(Pagination pagination) {
-		return courseRepository.findAllCourses(pagination);
+	public List<Course> findAllCoursesByPagination(Pagination pagination) {
+		return courseRepository.findAllCoursesByPagination(pagination);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -30,22 +31,26 @@ public class CourseRepositoryImpl implements CourseRepository {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+	private static final Logger logger = Logger.getLogger(CourseRepositoryImpl.class);
+
 	@Override
 	public Long saveCourse(Course course) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			Long courseId = (Long) session.save(course);
 			transaction.commit();
-			committed = true;
 			return courseId;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return null;
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}
@@ -55,17 +60,18 @@ public class CourseRepositoryImpl implements CourseRepository {
 	public void updateCourse(Course course) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.update(course);
 			transaction.commit();
-			committed = true;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}
@@ -75,18 +81,19 @@ public class CourseRepositoryImpl implements CourseRepository {
 	public void deleteCourse(Course course) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			session.delete(course);
 			transaction.commit();
-			committed = true;
 
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}
@@ -98,7 +105,6 @@ public class CourseRepositoryImpl implements CourseRepository {
 	public Course findCourseById(Long courseId) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
@@ -106,27 +112,28 @@ public class CourseRepositoryImpl implements CourseRepository {
 					.createQuery("Select c from Course c where c.id = :courseId");
 			query.setParameter("courseId", courseId);
 			List<Course> courses = query.list();
-			transaction.commit();
-			committed = true;
 			if (!courses.isEmpty())
 				return courses.get(0);
 			else
 				return null;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return null;
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Course> findAllCourses() {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
@@ -135,15 +142,18 @@ public class CourseRepositoryImpl implements CourseRepository {
 							+ "from Course c");
 			List<Course> courses = query.list();
 			transaction.commit();
-			committed = true;
 			if (!courses.isEmpty())
 				return courses;
 			else
 				return Collections.emptyList();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return Collections.emptyList();
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}
@@ -151,10 +161,9 @@ public class CourseRepositoryImpl implements CourseRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Course> findAllCourses(Pagination pagination) {
+	public List<Course> findAllCoursesByPagination(Pagination pagination) {
 		Transaction transaction = null;
 		Session session = null;
-		boolean committed = false;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
@@ -166,7 +175,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 				query = session.createQuery("Select c from Course c where " + "c.code like :searchKeyword or "
 						+ "c.name like :searchKeyword or " + "c.status like :searchKeyword or "
 						+ "c.teacher like :searchKeyword or " + "c.description like :searchKeyword or "
-						+ "c.subject.name like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc
+						+ "c.subject like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc
 						+ ",c.code asc");
 			} else {
 				query = session.createQuery("Select c from Course c where " + fieldSearch + " " + "like :searchKeyword "
@@ -177,15 +186,18 @@ public class CourseRepositoryImpl implements CourseRepository {
 			query.setMaxResults(pagination.getRowsPerPage());
 			List<Course> courses = query.getResultList();
 			transaction.commit();
-			committed = true;
 			if (!courses.isEmpty())
 				return courses;
 			else
 				return Collections.emptyList();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return Collections.emptyList();
 		} finally {
 			if (session != null) {
-				if (!committed && transaction != null)
-					transaction.rollback();
 				session.close();
 			}
 		}

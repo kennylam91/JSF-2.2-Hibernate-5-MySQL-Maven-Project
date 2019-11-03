@@ -18,6 +18,6 @@ public interface CourseRepository extends Serializable {
 
 	List<Course> findAllCourses();
 
-	List<Course> findAllCourses(Pagination pagination);
+	List<Course> findAllCoursesByPagination(Pagination pagination);
 
 }
