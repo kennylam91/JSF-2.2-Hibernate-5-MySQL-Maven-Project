@@ -78,11 +78,6 @@
           <p:inplace editor="true">
             <p:inputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false" />
           </p:inplace>
-          <!-- <p:message for="avgScore" /> -->
-          <!-- <p:outputLabel>Courses:</p:outputLabel>
-					<p:outputLabel value="#{studentController.selectedStudent.courses}" id="courses"
-						required="false" /> -->
-          <!-- <p:message for="courses" /> -->
           <f:facet name="footer">
             <div align="center">
               <p:commandButton value="Save" styleClass="save" action="#{studentController.update}" style="width:110px" />
@@ -96,7 +91,34 @@
           <f:facet name="header">
             <p:outputLabel value="LEARNING INFORMATION"></p:outputLabel>
           </f:facet>
-        #{studentController.selectedStudent.courses}
+          <p:dataTable id="student_detail_courses_table" var="course"
+            value="#{studentController.selectedStudent.courses}">
+            <p:column headerText="Name">
+              <h:outputText value="#{course.name}"></h:outputText>
+            </p:column>
+            <p:column headerText="Subject">
+              <h:outputText value="#{course.subject}"></h:outputText>
+            </p:column>
+            <p:column headerText="BeginTime">
+              <h:outputText value="#{course.beginTime}"></h:outputText>
+            </p:column>
+            <p:column headerText="FinishTime">
+              <h:outputText value="#{course.finishTime}"></h:outputText>
+            </p:column>
+            <p:column headerText="StudentsNo">
+              <h:outputText value="#{course.studentsNo}"></h:outputText>
+            </p:column>
+            <p:column headerText="Cap">
+              <h:outputText value="#{course.capacity}"></h:outputText>
+            </p:column>
+            <p:column headerText="Status">
+              <h:outputText value="#{course.status}"></h:outputText>
+            </p:column>
+            <p:column headerText="Action">
+              <p:commandButton icon="pi pi-search" title="View"></p:commandButton>
+            </p:column>
+            
+          </p:dataTable>
         </p:panelGrid>
       </h:form>
     </div>
