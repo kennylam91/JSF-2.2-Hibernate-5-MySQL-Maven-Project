@@ -225,6 +225,8 @@ public class CourseRepositoryImpl implements CourseRepository {
 			return "c.description";
 		case "subject":
 			return "c.subject";
+		case "studentsNo":
+			return "c.studentsNo";
 		default:
 			return "c.code";
 		}

@@ -64,7 +64,6 @@ public class CourseServiceTest {
 			assertEquals(10, courseService.findCourseById(firstCourseId).getCapacity());
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

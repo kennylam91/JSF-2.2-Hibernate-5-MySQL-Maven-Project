@@ -64,15 +64,19 @@ public class Course {
 	joinColumns = @JoinColumn(referencedColumnName = "id"), 
 	inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
 	private Set<Student> students = new HashSet<>();
+	
+	private int studentsNo;
 
 	public void addStudent(Student student) {
 		students.add(student);
 		student.getCourses().add(this);
+		studentsNo = students.size();
 	}
 
 	public void removeStudent(Student student) {
 		students.remove(student);
 		student.getCourses().remove(this);
+		studentsNo = students.size();
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -82,6 +86,10 @@ public class Course {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	public int getStudentsNo() {
+		return students.size();
 	}
 
 	@Override

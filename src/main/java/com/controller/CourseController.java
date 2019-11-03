@@ -90,7 +90,6 @@ public class CourseController implements Serializable {
 		try {
 			courseService.updateCourse(selectedCourse);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		editMode = false;
@@ -124,6 +123,7 @@ public class CourseController implements Serializable {
 			paginationCourseList.setAscOrDesc("desc");
 		}
 		onPaginationChange();
+		
 	}
 
 	public void onPaginationChange() {
@@ -138,6 +138,7 @@ public class CourseController implements Serializable {
 			paginationCourseList.setPage(currentPage - 1);
 		}
 		onPaginationChange();
+		
 	}
 
 	public void getNextPage() {
