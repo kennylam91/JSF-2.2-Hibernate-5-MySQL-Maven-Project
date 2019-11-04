@@ -2,14 +2,18 @@ package com.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 import org.apache.log4j.Logger;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Navigation;
@@ -85,6 +89,8 @@ public class StudentController implements Serializable {
 	public void createStudent() {
 		studentService.saveStudent(newStudent);
 		newStudent = new Student();
+		closeCreateStudentDialog();
+		logger.info("create Student successfully");
 
 	}
 
@@ -142,6 +148,18 @@ public class StudentController implements Serializable {
 			courseController.getSelectedCourse().addStudent(student);
 		}
 		selectedStudentDtos = new ArrayList<>();
+	}
+
+	public void openCreateStudentDialog(ActionEvent ae) {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("resizable", false);
+		options.put("width","470px");
+		options.put("height","560px");
+		PrimeFaces.current().dialog().openDynamic("dialog_create_student", options, null);
+	}
+
+	public void closeCreateStudentDialog() {
+		PrimeFaces.current().dialog().closeDynamic(null);
 	}
 
 }
