@@ -56,8 +56,9 @@ public class SubjectController implements Serializable {
 		return subjectService.findAllSubjects();
 	}
 
-	public void deleteSubject(Long subjectId) throws Exception {
-		subjectService.deleteSubject(subjectId);
+	public void deleteSubject() throws Exception {
+		subjectService.deleteSubject(selectedSubject.getId());
+		subjects = subjectService.findAllSubjects();
 	}
 
 	public Subject getSubjectDetail(Long subjectId) {

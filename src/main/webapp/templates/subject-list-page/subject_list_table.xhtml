@@ -7,17 +7,20 @@
 </head>
 <body>
   <ui:composition>
-    <p:dataTable value="#{subjectController.subjects}" var="subject" reflow="true" id="subject_list_table"
-      rowKey="subject.Id" styleClass="wpsp-table dataTable dtr-inline">
-      <ui:insert name="table-content">
-        <ui:include src="/templates/subject-list-page/subject_list_table_content.xhtml"></ui:include>
-      </ui:insert>
-      <f:facet name="footer">
-        <!-- <ui:insert name="table-content">
+    <h:form>
+      <p:dataTable value="#{subjectController.subjects}" var="subject" reflow="true" id="subject_list_table"
+        rowKey="subject.Id" styleClass="wpsp-table dataTable dtr-inline">
+        <f:event listener="#{studentController.getStudentDtos()}" type="preRenderView" />
+        <ui:insert name="table-content">
+          <ui:include src="/templates/subject-list-page/subject_list_table_content.xhtml"></ui:include>
+        </ui:insert>
+        <f:facet name="footer">
+          <!-- <ui:insert name="table-content">
           <ui:include src="/templates/student-list-table-footer.xhtml"></ui:include>
         </ui:insert> -->
-      </f:facet>
-    </p:dataTable>
+        </f:facet>
+      </p:dataTable>
+    </h:form>
   </ui:composition>
 </body>
 </html>
