@@ -50,14 +50,20 @@ public class SubjectController implements Serializable {
 
 	private List<Subject> subjects;
 
-	private Subject selectedSubject;
+	private Subject selectedSubject = new Subject();
 
 	public List<Subject> getSubjects() {
 		return subjectService.findAllSubjects();
 	}
 
-	public void deleteSubject() throws Exception {
-		subjectService.deleteSubject(selectedSubject.getId());
+	public void deleteSubject() {
+		try {
+			subjectService.deleteSubject(selectedSubject.getId());
+			System.out.println("delete " + selectedSubject.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		subjects = subjectService.findAllSubjects();
 	}
 

@@ -30,11 +30,11 @@
           actionListener="#{subjectController.}">
             
           </p:commandButton> -->
-          <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;font-size:16px"
-            action="#{subjectController.deleteSubject}" update="main-content">
-            <f:setPropertyActionListener value="#{subject}" target="#{studentController.selectedSubject}">
-            </f:setPropertyActionListener>
+          <p:commandButton title="Delete" id="delete_subject_button" icon="pi pi-minus" style="color:red;font-size:16px"
+            action="#{subjectController.deleteSubject}" update="@form:subject_list_table">
             <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+            <f:setPropertyActionListener value="#{subject}" target="#{subjectController.selectedSubject}">
+            </f:setPropertyActionListener>
           </p:commandButton>
           <ui:insert name="dialog_delete_subject">
             <ui:include src="/templates/subject-list-page/dialog_delete_subject.xhtml"></ui:include>

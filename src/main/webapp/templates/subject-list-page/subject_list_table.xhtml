@@ -7,10 +7,9 @@
 </head>
 <body>
   <ui:composition>
-    <h:form>
       <p:dataTable value="#{subjectController.subjects}" var="subject" reflow="true" id="subject_list_table"
-        rowKey="subject.Id" styleClass="wpsp-table dataTable dtr-inline">
-        <f:event listener="#{studentController.getStudentDtos()}" type="preRenderView" />
+        rowKey="#{subject.id}" styleClass="wpsp-table dataTable dtr-inline">
+        <f:event listener="#{subjectController.getSubjects()}" type="preRenderView" />
         <ui:insert name="table-content">
           <ui:include src="/templates/subject-list-page/subject_list_table_content.xhtml"></ui:include>
         </ui:insert>
@@ -20,7 +19,6 @@
         </ui:insert> -->
         </f:facet>
       </p:dataTable>
-    </h:form>
   </ui:composition>
 </body>
 </html>
