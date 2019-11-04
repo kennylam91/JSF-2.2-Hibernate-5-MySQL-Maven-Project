@@ -7,8 +7,7 @@
 <h:body>
   <h:form>
     <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
-    <f:facet name="header">
-    <h2>Create new student</h2>
+    <f:facet name="header">CREATE NEW STUDENT
     </f:facet>
       <h:outputLabel for="code" value="Code:" />
       <p:inputText id="code" value="#{studentController.newStudent.code}" required="true" />
@@ -38,7 +37,8 @@
           <p:commandButton value="Save" actionListener="#{studentController.createStudent}" validateClient="true"
             update="@form ">
           </p:commandButton>
-          <p:commandButton value="Cancel" actionListener="#{studentController.closeCreateStudentDialog}" process="@this"></p:commandButton>
+          <p:commandButton value="Cancel" actionListener="#{studentController.closeCreateStudentDialog}" process="@this">
+          </p:commandButton>
         </div>
       </f:facet>
     </p:panelGrid>

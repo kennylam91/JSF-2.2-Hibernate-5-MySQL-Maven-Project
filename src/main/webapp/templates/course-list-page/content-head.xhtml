@@ -17,9 +17,10 @@
               <span class="active">Courses</span>
             </p:commandLink></li>
         </ol>
-        <p:commandButton id="create_course_button" styleClass="wpsp-btn"
+        <p:commandButton id="create_course_button" styleClass="wpsp-btn "
           style="height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-          value="New Course" onclick="PF('dlg_create_course').show()" icon="pi pi-plus-circle">
+          value="New Course" actionListener="#{courseController.openCreateCourseDialog}" icon="pi pi-plus-circle">
+          <p:ajax event="dialogReturn" update="main-content"></p:ajax>
         </p:commandButton>
       </div>
     </div>

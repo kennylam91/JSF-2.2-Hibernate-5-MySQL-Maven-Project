@@ -1,13 +1,18 @@
 package com.controller;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
+import org.apache.log4j.Logger;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Course;
@@ -30,10 +35,12 @@ import lombok.Setter;
 @SessionScoped
 public class CourseController implements Serializable {
 
+	private static final Logger logger = Logger.getLogger(CourseController.class);
+
 	private static final long serialVersionUID = 4251571962723500481L;
 	private List<Course> courses;
 	private boolean editMode = false;
-	
+
 	private Course selectedCourse;
 
 	@ManagedProperty(value = "#{courseService}")
@@ -60,29 +67,19 @@ public class CourseController implements Serializable {
 		return courseService.findAllCoursesByPagination(paginationCourseList);
 	}
 
-	public void createCourse(NewCourseForm newCourseForm) {
+	public void createCourse() {
 		Course course = ObjectMapper.convertToCourseFromNewCourseForm(newCourseForm);
 		Long newCourseId = courseService.saveCourse(course);
-		clearNewCourseForm();
-	}
-
-	private void clearNewCourseForm() {
-		newCourseForm.setBeginTime(null);
-		newCourseForm.setCapacity(0);
-		newCourseForm.setCode(null);
-		newCourseForm.setFinishTime(null);
-		newCourseForm.setName(null);
-		newCourseForm.setStatus(null);
-		newCourseForm.setSubject(null);
-		newCourseForm.setTeacher(null);
-
+		closeCreateCourseDialog();
+		newCourseForm = new NewCourseForm();
+		logger.info("create Student successfully");
 	}
 
 	public void deleteCourse() {
 		try {
 			courseService.deleteCourse(selectedCourse.getId());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -90,7 +87,7 @@ public class CourseController implements Serializable {
 		try {
 			courseService.updateCourse(selectedCourse);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		editMode = false;
 
@@ -123,13 +120,11 @@ public class CourseController implements Serializable {
 			paginationCourseList.setAscOrDesc("desc");
 		}
 		onPaginationChange();
-		
+
 	}
 
 	public void onPaginationChange() {
 		courses = courseService.findAllCoursesByPagination(paginationCourseList);
-		System.out.println(paginationCourseList);
-		System.out.println(courses);
 	}
 
 	public void getPreviousPage() {
@@ -138,13 +133,25 @@ public class CourseController implements Serializable {
 			paginationCourseList.setPage(currentPage - 1);
 		}
 		onPaginationChange();
-		
+
 	}
 
 	public void getNextPage() {
 		int currentPage = paginationCourseList.getPage();
 		paginationCourseList.setPage(currentPage + 1);
 		onPaginationChange();
+	}
+
+	public void openCreateCourseDialog(ActionEvent ae) {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("resizable", false);
+		options.put("width", "470px");
+		options.put("height", "470px");
+		PrimeFaces.current().dialog().openDynamic("/templates/course-list-page/dialog-create-course", options, null);
+	}
+
+	public void closeCreateCourseDialog() {
+		PrimeFaces.current().dialog().closeDynamic(null);
 	}
 
 }
