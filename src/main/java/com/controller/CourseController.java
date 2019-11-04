@@ -20,6 +20,7 @@ import org.primefaces.event.data.SortEvent;
 import com.beans.Course;
 import com.beans.Navigation;
 import com.beans.Score;
+import com.beans.ScoreDto;
 import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
 import com.beans.pagination.Pagination;
@@ -45,7 +46,7 @@ public class CourseController implements Serializable {
 	private boolean editMode = false;
 	private Subject selectedSubject;
 	private Course selectedCourse;
-	private Set<Score> selectedScores;
+	private Set<ScoreDto> selectedScores;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
@@ -64,8 +65,8 @@ public class CourseController implements Serializable {
 
 	private Pagination paginationCourseList = new PaginationCourseList();
 
-	public Set<Score> getSelectedScores() {
-		return scoreService.findScoresByCourseId(selectedCourse.getId());
+	public Set<ScoreDto> getSelectedScores() {
+		return scoreService.findScoreDtosByCourseId(selectedCourse.getId());
 	}
 
 	public List<Course> getCourses() {

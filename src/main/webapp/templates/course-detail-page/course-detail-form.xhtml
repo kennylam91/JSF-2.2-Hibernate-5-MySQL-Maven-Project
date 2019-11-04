@@ -93,7 +93,7 @@
         <f:facet name="header">
           <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
         </f:facet>
-        <p:dataTable id="course_student_list_table" var="student" value="#{courseController.selectedCourse.students}"
+        <!-- <p:dataTable id="course_student_list_table" var="student" value="#{courseController.selectedCourse.students}"
           selection="#{studentController.selectedStudentDtos}" rowKey="#{student.id}">
           <p:column selectionMode="multiple" style="width:40px;text-align:center"></p:column>
           <p:column headerText="Code">
@@ -108,9 +108,24 @@
           <p:column headerText="Field">
             <h:outputText value="#{student.field}"></h:outputText>
           </p:column>
-          <!-- <p:column headerText="Score">
+          <p:column headerText="Score">
             <h:outpuText value="#{courseController.selectedCourse.scoreMap.get(student.id)}" ></h:outpuText>
-          </p:column> -->
+          </p:column>
+        </p:dataTable> -->
+        <p:dataTable value="#{courseController.selectedScores}" var="score">
+        <p:column headerText="StudentCode">
+        <h:outputText value="#{score.studentCode}"></h:outputText>
+        </p:column>
+        <p:column headerText="FirstName">
+        <h:outputText value="#{score.studentFirstname}"></h:outputText>
+        </p:column>
+        <p:column headerText="LastName">
+        <h:outputText value="#{score.studentLastname}"></h:outputText>
+        </p:column>
+        <p:column headerText="Score">
+        <h:outputText value="#{score.score}"></h:outputText>
+        </p:column>
+        
         </p:dataTable>
       </p:panelGrid>
     </h:form>
