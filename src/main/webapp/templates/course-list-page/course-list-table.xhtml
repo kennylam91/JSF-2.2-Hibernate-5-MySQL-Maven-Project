@@ -24,7 +24,7 @@
             <div id="student_table_filter" class=" ui-g-4" align="right">
               <div class="ui-inputgroup" style="float: right">
                 <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="course_search_field"
-                  value="#{paginationCourseList.searchField}">
+                  value="#{courseController.paginationCourseList.searchField}">
                   <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
                   <f:selectItem itemLabel="All" itemValue="all" />
                   <f:selectItem itemLabel="Code" itemValue="code" />
@@ -36,7 +36,7 @@
                   <f:selectItem itemLabel="Subject" itemValue="subject" />
                 </h:selectOneMenu>
                 <p:inputText id="search_keyword" style="width:160px;height:31px"
-                  value="#{paginationCourseList.searchKeyword}" placeholder="Search keyword">
+                  value="#{courseController.paginationCourseList.searchKeyword}" placeholder="Search keyword">
                 </p:inputText>
                 <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
                   action="#{courseController.onPaginationChange}" style="height:31px;" />

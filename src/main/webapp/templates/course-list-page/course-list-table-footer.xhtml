@@ -12,7 +12,7 @@
     </p:commandButton>
     <label class="wpsp-labelMain">Rows: </label>
     <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
-      value="#{paginationCourseList.rowsPerPage}">
+      value="#{courseController.paginationCourseList.rowsPerPage}">
       <p:ajax event="valueChange" listener="#{courseController.onPaginationChange}" update="main-content" />
       <f:selectItem itemLabel="10" itemValue="10" />
       <f:selectItem itemLabel="20" itemValue="20" />
