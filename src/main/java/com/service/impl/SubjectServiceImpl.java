@@ -10,6 +10,7 @@ import com.beans.Subject;
 import com.repository.SubjectRepository;
 import com.service.SubjectService;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ManagedBean(name = "subjectService")
 @SessionScoped
 public class SubjectServiceImpl implements SubjectService {
@@ -32,14 +34,9 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public void updateSubject(Subject subject, Long subjectId) throws Exception {
-		Subject subjectFound = subjectRepository.findSubjectById(subjectId);
+	public void updateSubject(Subject subject) throws Exception {
+		Subject subjectFound = subjectRepository.findSubjectById(subject.getId());
 		if (subjectFound != null) {
-			subjectFound.setCode(subject.getCode());
-			subjectFound.setCoefficient(subject.getCoefficient());
-			subjectFound.setCourses(subject.getCourses());
-			subjectFound.setDescription(subject.getDescription());
-			subjectFound.setName(subject.getName());
 			subjectRepository.updateSubject(subjectFound);
 		} else {
 			throw new Exception("SubjectId not found");

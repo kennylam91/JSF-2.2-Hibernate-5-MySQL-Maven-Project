@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -41,13 +42,19 @@ public class CourseServiceTest {
 		firstCalendar.set(2019, 11, 03);
 		firstCourse = Course.builder().code("A1111111").name("Java Core 01").beginTime(firstCalendar.getTime())
 				.status("registering").teacher("Mr.Lam").capacity(20).build();
+
 		firstCourseId = courseService.saveCourse(firstCourse);
 		firstCourse.setId(firstCourseId);
 	}
 
 	@After
 	public void after() {
-		courseService = null;
+		try {
+			courseService.deleteCourse(firstCourseId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Test
@@ -73,17 +80,6 @@ public class CourseServiceTest {
 		pagination.setSearchKeyword("A1111111");
 		List<Course> courses = courseService.findAllCoursesByPagination(pagination);
 		assertTrue(courses.get(0).getCode().equals(firstCourse.getCode()));
-
-	}
-
-	@Test
-	public void testDeleteCourse() {
-		try {
-			courseService.deleteCourse(firstCourseId);
-			assertNull(courseService.findCourseById(firstCourseId));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 	}
 

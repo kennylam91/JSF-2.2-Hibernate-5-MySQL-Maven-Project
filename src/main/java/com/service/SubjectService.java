@@ -9,7 +9,7 @@ public interface SubjectService extends Serializable {
 
 	Long saveSubject(Subject subject);
 
-	void updateSubject(Subject subject, Long subjectId) throws Exception;
+	void updateSubject(Subject subject) throws Exception;
 
 	void deleteSubject(Long subjectId) throws Exception;
 
