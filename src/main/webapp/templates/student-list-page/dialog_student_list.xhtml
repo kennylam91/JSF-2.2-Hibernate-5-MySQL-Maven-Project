@@ -14,17 +14,16 @@
   <h:outputStylesheet library="css" name="styles.css" />
 </h:head>
 <h:body>
-  <h:form id="form_student_list_dlg">
+  <h:form id="form_student_list_dlg" >
     <p:dataTable value="#{studentController.studentDtos}" var="student" id="student_list_table" rowKey="#{student.id}"
       selection="#{studentController.selectedStudentDtos}" multiViewState="true"
       styleClass="wpsp-table dataTable dtr-inline">
-      <p:ajax event="sort" listener="#{studentController.onSort}" update="@form" />
+      <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
       <f:facet name="header">
         <div class="wpsp-dataTable-top ui-g">
           <div class="ui-g-5">
             <p:commandButton actionListener="#{studentController.closeStudentListDialog}" update="@form"
               value="Add Students">
-              <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="@form"></p:ajax>
             </p:commandButton>
           </div>
           <div class="wpsp-label ui-g-7">
@@ -44,10 +43,10 @@
                 <f:selectItem itemLabel="Note" itemValue="note" />
               </h:selectOneMenu>
               <p:inputText id="search_keyword" value="#{studentController.paginationStudentList.searchKeyword}"
-                placeholder="Search keyword">
+                style="width: 120px" placeholder="Search keyword" onkeypress="if (event.keyCode == 13) { return false; }">
               </p:inputText>
               <p:commandButton icon="pi pi-search" styleClass="white-button"
-                action="#{studentController.onPaginationChange}" />
+                action="#{studentController.onPaginationChange}" update="student_list_table"/>
             </div>
           </div>
         </div>
