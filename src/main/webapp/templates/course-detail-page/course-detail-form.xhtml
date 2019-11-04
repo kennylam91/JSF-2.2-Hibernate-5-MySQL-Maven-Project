@@ -12,6 +12,8 @@
       <p:commandButton id="add_student_button" styleClass="wpsp-btn"
         style="float:right;height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
         value="Add Student" actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
+        <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="course-detail-form"
+         ></p:ajax>
       </p:commandButton>
       <h:form id="course-detail-form" styleClass="ui-g">
         <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
@@ -19,7 +21,8 @@
             <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
           </f:facet>
           <p:outputLabel>Course Code:</p:outputLabel>
-          <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true" style="padding: 0 5px;" />
+          <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
+            style="padding: 0 5px;" />
           <!-- <p:message for="courseCode" /> -->
           <p:outputLabel>Name:</p:outputLabel>
           <p:inplace editor="true">
@@ -44,8 +47,8 @@
           <!--  </p:inplace> -->
           <p:outputLabel>Begin time:</p:outputLabel>
           <p:inplace editor="true">
-            <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true" value="#{courseController.selectedCourse.beginTime}"
-              showOn="button">
+            <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true"
+              value="#{courseController.selectedCourse.beginTime}" showOn="button">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </p:calendar>
           </p:inplace>

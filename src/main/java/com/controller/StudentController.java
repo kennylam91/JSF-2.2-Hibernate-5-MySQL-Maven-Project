@@ -14,6 +14,7 @@ import javax.faces.event.ActionEvent;
 
 import org.apache.log4j.Logger;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Navigation;
@@ -142,12 +143,14 @@ public class StudentController implements Serializable {
 
 	}
 
-	public void addStudentToCourse() {
-		List<Student> students = studentService.findStudentsByStudentDtos(selectedStudentDtos);
+	public void addStudentToCourse(SelectEvent event) {
+		List<StudentDto> list = (List<StudentDto>) event.getObject();
+		List<Student> students = studentService.findStudentsByStudentDtos(list);
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
 		}
 		selectedStudentDtos = new ArrayList<>();
+		
 	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
@@ -161,6 +164,10 @@ public class StudentController implements Serializable {
 
 	public void closeCreateStudentDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
+	}
+	
+	public void closeStudentListDialog() {
+		PrimeFaces.current().dialog().closeDynamic(selectedStudentDtos);
 	}
 
 	

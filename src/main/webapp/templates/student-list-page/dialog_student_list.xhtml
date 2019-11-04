@@ -22,8 +22,9 @@
       <f:facet name="header">
         <div class="wpsp-dataTable-top ui-g">
           <div class="ui-g-5">
-            <p:commandButton actionListener="#{studentController.addStudentToCourse}" update="@form"
+            <p:commandButton actionListener="#{studentController.closeStudentListDialog}" update="@form"
               value="Add Students">
+              <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="@form"></p:ajax>
             </p:commandButton>
           </div>
           <div class="wpsp-label ui-g-7">
