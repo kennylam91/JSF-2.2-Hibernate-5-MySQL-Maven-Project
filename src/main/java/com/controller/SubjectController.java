@@ -93,6 +93,8 @@ public class SubjectController implements Serializable {
 	public void closeCreateSubjectDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
+	
+
 
 	
 }

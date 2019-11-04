@@ -11,7 +11,7 @@
       <h3 class="wpsp-card-title">COURSE DETAILS</h3>
       <p:commandButton id="add_student_button" styleClass="wpsp-btn"
         style="float:right;height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-        value="Add Student" onclick="PF('dlg_list_student').show()" icon="pi pi-plus-circle">
+        value="Add Student" actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
       </p:commandButton>
       <h:form id="course-detail-form" styleClass="ui-g">
         <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">

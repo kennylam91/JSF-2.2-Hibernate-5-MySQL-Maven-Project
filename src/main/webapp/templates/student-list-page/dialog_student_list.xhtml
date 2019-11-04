@@ -2,23 +2,92 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
-<ui:composition>
+<h:head>
+  <h:outputStylesheet library="primefaces" name="components.css" />
+  <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+  <h:outputStylesheet library="primefaces-omega" name="theme.css" />
+  <h:outputStylesheet library="css" name="widget.css" />
+  <h:outputStylesheet library="css" name="wpsp-grid.css" />
+  <h:outputStylesheet library="css" name="wpsp-resposive.css" />
+  <h:outputStylesheet library="css" name="font-awesome.min.css" />
+  <h:outputStylesheet library="css" name="template.css" />
+  <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
   <h:form id="form_student_list_dlg">
-    <p:dialog header="Student List" widgetVar="dlg_list_student" resizable="false" width="1000px" height="500px"
-      modal="true">
-      <p:dataTable value="#{studentController.studentDtos}" var="student" reflow="true" id="student_list_table"
-        rowKey="#{student.id}" selection="#{studentController.selectedStudentDtos}" multiViewState="true"
-        styleClass="wpsp-table dataTable dtr-inline">
-        <ui:insert name="table-content">
-          <ui:include src="/templates/student-list-page/student-list-table-content-dialog.xhtml"></ui:include>
-        </ui:insert>
-        <f:facet name="footer">
-          <ui:insert name="table-content">
-            <ui:include src="/templates/student-list-page/student-list-table-footer.xhtml"></ui:include>
-          </ui:insert>
-        </f:facet>
-      </p:dataTable>
-    </p:dialog>
+    <p:dataTable value="#{studentController.studentDtos}" var="student" id="student_list_table" rowKey="#{student.id}"
+      selection="#{studentController.selectedStudentDtos}" multiViewState="true"
+      styleClass="wpsp-table dataTable dtr-inline">
+      <p:ajax event="sort" listener="#{studentController.onSort}" update="@form" />
+      <f:facet name="header">
+        <div class="wpsp-dataTable-top ui-g">
+          <div class="ui-g-5">
+            <p:commandButton actionListener="#{studentController.addStudentToCourse}" update="@form"
+              value="Add Students">
+            </p:commandButton>
+          </div>
+          <div class="wpsp-label ui-g-7">
+            <div class="ui-inputgroup" style="float: right;">
+              <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
+                value="#{studentController.paginationStudentList.searchField}">
+                <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
+                <f:selectItem itemLabel="All" itemValue="all" />
+                <f:selectItem itemLabel="Code" itemValue="code" />
+                <f:selectItem itemLabel="FirstName" itemValue="firstName" />
+                <f:selectItem itemLabel="LastName" itemValue="lastName" />
+                <f:selectItem itemLabel="Field" itemValue="field" />
+                <f:selectItem itemLabel="Dob" itemValue="dob" />
+                <f:selectItem itemLabel="Phone" itemValue="phone" />
+                <f:selectItem itemLabel="Email" itemValue="email" />
+                <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
+                <f:selectItem itemLabel="Note" itemValue="note" />
+              </h:selectOneMenu>
+              <p:inputText id="search_keyword" value="#{studentController.paginationStudentList.searchKeyword}"
+                placeholder="Search keyword">
+              </p:inputText>
+              <p:commandButton icon="pi pi-search" styleClass="white-button"
+                action="#{studentController.onPaginationChange}" />
+            </div>
+          </div>
+        </div>
+      </f:facet>
+      <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:40px;">
+      </p:column>
+      <p:column headerText="Code" style="" sortBy="#{student.code}" field="code">
+        <h:outputText value="#{student.code}" />
+      </p:column>
+      <p:column headerText="Firstname" sortBy="#{student.firstName}" field="firstName" style="width: 120px;">
+        <h:outputText value="#{student.firstName}" />
+      </p:column>
+      <p:column headerText="Lastname" style="" sortBy="#{student.lastName}" field="lastName">
+        <h:outputText value="#{student.lastName}" />
+      </p:column>
+      <p:column headerText="Gender" style="" sortBy="#{student.gender}" field="gender">
+        <h:outputText value="#{student.gender}" />
+      </p:column>
+      <p:column headerText="Field" style="" sortBy="#{student.field}" field="field">
+        <h:outputText value="#{student.field}" />
+      </p:column>
+      <f:facet name="footer">
+        <p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;" title="previous_page"
+          action="#{studentController.getPreviousPage}" update="@form">
+        </p:commandButton>
+        <label class="wpsp-labelMain">Rows: </label>
+        <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
+          value="#{studentController.paginationStudentList.rowsPerPage}">
+          <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="@form" />
+          <f:selectItem itemLabel="10" itemValue="10" />
+          <f:selectItem itemLabel="20" itemValue="20" />
+          <f:selectItem itemLabel="50" itemValue="50" />
+        </h:selectOneMenu>
+        <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
+            value="#{studentController.paginationStudentList.page}">
+          </h:outputText></label>
+        <p:commandButton icon="pi pi-chevron-right" styleClass="mx-2" title="next_page"
+          action="#{studentController.getNextPage}" update="@form">
+        </p:commandButton>
+      </f:facet>
+    </p:dataTable>
   </h:form>
-</ui:composition>
+</h:body>
 </html>

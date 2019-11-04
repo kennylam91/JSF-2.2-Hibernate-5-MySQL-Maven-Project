@@ -7,61 +7,7 @@
 </head>
 <body>
   <ui:composition>
-    <div id="student-list-table-content">
-      <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
-      <f:facet name="header">
-        <div class="wpsp-dataTable-top ui-g">
-          <div class="ui-g-6" align="left">
-            <p:commandButton actionListener="#{studentController.addStudentToCourse}"
-              update="main-content"
-              value="Add Students" process="student_list_table">
-            </p:commandButton>
-          </div>
-          <div id="student_table_filter" class=" ui-g-6">
-            <div class="wpsp-label" style="float: right;">
-              <div class="ui-inputgroup">
-                <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
-                  value="#{studentController.paginationStudentList.searchField}">
-                  <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
-                  <f:selectItem itemLabel="All" itemValue="all" />
-                  <f:selectItem itemLabel="Code" itemValue="code" />
-                  <f:selectItem itemLabel="FirstName" itemValue="firstName" />
-                  <f:selectItem itemLabel="LastName" itemValue="lastName" />
-                  <f:selectItem itemLabel="Field" itemValue="field" />
-                  <f:selectItem itemLabel="Dob" itemValue="dob" />
-                  <f:selectItem itemLabel="Phone" itemValue="phone" />
-                  <f:selectItem itemLabel="Email" itemValue="email" />
-                  <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
-                  <f:selectItem itemLabel="Note" itemValue="note" />
-                </h:selectOneMenu>
-                <p:inputText id="search_keyword" style="width:160px;height:31px"
-                  value="#{studentController.paginationStudentList.searchKeyword}" placeholder="Search keyword">
-                </p:inputText>
-                <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
-                  action="#{studentController.onPaginationChange}" style="height:31px;" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </f:facet>
-      <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:40px;">
-      </p:column>
-      <p:column headerText="Code" style="width:100px" sortBy="#{student.code}" field="code">
-        <h:outputText value="#{student.code}" />
-      </p:column>
-      <p:column headerText="Firstname" sortBy="#{student.firstName}" field="firstName" style="width: 120px;">
-        <h:outputText value="#{student.firstName}" />
-      </p:column>
-      <p:column headerText="Lastname" style="width:110px" sortBy="#{student.lastName}" field="lastName">
-        <h:outputText value="#{student.lastName}" />
-      </p:column>
-      <p:column headerText="Gender" style="width:95px" sortBy="#{student.gender}" field="gender">
-        <h:outputText value="#{student.gender}" />
-      </p:column>
-      <p:column headerText="Field" style="width:85px" sortBy="#{student.field}" field="field">
-        <h:outputText value="#{student.field}" />
-      </p:column>
-    </div>
+    
   </ui:composition>
 </body>
 </html>

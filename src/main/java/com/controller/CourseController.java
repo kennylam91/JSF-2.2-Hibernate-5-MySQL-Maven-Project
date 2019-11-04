@@ -21,6 +21,7 @@ import com.beans.Navigation;
 import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
 import com.beans.pagination.Pagination;
+import com.beans.pagination.PaginationCourseList;
 import com.service.CourseService;
 import com.service.SubjectService;
 import com.util.ObjectMapper;
@@ -55,8 +56,7 @@ public class CourseController implements Serializable {
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
 
-	@ManagedProperty(value = "#{paginationCourseList}")
-	private Pagination paginationCourseList;
+	private Pagination paginationCourseList = new PaginationCourseList();
 
 	/*
 	 * @PostConstruct public void init() { courses =
@@ -167,6 +167,12 @@ public class CourseController implements Serializable {
 
 	public void closeSubjectListDialog() {
 		PrimeFaces.current().dialog().closeDynamic(selectedSubject);
+	}
+	
+	public void openStudentListDialog() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("model", true);
+		PrimeFaces.current().dialog().openDynamic("/templates/student-list-page/dialog_student_list", options, null);
 	}
 
 }

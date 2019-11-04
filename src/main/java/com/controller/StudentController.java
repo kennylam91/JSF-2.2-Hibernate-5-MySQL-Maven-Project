@@ -22,6 +22,7 @@ import com.beans.StudentDto;
 import com.beans.StudentForm;
 import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
+import com.beans.pagination.PaginationStudentList;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 
@@ -47,8 +48,7 @@ public class StudentController implements Serializable {
 	@ManagedProperty(value = "#{studentService}")
 	private StudentServiceImpl studentService;
 
-	@ManagedProperty(value = "#{paginationStudentList}")
-	private Pagination paginationStudentList;
+	private Pagination paginationStudentList = new PaginationStudentList();
 
 	private Student newStudent = new Student();
 

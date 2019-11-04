@@ -3,11 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
+  <h:outputStylesheet library="primefaces" name="components.css" />
+  <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+  <h:outputStylesheet library="primefaces-omega" name="theme.css" />
+  <h:outputStylesheet library="css" name="widget.css" />
+  <h:outputStylesheet library="css" name="wpsp-grid.css" />
+  <h:outputStylesheet library="css" name="wpsp-resposive.css" />
+  <h:outputStylesheet library="css" name="font-awesome.min.css" />
+  <h:outputStylesheet library="css" name="template.css" />
+  <h:outputStylesheet library="css" name="styles.css" />
 </h:head>
 <h:body>
   <h:form>
     <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
-    <f:facet name="header">CREATE NEW STUDENT
+      <f:facet name="header">CREATE NEW STUDENT
     </f:facet>
       <h:outputLabel for="code" value="Code:" />
       <p:inputText id="code" value="#{studentController.newStudent.code}" required="true" />

@@ -16,30 +16,7 @@
   <h:outputStylesheet library="css" name="styles.css" />
   <script type="text/javascript">
 			//<![CDATA[
-			function handleLoginRequest(xhr, status, args) {
-				if (args.validationFailed) {
-					PF('dlg_create_student').show();
-				} else {
-					PF('dlg_create_student').hide();
-				}
-			}
-
-			function handleCreateSubjectDialogRequest(xhr, status, args) {
-				if (args.validationFailed) {
-					PF('dlg_create_subject').show();
-				} else {
-					PF('dlg_create_subject').hide();
-				}
-			}
-
-			function handleCreateCourseDialogRequest(xhr, status, args) {
-				if (args.validationFailed) {
-					PF('dlg_create_course').show();
-				} else {
-					PF('dlg_create_course').hide();
-				}
-			}
-
+			
 			function handleAddStudentDialogRequest(xhr, status, args) {
 				if (args.validationFailed) {
 					PF('dlg_create_course').show();
@@ -139,9 +116,7 @@
         <ui:include src="/templates/main-footer.xhtml" />
       </ui:insert>
     </div>
-    <ui:insert name="dialog_list_student">
-      <ui:include src="/templates/student-list-page/dialog_student_list.xhtml"></ui:include>
-    </ui:insert>
+    
   </h:panelGroup>
 </h:body>
 </html>
