@@ -165,10 +165,14 @@ public class CourseController implements Serializable {
 		newCourseForm.setSubject((Subject) event.getObject());
 	}
 
+	public void onSubjectSelectedDialogCloseOnCourseDetail(SelectEvent event) {
+		selectedCourse.setSubject((Subject) event.getObject());
+	}
+
 	public void closeSubjectListDialog() {
 		PrimeFaces.current().dialog().closeDynamic(selectedSubject);
 	}
-	
+
 	public void openStudentListDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("model", true);
