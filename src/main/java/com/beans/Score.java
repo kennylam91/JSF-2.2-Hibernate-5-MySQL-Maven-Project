@@ -13,11 +13,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "scores")
 public class Score implements Serializable {
@@ -35,6 +37,6 @@ public class Score implements Serializable {
 	private Long courseId;
 
 	@Column(name = "score", nullable = false)
-	private float score;
+	private Float score;
 
 }

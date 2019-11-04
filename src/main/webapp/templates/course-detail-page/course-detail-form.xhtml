@@ -7,12 +7,14 @@
 </h:head>
 <h:body>
   <div class="wpsp-card">
-    <h3 class="wpsp-card-title">COURSE DETAILS</h3>
-    <p:commandButton id="add_student_button" styleClass="wpsp-btn"
-      style="float:right;height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-      value="Add Student" actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
-      <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="course-detail-form"></p:ajax>
-    </p:commandButton>
+    <h:panelGroup class="ui-g">
+      <h3 class="wpsp-card-title">COURSE DETAILS</h3>
+      <p:commandButton id="add_student_button" styleClass="wpsp-btn"
+        style="display:block;position:absolute;right: 63px;height:32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
+        value="Add Student" actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
+        <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="course-detail-form"></p:ajax>
+      </p:commandButton>
+    </h:panelGroup>
     <h:form id="course-detail-form" styleClass="ui-g">
       <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
         <f:facet name="header">
@@ -21,12 +23,10 @@
         <p:outputLabel>Course Code:</p:outputLabel>
         <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
           style="padding: 0 5px;" />
-        <!-- <p:message for="courseCode" /> -->
         <p:outputLabel>Name:</p:outputLabel>
         <p:inplace editor="true">
           <p:inputText value="#{courseController.selectedCourse.name}" id="name" required="true" />
         </p:inplace>
-        <!-- <p:message for="firstName" /> -->
         <p:outputLabel>Subject:</p:outputLabel>
         <h:panelGroup>
           <h:outputText id="course_selected_subject" value="#{courseController.selectedCourse.subject}">
@@ -37,7 +37,6 @@
               update="@form:course_selected_subject"></p:ajax>
           </p:commandLink>
         </h:panelGroup>
-        <!-- <p:inplace editor="true"> -->
         <!-- <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
             value="#{courseController.selectedCourse.subject}">
             <f:selectItems value="#{subjectController.subjects}" var="subject" itemLabel="#{subject.name}"
@@ -52,7 +51,6 @@
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </p:calendar>
         </p:inplace>
-        <!-- <p:message for="dob" /> -->
         <p:outputLabel>Finish time:</p:outputLabel>
         <p:inplace editor="true">
           <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
@@ -68,7 +66,6 @@
             <f:selectItem itemLabel="Completed" itemValue="completed" />
           </h:selectOneMenu>
         </p:inplace>
-        <!-- <p:message for="field" /> -->
         <p:outputLabel>Teacher:</p:outputLabel>
         <p:inplace editor="true">
           <p:inputText value="#{courseController.selectedCourse.teacher}" id="teacher" />
@@ -78,7 +75,6 @@
         <p:inplace editor="true">
           <p:inputText value="#{courseController.selectedCourse.capacity}" id="capacity" required="true" />
         </p:inplace>
-        <!-- <p:message for="phone" /> -->
         <p:outputLabel>Description:</p:outputLabel>
         <p:inplace editor="true">
           <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
@@ -86,9 +82,9 @@
         <f:facet name="footer">
           <div align="center">
             <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-              style="width:110px"></p:commandButton>
+              style="width:120px"></p:commandButton>
             <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
-              style="margin-left:10px;width:115px" update="main-content">
+              style="margin-left:10px;width:135px" update="main-content">
             </p:commandButton>
           </div>
         </f:facet>
@@ -112,9 +108,12 @@
           <p:column headerText="Field">
             <h:outputText value="#{student.field}"></h:outputText>
           </p:column>
+          <!-- <p:column headerText="Score">
+            <h:outpuText value="#{courseController.selectedCourse.scoreMap.get(student.id)}" ></h:outpuText>
+          </p:column> -->
         </p:dataTable>
       </p:panelGrid>
     </h:form>
   </div>
-s</h:body>
+</h:body>
 </html>

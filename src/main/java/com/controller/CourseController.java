@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -18,11 +19,13 @@ import org.primefaces.event.data.SortEvent;
 
 import com.beans.Course;
 import com.beans.Navigation;
+import com.beans.Score;
 import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationCourseList;
 import com.service.CourseService;
+import com.service.ScoreService;
 import com.service.SubjectService;
 import com.util.ObjectMapper;
 
@@ -41,8 +44,8 @@ public class CourseController implements Serializable {
 	private List<Course> courses;
 	private boolean editMode = false;
 	private Subject selectedSubject;
-
 	private Course selectedCourse;
+	private Set<Score> selectedScores;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
@@ -52,16 +55,18 @@ public class CourseController implements Serializable {
 
 	@ManagedProperty(value = "#{newCourseForm}")
 	private NewCourseForm newCourseForm;
+	
+	@ManagedProperty(value = "#{scoreService}")
+	private ScoreService scoreService;
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
 
 	private Pagination paginationCourseList = new PaginationCourseList();
 
-	/*
-	 * @PostConstruct public void init() { courses =
-	 * courseService.findAllCourses(paginationCourseList); }
-	 */
+	public Set<Score> getSelectedScores() {
+		return scoreService.findScoresByCourseId(selectedCourse.getId());
+	}
 
 	public List<Course> getCourses() {
 		return courseService.findAllCoursesByPagination(paginationCourseList);
