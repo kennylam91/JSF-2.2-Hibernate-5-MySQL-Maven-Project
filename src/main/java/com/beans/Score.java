@@ -37,6 +37,6 @@ public class Score implements Serializable {
 	private Long courseId;
 
 	@Column(name = "score", nullable = false)
-	private Float score;
+	private float score;
 
 }

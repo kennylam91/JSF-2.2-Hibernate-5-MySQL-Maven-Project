@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.beans.Score;
+import com.beans.ScoreDto;
 import com.repository.ScoreRepository;
 import com.service.ScoreService;
 
@@ -35,5 +36,13 @@ public class ScoreServiceImpl implements ScoreService {
 		List<Score> scores = scoreRepository.findScoresByCourseId(courseId);
 		return new HashSet<>(scores);
 	}
+
+	@Override
+	public Set<ScoreDto> findScoreDtosByCourseId(Long courseId) {
+		List<ScoreDto> scores = scoreRepository.findScoreDtosByCourseId(courseId);
+		return new HashSet<>(scores);
+	}
+	
+	
 
 }

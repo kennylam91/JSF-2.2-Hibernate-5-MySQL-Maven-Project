@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.beans.Score;
+import com.beans.ScoreDto;
 import com.repository.ScoreRepository;
 import com.repository.impl.ScoreRepositoryImpl;
 import com.service.ScoreService;
@@ -40,6 +41,15 @@ public class ScoreServiceTest {
 		Set<Score> scores = scoreService.findScoresByCourseId(courseId);
 		for (Score score : scores) {
 			System.out.println(score);
+		}
+		assertTrue(scores.size() > 0);
+	}
+
+	@Test
+	public void testFindScoreDtosByCourseId() {
+		Set<ScoreDto> scores = scoreService.findScoreDtosByCourseId(courseId);
+		for (ScoreDto scoreDto : scores) {
+			System.out.println(scoreDto);
 		}
 		assertTrue(scores.size() > 0);
 	}
