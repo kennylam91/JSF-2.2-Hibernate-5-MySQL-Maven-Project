@@ -19,7 +19,8 @@
         </ol>
         <p:commandButton id="create_subject_button" styleClass="wpsp-btn"
           style="height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-          value="New Subject" onclick="PF('dlg_create_subject').show()" icon="pi pi-plus-circle">
+          value="New Subject" icon="pi pi-plus-circle" actionListener="#{subjectController.openCreateSubjectDialog}">
+          <p:ajax event="dialogReturn" update="main-content"></p:ajax>
         </p:commandButton>
       </div>
     </div>

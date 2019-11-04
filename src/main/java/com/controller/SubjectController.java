@@ -1,7 +1,9 @@
 package com.controller;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -65,17 +67,8 @@ public class SubjectController implements Serializable {
 	public void createSubject() {
 		Subject subject = ObjectMapper.convertToSubjectFromNewSubjectForm(newSubjectForm);
 		Long subjectId = subjectService.saveSubject(subject);
-		clearNewSubjectForm();
-
-	}
-
-	private void clearNewSubjectForm() {
-		newSubjectForm.setCode(null);
-		newSubjectForm.setCoefficient(0.0f);
-		newSubjectForm.setCourses(null);
-		newSubjectForm.setDescription(null);
-		newSubjectForm.setField(null);
-		newSubjectForm.setName(null);
+		closeCreateSubjectDialog();
+		newSubjectForm = new NewSubjectForm();
 
 	}
 
@@ -87,6 +80,18 @@ public class SubjectController implements Serializable {
 		} else {
 			courseController.getSelectedCourse().setSubject((Subject) event.getObject());
 		}
+	}
+	
+	public void openCreateSubjectDialog() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("resizable", false);
+		options.put("width", "345px");
+		options.put("model", true);
+		PrimeFaces.current().dialog().openDynamic("/templates/subject-list-page/dialog_create_subject", options, null);
+	}
+	
+	public void closeCreateSubjectDialog() {
+		PrimeFaces.current().dialog().closeDynamic(null);
 	}
 
 	
