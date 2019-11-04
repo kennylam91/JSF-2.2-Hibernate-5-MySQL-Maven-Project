@@ -32,15 +32,18 @@
         <h:outputLabel for="new_course_capacity" value="Capacity:" />
         <p:inputText id="new_course_capacity" value="#{courseController.newCourseForm.capacity}" required="true" label="capacity" />
         <h:outputLabel for="new_course_subject" value="Subject:" />
-        <h:panelGroup>
-          <h:outputText id="new_course_subject" value="#{courseController.newCourseForm.subject}" style="width:100%">
-          </h:outputText>
-          <p:commandLink onclick="PF('dlg_list_subject').show()" value="Choose" style="margin-left:10px; color:red"></p:commandLink>
-        </h:panelGroup>
-        <f:facet name="footer">
+      <h:panelGroup>
+        <h:outputText id="new_course_subject" value="#{courseController.newCourseForm.subject}" style="width:100%">
+        </h:outputText>
+        <p:commandButton value="Choose" style="margin-left:10px; color:red" immediate="true"
+          actionListener="#{courseController.openSubjectListDialog}">
+          <p:ajax event="dialogReturn" listener="#{courseController.onSubjectSelectedDialogClose}" update="@form:new_course_subject"></p:ajax>
+          </p:commandButton>
+      </h:panelGroup>
+      <f:facet name="footer">
           <div align="center">
             <p:commandButton value="Save" actionListener="#{courseController.createCourse}" validateClient="true"
-              update="@form ">
+              update="@form">
             </p:commandButton>
             <p:commandButton value="Cancel" actionListener="#{courseController.closeCreateCourseDialog}"
               process="@this">

@@ -66,7 +66,7 @@ public class SubjectController implements Serializable {
 		Subject subject = ObjectMapper.convertToSubjectFromNewSubjectForm(newSubjectForm);
 		Long subjectId = subjectService.saveSubject(subject);
 		clearNewSubjectForm();
-		
+
 	}
 
 	private void clearNewSubjectForm() {
@@ -76,7 +76,7 @@ public class SubjectController implements Serializable {
 		newSubjectForm.setDescription(null);
 		newSubjectForm.setField(null);
 		newSubjectForm.setName(null);
-		
+
 	}
 
 	public void onSubjectRowSelect(SelectEvent event) {
@@ -88,4 +88,6 @@ public class SubjectController implements Serializable {
 			courseController.getSelectedCourse().setSubject((Subject) event.getObject());
 		}
 	}
+
+	
 }

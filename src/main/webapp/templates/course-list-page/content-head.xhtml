@@ -20,7 +20,8 @@
         <p:commandButton id="create_course_button" styleClass="wpsp-btn "
           style="height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
           value="New Course" actionListener="#{courseController.openCreateCourseDialog}" icon="pi pi-plus-circle">
-          <p:ajax event="dialogReturn" update="main-content"></p:ajax>
+          <p:ajax event="dialogReturn" update="main-content">
+          </p:ajax>
         </p:commandButton>
       </div>
     </div>

@@ -153,13 +153,16 @@ public class StudentController implements Serializable {
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
-		options.put("width","470px");
-		options.put("height","550px");
+		options.put("width", "470px");
+		options.put("height", "550px");
+		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic("/templates/student-list-page/dialog_create_student", options, null);
 	}
 
 	public void closeCreateStudentDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
+
+	
 
 }

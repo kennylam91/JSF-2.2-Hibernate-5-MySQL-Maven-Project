@@ -13,6 +13,7 @@ import javax.faces.event.ActionEvent;
 
 import org.apache.log4j.Logger;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Course;
@@ -35,11 +36,10 @@ import lombok.Setter;
 @SessionScoped
 public class CourseController implements Serializable {
 
-	private static final Logger logger = Logger.getLogger(CourseController.class);
-
 	private static final long serialVersionUID = 4251571962723500481L;
 	private List<Course> courses;
 	private boolean editMode = false;
+	private Subject selectedSubject;
 
 	private Course selectedCourse;
 
@@ -72,14 +72,13 @@ public class CourseController implements Serializable {
 		Long newCourseId = courseService.saveCourse(course);
 		closeCreateCourseDialog();
 		newCourseForm = new NewCourseForm();
-		logger.info("create Student successfully");
 	}
 
 	public void deleteCourse() {
 		try {
 			courseService.deleteCourse(selectedCourse.getId());
 		} catch (Exception e) {
-			logger.error(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -87,7 +86,7 @@ public class CourseController implements Serializable {
 		try {
 			courseService.updateCourse(selectedCourse);
 		} catch (Exception e) {
-			logger.error(e);
+			e.printStackTrace();
 		}
 		editMode = false;
 
@@ -147,11 +146,27 @@ public class CourseController implements Serializable {
 		options.put("resizable", false);
 		options.put("width", "470px");
 		options.put("height", "470px");
+		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic("/templates/course-list-page/dialog-create-course", options, null);
 	}
 
 	public void closeCreateCourseDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
+	}
+
+	public void openSubjectListDialog() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("resizable", false);
+		options.put("model", true);
+		PrimeFaces.current().dialog().openDynamic("/templates/subject-list-page/dialog_list_subject", options, null);
+	}
+
+	public void onSubjectSelectedDialogClose(SelectEvent event) {
+		newCourseForm.setSubject((Subject) event.getObject());
+	}
+
+	public void closeSubjectListDialog() {
+		PrimeFaces.current().dialog().closeDynamic(selectedSubject);
 	}
 
 }
