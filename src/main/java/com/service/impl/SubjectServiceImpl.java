@@ -37,7 +37,7 @@ public class SubjectServiceImpl implements SubjectService {
 	public void updateSubject(Subject subject) throws Exception {
 		Subject subjectFound = subjectRepository.findSubjectById(subject.getId());
 		if (subjectFound != null) {
-			subjectRepository.updateSubject(subjectFound);
+			subjectRepository.updateSubject(subject);
 		} else {
 			throw new Exception("SubjectId not found");
 		}

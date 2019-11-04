@@ -32,11 +32,16 @@ public class SubjectServiceTest {
 		firstSubject = Subject.builder().code("A01").name("Test").field("JAVA").description("description")
 				.coefficient(2.0f).build();
 		firstSubjectId = subjectService.saveSubject(firstSubject);
+		firstSubject.setId(firstSubjectId);
 	}
 
 	@After
 	public void after() {
-		subjectService = null;
+		try {
+			subjectService.deleteSubject(firstSubjectId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
@@ -47,22 +52,18 @@ public class SubjectServiceTest {
 
 	@Test
 	public void testUpdateSubject() {
-		firstSubject.setField("PHP");
+		String newField = "PHP";
+		firstSubject.setField(newField);
+		
 		try {
 			subjectService.updateSubject(firstSubject);
-			assertTrue(subjectService.findSubjectById(firstSubjectId).getField().equals("PHP"));
+			String foundField = subjectService.findSubjectById(firstSubjectId).getField();
+			assertEquals(newField, foundField);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
-	@Test
-	public void testDeleteSubject() {
-		try {
-			subjectService.deleteSubject(firstSubjectId);
-			assertNull(subjectService.findSubjectById(firstSubjectId));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
