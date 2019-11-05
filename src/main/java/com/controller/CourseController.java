@@ -51,7 +51,7 @@ public class CourseController implements Serializable {
 	private boolean editMode = false;
 	private Subject selectedSubject;
 	private Course selectedCourse;
-	private List<ScoreDto> selectedScores;
+	private List<ScoreDto> selectedScores = new ArrayList<>();
 	private ScoreDto selectedScore;
 
 	@ManagedProperty(value = "#{courseService}")
@@ -72,11 +72,12 @@ public class CourseController implements Serializable {
 	private Pagination paginationCourseList = new PaginationCourseList();
 
 	public List<ScoreDto> getSelectedScores() {
+		System.out.println("selected scores " + selectedScores);
 		return selectedScores;
 	}
 
 	public void SetSelectedScores(List<ScoreDto> scores) {
-		this.selectedScores = scores;
+		this.selectedScores.addAll(scores);
 	}
 
 	public Set<Score> scores = new HashSet<>();;
@@ -199,16 +200,12 @@ public class CourseController implements Serializable {
 	}
 
 	public void openAddScoresDialog() {
-		findSelectedScores();
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
 		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_ADD_SCORES_URL, options, null);
 	}
 
-	public void findSelectedScores() {
-		selectedScores = new ArrayList<>(scoreService.findScoreDtosByCourseId(selectedCourse.getId()));
-	}
 
 	public void closeCourseScoreDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);

@@ -21,6 +21,7 @@ import org.primefaces.event.data.SortEvent;
 
 import com.beans.Navigation;
 import com.beans.Score;
+import com.beans.ScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.StudentForm;
@@ -152,12 +153,17 @@ public class StudentController implements Serializable {
 		List<Student> students = studentService.findStudentsByStudentDtos(list);
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
-			Score score = Score.builder().courseId(courseController.getSelectedCourse().getId())
-					.studentId(student.getId()).build();
-			courseController.scores.add(score);
+			ScoreDto scoreDto = new ScoreDto();
+			scoreDto.setCourseId(courseController.getSelectedCourse().getId());
+			scoreDto.setStudentId(student.getId());
+			scoreDto.setStudentCode(student.getCode());
+			scoreDto.setStudentFirstname(student.getFirstName());
+			scoreDto.setStudentLastname(student.getLastName());
+			scoreDto.setStudentField(student.getField());
+			courseController.getSelectedScores().add(scoreDto);
 		}
 		selectedStudentDtos = new ArrayList<>();
-		
+
 	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
@@ -172,11 +178,9 @@ public class StudentController implements Serializable {
 	public void closeCreateStudentDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
-	
+
 	public void closeStudentListDialog() {
 		PrimeFaces.current().dialog().closeDynamic(selectedStudentDtos);
 	}
-
-	
 
 }
