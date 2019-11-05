@@ -42,6 +42,14 @@ public class ScoreServiceImpl implements ScoreService {
 		List<ScoreDto> scores = scoreRepository.findScoreDtosByCourseId(courseId);
 		return new HashSet<>(scores);
 	}
+
+	@Override
+	public void saveAll(Set<Score> scores) {
+		scoreRepository.saveAll(scores);
+		
+	}
+	
+	
 	
 	
 

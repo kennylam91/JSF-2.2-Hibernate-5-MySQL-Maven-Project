@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <h:outputStylesheet library="primefaces" name="components.css" />
+   <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+   <h:outputStylesheet library="primefaces-omega" name="theme.css" />
+   <h:outputStylesheet library="css" name="widget.css" />
+   <h:outputStylesheet library="css" name="wpsp-grid.css" />
+   <h:outputStylesheet library="css" name="wpsp-resposive.css" />
+   <h:outputStylesheet library="css" name="font-awesome.min.css" />
+   <h:outputStylesheet library="css" name="template.css" />
+   <h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+   <h:form id="score_course_detail_dialog_form">
+      <p:dataTable value="#{courseController.selectedScores}" var="score">
+         <p:column headerText="StudentCode">
+            <h:outputText value="#{score.studentCode}"></h:outputText>
+         </p:column>
+         <p:column headerText="FirstName">
+            <h:outputText value="#{score.studentFirstname}"></h:outputText>
+         </p:column>
+         <p:column headerText="LastName">
+            <h:outputText value="#{score.studentLastname}"></h:outputText>
+         </p:column>
+         <p:column headerText="Score">
+            <h:outputText value="#{score.score}"></h:outputText>
+         </p:column>
+      </p:dataTable>
+      <!--  <p:dataTable id="course_student_list_table" var="student" value="#{courseController.selectedCourse.students}"
+         rowKey="#{student.id}">
+         <f:facet name="header">ADD SCORES</f:facet>
+         <p:column headerText="Code">
+            <h:outputText value="#{student.code}"></h:outputText>
+         </p:column>
+         <p:column headerText="FirstName">
+            <h:outputText value="#{student.firstName}"></h:outputText>
+         </p:column>
+         <p:column headerText="LastName">
+            <h:outputText value="#{student.lastName}"></h:outputText>
+         </p:column>
+         <p:column headerText="Field">
+            <h:outputText value="#{student.field}"></h:outputText>
+         </p:column>
+         <p:column headerText="Score">
+            <h:inputText value=""></h:inputText>
+         </p:column>
+        
+      </p:dataTable> -->
+   </h:form>
+</h:body>
+</html>

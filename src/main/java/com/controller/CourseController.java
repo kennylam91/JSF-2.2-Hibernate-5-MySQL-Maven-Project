@@ -2,6 +2,7 @@ package com.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +57,7 @@ public class CourseController implements Serializable {
 
 	@ManagedProperty(value = "#{newCourseForm}")
 	private NewCourseForm newCourseForm;
-	
+
 	@ManagedProperty(value = "#{scoreService}")
 	private ScoreService scoreService;
 
@@ -68,6 +69,8 @@ public class CourseController implements Serializable {
 	public Set<ScoreDto> getSelectedScores() {
 		return scoreService.findScoreDtosByCourseId(selectedCourse.getId());
 	}
+	
+	public Set<Score> scores = new HashSet<>();;
 
 	public List<Course> getCourses() {
 		return courseService.findAllCoursesByPagination(paginationCourseList);
@@ -91,6 +94,7 @@ public class CourseController implements Serializable {
 	public void updateCourse() {
 		try {
 			courseService.updateCourse(selectedCourse);
+			scoreService.saveAll(scores);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -183,6 +187,14 @@ public class CourseController implements Serializable {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic("/templates/student-list-page/dialog_student_list", options, null);
+	}
+
+	public void openAddScoresDialog() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("resizable", false);
+		options.put("model", true);
+		PrimeFaces.current().dialog().openDynamic("/templates/course-detail-page/dialog-scores-course-detail", options,
+				null);
 	}
 
 }

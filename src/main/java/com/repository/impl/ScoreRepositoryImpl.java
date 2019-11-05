@@ -79,4 +79,31 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 		}
 	}
 
+	@Override
+	public void saveAll(Set<Score> scores) {
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			for (Score score : scores) {
+				session.save(score);
+			}
+			transaction.commit();
+			
+		} catch (Exception e) {
+			if(transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+	}
+	
+	
+
 }

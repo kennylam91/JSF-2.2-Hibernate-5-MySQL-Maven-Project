@@ -3,8 +3,10 @@ package com.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +20,7 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Navigation;
+import com.beans.Score;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.StudentForm;
@@ -143,11 +146,15 @@ public class StudentController implements Serializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void addStudentToCourse(SelectEvent event) {
 		List<StudentDto> list = (List<StudentDto>) event.getObject();
 		List<Student> students = studentService.findStudentsByStudentDtos(list);
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
+			Score score = Score.builder().courseId(courseController.getSelectedCourse().getId())
+					.studentId(student.getId()).build();
+			courseController.scores.add(score);
 		}
 		selectedStudentDtos = new ArrayList<>();
 		

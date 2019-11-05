@@ -2,133 +2,124 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+   xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 </h:head>
 <h:body>
-  <div class="wpsp-card">
-    <h:panelGroup class="ui-g">
-      <h3 class="wpsp-card-title">COURSE DETAILS</h3>
-      <p:commandButton id="add_student_button" styleClass="wpsp-btn"
-        style="display:block;position:absolute;right: 63px;height:32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-        value="Add Student" actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
-        <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="course-detail-form"></p:ajax>
-      </p:commandButton>
-    </h:panelGroup>
-    <h:form id="course-detail-form" styleClass="ui-g">
-      <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
-        <f:facet name="header">
-          <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
-        </f:facet>
-        <p:outputLabel>Course Code:</p:outputLabel>
-        <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
-          style="padding: 0 5px;" />
-        <p:outputLabel>Name:</p:outputLabel>
-        <p:inplace editor="true">
-          <p:inputText value="#{courseController.selectedCourse.name}" id="name" required="true" />
-        </p:inplace>
-        <p:outputLabel>Subject:</p:outputLabel>
-        <h:panelGroup>
-          <h:outputText id="course_selected_subject" value="#{courseController.selectedCourse.subject}">
-          </h:outputText>
-          <p:commandLink actionListener="#{courseController.openSubjectListDialog}" value="Edit"
-            style="margin-left:10px;color:red;">
-            <p:ajax event="dialogReturn" listener="#{courseController.onSubjectSelectedDialogCloseOnCourseDetail}"
-              update="@form:course_selected_subject"></p:ajax>
-          </p:commandLink>
-        </h:panelGroup>
-        <!-- <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
+   <div class="wpsp-card">
+      <h:panelGroup class="ui-g">
+         <h3 class="wpsp-card-title">COURSE DETAILS</h3>
+         <p:commandButton id="add_student_button" styleClass="wpsp-btn"
+            style="display:block;position:absolute;right: 63px;height:32px;width: 111px;padding: 0;
+            background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
+            value="Add Student" actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
+            <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="course-detail-form">
+            </p:ajax>
+         </p:commandButton>
+         <p:commandButton id="add_scores_button" styleClass="wpsp-btn"
+            style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
+            background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;" value="Add Score" 
+            actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
+            </p:commandButton>
+      </h:panelGroup>
+      <h:form id="course-detail-form" styleClass="ui-g">
+         <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
+            <f:facet name="header">
+               <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
+            </f:facet>
+            <p:outputLabel>Course Code:</p:outputLabel>
+            <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
+               style="padding: 0 5px;" />
+            <p:outputLabel>Name:</p:outputLabel>
+            <p:inplace editor="true">
+               <p:inputText value="#{courseController.selectedCourse.name}" id="name" required="true" />
+            </p:inplace>
+            <p:outputLabel>Subject:</p:outputLabel>
+            <h:panelGroup>
+               <h:outputText id="course_selected_subject" value="#{courseController.selectedCourse.subject}">
+               </h:outputText>
+               <p:commandLink actionListener="#{courseController.openSubjectListDialog}" value="Edit"
+                  style="margin-left:10px;color:red;">
+                  <p:ajax event="dialogReturn" listener="#{courseController.onSubjectSelectedDialogCloseOnCourseDetail}"
+                     update="@form:course_selected_subject"></p:ajax>
+               </p:commandLink>
+            </h:panelGroup>
+            <!-- <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
             value="#{courseController.selectedCourse.subject}">
             <f:selectItems value="#{subjectController.subjects}" var="subject" itemLabel="#{subject.name}"
               itemValue="#{subject}">
             </f:selectItems>
           </h:selectOneMenu> -->
-        <!--  </p:inplace> -->
-        <p:outputLabel>Begin time:</p:outputLabel>
-        <p:inplace editor="true">
-          <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true"
-            value="#{courseController.selectedCourse.beginTime}" showOn="button">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </p:calendar>
-        </p:inplace>
-        <p:outputLabel>Finish time:</p:outputLabel>
-        <p:inplace editor="true">
-          <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
-            showOn="button">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </p:calendar>
-        </p:inplace>
-        <p:outputLabel>Status:</p:outputLabel>
-        <p:inplace editor="true">
-          <h:selectOneMenu id="status" styleClass="select_input" value="#{courseController.selectedCourse.status}">
-            <f:selectItem itemLabel="Registering" itemValue="registering" />
-            <f:selectItem itemLabel="Studying" itemValue="studying" />
-            <f:selectItem itemLabel="Completed" itemValue="completed" />
-          </h:selectOneMenu>
-        </p:inplace>
-        <p:outputLabel>Teacher:</p:outputLabel>
-        <p:inplace editor="true">
-          <p:inputText value="#{courseController.selectedCourse.teacher}" id="teacher" />
-        </p:inplace>
-        <!-- <p:message for="address" /> -->
-        <p:outputLabel>Capacity:</p:outputLabel>
-        <p:inplace editor="true">
-          <p:inputText value="#{courseController.selectedCourse.capacity}" id="capacity" required="true" />
-        </p:inplace>
-        <p:outputLabel>Description:</p:outputLabel>
-        <p:inplace editor="true">
-          <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
-        </p:inplace>
-        <f:facet name="footer">
-          <div align="center">
-            <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-              style="width:120px"></p:commandButton>
-            <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
-              style="margin-left:10px;width:135px" update="main-content">
-            </p:commandButton>
-          </div>
-        </f:facet>
-      </p:panelGrid>
-      <p:panelGrid styleClass="ui-g-8" columns="2" style="padding-top:1rem;padding-left:1rem;display:inline-block;">
-        <f:facet name="header">
-          <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
-        </f:facet>
-        <!-- <p:dataTable id="course_student_list_table" var="student" value="#{courseController.selectedCourse.students}"
-          selection="#{studentController.selectedStudentDtos}" rowKey="#{student.id}">
-          <p:column selectionMode="multiple" style="width:40px;text-align:center"></p:column>
-          <p:column headerText="Code">
-            <h:outputText value="#{student.code}"></h:outputText>
-          </p:column>
-          <p:column headerText="FirstName">
-            <h:outputText value="#{student.firstName}"></h:outputText>
-          </p:column>
-          <p:column headerText="LastName">
-            <h:outputText value="#{student.lastName}"></h:outputText>
-          </p:column>
-          <p:column headerText="Field">
-            <h:outputText value="#{student.field}"></h:outputText>
-          </p:column>
-          <p:column headerText="Score">
-            <h:outpuText value="#{courseController.selectedCourse.scoreMap.get(student.id)}" ></h:outpuText>
-          </p:column>
-        </p:dataTable> -->
-        <p:dataTable value="#{courseController.selectedScores}" var="score">
-        <p:column headerText="StudentCode">
-        <h:outputText value="#{score.studentCode}"></h:outputText>
-        </p:column>
-        <p:column headerText="FirstName">
-        <h:outputText value="#{score.studentFirstname}"></h:outputText>
-        </p:column>
-        <p:column headerText="LastName">
-        <h:outputText value="#{score.studentLastname}"></h:outputText>
-        </p:column>
-        <p:column headerText="Score">
-        <h:outputText value="#{score.score}"></h:outputText>
-        </p:column>
-        
-        </p:dataTable>
-      </p:panelGrid>
-    </h:form>
-  </div>
+            <!--  </p:inplace> -->
+            <p:outputLabel>Begin time:</p:outputLabel>
+            <p:inplace editor="true">
+               <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true"
+                  value="#{courseController.selectedCourse.beginTime}" showOn="button">
+                  <f:convertDateTime pattern="dd/MM/yyyy" />
+               </p:calendar>
+            </p:inplace>
+            <p:outputLabel>Finish time:</p:outputLabel>
+            <p:inplace editor="true">
+               <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
+                  showOn="button">
+                  <f:convertDateTime pattern="dd/MM/yyyy" />
+               </p:calendar>
+            </p:inplace>
+            <p:outputLabel>Status:</p:outputLabel>
+            <p:inplace editor="true">
+               <h:selectOneMenu id="status" styleClass="select_input" value="#{courseController.selectedCourse.status}">
+                  <f:selectItem itemLabel="Registering" itemValue="registering" />
+                  <f:selectItem itemLabel="Studying" itemValue="studying" />
+                  <f:selectItem itemLabel="Completed" itemValue="completed" />
+               </h:selectOneMenu>
+            </p:inplace>
+            <p:outputLabel>Teacher:</p:outputLabel>
+            <p:inplace editor="true">
+               <p:inputText value="#{courseController.selectedCourse.teacher}" id="teacher" />
+            </p:inplace>
+            <!-- <p:message for="address" /> -->
+            <p:outputLabel>Capacity:</p:outputLabel>
+            <p:inplace editor="true">
+               <p:inputText value="#{courseController.selectedCourse.capacity}" id="capacity" required="true" />
+            </p:inplace>
+            <p:outputLabel>Description:</p:outputLabel>
+            <p:inplace editor="true">
+               <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
+            </p:inplace>
+            <f:facet name="footer">
+               <div align="center">
+                  <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
+                     style="width:120px"></p:commandButton>
+                  <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
+                     style="margin-left:10px;width:135px" update="main-content">
+                  </p:commandButton>
+               </div>
+            </f:facet>
+         </p:panelGrid>
+         <p:panelGrid styleClass="ui-g-8" columns="2" style="padding-top:1rem;padding-left:1rem;display:inline-block;">
+            <f:facet name="header">
+               <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
+            </f:facet>
+            <p:dataTable id="course_student_list_table" var="student"
+               value="#{courseController.selectedCourse.students}" selection="#{studentController.selectedStudentDtos}"
+               rowKey="#{student.id}">
+               <p:column selectionMode="multiple" style="width:40px;text-align:center"></p:column>
+               <p:column headerText="Code">
+                  <h:outputText value="#{student.code}"></h:outputText>
+               </p:column>
+               <p:column headerText="FirstName">
+                  <h:outputText value="#{student.firstName}"></h:outputText>
+               </p:column>
+               <p:column headerText="LastName">
+                  <h:outputText value="#{student.lastName}"></h:outputText>
+               </p:column>
+               <p:column headerText="Field">
+                  <h:outputText value="#{student.field}"></h:outputText>
+               </p:column>
+            </p:dataTable>
+            
+         </p:panelGrid>
+      </h:form>
+   </div>
 </h:body>
 </html>

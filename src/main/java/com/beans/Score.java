@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString
 @Entity
 @Table(name = "scores")
@@ -36,7 +38,7 @@ public class Score implements Serializable {
 	@Column(name = "course_id", nullable = false)
 	private Long courseId;
 
-	@Column(name = "score", nullable = false)
+	@Column(name = "score", nullable = true)
 	private float score;
 
 }
