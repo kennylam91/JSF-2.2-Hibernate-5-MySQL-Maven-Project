@@ -205,7 +205,6 @@ public class CourseController implements Serializable {
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_ADD_SCORES_URL, options, null);
 	}
 
-
 	public void closeCourseScoreDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
@@ -220,19 +219,4 @@ public class CourseController implements Serializable {
 		scoreService.updateAll(scoreSet);
 		closeCourseScoreDialog();
 	}
-
-	public void onRowSelectScoreTable(SelectEvent event) {
-		PrimeFaces.current().executeScript("PF('input_score_dlg').show();");
-	}
-
-	public void onScoreChange() {
-		PrimeFaces.current().executeScript("PF('input_score_dlg').hide();");
-		for (int i = 0; i < selectedScores.size(); i++) {
-			if (selectedScores.get(i).getId() == selectedScore.getId()) {
-				selectedScores.get(i).setScore(selectedScore.getScore());
-			}
-		}
-
-	}
-
 }
