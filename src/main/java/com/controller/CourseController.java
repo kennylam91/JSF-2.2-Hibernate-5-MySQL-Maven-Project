@@ -72,7 +72,6 @@ public class CourseController implements Serializable {
 	private Pagination paginationCourseList = new PaginationCourseList();
 
 	public List<ScoreDto> getSelectedScores() {
-		System.out.println("selected scores " + selectedScores);
 		return selectedScores;
 	}
 

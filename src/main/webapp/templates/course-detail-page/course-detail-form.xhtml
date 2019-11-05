@@ -4,6 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
    xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
 </h:head>
 <h:body>
    <div class="wpsp-card">
@@ -21,6 +23,9 @@
             style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
             background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;"
             actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
+            <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
+               immediate="true">
+            </p:ajax>
          </p:commandButton>
       </h:panelGroup>
       <h:panelGroup class="ui-g">

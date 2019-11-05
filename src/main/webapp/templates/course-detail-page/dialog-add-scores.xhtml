@@ -3,23 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <h:outputStylesheet library="primefaces" name="components.css" />
-   <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
-   <h:outputStylesheet library="primefaces-omega" name="theme.css" />
-   <h:outputStylesheet library="css" name="widget.css" />
-   <h:outputStylesheet library="css" name="wpsp-grid.css" />
-   <h:outputStylesheet library="css" name="wpsp-resposive.css" />
-   <h:outputStylesheet library="css" name="font-awesome.min.css" />
-   <h:outputStylesheet library="css" name="template.css" />
-   <h:outputStylesheet library="css" name="styles.css" />
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
 </h:head>
 <h:body>
    <h:form onkeypress="if (event.keyCode == 13) { return false; }">
-      <p:dataTable value="#{courseController.selectedScores}" var="score" id="score_table" widgetVar="cellScores"
-         selection="#{courseController.selectedScore}" rowKey="#{score.id}" selectionMode="single">
-         <p:ajax event="rowSelect" listener="#{courseController.onRowSelectScoreTable}"
-            update="@form:score_table @form:score_input">
-         </p:ajax>
+      <p:dataTable value="#{courseController.selectedScores}" var="score" id="scores_table" widgetVar="cellScores"
+         editable="true" editMode="cell">
          <f:facet name="header">
             <h3>COURSE SCORES</h3>
          </f:facet>
@@ -33,7 +23,14 @@
             <h:outputText value="#{score.studentLastname}"></h:outputText>
          </p:column>
          <p:column headerText="Score">
-            <h:outputText id="score_output" value="#{score.score}"></h:outputText>
+            <p:cellEditor>
+               <f:facet name="output">
+                  <h:outputText id="score_output" value="#{score.score}"></h:outputText>
+               </f:facet>
+               <f:facet name="input">
+                  <p:inputText value="#{score.score}" />
+               </f:facet>
+            </p:cellEditor>
          </p:column>
          <f:facet name="footer">
             <p:commandButton value="Update" actionListener="#{courseController.updateScores}"></p:commandButton>
@@ -42,15 +39,6 @@
             </p:commandButton>
          </f:facet>
       </p:dataTable>
-      <p:dialog widgetVar="input_score_dlg" resizable="false">
-         <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="score_input" value="Input Score:" />
-            <p:inputText id="score_input" value="#{courseController.selectedScore.score}" label="score"
-               onkeypress="if (event.keyCode == 13) {PF('input_score_dlg').hide();}">
-               <p:ajax event="change" listener="#{courseController.onScoreChange}" update="@form:score_table"></p:ajax>
-            </p:inputText>
-         </h:panelGrid>
-      </p:dialog>
    </h:form>
 </h:body>
 </html>
