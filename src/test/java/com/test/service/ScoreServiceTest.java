@@ -1,5 +1,6 @@
 package com.test.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -55,5 +56,19 @@ public class ScoreServiceTest {
 	public void testFindScoreDtosByCourseId() {
 		Set<ScoreDto> scores = scoreService.findScoreDtosByCourseId(courseId);
 		assertTrue(scores.size() > 0);
+	}
+
+	@Test
+	public void testUpdateAll() {
+		firstScore.setScore(5.5f);
+		secondScore.setScore(7.5f);
+		Set<Score> scores = new HashSet<>();
+		scores.add(firstScore);
+		scores.add(secondScore);
+		scoreService.updateAll(scores);
+		Set<Score> scoresFound = scoreService.findScoresByCourseId(courseId);
+		for (Score score : scoresFound) {
+			assertTrue(score.getScore() > 0);
+		}
 	}
 }

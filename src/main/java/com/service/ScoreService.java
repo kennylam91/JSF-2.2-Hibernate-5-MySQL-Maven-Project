@@ -13,4 +13,6 @@ public interface ScoreService extends Serializable{
 	public Set<ScoreDto> findScoreDtosByCourseId(Long courseId);
 
 	public void saveAll(Set<Score> scores);
+	
+	public void updateAll(Set<Score> scores);
 }

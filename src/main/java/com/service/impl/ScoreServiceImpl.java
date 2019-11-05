@@ -48,6 +48,13 @@ public class ScoreServiceImpl implements ScoreService {
 		scoreRepository.saveAll(scores);
 		
 	}
+
+	@Override
+	public void updateAll(Set<Score> scores) {
+		scoreRepository.updateAll(scores);
+		
+	}
+	
 	
 	
 	

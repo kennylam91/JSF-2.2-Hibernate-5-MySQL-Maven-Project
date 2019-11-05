@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +16,8 @@ import javax.faces.event.ActionEvent;
 
 import org.apache.log4j.Logger;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
 
@@ -47,7 +50,8 @@ public class CourseController implements Serializable {
 	private boolean editMode = false;
 	private Subject selectedSubject;
 	private Course selectedCourse;
-	private Set<ScoreDto> selectedScores;
+	private List<ScoreDto> selectedScores;
+	private ScoreDto selectedScore;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
@@ -66,10 +70,14 @@ public class CourseController implements Serializable {
 
 	private Pagination paginationCourseList = new PaginationCourseList();
 
-	public Set<ScoreDto> getSelectedScores() {
-		return scoreService.findScoreDtosByCourseId(selectedCourse.getId());
+	public List<ScoreDto> getSelectedScores() {
+		return selectedScores;
 	}
-	
+
+	public void SetSelectedScores(List<ScoreDto> scores) {
+		this.selectedScores = scores;
+	}
+
 	public Set<Score> scores = new HashSet<>();;
 
 	public List<Course> getCourses() {
@@ -190,11 +198,43 @@ public class CourseController implements Serializable {
 	}
 
 	public void openAddScoresDialog() {
+		selectedScores = new ArrayList<>(scoreService.findScoreDtosByCourseId(selectedCourse.getId()));
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
 		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic("/templates/course-detail-page/dialog-scores-course-detail", options,
 				null);
+	}
+
+	/*
+	 * public void onScoreEdit(CellEditEvent cellEvent) { String newScore = (String)
+	 * cellEvent.getNewValue(); List<ScoreDto> scoreList = new
+	 * ArrayList<>(selectedScores); int rowKey = cellEvent.getRowIndex();
+	 * scoreList.get(rowKey).setScore(Float.parseFloat(newScore)); for (Score score
+	 * : scoreList) { System.out.println(score.getScore()); } selectedScores = new
+	 * HashSet<ScoreDto>(scoreList); }
+	 */
+	public void updateScores() {
+
+		Set<Score> scoreSet = new HashSet<>();
+		for (Score score : selectedScores) {
+			scoreSet.add(score);
+		}
+
+		 scoreService.updateAll(scoreSet); 
+	}
+
+	public void onRowSelectScoreTable(SelectEvent event) {
+		PrimeFaces.current().executeScript("PF('input_score_dlg').show();");
+	}
+
+	public void onScoreChange() {
+		for (int i = 0; i < selectedScores.size(); i++) {
+			if (selectedScores.get(i).getId() == selectedScore.getId()) {
+				selectedScores.remove(i);
+				selectedScores.add(i, selectedScore);
+			}
+		}
 	}
 
 }

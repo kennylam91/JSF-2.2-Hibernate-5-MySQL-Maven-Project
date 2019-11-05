@@ -14,8 +14,11 @@
    <h:outputStylesheet library="css" name="styles.css" />
 </h:head>
 <h:body>
-   <h:form id="score_course_detail_dialog_form">
-      <p:dataTable value="#{courseController.selectedScores}" var="score">
+   <h:form>
+      <p:dataTable value="#{courseController.selectedScores}" var="score" id="score_table" widgetVar="cellScores"
+         selection="#{courseController.selectedScore}" rowKey="#{score.id}" selectionMode="single">
+         <p:ajax event="rowSelect" listener="#{courseController.onRowSelectScoreTable}" update="@form:score_table">
+         </p:ajax>
          <f:facet name="header">
             <h3>ADD SCORES</h3>
          </f:facet>
@@ -29,9 +32,20 @@
             <h:outputText value="#{score.studentLastname}"></h:outputText>
          </p:column>
          <p:column headerText="Score">
-            <h:inputText value="#{score.score}"></h:inputText>
+            <h:outputText id="score_output" value="#{score.score}"></h:outputText>
          </p:column>
+         <f:facet name="footer">
+         <p:commandButton value="Update" actionListener="#{courseController.updateScores}"></p:commandButton>
+         </f:facet>
       </p:dataTable>
+      <p:dialog widgetVar="input_score_dlg" resizable="false">
+         <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="score_input" value="Input Score:" />
+            <p:inputText id="score_input" value="#{courseController.selectedScore.score}" label="score">
+               <p:ajax event="valueChange" listener="#{courseController.onScoreChange}" update="@form:score_table"></p:ajax>
+            </p:inputText>
+         </h:panelGrid>
+      </p:dialog>
       <!--  <p:dataTable id="course_student_list_table" var="student" value="#{courseController.selectedCourse.students}"
          rowKey="#{student.id}">
          <f:facet name="header">ADD SCORES</f:facet>

@@ -14,4 +14,6 @@ public interface ScoreRepository extends Serializable{
 	public List<ScoreDto> findScoreDtosByCourseId (Long courseId);
 
 	public void saveAll(Set<Score> scores);
+	
+	public void updateAll(Set<Score> scores);
 }
