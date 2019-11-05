@@ -2,121 +2,115 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-  <title><ui:insert name="title" /></title>
-  <h:outputStylesheet library="primefaces" name="components.css" />
-  <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
-  <h:outputStylesheet library="primefaces-omega" name="theme.css" />
-  <h:outputStylesheet library="css" name="widget.css" />
-  <h:outputStylesheet library="css" name="wpsp-grid.css" />
-  <h:outputStylesheet library="css" name="wpsp-resposive.css" />
-  <h:outputStylesheet library="css" name="font-awesome.min.css" />
-  <h:outputStylesheet library="css" name="template.css" />
-  <h:outputStylesheet library="css" name="styles.css" />
-  <script type="text/javascript">
-			//<![CDATA[
-			
-			function handleAddStudentDialogRequest(xhr, status, args) {
-				if (args.validationFailed) {
-					PF('dlg_create_course').show();
-				} else {
-					PF('dlg_create_course').hide();
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <script type="text/javascript">
+				//<![CDATA[
+
+				function handleAddStudentDialogRequest(xhr, status, args) {
+					if (args.validationFailed) {
+						PF('dlg_create_course').show();
+					} else {
+						PF('dlg_create_course').hide();
+					}
 				}
-			}
-			jsf.ajax.addOnEvent(function(data) {
-				if (data.status == "success") {
-					var viewState = getViewState(data.responseXML);
+				jsf.ajax.addOnEvent(function(data) {
+					if (data.status == "success") {
+						var viewState = getViewState(data.responseXML);
 
-					for (var i = 0; i < document.forms.length; i++) {
-						var form = document.forms[i];
+						for (var i = 0; i < document.forms.length; i++) {
+							var form = document.forms[i];
 
-						if (form.method == "post" && !hasViewState(form)) {
-							createViewState(form, viewState);
+							if (form.method == "post" && !hasViewState(form)) {
+								createViewState(form, viewState);
+							}
 						}
 					}
-				}
-			});
-
-			function getViewState(responseXML) {
-				var updates = responseXML.getElementsByTagName("update");
-
-				for (var i = 0; i < updates.length; i++) {
-					if (updates[i].getAttribute("id").match(
-							/^([\w]+:)?javax\.faces\.ViewState(:[0-9]+)?$/)) {
-						return updates[i].textContent || updates[i].innerText;
-					}
-				}
-
-				return null;
-			}
-
-			function hasViewState(form) {
-				for (var i = 0; i < form.elements.length; i++) {
-					if (form.elements[i].name == "javax.faces.ViewState") {
-						return true;
-					}
-				}
-
-				return false;
-			}
-
-			function createViewState(form, viewState) {
-				var hidden;
-
-				try {
-					hidden = document
-							.createElement("<input name='javax.faces.ViewState'>"); // IE6-8.
-				} catch (e) {
-					hidden = document.createElement("input");
-					hidden.setAttribute("name", "javax.faces.ViewState");
-				}
-
-				hidden.setAttribute("type", "hidden");
-				hidden.setAttribute("value", viewState);
-				hidden.setAttribute("autocomplete", "off");
-				form.appendChild(hidden);
-			}
-
-			jQuery(function($) {
-				ajax_url = 'https://demo.wpschoolpress.com/wp-admin/admin-ajax.php';
-				date_format = 'mm/dd/yy';
-				$('.content-wrapper').on('click', function() {
-					$('.control-sidebar').removeClass('control-sidebar-open');
 				});
-				$('body').addClass('wpschoolpress');
-				$('html').removeClass('wp-toolbar');
-			});
-			//]]>
-		</script>
+
+				function getViewState(responseXML) {
+					var updates = responseXML.getElementsByTagName("update");
+
+					for (var i = 0; i < updates.length; i++) {
+						if (updates[i].getAttribute("id").match(
+								/^([\w]+:)?javax\.faces\.ViewState(:[0-9]+)?$/)) {
+							return updates[i].textContent
+									|| updates[i].innerText;
+						}
+					}
+
+					return null;
+				}
+
+				function hasViewState(form) {
+					for (var i = 0; i < form.elements.length; i++) {
+						if (form.elements[i].name == "javax.faces.ViewState") {
+							return true;
+						}
+					}
+
+					return false;
+				}
+
+				function createViewState(form, viewState) {
+					var hidden;
+
+					try {
+						hidden = document
+								.createElement("<input name='javax.faces.ViewState'>"); // IE6-8.
+					} catch (e) {
+						hidden = document.createElement("input");
+						hidden.setAttribute("name", "javax.faces.ViewState");
+					}
+
+					hidden.setAttribute("type", "hidden");
+					hidden.setAttribute("value", viewState);
+					hidden.setAttribute("autocomplete", "off");
+					form.appendChild(hidden);
+				}
+
+				jQuery(function($) {
+					ajax_url = 'https://demo.wpschoolpress.com/wp-admin/admin-ajax.php';
+					date_format = 'mm/dd/yy';
+					$('.content-wrapper').on(
+							'click',
+							function() {
+								$('.control-sidebar').removeClass(
+										'control-sidebar-open');
+							});
+					$('body').addClass('wpschoolpress');
+					$('html').removeClass('wp-toolbar');
+				});
+				//]]>
+			</script>
 </h:head>
 <h:body>
-  <div id="main-header">
-    <ui:insert name="header">
-      <ui:include src="/templates/main-header.xhtml" />
-    </ui:insert>
-  </div>
-  <div id="left-side-bar">
-    <ui:insert name="left-side-bar">
-      <ui:include src="/templates/leftSidebar.xhtml" />
-    </ui:insert>
-  </div>
-  <h:panelGroup class="wpsp-wrapper" id="main-content" layout="block">
-    <!-- Main content -->
-    <div class="wpsp-container">
-      <ui:insert name="contentHead">
-        <ui:include src="#{navigation.mainContentHead}" />
+   <div id="main-header">
+      <ui:insert name="header">
+         <ui:include src="/templates/main-header.xhtml" />
       </ui:insert>
-      <ui:insert name="contentBody">
-        <ui:include src="#{navigation.mainContentBody}" />
+   </div>
+   <div id="left-side-bar">
+      <ui:insert name="left-side-bar">
+         <ui:include src="/templates/leftSidebar.xhtml" />
       </ui:insert>
-    </div>
-    <div id="main-footer" style="margin: 40px;">
-      <ui:insert name="contentFooter">
-        <ui:include src="/templates/main-footer.xhtml" />
-      </ui:insert>
-    </div>
-    
-  </h:panelGroup>
+   </div>
+   <h:panelGroup class="wpsp-wrapper" id="main-content" layout="block">
+      <!-- Main content -->
+      <div class="wpsp-container">
+         <ui:insert name="contentHead">
+            <ui:include src="#{navigation.mainContentHead}" />
+         </ui:insert>
+         <ui:insert name="contentBody">
+            <ui:include src="#{navigation.mainContentBody}" />
+         </ui:insert>
+      </div>
+      <div id="main-footer" style="margin: 40px;">
+         <ui:insert name="contentFooter">
+            <ui:include src="/templates/main-footer.xhtml" />
+         </ui:insert>
+      </div>
+   </h:panelGroup>
 </h:body>
 </html>

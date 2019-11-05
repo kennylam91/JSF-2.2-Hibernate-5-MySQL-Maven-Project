@@ -29,6 +29,7 @@ import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationCourseList;
+import com.constant.Constant;
 import com.service.CourseService;
 import com.service.ScoreService;
 import com.service.SubjectService;
@@ -165,7 +166,7 @@ public class CourseController implements Serializable {
 		options.put("width", "470px");
 		options.put("height", "470px");
 		options.put("model", true);
-		PrimeFaces.current().dialog().openDynamic("/templates/course-list-page/dialog-create-course", options, null);
+		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_CREATE_COURSE_URL, options, null);
 	}
 
 	public void closeCreateCourseDialog() {
@@ -176,7 +177,7 @@ public class CourseController implements Serializable {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
 		options.put("model", true);
-		PrimeFaces.current().dialog().openDynamic("/templates/subject-list-page/dialog_list_subject", options, null);
+		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_SUBJECT_LIST_URL, options, null);
 	}
 
 	public void onSubjectSelectedDialogClose(SelectEvent event) {
@@ -194,7 +195,7 @@ public class CourseController implements Serializable {
 	public void openStudentListDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("model", true);
-		PrimeFaces.current().dialog().openDynamic("/templates/student-list-page/dialog_student_list", options, null);
+		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_URL, options, null);
 	}
 
 	public void openAddScoresDialog() {
@@ -202,8 +203,7 @@ public class CourseController implements Serializable {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
 		options.put("model", true);
-		PrimeFaces.current().dialog().openDynamic("/templates/course-detail-page/dialog-scores-course-detail", options,
-				null);
+		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_ADD_SCORES_URL, options, null);
 	}
 
 	public void findSelectedScores() {
