@@ -17,7 +17,7 @@
    <h:form>
       <p:dataTable value="#{courseController.selectedScores}" var="score" id="score_table" widgetVar="cellScores"
          selection="#{courseController.selectedScore}" rowKey="#{score.id}" selectionMode="single">
-         <p:ajax event="rowSelect" listener="#{courseController.onRowSelectScoreTable}" update="@form:score_table">
+         <p:ajax event="rowSelect" listener="#{courseController.onRowSelectScoreTable}" update="@form:score_table @form:score_input">
          </p:ajax>
          <f:facet name="header">
             <h3>ADD SCORES</h3>
@@ -42,7 +42,7 @@
          <h:panelGrid columns="2" cellpadding="5">
             <h:outputLabel for="score_input" value="Input Score:" />
             <p:inputText id="score_input" value="#{courseController.selectedScore.score}" label="score">
-               <p:ajax event="valueChange" listener="#{courseController.onScoreChange}" update="@form:score_table"></p:ajax>
+               <p:ajax event="change" listener="#{courseController.onScoreChange}" update="@form:score_table"></p:ajax>
             </p:inputText>
          </h:panelGrid>
       </p:dialog>

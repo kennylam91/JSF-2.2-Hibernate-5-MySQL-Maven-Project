@@ -221,7 +221,7 @@ public class CourseController implements Serializable {
 			scoreSet.add(score);
 		}
 
-		 scoreService.updateAll(scoreSet); 
+		scoreService.updateAll(scoreSet);
 	}
 
 	public void onRowSelectScoreTable(SelectEvent event) {
@@ -229,12 +229,13 @@ public class CourseController implements Serializable {
 	}
 
 	public void onScoreChange() {
+		PrimeFaces.current().executeScript("PF('input_score_dlg').hide();");
 		for (int i = 0; i < selectedScores.size(); i++) {
 			if (selectedScores.get(i).getId() == selectedScore.getId()) {
-				selectedScores.remove(i);
-				selectedScores.add(i, selectedScore);
+				selectedScores.get(i).setScore(selectedScore.getScore());
 			}
 		}
+
 	}
 
 }
