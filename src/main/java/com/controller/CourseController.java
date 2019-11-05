@@ -206,14 +206,10 @@ public class CourseController implements Serializable {
 				null);
 	}
 
-	/*
-	 * public void onScoreEdit(CellEditEvent cellEvent) { String newScore = (String)
-	 * cellEvent.getNewValue(); List<ScoreDto> scoreList = new
-	 * ArrayList<>(selectedScores); int rowKey = cellEvent.getRowIndex();
-	 * scoreList.get(rowKey).setScore(Float.parseFloat(newScore)); for (Score score
-	 * : scoreList) { System.out.println(score.getScore()); } selectedScores = new
-	 * HashSet<ScoreDto>(scoreList); }
-	 */
+	public void closeCourseScoreDialog() {
+		PrimeFaces.current().dialog().closeDynamic(null);
+	}
+
 	public void updateScores() {
 
 		Set<Score> scoreSet = new HashSet<>();
@@ -222,6 +218,7 @@ public class CourseController implements Serializable {
 		}
 
 		scoreService.updateAll(scoreSet);
+		closeCourseScoreDialog();
 	}
 
 	public void onRowSelectScoreTable(SelectEvent event) {
