@@ -198,12 +198,16 @@ public class CourseController implements Serializable {
 	}
 
 	public void openAddScoresDialog() {
-		selectedScores = new ArrayList<>(scoreService.findScoreDtosByCourseId(selectedCourse.getId()));
+		findSelectedScores();
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
 		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic("/templates/course-detail-page/dialog-scores-course-detail", options,
 				null);
+	}
+
+	public void findSelectedScores() {
+		selectedScores = new ArrayList<>(scoreService.findScoreDtosByCourseId(selectedCourse.getId()));
 	}
 
 	public void closeCourseScoreDialog() {

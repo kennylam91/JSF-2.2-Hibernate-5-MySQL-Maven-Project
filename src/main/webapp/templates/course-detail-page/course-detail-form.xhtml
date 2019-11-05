@@ -13,7 +13,7 @@
             style="display:block;position:absolute;right: 63px;height:32px;width: 111px;padding: 0;
             background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
             actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
-            <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}" update="course-detail-form">
+            <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}">
             </p:ajax>
          </p:commandButton>
          <p:commandButton value="Add Score" id="add_scores_button" styleClass="wpsp-btn"
@@ -23,7 +23,7 @@
          </p:commandButton>
       </h:panelGroup>
       <h:form id="course-detail-form" styleClass="ui-g">
-         <p:panelGrid styleClass="ui-g-5" columns="2" style="margin-top:1rem">
+         <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
             <f:facet name="header">
                <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
             </f:facet>
@@ -89,20 +89,21 @@
             <f:facet name="footer">
                <div align="center">
                   <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-                     style="width:120px"></p:commandButton>
+                     style="width:120px" update="course-detail-form"></p:commandButton>
                   <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
                      style="margin-left:10px;width:135px" update="main-content">
                   </p:commandButton>
                </div>
             </f:facet>
          </p:panelGrid>
-         <p:panelGrid styleClass="ui-g-7" columns="2" style="padding-top:1rem;padding-left:1rem;display:inline-block;">
+         <p:panelGrid styleClass="ui-g-8" columns="2" style="padding-top:1rem;padding-left:1rem;display:inline-block;">
             <f:facet name="header">
                <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
             </f:facet>
-            <p:dataTable id="course_student_list_table" var="score"
-               value="#{courseController.selectedScores}">
-               <p:column headerText="Code">
+            <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScores}"
+               selection="#{courseController.selectedScore}" rowKey="#{score.id}">
+               <f:event listener="#{courseController.findSelectedScores}" type="preRenderView" />
+               <p:column headerText="StudentCode">
                   <h:outputText value="#{score.studentCode}"></h:outputText>
                </p:column>
                <p:column headerText="FirstName">
@@ -111,11 +112,8 @@
                <p:column headerText="LastName">
                   <h:outputText value="#{score.studentLastname}"></h:outputText>
                </p:column>
-               <p:column headerText="Field">
-                  <h:outputText value="#{score.studentField}"></h:outputText>
-               </p:column>
                <p:column headerText="Score">
-                  <h:outputText value="#{score.score}"></h:outputText>
+                  <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
             </p:dataTable>
          </p:panelGrid>
