@@ -65,15 +65,16 @@ public class StudentController implements Serializable {
 	private Navigation navigation;
 
 	private List<StudentDto> studentDtos;
-
+        
 	private StudentDto selectedStudentDto;
 
 	private List<StudentDto> selectedStudentDtos;
 
 	private String actionForMulti = "create";
-
-	public List<StudentDto> getStudentDtos() {
-		return studentService.findStudentsByPagination(paginationStudentList);
+	
+	@PostConstruct
+	public void init() {
+		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
 	public List<StudentDto> getSelectedStudentDtos() {
