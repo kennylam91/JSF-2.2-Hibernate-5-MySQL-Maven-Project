@@ -120,16 +120,33 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 
 	}
 
-	/*
-	 * @Override public void updateAll(Set<Score> scores) { Session session = null;
-	 * Transaction transaction = null; try { session = sessionFactory.openSession();
-	 * transaction = session.beginTransaction(); for (Score score : scores) {
-	 * session.createQuery("" + "update Score s " + "set s.score = :score " +
-	 * "where s.id = :id ") .setParameter("score", score.getScore())
-	 * .setParameter("id", score.getId()) .executeUpdate(); } transaction.commit();
-	 * 
-	 * } catch (Exception e) { if(transaction != null) { transaction.rollback(); }
-	 * logger.error(e); }finally { if(session != null) { session.close(); } } }
-	 */
+	@Override
+	public void delete(Long courseId, Long studentId) {
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.createQuery(
+					"Delete from Score s where s.courseId = :courseId and s.studentId = :studentId")
+			.setParameter("courseId", courseId)
+			.setParameter("studentId", studentId)
+			.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+	}
+	
+	
+
 
 }

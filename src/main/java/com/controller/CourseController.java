@@ -33,6 +33,7 @@ import com.beans.pagination.PaginationCourseList;
 import com.constant.Constant;
 import com.service.CourseService;
 import com.service.ScoreService;
+import com.service.StudentService;
 import com.service.SubjectService;
 import com.util.ObjectMapper;
 
@@ -69,6 +70,9 @@ public class CourseController implements Serializable {
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
+	
+	@ManagedProperty(value = "#{studentService}")
+	private StudentService studentService;
 
 	private Pagination paginationCourseList = new PaginationCourseList();
 
@@ -207,5 +211,17 @@ public class CourseController implements Serializable {
 	public void updateScores() {
 		scoreService.saveAllScoreDtos(selectedScores);
 		closeCourseScoreDialog();
+	}
+	
+	public void removeStudentOutOfCourse(Long studentId) {
+		selectedCourse.removeStudent(studentService.findStudentById(studentId));
+		try {
+			courseService.updateCourse(selectedCourse);
+			scoreService.delete(selectedCourse.getId(), studentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourse.getId());
+		
 	}
 }

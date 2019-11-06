@@ -167,17 +167,7 @@ public class StudentController implements Serializable {
 
 	}
 
-	public void removeStudentOutOfCourse(Long studentId) {
-		System.out.println("remove student " + studentId);
-
-		for (ScoreDto scoreDto : courseController.getSelectedScores()) {
-			if (scoreDto.getStudentId().equals(studentId)) {
-				courseController.getSelectedScores().remove(scoreDto);
-			}
-		}
-
-		courseController.getSelectedCourse().removeStudent(studentService.findStudentById(studentId));
-	}
+	
 
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();

@@ -123,12 +123,18 @@
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
                <p:column headerText="Action">
-                  <p:commandButton icon="pi pi-trash" title="Del" update="form-course-students-information"
-                     actionListener="#{studentController.removeStudentOutOfCourse(score.studentId)}"
+                  <p:commandButton icon="pi pi-trash" title="Del" update="course_student_list_table"
+                     actionListener="#{courseController.removeStudentOutOfCourse(score.studentId)}"
                      style="color:red;background-color:#f2f5f9;border:none;">
+                     <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
                   </p:commandButton>
                </p:column>
             </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+               <p:commandButton value="Confirm" type="button" 
+                  styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+               <p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
          </h:form>
       </h:panelGroup>
    </div>

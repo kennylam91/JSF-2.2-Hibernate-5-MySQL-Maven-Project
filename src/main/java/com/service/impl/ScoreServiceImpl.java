@@ -70,4 +70,12 @@ public class ScoreServiceImpl implements ScoreService {
 
 	}
 
+	@Override
+	public void delete(Long courseId, Long studentId) {
+		scoreRepository.delete(courseId, studentId);
+		
+	}
+	
+	
+
 }
