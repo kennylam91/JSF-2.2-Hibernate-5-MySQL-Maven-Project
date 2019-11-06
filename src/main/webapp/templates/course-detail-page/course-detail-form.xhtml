@@ -62,13 +62,6 @@
                         update="@form:course_selected_subject"></p:ajax>
                   </p:commandLink>
                </h:panelGroup>
-               <!-- <h:selectOneMenu id="subject" converter="#{subjectConverter}" styleClass="select_input"
-            value="#{courseController.selectedCourse.subject}">
-            <f:selectItems value="#{subjectController.subjects}" var="subject" itemLabel="#{subject.name}"
-              itemValue="#{subject}">
-            </f:selectItems>
-          </h:selectOneMenu> -->
-               <!--  </p:inplace> -->
                <p:outputLabel>Begin time:</p:outputLabel>
                <p:inplace editor="true">
                   <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true"
@@ -96,16 +89,16 @@
                <p:inplace editor="true">
                   <p:inputText value="#{courseController.selectedCourse.teacher}" id="teacher" />
                </p:inplace>
-               <!-- <p:message for="address" /> -->
                <p:outputLabel>Capacity:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{courseController.selectedCourse.capacity}" id="capacity" required="true" />
                </p:inplace>
+               <p:outputLabel>Student No:</p:outputLabel>
+               <h:outputText value="#{courseController.selectedCourse.studentsNo}" id="studentsNo" />
                <p:outputLabel>Description:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
                </p:inplace>
-
             </p:panelGrid>
          </h:form>
          <h:form id="form-course-students-information" styleClass="ui-g-8">
@@ -130,10 +123,10 @@
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
                <p:column headerText="Action">
-               <p:commandButton icon="pi pi-trash" title="Del" 
-               actionListener="#{studentController.removeStudentOutOfCourse(score.studentId)}"
-               style="color:red;background-color:#f2f5f9;border:none;">
-               </p:commandButton>
+                  <p:commandButton icon="pi pi-trash" title="Del"
+                     actionListener="#{studentController.removeStudentOutOfCourse(score.studentId)}"
+                     style="color:red;background-color:#f2f5f9;border:none;">
+                  </p:commandButton>
                </p:column>
             </p:dataTable>
          </h:form>
