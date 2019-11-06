@@ -12,7 +12,7 @@
       <h:panelGroup class="ui-g">
          <h3 class="wpsp-card-title">COURSE DETAILS</h3>
          <p:commandButton value="Add Students" id="add_students_button" styleClass="wpsp-btn"
-            style="display:block;position:absolute;right: 63px;height:32px;width: 111px;padding: 0;
+            style="display:block;position:absolute;right: 63px;height:32px;width: 120px;padding: 0;
             background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
             actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
             <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}"
@@ -26,6 +26,16 @@
             <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
                immediate="true">
             </p:ajax>
+         </p:commandButton>
+         <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
+            style="
+            display:block;position:absolute;right: 335px;height:32px;width: 111px;padding: 0;
+            background-color:#0178bc;border-color: #0178bc;font-size: 12px;"
+            update="form-course-basic-information"></p:commandButton>
+         <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
+            style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
+            background-color: #54667a;border-color: #54667a;font-size: 12px;"
+            update="main-content">
          </p:commandButton>
       </h:panelGroup>
       <h:panelGroup class="ui-g">
@@ -46,7 +56,7 @@
                   <h:outputText id="course_selected_subject" value="#{courseController.selectedCourse.subject}">
                   </h:outputText>
                   <p:commandLink actionListener="#{courseController.openSubjectListDialog}" value="Edit"
-                     style="margin-left:10px;color:red;">
+                     style="margin-left:10px;color:red;font-size:12px;">
                      <p:ajax event="dialogReturn"
                         listener="#{courseController.onSubjectSelectedDialogCloseOnCourseDetail}"
                         update="@form:course_selected_subject"></p:ajax>
@@ -95,15 +105,7 @@
                <p:inplace editor="true">
                   <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
                </p:inplace>
-               <f:facet name="footer">
-                  <div align="center">
-                     <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-                        style="width:120px" update="form-course-basic-information"></p:commandButton>
-                     <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
-                        style="margin-left:10px;width:135px" update="main-content">
-                     </p:commandButton>
-                  </div>
-               </f:facet>
+
             </p:panelGrid>
          </h:form>
          <h:form id="form-course-students-information" styleClass="ui-g-8">

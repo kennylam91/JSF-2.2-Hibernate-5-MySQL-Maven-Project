@@ -51,7 +51,7 @@ public class CourseController implements Serializable {
 	private boolean editMode = false;
 	private Subject selectedSubject;
 	private Course selectedCourse;
-	private List<ScoreDto> selectedScores = new ArrayList<>();
+	private List<ScoreDto> selectedScores;
 	private ScoreDto selectedScore;
 
 	@ManagedProperty(value = "#{courseService}")
@@ -112,7 +112,9 @@ public class CourseController implements Serializable {
 	}
 
 	public void getCourseDetail() {
-		selectedCourse = courseService.findCourseById(selectedCourse.getId());
+		Long selectedCourseId = selectedCourse.getId();
+		selectedCourse = courseService.findCourseById(selectedCourseId);
+		selectedScores = new ArrayList<>(scoreService.findScoreDtosByCourseId(selectedCourseId));
 		navigation.navigateToCourseDetail();
 	}
 
