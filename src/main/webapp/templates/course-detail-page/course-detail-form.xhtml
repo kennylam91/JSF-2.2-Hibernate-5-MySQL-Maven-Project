@@ -14,7 +14,7 @@
          <p:commandButton value="Add Students" id="add_students_button" styleClass="wpsp-btn"
             style="display:block;position:absolute;right: 63px;height:32px;width: 120px;padding: 0;
             background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-            actionListener="#{courseController.openStudentListDialog}" icon="pi pi-plus-circle">
+            actionListener="#{studentListDlgView.openStudentListDialog}" icon="pi pi-plus-circle">
             <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}"
                update=":form-course-students-information:course_student_list_table" immediate="true">
             </p:ajax>

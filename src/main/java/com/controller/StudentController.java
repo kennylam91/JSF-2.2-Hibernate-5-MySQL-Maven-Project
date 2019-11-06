@@ -81,14 +81,6 @@ public class StudentController implements Serializable {
 		if (selectedStudentDtos == null) {
 			selectedStudentDtos = new LinkedList<>();
 		}
-		// when students-list-dialog open
-		if (courseController.getSelectedCourse() != null) {
-			selectedStudentDtos = new LinkedList<>();
-			for (Student student : courseController.getSelectedCourse().getStudents()) {
-				StudentDto studentDto = ObjectMapper.modelMapper.map(student, StudentDto.class);
-				selectedStudentDtos.add(studentDto);
-			}
-		}
 		return selectedStudentDtos;
 	}
 
@@ -179,11 +171,11 @@ public class StudentController implements Serializable {
 		System.out.println("remove student " + studentId);
 
 		for (ScoreDto scoreDto : courseController.getSelectedScores()) {
-			if(scoreDto.getStudentId().equals(studentId)) {
+			if (scoreDto.getStudentId().equals(studentId)) {
 				courseController.getSelectedScores().remove(scoreDto);
 			}
 		}
-		
+
 		courseController.getSelectedCourse().removeStudent(studentService.findStudentById(studentId));
 	}
 
@@ -198,10 +190,6 @@ public class StudentController implements Serializable {
 
 	public void closeCreateStudentDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
-	}
-
-	public void closeStudentListDialog() {
-		PrimeFaces.current().dialog().closeDynamic(selectedStudentDtos);
 	}
 
 	public void clearPaginationAndSelectedStudentDtos() {
