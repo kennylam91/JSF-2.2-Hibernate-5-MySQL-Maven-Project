@@ -12,6 +12,7 @@ import com.beans.Score;
 import com.beans.ScoreDto;
 import com.repository.ScoreRepository;
 import com.service.ScoreService;
+import com.util.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,18 +47,26 @@ public class ScoreServiceImpl implements ScoreService {
 	@Override
 	public void saveAll(Set<Score> scores) {
 		scoreRepository.saveAll(scores);
-		
+
 	}
 
 	@Override
 	public void updateAll(Set<Score> scores) {
 		scoreRepository.updateAll(scores);
-		
+
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public void saveAllScoreDtos(List<ScoreDto> scoreDtos) {
+		Set<Score> scores = new HashSet<>();
+		for (ScoreDto scoreDto : scoreDtos) {
+			Score score = Score.builder().courseId(scoreDto.getCourseId())
+								.studentId(scoreDto.getStudentId())
+								.score(scoreDto.getScore()).build();
+			scores.add(score);
+		}
+		scoreRepository.saveAll(scores);
+
+	}
 
 }

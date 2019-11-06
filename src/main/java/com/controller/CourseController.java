@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,6 +73,9 @@ public class CourseController implements Serializable {
 	private Pagination paginationCourseList = new PaginationCourseList();
 
 	public List<ScoreDto> getSelectedScores() {
+		if (selectedScores == null) {
+			selectedScores = new LinkedList<>();
+		}
 		return selectedScores;
 	}
 
@@ -103,18 +107,19 @@ public class CourseController implements Serializable {
 	public void updateCourse() {
 		try {
 			courseService.updateCourse(selectedCourse);
-			scoreService.saveAll(scores);
+			scoreService.saveAllScoreDtos(selectedScores);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		editMode = false;
 
 	}
 
 	public void getCourseDetail() {
 		Long selectedCourseId = selectedCourse.getId();
 		selectedCourse = courseService.findCourseById(selectedCourseId);
-		selectedScores = new ArrayList<>(scoreService.findScoreDtosByCourseId(selectedCourseId));
+		for (ScoreDto scoreDto : scoreService.findScoreDtosByCourseId(selectedCourseId)) {
+			selectedScores.add(scoreDto);
+		}
 		navigation.navigateToCourseDetail();
 	}
 
