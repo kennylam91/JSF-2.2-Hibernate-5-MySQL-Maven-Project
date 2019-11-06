@@ -162,12 +162,17 @@ public class StudentController implements Serializable {
 			scoreDto.setStudentField(student.getField());
 			courseController.getSelectedScores().add(scoreDto);
 		}
-		selectedStudentDtos = new ArrayList<>();
+		
 
 	}
 	
-	public void removeStudentOutOfCourse() {
-		System.out.println("remove student");
+	public void removeStudentOutOfCourse(Long studentId) {
+		System.out.println("remove student " + studentId);
+		/*
+		 * for (StudentDto studentDto : selectedStudentDtos) {
+		 * System.out.println(studentDto); }
+		 */
+//		courseController.getSelectedCourse().removeStudent(student);
 	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
