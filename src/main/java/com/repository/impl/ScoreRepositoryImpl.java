@@ -33,24 +33,25 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			org.hibernate.query.Query<Score> query = session.createQuery("SELECT s from Score s where s.courseId = :courseId");
+			org.hibernate.query.Query<Score> query = session
+					.createQuery("SELECT s from Score s where s.courseId = :courseId");
 			query.setParameter("courseId", courseId);
-			List<Score> scores =  query.getResultList();
+			List<Score> scores = query.getResultList();
 			transaction.commit();
 			return scores;
 		} catch (Exception e) {
-			if(transaction != null) {
+			if (transaction != null) {
 				transaction.rollback();
 			}
 			logger.error(e);
 			return Collections.emptyList();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ScoreDto> findScoreDtosByCourseId(Long courseId) {
@@ -60,20 +61,20 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			org.hibernate.query.Query<ScoreDto> query = session.createQuery(
-			"SELECT new com.beans.ScoreDto(s.id,s.studentId,s.courseId,s.score,st.code,st.firstName,st.lastName,st.field) "+
-			"from Score s left join Student st on s.studentId = st.id where s.courseId = :courseId");
+					"SELECT new com.beans.ScoreDto(s.id,s.studentId,s.courseId,s.score,st.code,st.firstName,st.lastName,st.field) "
+							+ "from Score s left join Student st on s.studentId = st.id where s.courseId = :courseId");
 			query.setParameter("courseId", courseId);
-			List<ScoreDto> scores =  query.getResultList();
+			List<ScoreDto> scores = query.getResultList();
 			transaction.commit();
 			return scores;
 		} catch (Exception e) {
-			if(transaction != null) {
+			if (transaction != null) {
 				transaction.rollback();
 			}
 			logger.error(e);
 			return Collections.emptyList();
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
@@ -88,34 +89,35 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			transaction = session.beginTransaction();
 			for (Score score : scores) {
 				@SuppressWarnings("unchecked")
-				List<Score> foundScores = session.createQuery("Select s.courseId, s.studentId from Score s "
-						+ "where s.courseId = :courseId and s.studentId = :studentId")
-				.setParameter("courseId", score.getCourseId())
-				.setParameter("studentId", score.getStudentId())
-				.getResultList();
-				if(foundScores.isEmpty()) {
+				List<Score> foundScores = session
+						.createQuery("Select s.courseId, s.studentId from Score s "
+								+ "where s.courseId = :courseId and s.studentId = :studentId")
+						.setParameter("courseId", score.getCourseId()).setParameter("studentId", score.getStudentId())
+						.getResultList();
+				if (foundScores.isEmpty()) {
 					session.save(score);
-				}
-				else {
-					session.createQuery("update Score s "
-							+ "set s.score = :score")
-					.setParameter("score", score.getScore());
+				} else {
+					session.createQuery("update Score s " + "set s.score = :score "
+							+ "where s.courseId = :courseId and s.studentId = :studentId")
+							.setParameter("score", score.getScore())
+							.setParameter("courseId", score.getCourseId())
+							.setParameter("studentId", score.getStudentId())
+							.executeUpdate();
 				}
 			}
 			transaction.commit();
-			
+
 		} catch (Exception e) {
-			if(transaction != null) {
+			if (transaction != null) {
 				transaction.rollback();
 			}
 			logger.error(e);
-		}finally {
-			if(session != null) {
+		} finally {
+			if (session != null) {
 				session.close();
 			}
 		}
-		
-		
+
 	}
 
 	/*
@@ -129,7 +131,5 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 	 * } catch (Exception e) { if(transaction != null) { transaction.rollback(); }
 	 * logger.error(e); }finally { if(session != null) { session.close(); } } }
 	 */
-	
-	
 
 }

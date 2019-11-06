@@ -205,13 +205,7 @@ public class CourseController implements Serializable {
 	}
 
 	public void updateScores() {
-
-		Set<Score> scoreSet = new HashSet<>();
-		for (Score score : selectedScores) {
-			scoreSet.add(score);
-		}
-
-		scoreService.updateAll(scoreSet);
+		scoreService.saveAllScoreDtos(selectedScores);
 		closeCourseScoreDialog();
 	}
 }
