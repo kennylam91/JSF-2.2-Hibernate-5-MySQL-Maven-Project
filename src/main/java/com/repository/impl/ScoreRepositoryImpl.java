@@ -87,7 +87,20 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			for (Score score : scores) {
-				session.saveOrUpdate(score);
+				@SuppressWarnings("unchecked")
+				List<Score> foundScores = session.createQuery("Select s.courseId, s.studentId from Score s "
+						+ "where s.courseId = :courseId and s.studentId = :studentId")
+				.setParameter("courseId", score.getCourseId())
+				.setParameter("studentId", score.getStudentId())
+				.getResultList();
+				if(foundScores.isEmpty()) {
+					session.save(score);
+				}
+				else {
+					session.createQuery("update Score s "
+							+ "set s.score = :score")
+					.setParameter("score", score.getScore());
+				}
 			}
 			transaction.commit();
 			
