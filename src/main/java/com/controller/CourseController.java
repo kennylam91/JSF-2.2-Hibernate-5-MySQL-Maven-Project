@@ -52,7 +52,7 @@ public class CourseController implements Serializable {
 	private boolean editMode = false;
 	private Subject selectedSubject;
 	private Course selectedCourse;
-	private List<ScoreDto> selectedScores;
+	private Set<ScoreDto> selectedScores;
 	private ScoreDto selectedScore;
 
 	@ManagedProperty(value = "#{courseService}")
@@ -72,15 +72,11 @@ public class CourseController implements Serializable {
 
 	private Pagination paginationCourseList = new PaginationCourseList();
 
-	public List<ScoreDto> getSelectedScores() {
+	public Set<ScoreDto> getSelectedScores() {
 		if (selectedScores == null) {
-			selectedScores = new LinkedList<>();
+			selectedScores = new HashSet<>();
 		}
 		return selectedScores;
-	}
-
-	public void SetSelectedScores(List<ScoreDto> scores) {
-		this.selectedScores.addAll(scores);
 	}
 
 	public Set<Score> scores = new HashSet<>();;
@@ -117,9 +113,7 @@ public class CourseController implements Serializable {
 	public void getCourseDetail() {
 		Long selectedCourseId = selectedCourse.getId();
 		selectedCourse = courseService.findCourseById(selectedCourseId);
-		for (ScoreDto scoreDto : scoreService.findScoreDtosByCourseId(selectedCourseId)) {
-			selectedScores.add(scoreDto);
-		}
+		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourseId);
 		navigation.navigateToCourseDetail();
 	}
 

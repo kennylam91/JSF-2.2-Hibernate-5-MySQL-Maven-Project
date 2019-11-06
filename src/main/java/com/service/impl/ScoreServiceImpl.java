@@ -57,7 +57,7 @@ public class ScoreServiceImpl implements ScoreService {
 	}
 
 	@Override
-	public void saveAllScoreDtos(List<ScoreDto> scoreDtos) {
+	public void saveAllScoreDtos(Set<ScoreDto> scoreDtos) {
 		Set<Score> scores = new HashSet<>();
 		for (ScoreDto scoreDto : scoreDtos) {
 			Score score = Score.builder().courseId(scoreDto.getCourseId())

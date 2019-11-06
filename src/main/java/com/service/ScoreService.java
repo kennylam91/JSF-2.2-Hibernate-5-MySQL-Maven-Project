@@ -15,7 +15,7 @@ public interface ScoreService extends Serializable{
 
 	public void saveAll(Set<Score> scores);
 	
-	public void saveAllScoreDtos(List<ScoreDto> scoreDtos);
+	public void saveAllScoreDtos(Set<ScoreDto> scoreDtos);
 	
 	public void updateAll(Set<Score> scores);
 }
