@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
 <title><ui:insert name="title">Student System</ui:insert></title>
 </head>
 <body>
-  <ui:composition>
-    <div class="wpsp-card">
-      <div class="wpsp-card-head">
-        <div class="subject-inner wpsp-left wpsp-class-filter">
-          <div class="subject-inner wpsp-left wpsp-class-filter">
-            <!-- Not use, need to develop more -->
-            <!-- <div id="filter_by_field">
+   <ui:composition>
+      <div class="wpsp-card">
+         <div class="wpsp-card-head">
+            <div class="subject-inner wpsp-left wpsp-class-filter">
+               <div class="subject-inner wpsp-left wpsp-class-filter">
+                  <!-- Not use, need to develop more -->
+                  <!-- <div id="filter_by_field">
               <label class="wpsp-labelMain">Select Field</label>
               <h:selectOneMenu styleClass="select_input"
                 value="#{studentController.paginationStudentList.searchKeyword}"
@@ -24,30 +24,29 @@
                   update="main-content" />
               </h:selectOneMenu>
             </div> -->
-          </div>
-        </div>
-        <ui:include src="/templates/import-export.xhtml"></ui:include>
-      </div>
-      <div class="wpsp-card-body">
-        <div class="subject-head">
-          <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div>
-              <ui:insert name="student-list-table">
-                <ui:include src="/templates/student-list-page/student-list-table.xhtml"></ui:include>
-              </ui:insert>
+               </div>
             </div>
-            <div id="record_search_status">
-              <label class="wpsp-labelMain"> <h:outputText
-                  value="Show from record #{studentController.paginationStudentList.firstRowIndexOnPage} to 
+         </div>
+         <div class="wpsp-card-body">
+            <div class="subject-head">
+               <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                  <div>
+                     <ui:insert name="student-list-table">
+                        <ui:include src="/templates/student-list-page/student-list-table.xhtml"></ui:include>
+                     </ui:insert>
+                  </div>
+                  <div id="record_search_status">
+                     <label class="wpsp-labelMain"> <h:outputText
+                           value="Show from record #{studentController.paginationStudentList.firstRowIndexOnPage} to 
                   record #{studentController.paginationStudentList.lastRowIndexOnPage}.">
-                </h:outputText>
-              </label>
+                        </h:outputText>
+                     </label>
+                  </div>
+               </div>
             </div>
-          </div>
-        </div>
+<!--             <ui:include src="/templates/import-export.xhtml"></ui:include>
+ -->         </div>
       </div>
-    </div>
-    <!-- /.box-body -->
-  </ui:composition>
+   </ui:composition>
 </body>
 </html>
