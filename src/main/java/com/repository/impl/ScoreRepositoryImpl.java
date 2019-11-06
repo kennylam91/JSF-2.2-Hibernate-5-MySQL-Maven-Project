@@ -87,7 +87,7 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			for (Score score : scores) {
-				session.save(score);
+				session.saveOrUpdate(score);
 			}
 			transaction.commit();
 			
@@ -105,35 +105,17 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 		
 	}
 
-	@Override
-	public void updateAll(Set<Score> scores) {
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			for (Score score : scores) {
-				session.createQuery(""
-						+ "update Score s "
-						+ "set s.score = :score "
-						+ "where s.id = :id ")
-						.setParameter("score", score.getScore())
-						.setParameter("id", score.getId())
-						.executeUpdate();
-			}
-			transaction.commit();
-			
-		} catch (Exception e) {
-			if(transaction != null) {
-				transaction.rollback();
-			}
-			logger.error(e);
-		}finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-	}
+	/*
+	 * @Override public void updateAll(Set<Score> scores) { Session session = null;
+	 * Transaction transaction = null; try { session = sessionFactory.openSession();
+	 * transaction = session.beginTransaction(); for (Score score : scores) {
+	 * session.createQuery("" + "update Score s " + "set s.score = :score " +
+	 * "where s.id = :id ") .setParameter("score", score.getScore())
+	 * .setParameter("id", score.getId()) .executeUpdate(); } transaction.commit();
+	 * 
+	 * } catch (Exception e) { if(transaction != null) { transaction.rollback(); }
+	 * logger.error(e); }finally { if(session != null) { session.close(); } } }
+	 */
 	
 	
 

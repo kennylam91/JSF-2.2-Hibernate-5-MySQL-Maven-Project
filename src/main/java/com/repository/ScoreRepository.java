@@ -15,5 +15,5 @@ public interface ScoreRepository extends Serializable{
 
 	public void saveAll(Set<Score> scores);
 	
-	public void updateAll(Set<Score> scores);
+	/* public void updateAll(Set<Score> scores); */
 }

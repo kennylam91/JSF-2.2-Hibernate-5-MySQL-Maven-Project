@@ -52,7 +52,7 @@ public class ScoreServiceImpl implements ScoreService {
 
 	@Override
 	public void updateAll(Set<Score> scores) {
-		scoreRepository.updateAll(scores);
+		scoreRepository.saveAll(scores);
 
 	}
 
@@ -62,7 +62,8 @@ public class ScoreServiceImpl implements ScoreService {
 		for (ScoreDto scoreDto : scoreDtos) {
 			Score score = Score.builder().courseId(scoreDto.getCourseId())
 								.studentId(scoreDto.getStudentId())
-								.score(scoreDto.getScore()).build();
+								.score(scoreDto.getScore()).id(scoreDto.getId())
+								.build();
 			scores.add(score);
 		}
 		scoreRepository.saveAll(scores);
