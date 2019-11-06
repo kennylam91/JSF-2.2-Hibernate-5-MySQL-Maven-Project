@@ -79,7 +79,7 @@ public class StudentController implements Serializable {
 
 	public List<StudentDto> getSelectedStudentDtos() {
 		if (selectedStudentDtos == null) {
-			selectedStudentDtos = new ArrayList<>();
+			selectedStudentDtos = new LinkedList<>();
 		}
 		//when students-list-dialog open
 		if(courseController.getSelectedCourse() != null) {
@@ -93,6 +93,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void getStudentListForm() {
+		clearPaginationAndSelectedStudentDtos();
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		navigation.navigateToStudentList();
 	}
@@ -201,4 +202,9 @@ public class StudentController implements Serializable {
 		PrimeFaces.current().dialog().closeDynamic(selectedStudentDtos);
 	}
 
+	public void clearPaginationAndSelectedStudentDtos() {
+		courseController.setSelectedCourse(null);
+		paginationStudentList = new PaginationStudentList();
+		selectedStudentDtos = new LinkedList<>();
+	}
 }
