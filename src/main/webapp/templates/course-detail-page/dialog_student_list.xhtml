@@ -8,11 +8,10 @@
 </h:head>
 <h:body>
    <h:form id="form_student_list_dlg">
-      <p:dataTable value="#{studentListDlgView.studentDtos}" var="student" id="student_list_table" rowKey="#{student.id}"
-         selection="#{studentController.selectedStudentDtos}" multiViewState="true"
+      <p:dataTable value="#{studentListDlgView.studentDtos}" var="student" id="student_list_table"
+         rowKey="#{student.id}" selection="#{studentListDlgView.selectedStudentDtos}" multiViewState="true"
          styleClass="wpsp-table dataTable dtr-inline">
-         <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
-         <!-- <f:event listener="#{studentController.getSelectedStudentDtos}" type="preRenderView"></f:event> -->
+         <p:ajax event="sort" listener="#{studentListDlgView.onSort}" update="student_list_table" />
          <f:facet name="header">
             <div class="wpsp-dataTable-top ui-g">
                <div class="ui-g-5">
@@ -22,26 +21,22 @@
                </div>
                <div class="wpsp-label ui-g-7">
                   <div class="ui-inputgroup" style="float: right;">
-                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:85px" id="search_field"
-                        value="#{studentController.paginationStudentList.searchField}">
+                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:90px;font-size:13px;" id="search_field"
+                        value="#{studentListDlgView.pagination.searchField}">
                         <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
                         <f:selectItem itemLabel="All" itemValue="all" />
                         <f:selectItem itemLabel="Code" itemValue="code" />
                         <f:selectItem itemLabel="FirstName" itemValue="firstName" />
                         <f:selectItem itemLabel="LastName" itemValue="lastName" />
                         <f:selectItem itemLabel="Field" itemValue="field" />
-                        <f:selectItem itemLabel="Dob" itemValue="dob" />
-                        <f:selectItem itemLabel="Phone" itemValue="phone" />
-                        <f:selectItem itemLabel="Email" itemValue="email" />
-                        <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
-                        <f:selectItem itemLabel="Note" itemValue="note" />
+                        <f:selectItem itemLabel="Gender" itemValue="gender" />
                      </h:selectOneMenu>
-                     <p:inputText id="search_keyword" value="#{studentController.paginationStudentList.searchKeyword}"
-                        style="width: 120px" placeholder="Search keyword"
+                     <p:inputText id="search_keyword" value="#{studentListDlgView.pagination.searchKeyword}"
+                        style="width: 120px" placeholder="Search"
                         onkeypress="if (event.keyCode == 13) { return false; }">
                      </p:inputText>
                      <p:commandButton icon="pi pi-search" styleClass="white-button"
-                        action="#{studentController.onPaginationChange}" update="student_list_table" />
+                        action="#{studentListDlgView.onPaginationChange}" update="student_list_table" />
                   </div>
                </div>
             </div>
@@ -65,21 +60,21 @@
          </p:column>
          <f:facet name="footer">
             <p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;" title="previous_page"
-               action="#{studentController.getPreviousPage}" update="@form">
+               action="#{studentListDlgView.getPreviousPage}" update="@form">
             </p:commandButton>
             <label class="wpsp-labelMain">Rows: </label>
             <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
-               value="#{studentController.paginationStudentList.rowsPerPage}">
-               <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}" update="@form" />
+               value="#{studentListDlgView.pagination.rowsPerPage}">
+               <p:ajax event="valueChange" listener="#{studentListDlgView.onPaginationChange}" update="@form" />
                <f:selectItem itemLabel="10" itemValue="10" />
                <f:selectItem itemLabel="20" itemValue="20" />
                <f:selectItem itemLabel="50" itemValue="50" />
             </h:selectOneMenu>
             <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
-                  value="#{studentController.paginationStudentList.page}">
+                  value="#{studentListDlgView.pagination.page}">
                </h:outputText></label>
             <p:commandButton icon="pi pi-chevron-right" styleClass="mx-2" title="next_page"
-               action="#{studentController.getNextPage}" update="@form">
+               action="#{studentListDlgView.getNextPage}" update="@form">
             </p:commandButton>
          </f:facet>
       </p:dataTable>
