@@ -99,10 +99,8 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 				} else {
 					session.createQuery("update Score s " + "set s.score = :score "
 							+ "where s.courseId = :courseId and s.studentId = :studentId")
-							.setParameter("score", score.getScore())
-							.setParameter("courseId", score.getCourseId())
-							.setParameter("studentId", score.getStudentId())
-							.executeUpdate();
+							.setParameter("score", score.getScore()).setParameter("courseId", score.getCourseId())
+							.setParameter("studentId", score.getStudentId()).executeUpdate();
 				}
 			}
 			transaction.commit();
@@ -127,11 +125,8 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			session.createQuery(
-					"Delete from Score s where s.courseId = :courseId and s.studentId = :studentId")
-			.setParameter("courseId", courseId)
-			.setParameter("studentId", studentId)
-			.executeUpdate();
+			session.createQuery("Delete from Score s where s.courseId = :courseId and s.studentId = :studentId")
+					.setParameter("courseId", courseId).setParameter("studentId", studentId).executeUpdate();
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {
@@ -143,10 +138,41 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 				session.close();
 			}
 		}
-		
-	}
-	
-	
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId) {
+		Session session = null;
+		Transaction transaction = null;
+		boolean isScoreExisted = false;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Score score = (Score) session
+					.createQuery(
+							"Select s from Score s "
+							+ "where s.courseId = :courseId and s.studentId = :studentId")
+					.setParameter("courseId", courseId).setParameter("studentId", studentId).getSingleResult();
+
+			if (score != null) {
+				return score.getScore();
+			} else {
+				return -1.0f;
+			}
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			logger.error(e);
+			return -2.0f;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+
+		}
+	}
 
 }

@@ -20,4 +20,6 @@ public interface ScoreService extends Serializable{
 	public void updateAll(Set<Score> scores);
 	
 	public void delete(Long courseId, Long studentId);
+	
+	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId);
 }

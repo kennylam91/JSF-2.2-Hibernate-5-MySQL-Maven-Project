@@ -29,6 +29,7 @@ import com.beans.StudentForm;
 import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
+import com.service.ScoreService;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
 
@@ -63,6 +64,9 @@ public class StudentController implements Serializable {
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
+	
+	@ManagedProperty(value = "#{scoreService}")
+	private ScoreService scoreService;
 
 	private List<StudentDto> studentDtos;
 
@@ -186,5 +190,9 @@ public class StudentController implements Serializable {
 		courseController.setSelectedCourse(null);
 		paginationStudentList = new PaginationStudentList();
 		selectedStudentDtos = new LinkedList<>();
+	}
+	
+	public float getScoreByStudentIdAndCourseId(Long courseId) {
+		return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudentDto.getId());
 	}
 }

@@ -75,6 +75,13 @@ public class ScoreServiceImpl implements ScoreService {
 		scoreRepository.delete(courseId, studentId);
 		
 	}
+
+	@Override
+	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId) {
+		return scoreRepository.findScoreByCourseIdAndStudentId(courseId, studentId);
+	}
+	
+	
 	
 	
 
