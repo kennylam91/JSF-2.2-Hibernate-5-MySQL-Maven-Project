@@ -63,13 +63,13 @@
                action="#{studentListDlgView.getPreviousPage}" update="@form">
             </p:commandButton>
             <label class="wpsp-labelMain">Rows: </label>
-            <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
+           <!--  <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
                value="#{studentListDlgView.pagination.rowsPerPage}">
                <p:ajax event="valueChange" listener="#{studentListDlgView.onPaginationChange}" update="@form" />
                <f:selectItem itemLabel="10" itemValue="10" />
                <f:selectItem itemLabel="20" itemValue="20" />
                <f:selectItem itemLabel="50" itemValue="50" />
-            </h:selectOneMenu>
+            </h:selectOneMenu> -->
             <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
                   value="#{studentListDlgView.pagination.page}">
                </h:outputText></label>

@@ -193,12 +193,6 @@ public class CourseController implements Serializable {
 		PrimeFaces.current().dialog().closeDynamic(selectedSubject);
 	}
 
-	public void openStudentListDialog() {
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("model", true);
-		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_URL, options, null);
-	}
-
 	public void openAddScoresDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
