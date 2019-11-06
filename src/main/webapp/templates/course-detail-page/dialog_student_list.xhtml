@@ -3,19 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <h:outputStylesheet library="primefaces" name="components.css" />
-   <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
-   <h:outputStylesheet library="primefaces-omega" name="theme.css" />
-   <h:outputStylesheet library="css" name="widget.css" />
-   <h:outputStylesheet library="css" name="wpsp-grid.css" />
-   <h:outputStylesheet library="css" name="wpsp-resposive.css" />
-   <h:outputStylesheet library="css" name="font-awesome.min.css" />
-   <h:outputStylesheet library="css" name="template.css" />
-   <h:outputStylesheet library="css" name="styles.css" />
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
 </h:head>
 <h:body>
    <h:form id="form_student_list_dlg">
-      <p:dataTable value="#{studentController.studentDtos}" var="student" id="student_list_table" rowKey="#{student.id}"
+      <p:dataTable value="#{studentListDlgView.studentDtos}" var="student" id="student_list_table" rowKey="#{student.id}"
          selection="#{studentController.selectedStudentDtos}" multiViewState="true"
          styleClass="wpsp-table dataTable dtr-inline">
          <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
