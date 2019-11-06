@@ -65,13 +65,13 @@ public class StudentController implements Serializable {
 	private Navigation navigation;
 
 	private List<StudentDto> studentDtos;
-        
+
 	private StudentDto selectedStudentDto;
 
 	private List<StudentDto> selectedStudentDtos;
 
 	private String actionForMulti = "create";
-	
+
 	@PostConstruct
 	public void init() {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
@@ -81,11 +81,11 @@ public class StudentController implements Serializable {
 		if (selectedStudentDtos == null) {
 			selectedStudentDtos = new LinkedList<>();
 		}
-		//when students-list-dialog open
-		if(courseController.getSelectedCourse() != null) {
+		// when students-list-dialog open
+		if (courseController.getSelectedCourse() != null) {
 			selectedStudentDtos = new LinkedList<>();
 			for (Student student : courseController.getSelectedCourse().getStudents()) {
-				StudentDto studentDto = ObjectMapper.modelMapper.map(student,StudentDto.class);
+				StudentDto studentDto = ObjectMapper.modelMapper.map(student, StudentDto.class);
 				selectedStudentDtos.add(studentDto);
 			}
 		}
@@ -172,17 +172,19 @@ public class StudentController implements Serializable {
 			scoreDto.setStudentField(student.getField());
 			courseController.getSelectedScores().add(scoreDto);
 		}
-		
 
 	}
-	
+
 	public void removeStudentOutOfCourse(Long studentId) {
 		System.out.println("remove student " + studentId);
-		/*
-		 * for (StudentDto studentDto : selectedStudentDtos) {
-		 * System.out.println(studentDto); }
-		 */
-//		courseController.getSelectedCourse().removeStudent(student);
+
+		for (ScoreDto scoreDto : courseController.getSelectedScores()) {
+			if(scoreDto.getStudentId().equals(studentId)) {
+				courseController.getSelectedScores().remove(scoreDto);
+			}
+		}
+		
+		courseController.getSelectedCourse().removeStudent(studentService.findStudentById(studentId));
 	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {

@@ -123,7 +123,7 @@
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
                <p:column headerText="Action">
-                  <p:commandButton icon="pi pi-trash" title="Del"
+                  <p:commandButton icon="pi pi-trash" title="Del" update="form-course-students-information"
                      actionListener="#{studentController.removeStudentOutOfCourse(score.studentId)}"
                      style="color:red;background-color:#f2f5f9;border:none;">
                   </p:commandButton>
