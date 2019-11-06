@@ -165,6 +165,10 @@ public class StudentController implements Serializable {
 		selectedStudentDtos = new ArrayList<>();
 
 	}
+	
+	public void removeStudentOutOfCourse() {
+		System.out.println("remove student");
+	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();

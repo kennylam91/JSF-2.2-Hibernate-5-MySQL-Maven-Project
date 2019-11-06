@@ -129,6 +129,11 @@
                <p:column headerText="Score">
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
+               <p:column headerText="Action">
+               <p:commandButton icon="pi pi-trash" title="Del" actionListener="#{studentController.removeStudentOutOfCourse}"
+               style="color:red;background-color:#f2f5f9;border:none;">
+               </p:commandButton>
+               </p:column>
             </p:dataTable>
          </h:form>
       </h:panelGroup>
