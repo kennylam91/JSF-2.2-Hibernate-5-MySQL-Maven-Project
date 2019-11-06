@@ -19,6 +19,7 @@
          selection="#{studentController.selectedStudentDtos}" multiViewState="true"
          styleClass="wpsp-table dataTable dtr-inline">
          <p:ajax event="sort" listener="#{studentController.onSort}" update="student_list_table" />
+         <!-- <f:event listener="#{studentController.getSelectedStudentDtos}" type="preRenderView"></f:event> -->
          <f:facet name="header">
             <div class="wpsp-dataTable-top ui-g">
                <div class="ui-g-5">

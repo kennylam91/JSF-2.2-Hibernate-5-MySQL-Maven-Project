@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -79,6 +80,14 @@ public class StudentController implements Serializable {
 		if (selectedStudentDtos == null) {
 			selectedStudentDtos = new ArrayList<>();
 		}
+		//when students-list-dialog open
+		if(courseController.getSelectedCourse() != null) {
+			selectedStudentDtos = new LinkedList<>();
+			for (Student student : courseController.getSelectedCourse().getStudents()) {
+				StudentDto studentDto = ObjectMapper.modelMapper.map(student,StudentDto.class);
+				selectedStudentDtos.add(studentDto);
+			}
+		}
 		return selectedStudentDtos;
 	}
 
@@ -110,7 +119,6 @@ public class StudentController implements Serializable {
 	}
 
 	public void update() throws Exception {
-		System.out.println("update: " + selectedStudent);
 		studentService.updateStudent(selectedStudent);
 	}
 
