@@ -206,4 +206,11 @@ public class StudentController implements Serializable {
 	public String getScore(Long courseId) {
 		return courseScoreMap.get(courseId);
 	}
+	
+	public void openFilterDialog() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("resizable", false);
+		options.put("model", true);
+		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
+	}
 }
