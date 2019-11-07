@@ -289,37 +289,54 @@ public class StudentRepositoryImpl implements StudentRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			List<CourseScoreDto> list = session
+			List<CourseScoreDto> courseScoreDtoList = session
 					.createQuery("Select new com.beans.CourseScoreDto(c.id, c.subject.id, c.subject.coefficient) "
 							+ "from Course c join c.students s "
 							+ "where s.id = :studentId and c.status like 'completed'")
 					.setParameter("studentId", studentId).getResultList();
-			for (CourseScoreDto courseScoreDto : list) {
+			for (CourseScoreDto courseScoreDto : courseScoreDtoList) {
 				Score score = (Score) session
 						.createQuery(
 								"Select s from Score s " + "where s.courseId = :courseId and s.studentId = :studentId")
 						.setParameter("courseId", courseScoreDto.getCourseId()).setParameter("studentId", studentId)
 						.getSingleResult();
 				courseScoreDto.setScore(score.getScore());
-				coeffSum += courseScoreDto.getCoefficient();
-				total += courseScoreDto.getCoefficient() * courseScoreDto.getScore();
+
+			}
+			Collections.sort(courseScoreDtoList);
+			filterCourseScoreListBySubject(courseScoreDtoList);
+			for (CourseScoreDto item : courseScoreDtoList) {
+				coeffSum += item.getCoefficient();
+				total += item.getCoefficient() * item.getScore();
+			}
+			float avgScore = 0;
+			if (coeffSum > 0) {
+				avgScore = total / coeffSum;
 			}
 
-			float avgScore = total / coeffSum;
-			session.createQuery("update Student s "
-					+ "set s.avgScore = :avgScore "
-					+ "where s.id = :studentId")
-			.setParameter("avgScore", avgScore)
-			.setParameter("studentId", studentId)
-			.executeUpdate();
-			
+			session.createQuery("update Student s " + "set s.avgScore = :avgScore " + "where s.id = :studentId")
+					.setParameter("avgScore", avgScore).setParameter("studentId", studentId).executeUpdate();
+
 			transaction.commit();
 
 		} catch (Exception e) {
-			logger.error(e);
+			e.printStackTrace();
 		} finally {
 			if (session != null)
 				session.close();
+		}
+	}
+
+	private void filterCourseScoreListBySubject(List<CourseScoreDto> courseScoreDtoList) {
+		for (int i = 0; i < courseScoreDtoList.size() - 1; i++) {
+			if (courseScoreDtoList.get(i).getSubjectId().equals(courseScoreDtoList.get(i + 1).getSubjectId())) {
+				if (courseScoreDtoList.get(i).getScore() <= courseScoreDtoList.get(i + 1).getScore()) {
+					courseScoreDtoList.remove(i);
+				} else {
+					courseScoreDtoList.remove(i + 1);
+					i= i-1;
+				}
+			}
 		}
 	}
 

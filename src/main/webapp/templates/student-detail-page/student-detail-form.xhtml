@@ -66,9 +66,9 @@
                   <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
                </p:inplace>
                <p:outputLabel>Average Score:</p:outputLabel>
-                  <h:outputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false">
-                     <f:convertNumber pattern="#0.00"></f:convertNumber>
-                  </h:outputText>
+               <h:outputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false">
+                  <f:convertNumber pattern="#0.00"></f:convertNumber>
+               </h:outputText>
                <f:facet name="footer">
                   <div align="center">
                      <p:commandButton value="Save" styleClass="save" action="#{studentController.update}"
@@ -86,11 +86,11 @@
                </f:facet>
                <p:dataTable id="student_detail_courses_table" var="course"
                   value="#{studentController.selectedStudent.courses}">
-                  <p:column headerText="Name">
-                     <h:outputText value="#{course.name}"></h:outputText>
-                  </p:column>
                   <p:column headerText="Subject">
                      <h:outputText value="#{course.subject}"></h:outputText>
+                  </p:column>
+                  <p:column headerText="Name">
+                     <h:outputText value="#{course.name}"></h:outputText>
                   </p:column>
                   <p:column headerText="Coeff" style="width:60px;">
                      <h:outputText value="#{course.subject.coefficient}"></h:outputText>

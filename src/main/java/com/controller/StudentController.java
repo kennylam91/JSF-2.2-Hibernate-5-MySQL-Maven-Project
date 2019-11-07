@@ -206,11 +206,4 @@ public class StudentController implements Serializable {
 	public String getScore(Long courseId) {
 		return courseScoreMap.get(courseId);
 	}
-
-	public float getAvgScore(Long studentId) {
-		float score = studentService.getAvgScore(studentId);
-		selectedStudent.setAvgScore(score);
-		studentService.updateStudent(selectedStudent);
-		return score;
-	}
 }

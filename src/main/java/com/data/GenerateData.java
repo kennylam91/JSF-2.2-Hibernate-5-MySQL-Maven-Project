@@ -74,8 +74,6 @@ public class GenerateData {
 		 * subjects = subjectService.findAllSubjects();
 		 */
 
-		StudentRepository repo = new StudentRepositoryImpl();
-		List<CourseScoreDto> list = repo.findCourseScoreDtosByStudentId(new Long(74L));
 
 	}
 

@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CourseScoreDto {
+public class CourseScoreDto implements Comparable<CourseScoreDto>{
 	
 	private Long courseId;
 	private Long subjectId;
@@ -27,5 +27,11 @@ public class CourseScoreDto {
 		this.subjectId = subjectId;
 		this.coefficient = coefficient;
 	}
+	@Override
+	public int compareTo(CourseScoreDto o) {
+		return (int) (this.subjectId - o.subjectId);
+	}
+	
+	
 	
 }
