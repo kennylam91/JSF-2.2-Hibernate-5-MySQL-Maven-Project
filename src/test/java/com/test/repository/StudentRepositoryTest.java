@@ -3,11 +3,13 @@ package com.test.repository;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
@@ -116,4 +118,29 @@ public class StudentRepositoryTest extends TestCase {
 		studentRepo.deleteStudentList(studentIds);
 		assertTrue(studentRepo.findStudentById(firstStudent.getId()) == null);
 	}
+	
+	@Test
+	public void testfilterCourseScoreListBySubjectAndGetAvgScore() {
+		Long firstId = new Long(1L);
+		CourseScoreDto csDtoFirst = CourseScoreDto.builder().subjectId(firstId).score(5.0f).build();
+		CourseScoreDto csDtoSecond = CourseScoreDto.builder().subjectId(firstId).score(7.0f).build();
+		CourseScoreDto csDtoThird = CourseScoreDto.builder().subjectId(firstId).score(9.0f).coefficient(6).build();
+		CourseScoreDto csDtoForth = CourseScoreDto.builder().subjectId(new Long(2L)).score(5.0f).build();
+		CourseScoreDto csDtoFifth = CourseScoreDto.builder().subjectId(new Long(2L)).coefficient(4).score(7.0f).build();
+		List<CourseScoreDto> courseScoreDtoList = new LinkedList<CourseScoreDto>();
+		courseScoreDtoList.add(csDtoFirst);
+		courseScoreDtoList.add(csDtoSecond);
+		courseScoreDtoList.add(csDtoThird);
+		courseScoreDtoList.add(csDtoForth);
+		courseScoreDtoList.add(csDtoFifth);
+		StudentRepositoryImpl studentRepoImpl = new StudentRepositoryImpl();
+		studentRepoImpl.filterCourseScoreListBySubject(courseScoreDtoList);
+		assertEquals(2, courseScoreDtoList.size());
+		assertEquals(courseScoreDtoList.get(0), csDtoThird);
+		assertEquals(courseScoreDtoList.get(1), csDtoFifth);
+		
+		float avgScore = studentRepoImpl.getAvgScore(courseScoreDtoList);
+		assertEquals(8.2f, avgScore);
+	}
+	
 }

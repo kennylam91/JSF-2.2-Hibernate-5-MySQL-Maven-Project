@@ -1,9 +1,7 @@
 package com.repository.impl;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.beans.Course;
 import com.beans.CourseScoreDto;
 import com.beans.Score;
 import com.beans.Student;
@@ -284,8 +281,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public void updateStudentAvgScore(Long studentId) {
 		Session session = null;
 		Transaction transaction = null;
-		float coeffSum = 0;
-		float total = 0;
+
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
@@ -305,15 +301,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			}
 			Collections.sort(courseScoreDtoList);
 			filterCourseScoreListBySubject(courseScoreDtoList);
-			for (CourseScoreDto item : courseScoreDtoList) {
-				coeffSum += item.getCoefficient();
-				total += item.getCoefficient() * item.getScore();
-			}
-			float avgScore = 0;
-			if (coeffSum > 0) {
-				avgScore = total / coeffSum;
-			}
-
+			float avgScore = getAvgScore(courseScoreDtoList);
 			session.createQuery("update Student s " + "set s.avgScore = :avgScore " + "where s.id = :studentId")
 					.setParameter("avgScore", avgScore).setParameter("studentId", studentId).executeUpdate();
 
@@ -327,17 +315,32 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 	}
 
-	private void filterCourseScoreListBySubject(List<CourseScoreDto> courseScoreDtoList) {
+	public void filterCourseScoreListBySubject(List<CourseScoreDto> courseScoreDtoList) {
 		for (int i = 0; i < courseScoreDtoList.size() - 1; i++) {
 			if (courseScoreDtoList.get(i).getSubjectId().equals(courseScoreDtoList.get(i + 1).getSubjectId())) {
 				if (courseScoreDtoList.get(i).getScore() <= courseScoreDtoList.get(i + 1).getScore()) {
 					courseScoreDtoList.remove(i);
+					i--;
 				} else {
 					courseScoreDtoList.remove(i + 1);
-					i= i-1;
+					i--;
 				}
 			}
 		}
+	}
+
+	public float getAvgScore(List<CourseScoreDto> courseScoreDtoList) {
+		float coeffSum = 0;
+		float total = 0;
+		for (CourseScoreDto item : courseScoreDtoList) {
+			coeffSum += item.getCoefficient();
+			total += item.getCoefficient() * item.getScore();
+		}
+		float avgScore = 0;
+		if (coeffSum > 0) {
+			avgScore = total / coeffSum;
+		}
+		return avgScore;
 	}
 
 }
