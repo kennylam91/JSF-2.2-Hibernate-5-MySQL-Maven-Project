@@ -22,12 +22,15 @@
          <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentController.newStudent.dob}">
          </p:datePicker>
          <h:outputLabel for="gender" value="Gender:" />
-         <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentController.newStudent.gender}" 
-         style="font-size:12px;" >
-            <f:selectItems value="#{studentController.genders}" ></f:selectItems>
+         <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentController.newStudent.gender}"
+            style="font-size:12px;">
+            <f:selectItems value="#{studentController.genders}"></f:selectItems>
          </h:selectOneMenu>
          <h:outputLabel for="field" value="Field:" />
-         <p:inputText id="field" value="#{studentController.newStudent.field}" required="true" label="field" />
+         <h:selectOneMenu id="field" styleClass="select_input" value="#{studentController.newStudent.field}"
+            style="font-size:12px;">
+            <f:selectItems value="#{studentController.fields}"></f:selectItems>
+         </h:selectOneMenu>
          <h:outputLabel for="address" value="Address:" />
          <p:inputText id="address" value="#{studentController.newStudent.address}" required="true" label="address" />
          <h:outputLabel for="phone" value="Phone:" />

@@ -33,6 +33,7 @@ import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
 import com.constant.Constant;
+import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.service.ScoreService;
 import com.service.impl.StudentServiceImpl;
@@ -89,6 +90,10 @@ public class StudentController implements Serializable {
 	
 	public GENDERS[] getGenders() {
 		return GENDERS.values();
+	}
+	
+	public FIELDS[] getFields() {
+		return FIELDS.values();
 	}
 
 	public List<StudentDto> getSelectedStudentDtos() {

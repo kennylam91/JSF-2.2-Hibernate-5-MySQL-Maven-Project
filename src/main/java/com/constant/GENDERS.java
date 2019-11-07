@@ -8,4 +8,9 @@ public enum GENDERS {
 	GENDERS(String s) {
 		gender = s;
 	}
+
+	public String getGender() {
+		return gender;
+	}
+	
 }
