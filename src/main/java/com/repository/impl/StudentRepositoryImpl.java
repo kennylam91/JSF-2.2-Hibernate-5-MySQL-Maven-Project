@@ -41,32 +41,6 @@ public class StudentRepositoryImpl implements StudentRepository {
 			+ "from Student s ";
 
 	@SuppressWarnings("unchecked")
-	public List<StudentDto> findAllStudents() {
-		Transaction transaction = null;
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			org.hibernate.query.Query<StudentDto> query = session
-					.createQuery(SELECT_NEW_STUDENTDTO_SQL + "order by s.code ");
-			query.setMaxResults(20);
-			List<StudentDto> studentDtoList = query.list();
-			transaction.commit();
-			return studentDtoList;
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			logger.error(e);
-			return Collections.emptyList();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-	}
-
-	@SuppressWarnings("unchecked")
 	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
 		String orderedBy = getStudentField(pagination.getOrderBy());
 		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());

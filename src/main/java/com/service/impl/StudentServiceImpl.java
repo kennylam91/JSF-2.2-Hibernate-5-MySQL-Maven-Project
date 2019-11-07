@@ -7,12 +7,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
 import com.repository.StudentRepository;
-import com.repository.impl.StudentRepositoryImpl;
 import com.service.StudentService;
 
 import lombok.AllArgsConstructor;
@@ -53,12 +51,6 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	@Override
 	public Student findStudentById(Long studentId) {
 		return studentRepository.findStudentById(studentId);
-
-	}
-
-	@Override
-	public List<StudentDto> findAllStudents() {
-		return studentRepository.findAllStudents();
 
 	}
 

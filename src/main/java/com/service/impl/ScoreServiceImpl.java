@@ -12,8 +12,6 @@ import com.beans.Score;
 import com.beans.ScoreDto;
 import com.repository.ScoreRepository;
 import com.service.ScoreService;
-import com.util.ObjectMapper;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
