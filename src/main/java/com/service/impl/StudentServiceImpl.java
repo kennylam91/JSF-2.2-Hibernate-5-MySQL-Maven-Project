@@ -87,4 +87,12 @@ public class StudentServiceImpl implements StudentService, Serializable {
 		}
 		return studentIds;
 	}
+
+	@Override
+	public float getAvgScore(Long studentId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 }

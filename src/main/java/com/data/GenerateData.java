@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.beans.Course;
+import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.Subject;
 import com.controller.SubjectController;
@@ -48,7 +49,6 @@ public class GenerateData {
 
 	public static void main(String[] args) {
 
-		
 		/*
 		 * Course course = new Course(); course.setCode("Alkf29");
 		 * course.setName("Java Core 01"); course.setStatus("Registering");
@@ -57,12 +57,12 @@ public class GenerateData {
 		 * CourseRepository courseRepo = new CourseRepositoryImpl();
 		 * courseRepo.saveCourse(course);
 		 */
-		 
 
-		 insertSubjectSQL(10);
-
-		 insertStudentSQL(100);
-
+		/*
+		 * insertSubjectSQL(10);
+		 * 
+		 * insertStudentSQL(100);
+		 */
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -74,12 +74,8 @@ public class GenerateData {
 		 * subjects = subjectService.findAllSubjects();
 		 */
 
-		/*
-		 * StudentRepository repo = new StudentRepositoryImpl(); List<Long> studentIds =
-		 * new ArrayList<>(); studentIds.add(new Long(13L)); studentIds.add(new
-		 * Long(14L)); studentIds.add(new Long(15L));
-		 * repo.deleteStudentList(studentIds);
-		 */
+		StudentRepository repo = new StudentRepositoryImpl();
+		List<CourseScoreDto> list = repo.findCourseScoreDtosByStudentId(new Long(74L));
 
 	}
 
@@ -173,7 +169,6 @@ public class GenerateData {
 			subject.setField(SUBJECT_FIELD_COLLECTION[i]);
 			subjectRepo.saveSubject(subject);
 		}
-		
 
 	}
 

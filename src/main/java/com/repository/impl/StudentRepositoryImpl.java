@@ -1,7 +1,10 @@
 package com.repository.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -10,6 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.beans.Course;
+import com.beans.CourseScoreDto;
+import com.beans.Score;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
@@ -272,5 +278,35 @@ public class StudentRepositoryImpl implements StudentRepository {
 			return "desc";
 		return "asc";
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CourseScoreDto> findCourseScoreDtosByStudentId(Long studentId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			List<CourseScoreDto> list = session.createQuery(
+					"Select new com.beans.CourseScoreDto(c.id, c.subject.id, c.subject.coefficient) "
+							+ "from Course c join c.students s "
+							+ "where s.id = :studentId and c.status like 'completed'")
+					.setParameter("studentId", studentId).getResultList();
+			for (CourseScoreDto courseScoreDto : list) {
+				Score score = (Score) session.createQuery("Select s from Score s "
+						+ "where s.courseId = :courseId and s.studentId = :studentId")
+						.setParameter("courseId", courseScoreDto.getCourseId())
+						.setParameter("studentId", studentId)
+						.getSingleResult(); 
+				courseScoreDto.setScore(score.getScore());
+			}
+			return list;
+		} catch (Exception e) {
+			logger.error(e);
+			return Collections.emptyList();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 
 }

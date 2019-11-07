@@ -17,17 +17,14 @@
                <p:outputLabel>Student Code:</p:outputLabel>
                <h:outputText value="#{studentController.selectedStudent.code}" id="studentCode" required="true"
                   style="padding: 0 5px;" />
-               <!-- <p:message for="studentCode" /> -->
                <p:outputLabel>Firstname:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.firstName}" id="firstName" required="true" />
                </p:inplace>
-               <!-- <p:message for="firstName" /> -->
                <p:outputLabel>Lastname:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.lastName}" id="lastName" required="true" />
                </p:inplace>
-               <!-- 	<p:message for="lastName" /> -->
                <p:outputLabel>Gender:</p:outputLabel>
                <p:inplace editor="true">
                   <h:selectOneMenu id="gender" styleClass="select_input"
@@ -44,36 +41,30 @@
                      <f:convertDateTime pattern="dd/MM/yyyy" />
                   </p:calendar>
                </p:inplace>
-               <!-- <p:message for="dob" /> -->
                <p:outputLabel>Field:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.field}" id="field" required="true"
                      requiredMessage="Field is required" />
                </p:inplace>
-               <!-- <p:message for="field" /> -->
                <p:outputLabel>Address:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.address}" id="address"
                      requiredMessage="Address is required" />
                </p:inplace>
-               <!-- <p:message for="address" /> -->
                <p:outputLabel>Phone:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.phone}" id="phone" required="true"
                      requiredMessage="Phone is required" />
                </p:inplace>
-               <!-- <p:message for="phone" /> -->
                <p:outputLabel>Email:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.email}" id="email" required="true"
                      requiredMessage="Email is required" />
                </p:inplace>
-               <!-- <p:message for="email" /> -->
                <p:outputLabel>Note:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
                </p:inplace>
-               <!-- <p:message for="note" /> -->
                <p:outputLabel>Average Score:</p:outputLabel>
                <p:inplace editor="true">
                   <p:inputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false" />
@@ -101,6 +92,9 @@
                   <p:column headerText="Subject">
                      <h:outputText value="#{course.subject}"></h:outputText>
                   </p:column>
+                  <p:column headerText="Coeff" style="width:60px;">
+                     <h:outputText value="#{course.subject.coefficient}"></h:outputText>
+                  </p:column>
                   <p:column headerText="BeginTime">
                      <h:outputText value="#{course.beginTime}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -110,7 +104,7 @@
                      <h:outputText value="#{course.status}"></h:outputText>
                   </p:column>
                   <p:column headerText="Score" style="width:60px;">
-                     <h:outputText value="#{studentController.getScoreByStudentIdAndCourseId(course.id)}"></h:outputText>
+                     <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
                   <p:column headerText="Action" style="width:60px;">
                      <p:commandButton icon="pi pi-search" title="View"></p:commandButton>

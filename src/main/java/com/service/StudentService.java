@@ -23,4 +23,6 @@ public interface StudentService {
 	void deleteStudents(List<StudentDto> StudentDtos);
 
 	List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos);
+	
+	public float getAvgScore(Long studentId);
 }

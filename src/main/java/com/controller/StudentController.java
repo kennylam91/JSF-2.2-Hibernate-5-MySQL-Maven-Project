@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +22,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
 
+import com.beans.Course;
 import com.beans.Navigation;
 import com.beans.Score;
 import com.beans.ScoreDto;
@@ -29,6 +32,7 @@ import com.beans.StudentForm;
 import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
+import com.constant.Constant;
 import com.service.ScoreService;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
@@ -52,19 +56,19 @@ public class StudentController implements Serializable {
 
 	private Student selectedStudent;
 
-	@ManagedProperty(value = "#{studentService}")
-	private StudentServiceImpl studentService;
-
 	private Pagination paginationStudentList = new PaginationStudentList();
 
 	private Student newStudent = new Student();
+
+	@ManagedProperty(value = "#{studentService}")
+	private StudentServiceImpl studentService;
 
 	@ManagedProperty(value = "#{courseController}")
 	private CourseController courseController;
 
 	@ManagedProperty(value = "#{navigation}")
 	private Navigation navigation;
-	
+
 	@ManagedProperty(value = "#{scoreService}")
 	private ScoreService scoreService;
 
@@ -74,11 +78,12 @@ public class StudentController implements Serializable {
 
 	private List<StudentDto> selectedStudentDtos;
 
-	private String actionForMulti = "create";
+	private Map<Long, String> courseScoreMap;
 
 	@PostConstruct
 	public void init() {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		courseScoreMap = new HashMap<>();
 	}
 
 	public List<StudentDto> getSelectedStudentDtos() {
@@ -89,7 +94,6 @@ public class StudentController implements Serializable {
 	}
 
 	public void getStudentListForm() {
-		clearPaginationAndSelectedStudentDtos();
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		navigation.navigateToStudentList();
 	}
@@ -106,17 +110,22 @@ public class StudentController implements Serializable {
 
 	}
 
-	public void deleteStudent() throws Exception {
+	public void deleteStudent() {
 		studentService.deleteStudent(selectedStudentDto.getId());
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 	}
 
-	public void getStudentDetail() throws Exception {
+	public void getStudentDetail() {
 		selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
+		for (Course course : selectedStudent.getCourses()) {
+			if (course.getStatus().equals("completed")) {
+				courseScoreMap.put(course.getId(), String.valueOf(getScoreByStudentIdAndCourseId(course.getId())));
+			}
+		}
 		navigation.navigateToStudentDetail();
 	}
 
-	public void update() throws Exception {
+	public void update() {
 		studentService.updateStudent(selectedStudent);
 	}
 
@@ -168,10 +177,7 @@ public class StudentController implements Serializable {
 			scoreDto.setStudentField(student.getField());
 			courseController.getSelectedScores().add(scoreDto);
 		}
-
 	}
-
-	
 
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();
@@ -179,7 +185,7 @@ public class StudentController implements Serializable {
 		options.put("width", "470px");
 		options.put("height", "550px");
 		options.put("model", true);
-		PrimeFaces.current().dialog().openDynamic("/templates/student-list-page/dialog_create_student", options, null);
+		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_CREATE_STUDENT_URL, options, null);
 	}
 
 	public void closeCreateStudentDialog() {
@@ -191,8 +197,17 @@ public class StudentController implements Serializable {
 		paginationStudentList = new PaginationStudentList();
 		selectedStudentDtos = new LinkedList<>();
 	}
-	
+
 	public float getScoreByStudentIdAndCourseId(Long courseId) {
 		return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudentDto.getId());
+	}
+
+	// return null if not found
+	public String getScore(Long courseId) {
+		return courseScoreMap.get(courseId);
+	}
+
+	public float getAvgScore(Long studentId) {
+		return studentService.getAvgScore(studentId);
 	}
 }
