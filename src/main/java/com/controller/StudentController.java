@@ -33,6 +33,7 @@ import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
 import com.constant.Constant;
+import com.constant.GENDERS;
 import com.service.ScoreService;
 import com.service.impl.StudentServiceImpl;
 import com.util.ObjectMapper;
@@ -84,6 +85,10 @@ public class StudentController implements Serializable {
 	public void init() {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		courseScoreMap = new HashMap<>();
+	}
+	
+	public GENDERS[] getGenders() {
+		return GENDERS.values();
 	}
 
 	public List<StudentDto> getSelectedStudentDtos() {
