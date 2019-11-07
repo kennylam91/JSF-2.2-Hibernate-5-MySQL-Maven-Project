@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
@@ -90,8 +91,14 @@ public class StudentServiceImpl implements StudentService, Serializable {
 
 	@Override
 	public float getAvgScore(Long studentId) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<CourseScoreDto> courseScoreDtos = studentRepository.findCourseScoreDtosByStudentId(studentId);
+		float coeffSum = 0;
+		float total = 0;
+		for (CourseScoreDto courseScoreDto : courseScoreDtos) {
+			coeffSum += courseScoreDto.getCoefficient();
+			total += courseScoreDto.getCoefficient() * courseScoreDto.getScore();
+		}
+		return total/coeffSum;
 	}
 	
 	
