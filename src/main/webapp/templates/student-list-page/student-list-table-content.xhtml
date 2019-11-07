@@ -72,7 +72,9 @@
         <h:outputText value="#{student.email}" />
       </p:column>
       <p:column headerText="Score" style="width:80px;" sortBy="#{student.avgScore}" field="avgScore">
-        <h:outputText value="#{student.avgScore}" />
+        <h:outputText value="#{student.avgScore}">
+        <f:convertNumber pattern="#0.00"></f:convertNumber>
+        </h:outputText>
       </p:column>
       <p:column headerText="Action" style="width:95px">
         <p:commandButton id="detail_button" update="main-content" icon="pi pi-info"

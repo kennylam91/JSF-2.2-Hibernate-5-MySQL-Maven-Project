@@ -31,6 +31,6 @@ public interface StudentRepository extends Serializable {
 	
 	List<Student> findStudentsByIds(List<Long> Ids);
 	
-	List<CourseScoreDto> findCourseScoreDtosByStudentId(Long studentId);
+	void updateStudentAvgScore(Long studentId);
 
 }

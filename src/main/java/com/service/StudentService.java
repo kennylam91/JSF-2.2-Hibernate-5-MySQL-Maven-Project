@@ -24,5 +24,5 @@ public interface StudentService {
 
 	List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos);
 	
-	public float getAvgScore(Long studentId);
+	void updateStudentAvgScore(Long studentId);
 }

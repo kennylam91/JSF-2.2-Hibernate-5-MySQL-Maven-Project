@@ -66,9 +66,9 @@
                   <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
                </p:inplace>
                <p:outputLabel>Average Score:</p:outputLabel>
-               <p:inplace editor="true">
-                  <p:inputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false" />
-               </p:inplace>
+                  <h:outputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false">
+                     <f:convertNumber pattern="#0.00"></f:convertNumber>
+                  </h:outputText>
                <f:facet name="footer">
                   <div align="center">
                      <p:commandButton value="Save" styleClass="save" action="#{studentController.update}"

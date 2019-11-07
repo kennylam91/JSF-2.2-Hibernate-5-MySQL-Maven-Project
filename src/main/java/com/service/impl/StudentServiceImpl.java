@@ -90,16 +90,11 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	@Override
-	public float getAvgScore(Long studentId) {
-		List<CourseScoreDto> courseScoreDtos = studentRepository.findCourseScoreDtosByStudentId(studentId);
-		float coeffSum = 0;
-		float total = 0;
-		for (CourseScoreDto courseScoreDto : courseScoreDtos) {
-			coeffSum += courseScoreDto.getCoefficient();
-			total += courseScoreDto.getCoefficient() * courseScoreDto.getScore();
-		}
-		return total/coeffSum;
+	public void updateStudentAvgScore(Long studentId) {
+		studentRepository.updateStudentAvgScore(studentId);
+		
 	}
+	
 	
 	
 }

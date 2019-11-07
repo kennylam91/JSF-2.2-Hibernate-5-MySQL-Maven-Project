@@ -210,6 +210,9 @@ public class CourseController implements Serializable {
 
 	public void updateScores() {
 		scoreService.saveAllScoreDtos(selectedScores);
+		for (ScoreDto scoreDto : selectedScores) {
+			studentService.updateStudentAvgScore(scoreDto.getStudentId());
+		}
 		closeCourseScoreDialog();
 	}
 	

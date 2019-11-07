@@ -281,32 +281,46 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<CourseScoreDto> findCourseScoreDtosByStudentId(Long studentId) {
+	public void updateStudentAvgScore(Long studentId) {
 		Session session = null;
+		Transaction transaction = null;
+		float coeffSum = 0;
+		float total = 0;
 		try {
 			session = sessionFactory.openSession();
-			List<CourseScoreDto> list = session.createQuery(
-					"Select new com.beans.CourseScoreDto(c.id, c.subject.id, c.subject.coefficient) "
+			transaction = session.beginTransaction();
+			List<CourseScoreDto> list = session
+					.createQuery("Select new com.beans.CourseScoreDto(c.id, c.subject.id, c.subject.coefficient) "
 							+ "from Course c join c.students s "
 							+ "where s.id = :studentId and c.status like 'completed'")
 					.setParameter("studentId", studentId).getResultList();
 			for (CourseScoreDto courseScoreDto : list) {
-				Score score = (Score) session.createQuery("Select s from Score s "
-						+ "where s.courseId = :courseId and s.studentId = :studentId")
-						.setParameter("courseId", courseScoreDto.getCourseId())
-						.setParameter("studentId", studentId)
-						.getSingleResult(); 
+				Score score = (Score) session
+						.createQuery(
+								"Select s from Score s " + "where s.courseId = :courseId and s.studentId = :studentId")
+						.setParameter("courseId", courseScoreDto.getCourseId()).setParameter("studentId", studentId)
+						.getSingleResult();
 				courseScoreDto.setScore(score.getScore());
+				coeffSum += courseScoreDto.getCoefficient();
+				total += courseScoreDto.getCoefficient() * courseScoreDto.getScore();
 			}
-			return list;
+
+			float avgScore = total / coeffSum;
+			session.createQuery("update Student s "
+					+ "set s.avgScore = :avgScore "
+					+ "where s.id = :studentId")
+			.setParameter("avgScore", avgScore)
+			.setParameter("studentId", studentId)
+			.executeUpdate();
+			
+			transaction.commit();
+
 		} catch (Exception e) {
 			logger.error(e);
-			return Collections.emptyList();
 		} finally {
 			if (session != null)
 				session.close();
 		}
 	}
-
 
 }
