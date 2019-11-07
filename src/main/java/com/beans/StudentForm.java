@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import com.constant.FIELDS;
+import com.constant.GENDERS;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +31,8 @@ public class StudentForm implements Serializable {
 	private String firstName;
 	private String lastName;
 	private Date dob;
-	private String gender;
-	private String field;
+	private GENDERS gender;
+	private FIELDS field;
 	private String address;
 	private String phone;
 	private String email;

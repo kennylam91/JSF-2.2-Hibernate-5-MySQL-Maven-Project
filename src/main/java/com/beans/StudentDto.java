@@ -6,6 +6,9 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.constant.FIELDS;
+import com.constant.GENDERS;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,8 +31,8 @@ public class StudentDto implements Serializable {
 	private String code;
 	private String firstName;
 	private String lastName;
-	private String gender;
-	private String field;
+	private GENDERS gender;
+	private FIELDS field;
 	private Date dob;
 	private String phone;
 	private String email;

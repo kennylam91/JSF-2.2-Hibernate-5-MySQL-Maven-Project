@@ -13,6 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.constant.FIELDS;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,7 +44,7 @@ public class Subject {
 	private String name;
 
 	@Column(name = "field", nullable = true)
-	private String field;
+	private FIELDS field;
 
 	@Column(name = "description", nullable = true)
 	private String description;

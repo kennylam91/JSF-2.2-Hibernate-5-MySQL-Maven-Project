@@ -39,7 +39,6 @@ public class SubjectConverter implements Converter, Serializable {
 		}
 
 		Subject subject = subjectService.findSubjectById(Long.valueOf(value));
-//		System.out.println(value + subject.toString());
 
 		return subject;
 	}
@@ -49,7 +48,6 @@ public class SubjectConverter implements Converter, Serializable {
 		if (!(value instanceof Subject) || ((Subject) value).getId() == null) {
 			return null;
 		}
-//		System.out.println(value);
 		return String.valueOf(((Subject) value).getId());
 
 	}

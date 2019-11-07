@@ -78,11 +78,9 @@
                </p:inplace>
                <p:outputLabel>Status:</p:outputLabel>
                <p:inplace editor="true">
-                  <h:selectOneMenu id="status" styleClass="select_input"
+                  <h:selectOneMenu id="status" styleClass="select_input" style="font-size:12px;"
                      value="#{courseController.selectedCourse.status}">
-                     <f:selectItem itemLabel="Registering" itemValue="registering" />
-                     <f:selectItem itemLabel="Studying" itemValue="studying" />
-                     <f:selectItem itemLabel="Completed" itemValue="completed" />
+                     <f:selectItems value="#{courseController.courseStatuses}"/>
                   </h:selectOneMenu>
                </p:inplace>
                <p:outputLabel>Teacher:</p:outputLabel>

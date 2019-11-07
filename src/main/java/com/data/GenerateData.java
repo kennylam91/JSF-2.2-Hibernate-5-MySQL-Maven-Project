@@ -10,6 +10,8 @@ import com.beans.Course;
 import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.Subject;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 import com.controller.SubjectController;
 import com.repository.CourseRepository;
 import com.repository.StudentRepository;
@@ -31,21 +33,21 @@ public class GenerateData {
 	private static final String[] LAST_NAME_COLLECTION = { "Lam", "Thang", "Dung", "Ngoc", "Nga", "Huyen", "Thao", "An",
 			"Anh", "Luyen", "Cham", "Dung", "Duong", "Duc", "Van", "Hiep", "Khanh", "Tuan", "Nam", "Nhat", "Minh" };
 	private static final String[] FIRST_NAME_COLLECTION = { "Nguyen", "Pham", "Do", "Hoang", "Le", "Dinh", "Duong" };
-	private static final String[] FIELD_COLLECTION = { "JAVA", "PHP", "PYTHON" };
+	private static final FIELDS[] FIELD_COLLECTION = { FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON };
 	private static final String[] ADDRESS_COLLECTION = { "Ha Noi", "Hai Phong", "Ho Chi Minh", "Da Nang", "Hue",
 			"Can Tho", "Quang Ninh" };
-	private static final String[] GENDER_COLLECTION = { "male", "female", "other", "male", "female", "male", "female",
-			"male", "female", "male", "female", "male", "female", "male", "female", "male", "female", "male",
-			"female" };
+	private static final GENDERS[] GENDER_COLLECTION = { GENDERS.MALE, GENDERS.FEMALE, GENDERS.OTHER, GENDERS.MALE,
+			GENDERS.FEMALE, GENDERS.MALE, GENDERS.FEMALE, GENDERS.MALE, GENDERS.FEMALE, GENDERS.MALE, GENDERS.FEMALE,
+			GENDERS.MALE, GENDERS.FEMALE };
 
 	private static final float[] COEFFICIENT_COLLECTION = { 2.0f, 3.0f, 4.0f, 5.0f };
 
-	private static final String[] SUBJECT_NAME_COLLECTION = { "Basic Programming", "Web Basic", "Java Basic",
-			"PHP Basic", "Data Struture Basic", "Algorithm Basic", "Java Advanced", "PHP Advanced", "Python Basic",
-			"Python advanced" };
+	private static final String[] SUBJECT_NAME_COLLECTION = { "Java Web Basic", "PHP Web Basic", "Java Core",
+			"PHP Corec", "Python Web Basic", "Java Immediate", "PHP Immediate", "Python Immediate", "Java Advanced",
+			"PHP Advanced", "Python Basic", "Python advanced" };
 
-	private static final String[] SUBJECT_FIELD_COLLECTION = { "BASIC", "BASIC", "JAVA", "PHP", "BASIC", "BASIC",
-			"JAVA", "PHP", "PYTHON", "PYTHON" };
+	private static final FIELDS[] SUBJECT_FIELD_COLLECTION = {FIELDS.JAVA,FIELDS.PHP, FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON,
+			FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON, FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON, FIELDS.PYTHON};
 
 	public static void main(String[] args) {
 
@@ -58,11 +60,9 @@ public class GenerateData {
 		 * courseRepo.saveCourse(course);
 		 */
 
-		/*
-		 * insertSubjectSQL(10);
-		 * 
-		 * insertStudentSQL(100);
-		 */
+		insertSubjectSQL(10);
+
+		insertStudentSQL(50);
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -73,7 +73,6 @@ public class GenerateData {
 		 * SubjectService subjectService = new SubjectServiceImpl(); List<Subject>
 		 * subjects = subjectService.findAllSubjects();
 		 */
-
 
 	}
 
@@ -112,7 +111,7 @@ public class GenerateData {
 		return random.nextInt(max - min + 1) + min;
 	}
 
-	private static String getRandomField() {
+	private static FIELDS getRandomField() {
 		return FIELD_COLLECTION[getRandomNumberBetween(0, FIELD_COLLECTION.length - 1)];
 	}
 
@@ -134,7 +133,7 @@ public class GenerateData {
 		return email.toString();
 	}
 
-	private static String getRandomGender() {
+	private static GENDERS getRandomGender() {
 		return GENDER_COLLECTION[getRandomNumberBetween(0, GENDER_COLLECTION.length - 1)];
 	}
 

@@ -30,6 +30,7 @@ import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationCourseList;
+import com.constant.COURSE_STATUSES;
 import com.constant.Constant;
 import com.service.CourseService;
 import com.service.ScoreService;
@@ -81,6 +82,10 @@ public class CourseController implements Serializable {
 			selectedScores = new HashSet<>();
 		}
 		return selectedScores;
+	}
+	
+	public COURSE_STATUSES[] getCourseStatuses() {
+		return COURSE_STATUSES.values();
 	}
 
 	public Set<Score> scores = new HashSet<>();;

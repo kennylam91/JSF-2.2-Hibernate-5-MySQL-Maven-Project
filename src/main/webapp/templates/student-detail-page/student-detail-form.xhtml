@@ -27,11 +27,9 @@
                </p:inplace>
                <p:outputLabel>Gender:</p:outputLabel>
                <p:inplace editor="true">
-                  <h:selectOneMenu id="gender" styleClass="select_input"
+                  <h:selectOneMenu id="gender" styleClass="select_input" style="font-size:12px;"
                      value="#{studentController.selectedStudent.gender}">
-                     <f:selectItem itemLabel="Male" itemValue="male" />
-                     <f:selectItem itemLabel="Female" itemValue="female" />
-                     <f:selectItem itemLabel="Other" itemValue="other" />
+                     <f:selectItems value="#{studentController.genders}" ></f:selectItems>
                   </h:selectOneMenu>
                </p:inplace>
                <p:outputLabel>Date of birth:</p:outputLabel>

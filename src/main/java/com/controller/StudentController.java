@@ -32,6 +32,7 @@ import com.beans.StudentForm;
 import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
+import com.constant.COURSE_STATUSES;
 import com.constant.Constant;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
@@ -128,7 +129,7 @@ public class StudentController implements Serializable {
 	public void getStudentDetail() {
 		selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
 		for (Course course : selectedStudent.getCourses()) {
-			if (course.getStatus().equals("completed")) {
+			if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
 				courseScoreMap.put(course.getId(), String.valueOf(getScoreByStudentIdAndCourseId(course.getId())));
 			}
 		}

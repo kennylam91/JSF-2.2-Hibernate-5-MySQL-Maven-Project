@@ -262,7 +262,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			List<CourseScoreDto> courseScoreDtoList = session
 					.createQuery("Select new com.beans.CourseScoreDto(c.id, c.subject.id, c.subject.coefficient) "
 							+ "from Course c join c.students s "
-							+ "where s.id = :studentId and c.status like 'completed'")
+							+ "where s.id = :studentId and c.status like 'COMPLETED'")
 					.setParameter("studentId", studentId).getResultList();
 			for (CourseScoreDto courseScoreDto : courseScoreDtoList) {
 				Score score = (Score) session

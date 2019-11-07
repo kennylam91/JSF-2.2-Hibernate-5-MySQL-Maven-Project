@@ -1,5 +1,7 @@
 package com.beans;
 
+import com.constant.FIELDS;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,10 +20,10 @@ public class ScoreDto extends Score {
 	private String studentCode;
 	private String studentFirstname;
 	private String studentLastname;
-	private String studentField;
+	private FIELDS studentField;
 
 	public ScoreDto(Long id, Long studentId, Long courseId, float score, String studentCode, String studentFirstname,
-			String studentLastname, String studentField) {
+			String studentLastname, FIELDS studentField) {
 		super(id, studentId, courseId, score);
 		this.studentCode = studentCode;
 		this.studentFirstname = studentFirstname;

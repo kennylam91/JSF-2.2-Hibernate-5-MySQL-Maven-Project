@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.constant.COURSE_STATUSES;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,7 +52,7 @@ public class Course {
 	private Date finishTime;
 
 	@Column(name = "status", nullable = false)
-	private String status;
+	private COURSE_STATUSES status;
 
 	@Column(name = "teacher", nullable = true)
 	private String teacher;

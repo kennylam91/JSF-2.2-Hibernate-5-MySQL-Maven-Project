@@ -16,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.constant.FIELDS;
+import com.constant.GENDERS;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,10 +54,10 @@ public class Student {
 	private Date dob;
 
 	@Column(name = "gender", nullable = false)
-	private String gender;
+	private GENDERS gender;
 
 	@Column(name = "field", nullable = false)
-	private String field;
+	private FIELDS field;
 
 	@Column(name = "address", nullable = false)
 	private String address;
@@ -70,7 +74,7 @@ public class Student {
 	@Column(name = "avg_score", nullable = true)
 	private float avgScore;
 
-	@ManyToMany(fetch = FetchType.EAGER,mappedBy = "students")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "students")
 	private Set<Course> courses = new HashSet<>();
 
 	@Override
