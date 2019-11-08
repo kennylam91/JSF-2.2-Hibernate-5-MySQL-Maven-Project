@@ -29,7 +29,7 @@
                <p:inplace editor="true">
                   <h:selectOneMenu id="gender" styleClass="select_input" style="font-size:12px;"
                      value="#{studentController.selectedStudent.gender}">
-                     <f:selectItems value="#{studentController.genders}" ></f:selectItems>
+                     <f:selectItems value="#{studentController.genders}"></f:selectItems>
                   </h:selectOneMenu>
                </p:inplace>
                <p:outputLabel>Date of birth:</p:outputLabel>
@@ -41,8 +41,10 @@
                </p:inplace>
                <p:outputLabel>Field:</p:outputLabel>
                <p:inplace editor="true">
-                  <p:inputText value="#{studentController.selectedStudent.field}" id="field" required="true"
-                     requiredMessage="Field is required" />
+                  <h:selectOneMenu id="field" styleClass="select_input"
+                     value="#{studentController.selectedStudent.field}" style="font-size:12px;">
+                     <f:selectItems value="#{studentController.fields}"></f:selectItems>
+                  </h:selectOneMenu>
                </p:inplace>
                <p:outputLabel>Address:</p:outputLabel>
                <p:inplace editor="true">

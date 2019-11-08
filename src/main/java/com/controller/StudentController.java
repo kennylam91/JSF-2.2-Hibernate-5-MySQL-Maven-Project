@@ -220,8 +220,8 @@ public class StudentController implements Serializable {
 	
 	public void openFilterDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("resizable", false);
-		options.put("model", true);
+		options.put("width","470px");
+		options.put("height","400px");
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
 	}
 }
