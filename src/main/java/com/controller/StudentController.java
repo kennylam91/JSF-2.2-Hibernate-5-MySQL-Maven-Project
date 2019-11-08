@@ -232,4 +232,7 @@ public class StudentController implements Serializable {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
 
+	public void resetFilter() {
+		((PaginationStudentList)paginationStudentList).setStudentFilter(new StudentFilter());
+	}
 }
