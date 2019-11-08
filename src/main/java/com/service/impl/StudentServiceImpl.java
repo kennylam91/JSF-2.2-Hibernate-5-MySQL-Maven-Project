@@ -90,4 +90,8 @@ public class StudentServiceImpl implements StudentService, Serializable {
 
 	}
 
+	public boolean checkDuplicatedEmail(String string) {
+		return true;
+	}
+
 }

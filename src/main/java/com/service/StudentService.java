@@ -26,5 +26,7 @@ public interface StudentService {
 	List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos);
 	
 	void updateStudentAvgScore(Long studentId);
+	
+	boolean checkDuplicatedEmail(String string);
 
 }

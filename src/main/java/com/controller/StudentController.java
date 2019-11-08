@@ -10,14 +10,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.validator.ValidatorException;
 
 import org.apache.log4j.Logger;
+import org.modelmapper.ValidationException;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
@@ -87,7 +95,7 @@ public class StudentController implements Serializable {
 	@PostConstruct
 	public void init() {
 		StudentFilter studentFilter = new StudentFilter();
-		((PaginationStudentList)paginationStudentList).setStudentFilter(studentFilter);
+		((PaginationStudentList) paginationStudentList).setStudentFilter(studentFilter);
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		courseScoreMap = new HashMap<>();
 	}
@@ -120,7 +128,6 @@ public class StudentController implements Serializable {
 		studentService.saveStudent(newStudent);
 		newStudent = new Student();
 		closeCreateStudentDialog();
-		logger.info("create Student successfully");
 
 	}
 
@@ -199,7 +206,7 @@ public class StudentController implements Serializable {
 		options.put("width", "700px");
 		options.put("height", "560px");
 		options.put("contentWidth", "100%");
-        options.put("contentHeight", "100%");
+		options.put("contentHeight", "100%");
 		options.put("modal", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_CREATE_STUDENT_URL, options, null);
 	}
@@ -229,12 +236,35 @@ public class StudentController implements Serializable {
 		options.put("height", "400px");
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
 	}
-	
+
 	public void closeStudentFilterDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
 
 	public void resetFilter() {
-		((PaginationStudentList)paginationStudentList).setStudentFilter(new StudentFilter());
+		((PaginationStudentList) paginationStudentList).setStudentFilter(new StudentFilter());
+	}
+
+	public void validateEmail(FacesContext context, UIComponent component, Object value) {
+
+		/*
+		 * 1) A-Z characters allowed 2) a-z characters allowed 3) 0-9 numbers allowed 4)
+		 * Additionally email may contain only dot(.), dash(-) and underscore(_) 5) Rest
+		 * all characters are not allowed
+		 */
+		String email = value.toString();
+		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+		
+		if(!matcher.matches()) {
+			throw new ValidatorException(
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Validation:Error", "Invalid Email !"));
+		}
+
+		if (studentService.checkDuplicatedEmail(email)) {
+			throw new ValidatorException(
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Validation:Error", "Email is existed!"));
+		}
 	}
 }

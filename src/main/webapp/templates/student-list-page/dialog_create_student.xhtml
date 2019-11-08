@@ -96,7 +96,9 @@
             <p:outputLabel for="email" value="Email:" />
          </p:column>
          <p:column colspan="5">
-            <p:inputText id="email" value="#{studentController.newStudent.email}" required="true" label="email" />
+            <p:inputText id="email" value="#{studentController.newStudent.email}" required="true" label="email" 
+            validator="#{studentController.validateEmail}">
+            </p:inputText>
          </p:column>
          <p:column colspan="6">
             <p:message for="email"></p:message>
