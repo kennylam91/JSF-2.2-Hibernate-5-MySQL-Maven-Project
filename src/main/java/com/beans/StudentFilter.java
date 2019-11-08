@@ -1,5 +1,6 @@
 package com.beans;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,8 +26,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class StudentFilter {
+@ManagedBean(name = "studentFilter")
+@SessionScoped
+public class StudentFilter implements Serializable{
 
+	
+	private static final long serialVersionUID = 8707899865819089652L;
 	private Boolean isByGender;
 	private Boolean isByField;
 	private Boolean isByDOB;

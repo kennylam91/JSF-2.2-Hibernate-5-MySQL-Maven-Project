@@ -84,13 +84,10 @@ public class StudentController implements Serializable {
 
 	private Map<Long, String> courseScoreMap;
 
-	private StudentFilter studentFilter;
-
 	@PostConstruct
 	public void init() {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		courseScoreMap = new HashMap<>();
-		studentFilter = new StudentFilter();
 	}
 
 	public GENDERS[] getGenders() {
@@ -229,9 +226,4 @@ public class StudentController implements Serializable {
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
 	}
 
-	public void filter() {
-		System.out.println("filter");
-
-		System.out.println(studentFilter);
-	}
 }

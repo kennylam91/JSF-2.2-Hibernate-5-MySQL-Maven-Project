@@ -51,21 +51,23 @@ public class StudentRepositoryImpl implements StudentRepository {
 		Transaction transaction = null;
 		Session session = null;
 		try {
-			session = this.sessionFactory.openSession();
+			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			org.hibernate.query.Query<StudentDto> query;
+			String queryString = SELECT_NEW_STUDENTDTO_SQL;
 			if (pagination.getSearchField().equals("all")) {
-				query = session.createQuery(SELECT_NEW_STUDENTDTO_SQL + "where s.code like :searchKeyword or "
+				queryString += "where s.code like :searchKeyword or "
 						+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or "
 						+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or "
 						+ "s.phone like :searchKeyword or" + " " + "s.email like :searchKeyword or "
 						+ "s.note like :searchKeyword " + " " + "order by " + orderedBy + " " + ascOrDesc
-						+ ",s.code asc");
-
+						+ ",s.code asc";
+				query = session.createQuery(queryString);
 				query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 			} else {
-				query = session.createQuery(SELECT_NEW_STUDENTDTO_SQL + "where " + fieldSearch + " "
-						+ "like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc + ",s.code asc");
+				queryString += "where " + fieldSearch + " "
+						+ "like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc + ",s.code asc";
+				query = session.createQuery(queryString);
 
 				query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 			}
