@@ -61,8 +61,6 @@ public class StudentRepositoryImpl implements StudentRepository {
 			// When using student filter function
 			if (((PaginationStudentList) pagination).getStudentFilter() != null) {
 				StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
-				Boolean[] filterByArray = { filter.getIsByGender(), filter.getIsByField(), filter.getIsByDOB(),
-						filter.getIsByScore() };
 				GENDERS genderFV = filter.getGenderFilterValue();
 				FIELDS fieldFV = filter.getFieldFilterValue();
 				Date dobFVFrom = filter.getDOBFilterFrom();
@@ -75,6 +73,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 				}
 				if (filter.getIsByField().booleanValue()) {
 					queryString += "s.field = :fieldFV" + " " + "and ";
+				}
+				if(filter.getIsByScore().booleanValue()) {
+					queryString += "s.avgScore between :scoreFVFrom and :scoreFVTo"+" "+ "and ";
+				}
+				if(filter.getIsByDOB().booleanValue()) {
+					queryString += "s.dob between :dobFVFrom and :dobFVTo" + " " +"and ";
 				}
 
 			}
@@ -105,6 +109,14 @@ public class StudentRepositoryImpl implements StudentRepository {
 				}
 				if (filter.getIsByField().booleanValue()) {
 					query.setParameter("fieldFV", fieldFV);
+				}
+				if(filter.getIsByScore().booleanValue()) {
+					query.setParameter("scoreFVFrom", scoreFVFrom);
+					query.setParameter("scoreFVTo", scoreFVTo);
+				}
+				if(filter.getIsByDOB().booleanValue()) {
+					query.setParameter("dobFVFrom", dobFVFrom);
+					query.setParameter("dobFVTo", dobFVTo);
 				}
 			}
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
