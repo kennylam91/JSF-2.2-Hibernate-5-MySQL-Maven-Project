@@ -8,7 +8,7 @@
    <title>CREATE NEW SUBJECT</title>
 </h:head>
 <h:body>
-   <h:form>
+   <h:form style="padding:20px;">
       <p:panelGrid id="create_subject_form">
          <p:row>
             <p:column colspan="2">
@@ -19,48 +19,78 @@
             </p:column>
          </p:row>
          <p:row>
-            <p:message for="create_subject_code"></p:message>
+            <p:column colspan="12">
+               <p:message for="create_subject_code"></p:message>
+            </p:column>
          </p:row>
          <p:row>
-            <p:outputLabel for="create_subject_name" value="Name:" />
-            <p:inputText id="create_subject_name" value="#{subjectController.newSubjectForm.name}" required="true"
-               label="name" />
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_name" value="Name:" />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_name" value="#{subjectController.newSubjectForm.name}" required="true"
+                  label="name" />
+            </p:column>
          </p:row>
          <p:row>
-            <p:message for="create_subject_name"></p:message>
+            <p:column colspan="12">
+               <p:message for="create_subject_name"></p:message>
+            </p:column>
          </p:row>
          <p:row>
-            <p:outputLabel for="create_subject_field" value="Field:" />
-            <p:inputText id="create_subject_field" value="#{subjectController.newSubjectForm.field}" required="true"
-               label="field" />
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_field" value="Field:" />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_field" value="#{subjectController.newSubjectForm.field}" required="true"
+                  label="field" />
+            </p:column>
          </p:row>
          <p:row>
-            <p:message for="create_subject_field"></p:message>
+            <p:column colspan="12">
+               <p:message for="create_subject_field"></p:message>
+            </p:column>
          </p:row>
          <p:row>
-            <p:outputLabel for="create_subject_description" value="Description: " />
-            <p:inputText id="create_subject_description" value="#{subjectController.newSubjectForm.description}"
-               label="description" />
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_description" value="Description: " />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_description" value="#{subjectController.newSubjectForm.description}"
+                  label="description" />
+            </p:column>
          </p:row>
          <p:row>
-            <p:message for="create_subject_description"></p:message>
+            <p:column colspan="12">
+               <p:message for="create_subject_description"></p:message>
+            </p:column>
          </p:row>
          <p:row>
-            <p:outputLabel for="create_subject_coefficient" value="Coefficient: " />
-            <p:inputText id="create_subject_coefficient" value="#{subjectController.newSubjectForm.coefficient}"
-               required="true" label="coefficient" />
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_coefficient" value="Coefficient: " />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_coefficient" value="#{subjectController.newSubjectForm.coefficient}"
+                  required="true" label="coefficient" />
+            </p:column>
          </p:row>
          <p:row>
-            <p:message for="create_subject_coefficient"></p:message>
+            <p:column colspan="12">
+               <p:message for="create_subject_coefficient"></p:message>
+            </p:column>
          </p:row>
-         <h:panelGroup style="display:flex;justify-content:center; margin-top:20px;">
-            <p:commandButton value="Save" actionListener="#{subjectController.createSubject}" validateClient="true"
-               update="@form">
-            </p:commandButton>
-            <p:commandButton value="Cancel" actionListener="#{subjectController.closeCreateSubjectDialog}"
-               process="@this">
-            </p:commandButton>
-         </h:panelGroup>
+         <p:row>
+            <p:column colspan="12">
+               <div style="display: flex; justify-content: center; margin-top: 20px;">
+                  <p:commandButton value="Save" actionListener="#{subjectController.createSubject}"
+                     validateClient="true" update="@form">
+                  </p:commandButton>
+                  <p:commandButton value="Cancel" actionListener="#{subjectController.closeCreateSubjectDialog}"
+                     process="@this">
+                  </p:commandButton>
+               </div>
+            </p:column>
+         </p:row>
       </p:panelGrid>
    </h:form>
 </h:body>

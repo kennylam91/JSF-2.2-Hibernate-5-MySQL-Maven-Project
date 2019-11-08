@@ -92,8 +92,8 @@ public class SubjectController implements Serializable {
 	public void openCreateSubjectDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
-		options.put("width","420px");
-		options.put("height","550px");
+		options.put("width","410px");
+		options.put("height","470px");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("modal", true);
