@@ -1,10 +1,13 @@
 package com.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 
 public interface StudentService {
 
@@ -23,4 +26,5 @@ public interface StudentService {
 	List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos);
 	
 	void updateStudentAvgScore(Long studentId);
+
 }

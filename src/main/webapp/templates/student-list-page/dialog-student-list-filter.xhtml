@@ -12,20 +12,20 @@
       <h:panelGrid cellpadding="5" cellspacing="5">
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Gender" value="#{studentFilter.isByGender}"></p:selectBooleanCheckbox>
+               <p:selectBooleanCheckbox itemLabel="By Gender" value="#{studentController.studentFilter.isByGender}"></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
-               <h:selectOneMenu id="filter_gender" value="#{studentFilter.genderFilterValue}"
+               <h:selectOneMenu id="filter_gender" value="#{studentController.studentFilter.genderFilterValue}"
                styleClass="select_input" style="font-size:13px;margin-top: 1rem">
                   <f:selectItems value="#{studentController.genders}"></f:selectItems>
                </h:selectOneMenu>
             </p:column>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Field" value="#{studentFilter.isByField}"
+               <p:selectBooleanCheckbox itemLabel="By Field" value="#{studentController.studentFilter.isByField}"
                style="padding-left:50px;"></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
-               <h:selectOneMenu id="filter_field" value="#{studentFilter.fieldFilterValue}"
+               <h:selectOneMenu id="filter_field" value="#{studentController.studentFilter.fieldFilterValue}"
                styleClass="select_input" style="font-size:13px;">
                   <f:selectItems value="#{studentController.fields}"></f:selectItems>
                </h:selectOneMenu>
@@ -33,12 +33,12 @@
          </p:row>
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By DOB" value="#{studentFilter.isByDOB}" > 
+               <p:selectBooleanCheckbox itemLabel="By DOB" value="#{studentController.studentFilter.isByDOB}" > 
                </p:selectBooleanCheckbox>
             </p:column>
             <p:column>
                <p:outputLabel value="From"></p:outputLabel>
-               <p:datePicker pattern="dd/MM/yyyy" value="#{studentFilter.DOBFilterFrom}"
+               <p:datePicker pattern="dd/MM/yyyy" value="#{studentController.studentFilter.DOBFilterFrom}"
                style="padding-left:32px ;margin-bottom: 1rem;margin-top: 1rem">
                </p:datePicker>
             </p:column>
@@ -46,28 +46,28 @@
          <p:row>
             <p:column>
                <p:outputLabel value="To" style="padding-left:100px"></p:outputLabel>
-               <p:datePicker value="#{studentFilter.DOBFilterTo}"
+               <p:datePicker value="#{studentController.studentFilter.DOBFilterTo}"
                pattern="dd/MM/yyyy" style="padding-left:50px"></p:datePicker>
             </p:column>
          </p:row>
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Score" value="#{studentFilter.isByScore}"
+               <p:selectBooleanCheckbox itemLabel="By Score" value="#{studentController.studentFilter.isByScore}"
                ></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
                <p:outputLabel value="From"></p:outputLabel>
-               <p:inputNumber value="#{studentFilter.scoreFilterFrom}"
+               <p:inputNumber value="#{studentController.studentFilter.scoreFilterFrom}"
                   inputStyle="margin-left:28px;width:60px;margin-right:19px;margin-bottom: 1rem;margin-top: 1rem">
                </p:inputNumber>
             </p:column>
             <p:column>
                <p:outputLabel value="To"></p:outputLabel>
-               <p:inputNumber value="#{studentFilter.scoreFilterTo}"
+               <p:inputNumber value="#{studentController.studentFilter.scoreFilterTo}"
                inputStyle="margin-left:28px;width:60px;"></p:inputNumber>
             </p:column>
          </p:row>
-         <p:commandButton value="Apply" actionListener="#{studentFilter.filter()}"
+         <p:commandButton value="Apply" actionListener="#{studentController.filter()}"
          style="display: block;margin-left: auto;margin-right: auto;"></p:commandButton>
       </h:panelGrid>
    </h:form>

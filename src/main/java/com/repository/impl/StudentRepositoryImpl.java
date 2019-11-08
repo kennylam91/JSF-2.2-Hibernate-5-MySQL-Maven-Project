@@ -1,6 +1,7 @@
 package com.repository.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -16,6 +17,8 @@ import com.beans.Score;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 import com.repository.StudentRepository;
 import com.util.HibernateUtil;
 
@@ -288,6 +291,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 				session.close();
 		}
 	}
+	
+	 
 
 	public void filterCourseScoreListBySubject(List<CourseScoreDto> courseScoreDtoList) {
 		for (int i = 0; i < courseScoreDtoList.size() - 1; i++) {
@@ -316,5 +321,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 		return avgScore;
 	}
+	
+	
 
 }

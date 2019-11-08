@@ -2,6 +2,7 @@ package com.service.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -10,6 +11,8 @@ import javax.faces.bean.SessionScoped;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 import com.repository.StudentRepository;
 import com.service.StudentService;
 
@@ -84,9 +87,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	@Override
 	public void updateStudentAvgScore(Long studentId) {
 		studentRepository.updateStudentAvgScore(studentId);
-		
+
 	}
-	
-	
-	
+
 }

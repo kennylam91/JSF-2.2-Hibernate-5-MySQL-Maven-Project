@@ -28,6 +28,7 @@ import com.beans.Score;
 import com.beans.ScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
+import com.beans.StudentFilter;
 import com.beans.StudentForm;
 import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
@@ -83,16 +84,19 @@ public class StudentController implements Serializable {
 
 	private Map<Long, String> courseScoreMap;
 
+	private StudentFilter studentFilter;
+
 	@PostConstruct
 	public void init() {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		courseScoreMap = new HashMap<>();
+		studentFilter = new StudentFilter();
 	}
-	
+
 	public GENDERS[] getGenders() {
 		return GENDERS.values();
 	}
-	
+
 	public FIELDS[] getFields() {
 		return FIELDS.values();
 	}
@@ -217,11 +221,17 @@ public class StudentController implements Serializable {
 	public String getScore(Long courseId) {
 		return courseScoreMap.get(courseId);
 	}
-	
+
 	public void openFilterDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("width","470px");
-		options.put("height","400px");
+		options.put("width", "470px");
+		options.put("height", "400px");
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
+	}
+
+	public void filter() {
+		System.out.println("filter");
+
+		System.out.println(studentFilter);
 	}
 }

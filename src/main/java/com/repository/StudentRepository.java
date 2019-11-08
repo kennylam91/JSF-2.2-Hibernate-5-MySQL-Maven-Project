@@ -4,11 +4,14 @@
 package com.repository;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 
 public interface StudentRepository extends Serializable {
 
@@ -27,5 +30,6 @@ public interface StudentRepository extends Serializable {
 	List<Student> findStudentsByIds(List<Long> Ids);
 	
 	void updateStudentAvgScore(Long studentId);
+
 
 }

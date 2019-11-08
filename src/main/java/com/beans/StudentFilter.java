@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.constant.FIELDS;
 import com.constant.GENDERS;
+import com.controller.StudentController;
 import com.service.StudentService;
 
 import lombok.AllArgsConstructor;
@@ -17,30 +18,28 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ManagedBean(name = "studentFilter")
-@SessionScoped
+@ToString
 public class StudentFilter {
 
 	private Boolean isByGender;
 	private Boolean isByField;
 	private Boolean isByDOB;
 	private Boolean isByScore;
-	
+
 	private GENDERS genderFilterValue;
 	private FIELDS fieldFilterValue;
 	private Date DOBFilterFrom;
 	private Date DOBFilterTo;
-	private Float ScoreFilterFrom;
-	private Float ScoreFilterTo;
+	private Float scoreFilterFrom;
+	private Float scoreFilterTo;
 	
-	@PostConstruct
-	public void init() {
+	public StudentFilter() {
 		isByGender = false;
 		isByField = false;
 		isByDOB = false;
@@ -49,25 +48,10 @@ public class StudentFilter {
 		fieldFilterValue = null;
 		DOBFilterFrom = null;
 		DOBFilterTo = null;
-		ScoreFilterFrom = new Float(0.0f);
-		ScoreFilterTo = new Float(0.0f);
-		
+		scoreFilterFrom = new Float(0.0f);
+		scoreFilterTo = new Float(0.0f);
 	}
+
 	
-	@ManagedProperty(value = "#{studentService}")
-	StudentService studentService;
-	
-	public void filter() {
-		System.out.println(isByGender);
-		System.out.println(isByField);
-		System.out.println(isByDOB);
-		System.out.println(isByScore);
-		System.out.println(genderFilterValue);
-		System.out.println(fieldFilterValue);
-		System.out.println(DOBFilterFrom);
-		System.out.println(DOBFilterTo);
-		System.out.println(ScoreFilterFrom);
-		System.out.println(ScoreFilterTo);
-	}
-	
+
 }
