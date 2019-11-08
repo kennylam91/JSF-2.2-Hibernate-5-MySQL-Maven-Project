@@ -17,6 +17,7 @@ import com.beans.Score;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
+import com.beans.pagination.PaginationStudentList;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.repository.StudentRepository;
@@ -54,23 +55,31 @@ public class StudentRepositoryImpl implements StudentRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			org.hibernate.query.Query<StudentDto> query;
-			String queryString = SELECT_NEW_STUDENTDTO_SQL;
-			if (pagination.getSearchField().equals("all")) {
-				queryString += "where s.code like :searchKeyword or "
-						+ "s.firstName like :searchKeyword or" + " " + "s.lastName like :searchKeyword or "
-						+ "s.gender like :searchKeyword or" + " " + "s.field like :searchKeyword or "
-						+ "s.phone like :searchKeyword or" + " " + "s.email like :searchKeyword or "
-						+ "s.note like :searchKeyword " + " " + "order by " + orderedBy + " " + ascOrDesc
-						+ ",s.code asc";
-				query = session.createQuery(queryString);
-				query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
-			} else {
-				queryString += "where " + fieldSearch + " "
-						+ "like :searchKeyword " + "order by " + orderedBy + " " + ascOrDesc + ",s.code asc";
-				query = session.createQuery(queryString);
+			String queryString = SELECT_NEW_STUDENTDTO_SQL + "where ";
+			if (((PaginationStudentList) pagination).getStudentFilter().getIsByField().booleanValue()) {
+				queryString += "s.field like '%" + FIELDS.JAVA + "%' and ";
 
-				query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 			}
+
+			if (pagination.getSearchField().equals("all")) {
+				queryString += "(s.code like :searchKeyword or " + "s.firstName like :searchKeyword or" + " "
+						+ "s.lastName like :searchKeyword or " + "s.gender like :searchKeyword or" + " "
+						+ "s.field like :searchKeyword or " + "s.phone like :searchKeyword or" + " "
+						+ "s.email like :searchKeyword or " + "s.note like :searchKeyword" + " )";
+			} else {
+				queryString += fieldSearch + " " + "like :searchKeyword" + " ";
+
+			}
+
+			queryString += "order by " + orderedBy + " " + ascOrDesc + ",s.code asc";
+			query = session.createQuery(queryString);
+			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+
+			/*
+			 * if (((PaginationStudentList)
+			 * pagination).getStudentFilter().getIsByField().booleanValue()) {
+			 * query.setParameter("fieldFilterValue", FIELDS.JAVA); }
+			 */
 
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
 			query.setMaxResults(pagination.getRowsPerPage());
@@ -293,8 +302,6 @@ public class StudentRepositoryImpl implements StudentRepository {
 				session.close();
 		}
 	}
-	
-	 
 
 	public void filterCourseScoreListBySubject(List<CourseScoreDto> courseScoreDtoList) {
 		for (int i = 0; i < courseScoreDtoList.size() - 1; i++) {
@@ -323,7 +330,5 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 		return avgScore;
 	}
-	
-	
 
 }

@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,6 +53,7 @@ public class Course {
 	@Column(name = "finish_time", nullable = true)
 	private Date finishTime;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
 	private COURSE_STATUSES status;
 

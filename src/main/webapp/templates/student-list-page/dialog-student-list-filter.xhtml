@@ -12,20 +12,20 @@
       <h:panelGrid cellpadding="5" cellspacing="5">
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Gender" value="#{paginationStudentList.studentFilter.isByGender}"></p:selectBooleanCheckbox>
+               <p:selectBooleanCheckbox itemLabel="By Gender" value="#{studentController.paginationStudentList.studentFilter.isByGender}"></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
-               <h:selectOneMenu id="filter_gender" value="#{paginationStudentList.studentFilter.genderFilterValue}"
+               <h:selectOneMenu id="filter_gender" value="#{studentController.paginationStudentList.studentFilter.genderFilterValue}"
                styleClass="select_input" style="font-size:13px;margin-top: 1rem">
                   <f:selectItems value="#{studentController.genders}"></f:selectItems>
                </h:selectOneMenu>
             </p:column>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Field" value="#{paginationStudentList.studentFilter.isByField}"
+               <p:selectBooleanCheckbox itemLabel="By Field" value="#{studentController.paginationStudentList.studentFilter.isByField}"
                style="padding-left:50px;"></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
-               <h:selectOneMenu id="filter_field" value="#{paginationStudentList.studentFilter.fieldFilterValue}"
+               <h:selectOneMenu id="filter_field" value="#{studentController.paginationStudentList.studentFilter.fieldFilterValue}"
                styleClass="select_input" style="font-size:13px;">
                   <f:selectItems value="#{studentController.fields}"></f:selectItems>
                </h:selectOneMenu>
@@ -33,12 +33,12 @@
          </p:row>
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By DOB" value="#{paginationStudentList.studentFilter.isByDOB}" > 
+               <p:selectBooleanCheckbox itemLabel="By DOB" value="#{studentController.paginationStudentList.studentFilter.isByDOB}" > 
                </p:selectBooleanCheckbox>
             </p:column>
             <p:column>
                <p:outputLabel value="From"></p:outputLabel>
-               <p:datePicker pattern="dd/MM/yyyy" value="#{paginationStudentList.studentFilter.DOBFilterFrom}"
+               <p:datePicker pattern="dd/MM/yyyy" value="#{studentController.paginationStudentList.studentFilter.DOBFilterFrom}"
                style="padding-left:32px ;margin-bottom: 1rem;margin-top: 1rem">
                </p:datePicker>
             </p:column>
@@ -46,24 +46,24 @@
          <p:row>
             <p:column>
                <p:outputLabel value="To" style="padding-left:100px"></p:outputLabel>
-               <p:datePicker value="#{paginationStudentList.studentFilter.DOBFilterTo}"
+               <p:datePicker value="#{studentController.paginationStudentList.studentFilter.DOBFilterTo}"
                pattern="dd/MM/yyyy" style="padding-left:50px"></p:datePicker>
             </p:column>
          </p:row>
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Score" value="#{paginationStudentList.studentFilter.isByScore}"
+               <p:selectBooleanCheckbox itemLabel="By Score" value="#{studentController.paginationStudentList.studentFilter.isByScore}"
                ></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
                <p:outputLabel value="From"></p:outputLabel>
-               <p:inputNumber value="#{paginationStudentList.studentFilter.scoreFilterFrom}"
+               <p:inputNumber value="#{studentController.paginationStudentList.studentFilter.scoreFilterFrom}"
                   inputStyle="margin-left:28px;width:60px;margin-right:19px;margin-bottom: 1rem;margin-top: 1rem">
                </p:inputNumber>
             </p:column>
             <p:column>
                <p:outputLabel value="To"></p:outputLabel>
-               <p:inputNumber value="#{paginationStudentList.studentFilter.scoreFilterTo}"
+               <p:inputNumber value="#{studentController.paginationStudentList.studentFilter.scoreFilterTo}"
                inputStyle="margin-left:28px;width:60px;"></p:inputNumber>
             </p:column>
          </p:row>

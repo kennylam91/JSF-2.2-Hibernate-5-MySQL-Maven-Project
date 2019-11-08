@@ -86,6 +86,8 @@ public class StudentController implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		StudentFilter studentFilter = new StudentFilter();
+		((PaginationStudentList)paginationStudentList).setStudentFilter(studentFilter);
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
 		courseScoreMap = new HashMap<>();
 	}

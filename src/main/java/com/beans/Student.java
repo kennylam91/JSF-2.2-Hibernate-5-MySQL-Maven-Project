@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,9 +55,11 @@ public class Student {
 	@Column(name = "dob", nullable = false)
 	private Date dob;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "gender", nullable = false)
 	private GENDERS gender;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "field", nullable = false)
 	private FIELDS field;
 

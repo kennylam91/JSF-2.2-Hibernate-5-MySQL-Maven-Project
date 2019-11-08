@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,6 +45,7 @@ public class Subject {
 	@Column(name = "name", nullable = false)
 	private String name;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "field", nullable = true)
 	private FIELDS field;
 
