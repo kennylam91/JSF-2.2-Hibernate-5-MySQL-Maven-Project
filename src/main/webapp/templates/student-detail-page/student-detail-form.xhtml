@@ -10,7 +10,8 @@
       <div class="wpsp-card">
          <h3 class="wpsp-card-title">STUDENT DETAILS</h3>
          <h:form id="student-detail-form" styleClass="ui-g">
-            <p:panelGrid styleClass="ui-g-4" columns="2" style="margin-top:1rem">
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <h:panelGrid styleClass="ui-g-4" columns="2" cellpadding="10" cellspacing="15" style="margin-top:1rem">
                <f:facet name="header">
                   <p:outputLabel value="PERSONAL INFORMATION"></p:outputLabel>
                </f:facet>
@@ -61,14 +62,14 @@
                   <p:inputText value="#{studentController.selectedStudent.email}" id="email" required="true"
                      requiredMessage="Email is required" />
                </p:inplace>
-               <p:outputLabel>Note:</p:outputLabel>
-               <p:inplace editor="true">
-                  <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
-               </p:inplace>
                <p:outputLabel>Average Score:</p:outputLabel>
                <h:outputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false">
                   <f:convertNumber pattern="#0.00"></f:convertNumber>
                </h:outputText>
+               <p:outputLabel>Note:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
+               </p:inplace>
                <f:facet name="footer">
                   <div align="center">
                      <p:commandButton value="Save" styleClass="save" action="#{studentController.update}"
@@ -78,7 +79,7 @@
                      </p:commandButton>
                   </div>
                </f:facet>
-            </p:panelGrid>
+            </h:panelGrid>
             <p:panelGrid styleClass="ui-g-8" columns="2"
                style="padding-top:1rem;padding-left:1rem;display:inline-block;">
                <f:facet name="header">

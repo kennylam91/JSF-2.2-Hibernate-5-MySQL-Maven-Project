@@ -5,49 +5,112 @@
 <h:head>
    <ui:include src="/templates/head_template.xhtml"></ui:include>
    <ui:include src="/templates/javascript.xhtml"></ui:include>
+   <title>CREATE NEW STUDENT</title>
 </h:head>
 <h:body>
    <h:form>
-      <p:panelGrid id="create_student_form" columns="2" cellpadding="5">
-         <f:facet name="header">CREATE NEW STUDENT
-    </f:facet>
-         <h:outputLabel for="code" value="Code:" />
-         <p:inputText id="code" value="#{studentController.newStudent.code}" required="true" />
-         <h:outputLabel for="first_name" value="Firstname:" />
-         <p:inputText id="first_name" value="#{studentController.newStudent.firstName}" required="true"
-            label="first_name" />
-         <h:outputLabel for="last_name" value="Lastname:" />
-         <p:inputText id="last_name" value="#{studentController.newStudent.lastName}" required="true" label="last_name" />
-         <h:outputLabel for="dob" value="Date of birth:" />
-         <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentController.newStudent.dob}">
-         </p:datePicker>
-         <h:outputLabel for="gender" value="Gender:" />
-         <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentController.newStudent.gender}"
-            style="font-size:12px;">
-            <f:selectItems value="#{studentController.genders}"></f:selectItems>
-         </h:selectOneMenu>
-         <h:outputLabel for="field" value="Field:" />
-         <h:selectOneMenu id="field" styleClass="select_input" value="#{studentController.newStudent.field}"
-            style="font-size:12px;">
-            <f:selectItems value="#{studentController.fields}"></f:selectItems>
-         </h:selectOneMenu>
-         <h:outputLabel for="address" value="Address:" />
-         <p:inputText id="address" value="#{studentController.newStudent.address}" required="true" label="address" />
-         <h:outputLabel for="phone" value="Phone:" />
-         <p:inputText id="phone" value="#{studentController.newStudent.phone}" required="true" label="phone" />
-         <h:outputLabel for="email" value="Email:" />
-         <p:inputText id="email" value="#{studentController.newStudent.email}" required="true" label="email" />
-         <f:facet name="footer">
-            <div align="center">
-               <p:commandButton value="Save" actionListener="#{studentController.createStudent}" validateClient="true"
-                  update="@form ">
-               </p:commandButton>
-               <p:commandButton value="Cancel" actionListener="#{studentController.closeCreateStudentDialog}"
-                  process="@this">
-               </p:commandButton>
-            </div>
-         </f:facet>
+      <p:panelGrid id="create_student_form" columnClasses="p-col-12" columns="3" layout="grid">
+         <p:column colspan="1">
+            <p:outputLabel for="code" value="Code:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:inputText id="code" value="#{studentController.newStudent.code}" required="true" label="Code" />
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="code" showSummary="false"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="first_name" value="Firstname:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:inputText id="first_name" value="#{studentController.newStudent.firstName}" required="true"
+               label="first_name" />
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="first_name"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="last_name" value="Lastname:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:inputText id="last_name" value="#{studentController.newStudent.lastName}" required="true"
+               label="last_name" />
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="last_name"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="dob" value="Date of birth:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:datePicker id="dob" pattern="dd/MM/yyyy" value="#{studentController.newStudent.dob}" label="DOB"
+               required="true">
+            </p:datePicker>
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="dob"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="gender" value="Gender:" />
+         </p:column>
+         <p:column colspan="5">
+            <h:selectOneMenu id="gender" styleClass="select_input" value="#{studentController.newStudent.gender}"
+               required="true" style="font-size:13px;">
+               <f:selectItems value="#{studentController.genders}"></f:selectItems>
+            </h:selectOneMenu>
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="gender"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="field" value="Field:" />
+         </p:column>
+         <p:column colspan="5">
+            <h:selectOneMenu id="field" styleClass="select_input" value="#{studentController.newStudent.field}"
+               required="true" style="font-size:13px;">
+               <f:selectItems value="#{studentController.fields}"></f:selectItems>
+            </h:selectOneMenu>
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="field"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="address" value="Address:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:inputText id="address" value="#{studentController.newStudent.address}" required="true" label="address" />
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="address"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="phone" value="Phone:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:inputText id="phone" value="#{studentController.newStudent.phone}" required="true" label="phone" />
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="phone"></p:message>
+         </p:column>
+         <p:column colspan="1">
+            <p:outputLabel for="email" value="Email:" />
+         </p:column>
+         <p:column colspan="5">
+            <p:inputText id="email" value="#{studentController.newStudent.email}" required="true" label="email" />
+         </p:column>
+         <p:column colspan="6">
+            <p:message for="email"></p:message>
+         </p:column>
+        
       </p:panelGrid>
+      <h:panelGroup style="display:flex;justify-content:center; margin-top:20px;" >
+         <p:commandButton value="Save" actionListener="#{studentController.createStudent}" validateClient="true"
+               update="@form " style="width:100px;margin-right:20px">
+            </p:commandButton>
+            <p:commandButton value="Cancel" actionListener="#{studentController.closeCreateStudentDialog}"
+               process="@this" style="width:100px;">
+            </p:commandButton>
+      </h:panelGroup>
    </h:form>
 </h:body>
 </html>

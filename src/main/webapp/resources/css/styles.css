@@ -97,3 +97,6 @@ body .ui-datatable thead th {
 .ui-datatable th.ui-state-active {
 	background: darkslategray;
 }
+.ui-growl{
+	top:85px;
+}

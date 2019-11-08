@@ -3,57 +3,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <h:outputStylesheet library="primefaces" name="components.css" />
-   <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
-   <h:outputStylesheet library="primefaces-omega" name="theme.css" />
-   <h:outputStylesheet library="css" name="widget.css" />
-   <h:outputStylesheet library="css" name="wpsp-grid.css" />
-   <h:outputStylesheet library="css" name="wpsp-resposive.css" />
-   <h:outputStylesheet library="css" name="font-awesome.min.css" />
-   <h:outputStylesheet library="css" name="template.css" />
-   <h:outputStylesheet library="css" name="styles.css" />
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
+   <title>CREATE NEW COURSE</title>
 </h:head>
 <h:body>
    <h:form id="create_course_dialog_form">
-      <p:panelGrid id="create_course_form" columns="2" cellpadding="5">
-         <f:facet name="header">CREATE NEW COURSE</f:facet>
-         <h:outputLabel for="new_course_code" value="Code:" />
+      <p:panelGrid id="create_course_form" columns="3" layout="grid">
+         <p:outputLabel for="new_course_code" value="Code:" />         
          <p:inputText id="new_course_code" value="#{courseController.newCourseForm.code}" required="true" />
-         <h:outputLabel for="new_course_name" value="Name:" />
+         <p:message for="new_course_code" ></p:message>
+         
+         <p:outputLabel for="new_course_name" value="Name:" />
          <p:inputText id="new_course_name" value="#{courseController.newCourseForm.name}" required="true" label="name" />
-         <h:outputLabel for="new_course_beginTime" value="Begin Time:" />
+         <p:message for="new_course_name" ></p:message>
+         
+         <p:outputLabel for="new_course_beginTime" value="Begin Time:" />
          <p:datePicker id="new_course_beginTime" pattern="dd/MM/yyyy"
             value="#{courseController.newCourseForm.beginTime}" required="true">
          </p:datePicker>
-         <h:outputLabel for="new_course_finishTime" value="Finish Time:" />
+         <p:message for="new_course_beginTime" ></p:message>
+         
+         <p:outputLabel for="new_course_finishTime" value="Finish Time:" />
          <p:datePicker id="new_course_finishTime" pattern="dd/MM/yyyy"
             value="#{courseController.newCourseForm.finishTime}">
          </p:datePicker>
-         <h:outputLabel for="new_course_status" value="Status" />
+         <p:message for="new_course_finishTime" ></p:message>
+         
+         <p:outputLabel for="new_course_status" value="Status" />
          <h:selectOneMenu id="new_course_status" value="#{courseController.newCourseForm.status}"
             styleClass="select_input" style="font-size:12px;">
             <f:selectItems value="#{courseController.courseStatuses}"/>
          </h:selectOneMenu>
-         <h:outputLabel for="new_course_teacher" value="Teacher:" />
+         <p:message for="new_course_status" ></p:message>
+         
+         <p:outputLabel for="new_course_teacher" value="Teacher:" />
          <p:inputText id="new_course_teacher" value="#{courseController.newCourseForm.teacher}" required="true"
             label="teacher" />
-         <h:outputLabel for="new_course_capacity" value="Capacity:" />
+         <p:message for="new_course_teacher" ></p:message>   
+            
+         <p:outputLabel for="new_course_capacity" value="Capacity:" />
          <p:inputText id="new_course_capacity" value="#{courseController.newCourseForm.capacity}" required="true"
             label="capacity" />
-         <h:outputLabel for="new_course_subject" value="Subject:" />
+         <p:message for="new_course_capacity" ></p:message>   
+            
+         <p:outputLabel for="new_course_subject" value="Subject:" />
          <h:panelGroup>
             <h:outputText id="new_course_subject" value="#{courseController.newCourseForm.subject}" style="width:100%">
             </h:outputText>
-            <p:commandButton value="Choose" style="margin-left:10px; color:red" immediate="true"
+            <p:commandButton value="Choose" style="margin-left:10px;" immediate="true"
                actionListener="#{courseController.openSubjectListDialog}">
                <p:ajax event="dialogReturn" listener="#{courseController.onSubjectSelectedDialogClose}"
                   update="@form:new_course_subject"></p:ajax>
             </p:commandButton>
+            
          </h:panelGroup>
-         <f:facet name="footer">
-            <div align="center">
+         <p:message for="new_course_subject" ></p:message>
+         
+         <f:facet name="footer" >
+            <div align="center" style="padding:10px" >
                <p:commandButton value="Save" actionListener="#{courseController.createCourse}" validateClient="true"
-                  update="@form">
+                  update="@form" style="width:80px; margin-right:20px">
                </p:commandButton>
                <p:commandButton value="Cancel" actionListener="#{courseController.closeCreateCourseDialog}"
                   process="@this">
