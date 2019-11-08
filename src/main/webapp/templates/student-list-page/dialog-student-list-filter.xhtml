@@ -12,55 +12,63 @@
       <h:panelGrid cellpadding="5" cellspacing="5">
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Gender"></p:selectBooleanCheckbox>
+               <p:selectBooleanCheckbox itemLabel="By Gender" value="#{studentFilter.isByGender}"></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
-               <h:selectOneMenu id="filter_gender" styleClass="select_input" style="font-size:12px;margin-top: 1rem">
+               <h:selectOneMenu id="filter_gender" value="#{studentFilter.genderFilterValue}"
+               styleClass="select_input" style="font-size:13px;margin-top: 1rem">
                   <f:selectItems value="#{studentController.genders}"></f:selectItems>
                </h:selectOneMenu>
             </p:column>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Field" style="padding-left:50px;"></p:selectBooleanCheckbox>
+               <p:selectBooleanCheckbox itemLabel="By Field" value="#{studentFilter.isByField}"
+               style="padding-left:50px;"></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
-               <h:selectOneMenu id="field" styleClass="select_input" style="font-size:12px;">
+               <h:selectOneMenu id="filter_field" value="#{studentFilter.fieldFilterValue}"
+               styleClass="select_input" style="font-size:13px;">
                   <f:selectItems value="#{studentController.fields}"></f:selectItems>
                </h:selectOneMenu>
             </p:column>
          </p:row>
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By DOB">
+               <p:selectBooleanCheckbox itemLabel="By DOB" value="#{studentFilter.isByDOB}" > 
                </p:selectBooleanCheckbox>
             </p:column>
             <p:column>
                <p:outputLabel value="From"></p:outputLabel>
-               <p:datePicker pattern="dd/MM/yyyy" style="padding-left:32px ;margin-bottom: 1rem;margin-top: 1rem">
+               <p:datePicker pattern="dd/MM/yyyy" value="#{studentFilter.DOBFilterFrom}"
+               style="padding-left:32px ;margin-bottom: 1rem;margin-top: 1rem">
                </p:datePicker>
             </p:column>
          </p:row>
          <p:row>
             <p:column>
                <p:outputLabel value="To" style="padding-left:100px"></p:outputLabel>
-               <p:datePicker pattern="dd/MM/yyyy" style="padding-left:50px"></p:datePicker>
+               <p:datePicker value="#{studentFilter.DOBFilterTo}"
+               pattern="dd/MM/yyyy" style="padding-left:50px"></p:datePicker>
             </p:column>
          </p:row>
          <p:row>
             <p:column>
-               <p:selectBooleanCheckbox itemLabel="By Score"></p:selectBooleanCheckbox>
+               <p:selectBooleanCheckbox itemLabel="By Score" value="#{studentFilter.isByScore}"
+               ></p:selectBooleanCheckbox>
             </p:column>
             <p:column>
                <p:outputLabel value="From"></p:outputLabel>
-               <p:inputNumber
+               <p:inputNumber value="#{studentFilter.scoreFilterFrom}"
                   inputStyle="margin-left:28px;width:60px;margin-right:19px;margin-bottom: 1rem;margin-top: 1rem">
                </p:inputNumber>
             </p:column>
             <p:column>
                <p:outputLabel value="To"></p:outputLabel>
-               <p:inputNumber inputStyle="margin-left:28px;width:60px;"></p:inputNumber>
+               <p:inputNumber value="#{studentFilter.scoreFilterTo}"
+               inputStyle="margin-left:28px;width:60px;"></p:inputNumber>
             </p:column>
          </p:row>
-         <p:commandButton value="Apply" style="display: block;margin-left: auto;margin-right: auto;"></p:commandButton>
+         <p:commandButton value="Apply" actionListener="#{studentFilter.filter()}"
+         style="display: block;margin-left: auto;margin-right: auto;"></p:commandButton>
       </h:panelGrid>
    </h:form>
 </h:body>
