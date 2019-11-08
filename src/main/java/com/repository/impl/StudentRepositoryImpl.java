@@ -43,7 +43,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	private final String SELECT_NEW_STUDENTDTO_SQL = "select new "
 			+ "com.beans.StudentDto(s.id,s.code,s.firstName,s.lastName,s.gender,s.field,s.dob,s.phone,s.email,s.note,s.avgScore) "
-			+ "from Student s ";
+			+ "from Student s where ";
 
 	@SuppressWarnings("unchecked")
 	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
@@ -52,21 +52,15 @@ public class StudentRepositoryImpl implements StudentRepository {
 		String fieldSearch = getStudentField(pagination.getSearchField());
 		Transaction transaction = null;
 		Session session = null;
+		StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			org.hibernate.query.Query<StudentDto> query;
-			String queryString = SELECT_NEW_STUDENTDTO_SQL + "where ";
+			String queryString = SELECT_NEW_STUDENTDTO_SQL;
 
 			// When using student filter function
-			if (((PaginationStudentList) pagination).getStudentFilter() != null) {
-				StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
-				GENDERS genderFV = filter.getGenderFilterValue();
-				FIELDS fieldFV = filter.getFieldFilterValue();
-				Date dobFVFrom = filter.getDOBFilterFrom();
-				Date dobFVTo = filter.getDOBFilterTo();
-				Float scoreFVFrom = filter.getScoreFilterFrom();
-				Float scoreFVTo = filter.getScoreFilterTo();
+			if (filter != null) {
 
 				if (filter.getIsByGender().booleanValue()) {
 					queryString += "s.gender = :genderFV" + " " + "and ";
@@ -74,13 +68,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 				if (filter.getIsByField().booleanValue()) {
 					queryString += "s.field = :fieldFV" + " " + "and ";
 				}
-				if(filter.getIsByScore().booleanValue()) {
-					queryString += "s.avgScore between :scoreFVFrom and :scoreFVTo"+" "+ "and ";
+				if (filter.getIsByScore().booleanValue()) {
+					queryString += "s.avgScore between :scoreFVFrom and :scoreFVTo" + " " + "and ";
 				}
-				if(filter.getIsByDOB().booleanValue()) {
-					queryString += "s.dob between :dobFVFrom and :dobFVTo" + " " +"and ";
+				if (filter.getIsByDOB().booleanValue()) {
+					queryString += "s.dob between :dobFVFrom and :dobFVTo" + " " + "and ";
 				}
-
 			}
 
 			if (pagination.getSearchField().equals("all")) {
@@ -96,27 +89,20 @@ public class StudentRepositoryImpl implements StudentRepository {
 			queryString += "order by " + orderedBy + " " + ascOrDesc + ",s.code asc";
 			query = session.createQuery(queryString);
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
-			if (((PaginationStudentList) pagination).getStudentFilter() != null) {
-				StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
-				GENDERS genderFV = filter.getGenderFilterValue();
-				FIELDS fieldFV = filter.getFieldFilterValue();
-				Date dobFVFrom = filter.getDOBFilterFrom();
-				Date dobFVTo = filter.getDOBFilterTo();
-				Float scoreFVFrom = filter.getScoreFilterFrom();
-				Float scoreFVTo = filter.getScoreFilterTo();
+			if (filter != null) {
 				if (filter.getIsByGender().booleanValue()) {
-					query.setParameter("genderFV", genderFV);
+					query.setParameter("genderFV", filter.getGenderFilterValue());
 				}
 				if (filter.getIsByField().booleanValue()) {
-					query.setParameter("fieldFV", fieldFV);
+					query.setParameter("fieldFV", filter.getFieldFilterValue());
 				}
-				if(filter.getIsByScore().booleanValue()) {
-					query.setParameter("scoreFVFrom", scoreFVFrom);
-					query.setParameter("scoreFVTo", scoreFVTo);
+				if (filter.getIsByScore().booleanValue()) {
+					query.setParameter("scoreFVFrom", filter.getScoreFilterFrom());
+					query.setParameter("scoreFVTo", filter.getScoreFilterTo());
 				}
-				if(filter.getIsByDOB().booleanValue()) {
-					query.setParameter("dobFVFrom", dobFVFrom);
-					query.setParameter("dobFVTo", dobFVTo);
+				if (filter.getIsByDOB().booleanValue()) {
+					query.setParameter("dobFVFrom", filter.getDOBFilterFrom());
+					query.setParameter("dobFVTo", filter.getDOBFilterTo());
 				}
 			}
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
