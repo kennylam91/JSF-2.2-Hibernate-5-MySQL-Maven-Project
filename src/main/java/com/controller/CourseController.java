@@ -173,8 +173,8 @@ public class CourseController implements Serializable {
 	public void openCreateCourseDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
-		options.put("width", "670");
-		options.put("height", "470");
+		options.put("width", "670px");
+		options.put("height", "470px");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("modal", true);
