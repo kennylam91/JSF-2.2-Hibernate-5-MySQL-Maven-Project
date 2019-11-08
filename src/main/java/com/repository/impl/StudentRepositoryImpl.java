@@ -16,6 +16,7 @@ import com.beans.CourseScoreDto;
 import com.beans.Score;
 import com.beans.Student;
 import com.beans.StudentDto;
+import com.beans.StudentFilter;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
 import com.constant.FIELDS;
@@ -56,8 +57,25 @@ public class StudentRepositoryImpl implements StudentRepository {
 			transaction = session.beginTransaction();
 			org.hibernate.query.Query<StudentDto> query;
 			String queryString = SELECT_NEW_STUDENTDTO_SQL + "where ";
-			if (((PaginationStudentList) pagination).getStudentFilter().getIsByField().booleanValue()) {
-				queryString += "s.field = :fieldFilterValue" + " " + "and ";
+
+			// When using student filter function
+			if (((PaginationStudentList) pagination).getStudentFilter() != null) {
+				StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
+				Boolean[] filterByArray = { filter.getIsByGender(), filter.getIsByField(), filter.getIsByDOB(),
+						filter.getIsByScore() };
+				GENDERS genderFV = filter.getGenderFilterValue();
+				FIELDS fieldFV = filter.getFieldFilterValue();
+				Date dobFVFrom = filter.getDOBFilterFrom();
+				Date dobFVTo = filter.getDOBFilterTo();
+				Float scoreFVFrom = filter.getScoreFilterFrom();
+				Float scoreFVTo = filter.getScoreFilterTo();
+
+				if (filter.getIsByGender().booleanValue()) {
+					queryString += "s.gender = :genderFV" + " " + "and ";
+				}
+				if (filter.getIsByField().booleanValue()) {
+					queryString += "s.field = :fieldFV" + " " + "and ";
+				}
 
 			}
 
@@ -74,11 +92,21 @@ public class StudentRepositoryImpl implements StudentRepository {
 			queryString += "order by " + orderedBy + " " + ascOrDesc + ",s.code asc";
 			query = session.createQuery(queryString);
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
-
-			if (((PaginationStudentList) pagination).getStudentFilter().getIsByField().booleanValue()) {
-				query.setParameter("fieldFilterValue", FIELDS.JAVA);
+			if (((PaginationStudentList) pagination).getStudentFilter() != null) {
+				StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
+				GENDERS genderFV = filter.getGenderFilterValue();
+				FIELDS fieldFV = filter.getFieldFilterValue();
+				Date dobFVFrom = filter.getDOBFilterFrom();
+				Date dobFVTo = filter.getDOBFilterTo();
+				Float scoreFVFrom = filter.getScoreFilterFrom();
+				Float scoreFVTo = filter.getScoreFilterTo();
+				if (filter.getIsByGender().booleanValue()) {
+					query.setParameter("genderFV", genderFV);
+				}
+				if (filter.getIsByField().booleanValue()) {
+					query.setParameter("fieldFV", fieldFV);
+				}
 			}
-
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
 			query.setMaxResults(pagination.getRowsPerPage());
 			List<StudentDto> studentDtoList = query.getResultList();
