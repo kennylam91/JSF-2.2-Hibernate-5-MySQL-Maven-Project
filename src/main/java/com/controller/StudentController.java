@@ -227,5 +227,9 @@ public class StudentController implements Serializable {
 		options.put("height", "400px");
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
 	}
+	
+	public void closeStudentFilterDialog() {
+		PrimeFaces.current().dialog().closeDynamic(null);
+	}
 
 }

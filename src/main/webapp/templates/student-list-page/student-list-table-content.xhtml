@@ -12,10 +12,16 @@
             <div class="wpsp-dataTable-top ui-g">
                <div class="ui-g-4" align="left">
                   <p:menuButton id="action_for_multi" value="Options">
-                     <p:menuitem actionListener="#{studentController.onActionForMultiChange}"
-                        update=":form_student_list:student_list_table" value="Delete All" process="student_list_table">
+                     <p:menuitem>
+                        <p:commandLink actionListener="#{studentController.onActionForMultiChange}"
+                           update=":form_student_list:student_list_table" value="Delete All"
+                           process="student_list_table"></p:commandLink>
                      </p:menuitem>
-                     <p:menuitem value="Filter Box" actionListener="#{studentController.openFilterDialog}">
+                     <p:menuitem>
+                        <p:commandLink value="FilterBox" actionListener="#{studentController.openFilterDialog}">
+                           <p:ajax event="dialogReturn" listener="#{studentController.onPaginationChange()}"
+                              update="main-content"></p:ajax>
+                        </p:commandLink>
                      </p:menuitem>
                   </p:menuButton>
                </div>

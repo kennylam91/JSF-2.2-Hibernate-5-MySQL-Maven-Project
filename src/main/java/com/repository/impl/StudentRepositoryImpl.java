@@ -57,7 +57,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			org.hibernate.query.Query<StudentDto> query;
 			String queryString = SELECT_NEW_STUDENTDTO_SQL + "where ";
 			if (((PaginationStudentList) pagination).getStudentFilter().getIsByField().booleanValue()) {
-				queryString += "s.field like '%" + FIELDS.JAVA + "%' and ";
+				queryString += "s.field = :fieldFilterValue" + " " + "and ";
 
 			}
 
@@ -75,11 +75,9 @@ public class StudentRepositoryImpl implements StudentRepository {
 			query = session.createQuery(queryString);
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 
-			/*
-			 * if (((PaginationStudentList)
-			 * pagination).getStudentFilter().getIsByField().booleanValue()) {
-			 * query.setParameter("fieldFilterValue", FIELDS.JAVA); }
-			 */
+			if (((PaginationStudentList) pagination).getStudentFilter().getIsByField().booleanValue()) {
+				query.setParameter("fieldFilterValue", FIELDS.JAVA);
+			}
 
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
 			query.setMaxResults(pagination.getRowsPerPage());
