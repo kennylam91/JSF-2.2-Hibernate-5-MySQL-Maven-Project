@@ -30,6 +30,8 @@ public interface StudentRepository extends Serializable {
 	List<Student> findStudentsByIds(List<Long> Ids);
 	
 	void updateStudentAvgScore(Long studentId);
+	
+	boolean checkDuplicatedEmail(String email);
 
 
 }

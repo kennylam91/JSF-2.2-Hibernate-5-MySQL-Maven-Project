@@ -355,4 +355,31 @@ public class StudentRepositoryImpl implements StudentRepository {
 		return avgScore;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkDuplicatedEmail(String email) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+
+			org.hibernate.query.Query<Student> query = session
+					.createQuery("select s from Student s where s.email = :email")
+					.setParameter("email", email);
+			Student student = query.uniqueResult();
+			transaction.commit();
+			return (student != null);
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			return false;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
 }
