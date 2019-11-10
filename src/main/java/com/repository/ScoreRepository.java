@@ -17,5 +17,5 @@ public interface ScoreRepository extends Serializable{
 	
 	public void delete(Long courseId, Long studentId);
 	
-	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId);
+	public Score findScoreByCourseIdAndStudentId(Long courseId, Long studentId);
 }

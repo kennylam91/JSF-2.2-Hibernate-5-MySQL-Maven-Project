@@ -142,27 +142,20 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 	}
 
 	@Override
-	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId) {
+	public Score findScoreByCourseIdAndStudentId(Long courseId, Long studentId) {
 		Session session = null;
 		Transaction transaction = null;
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			Score score = (Score) session
-					.createQuery("Select s from Score s " + "where s.courseId = :courseId and s.studentId = :studentId")
-					.setParameter("courseId", courseId).setParameter("studentId", studentId).getSingleResult();
-
-			if (score != null) {
-				return score.getScore();
-			} else {
-				return -1.0f;
-			}
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			logger.error(e);
-			return -2.0f;
+					.createQuery("Select s from Score s " + 
+								"where s.courseId = :courseId and s.studentId = :studentId")
+					.setParameter("courseId", courseId)
+					.setParameter("studentId", studentId)
+					.getSingleResult();
+			transaction.commit();
+			return score;
 		} finally {
 			if (session != null) {
 				session.close();

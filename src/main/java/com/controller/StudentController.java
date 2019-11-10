@@ -3,19 +3,14 @@ package com.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -24,31 +19,25 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.validator.ValidatorException;
 
-import org.apache.log4j.Logger;
-import org.modelmapper.ValidationException;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.SortEvent;
 
 import com.beans.Course;
 import com.beans.Navigation;
-import com.beans.Score;
 import com.beans.ScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.StudentFilter;
-import com.beans.StudentForm;
-import com.beans.formbeans.NewStudentForm;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
 import com.constant.COURSE_STATUSES;
 import com.constant.Constant;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
+import com.exception.ScoreNotFoundException;
 import com.service.ScoreService;
 import com.service.impl.StudentServiceImpl;
-import com.util.ObjectMapper;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -138,7 +127,11 @@ public class StudentController implements Serializable {
 		selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
 		for (Course course : selectedStudent.getCourses()) {
 			if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
-				courseScoreMap.put(course.getId(), String.valueOf(getScoreByStudentIdAndCourseId(course.getId())));
+				try {
+					courseScoreMap.put(course.getId(), String.valueOf(getScoreByStudentIdAndCourseId(course.getId())));
+				} catch (ScoreNotFoundException e) {
+					e.printStackTrace(); // need logger
+				}
 			}
 		}
 		navigation.navigateToStudentDetail();
@@ -162,7 +155,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void getNextPage() {
-		if(pagination.getPage() * pagination.getRowsPerPage() < pagination.getTotalRecords()) {
+		if (pagination.getPage() * pagination.getRowsPerPage() < pagination.getTotalRecords()) {
 			pagination.setPage(pagination.getPage() + 1);
 			studentDtos = studentService.findStudentsByPagination(pagination);
 		}
@@ -191,15 +184,21 @@ public class StudentController implements Serializable {
 		List<Student> students = studentService.findStudentsByStudentDtos(list);
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
-			ScoreDto scoreDto = new ScoreDto();
-			scoreDto.setCourseId(courseController.getSelectedCourse().getId());
-			scoreDto.setStudentId(student.getId());
-			scoreDto.setStudentCode(student.getCode());
-			scoreDto.setStudentFirstname(student.getFirstName());
-			scoreDto.setStudentLastname(student.getLastName());
-			scoreDto.setStudentField(student.getField());
-			courseController.getSelectedScores().add(scoreDto);
+
+			courseController.getSelectedScores()
+					.add(getScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), student));
 		}
+	}
+
+	private ScoreDto getScoreDtoObjectFromCourseAndStudent(Course course, Student student) {
+		ScoreDto scoreDto = new ScoreDto();
+		scoreDto.setCourseId(course.getId());
+		scoreDto.setStudentId(student.getId());
+		scoreDto.setStudentCode(student.getCode());
+		scoreDto.setStudentFirstname(student.getFirstName());
+		scoreDto.setStudentLastname(student.getLastName());
+		scoreDto.setStudentField(student.getField());
+		return scoreDto;
 	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
@@ -223,7 +222,7 @@ public class StudentController implements Serializable {
 		selectedStudentDtos = new LinkedList<>();
 	}
 
-	public float getScoreByStudentIdAndCourseId(Long courseId) {
+	public float getScoreByStudentIdAndCourseId(Long courseId) throws ScoreNotFoundException {
 		return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudentDto.getId());
 	}
 
@@ -269,11 +268,11 @@ public class StudentController implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Validation:Error", "Email is existed!"));
 		}
 	}
-	
+
 	/*
 	 * public void getStudentListTotalRecords() {
 	 * 
 	 * }
 	 */
-	
+
 }

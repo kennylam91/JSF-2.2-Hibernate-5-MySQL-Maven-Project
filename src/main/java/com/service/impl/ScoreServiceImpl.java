@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.beans.Score;
 import com.beans.ScoreDto;
+import com.exception.ScoreNotFoundException;
 import com.repository.ScoreRepository;
 import com.service.ScoreService;
 import lombok.AllArgsConstructor;
@@ -75,8 +76,12 @@ public class ScoreServiceImpl implements ScoreService {
 	}
 
 	@Override
-	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId) {
-		return scoreRepository.findScoreByCourseIdAndStudentId(courseId, studentId);
+	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId) throws ScoreNotFoundException {
+		Score score = scoreRepository.findScoreByCourseIdAndStudentId(courseId, studentId);
+		if(score != null) return score.getScore();
+		else {
+			throw new ScoreNotFoundException();
+		}
 	}
 	
 	

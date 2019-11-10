@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.beans.Score;
 import com.beans.ScoreDto;
+import com.exception.ScoreNotFoundException;
 
 public interface ScoreService extends Serializable{
 
@@ -20,5 +21,5 @@ public interface ScoreService extends Serializable{
 	
 	public void delete(Long courseId, Long studentId);
 	
-	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId);
+	public float findScoreByCourseIdAndStudentId(Long courseId, Long studentId) throws ScoreNotFoundException;
 }

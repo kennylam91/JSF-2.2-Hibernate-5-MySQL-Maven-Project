@@ -29,10 +29,6 @@ public class ScoreDto extends Score {
 		this.studentFirstname = studentFirstname;
 		this.studentLastname = studentLastname;
 		this.studentField = studentField;
-	}
-	
-	
-	
-	
 
+	}
 }
