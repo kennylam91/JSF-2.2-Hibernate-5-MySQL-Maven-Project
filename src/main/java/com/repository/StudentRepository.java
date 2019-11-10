@@ -32,6 +32,8 @@ public interface StudentRepository extends Serializable {
 	void updateStudentAvgScore(Long studentId);
 	
 	boolean checkDuplicatedEmail(String email);
+	
+	int getTotalRecords(Pagination paginationStudentList);
 
 
 }

@@ -28,5 +28,7 @@ public interface StudentService {
 	void updateStudentAvgScore(Long studentId);
 	
 	boolean checkDuplicatedEmail(String string);
+	
+	int getTotalRecords(Pagination paginationStudentList);
 
 }

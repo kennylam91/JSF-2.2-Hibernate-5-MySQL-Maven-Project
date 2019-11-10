@@ -94,4 +94,8 @@ public class StudentServiceImpl implements StudentService, Serializable {
 		return studentRepository.checkDuplicatedEmail(email);
 	}
 
+	public int getTotalRecords(Pagination paginationStudentList) {
+		return studentRepository.getTotalRecords(paginationStudentList);
+	}
+
 }

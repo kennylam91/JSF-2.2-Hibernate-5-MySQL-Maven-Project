@@ -55,8 +55,4 @@ public abstract class Pagination implements Serializable {
 		return rowsPerPage * page;
 	}
 
-	public int getTotalRecords() {
-		return 100;
-	}
-
 }

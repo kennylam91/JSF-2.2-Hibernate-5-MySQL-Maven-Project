@@ -94,7 +94,7 @@ public class StudentController implements Serializable {
 	public void init() {
 		StudentFilter studentFilter = new StudentFilter();
 		((PaginationStudentList) paginationStudentList).setStudentFilter(studentFilter);
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		onPaginationChange();
 		courseScoreMap = new HashMap<>();
 	}
 
@@ -114,7 +114,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void getStudentListForm() {
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		onPaginationChange();
 		navigation.navigateToStudentList();
 	}
 
@@ -150,6 +150,8 @@ public class StudentController implements Serializable {
 
 	public void onPaginationChange() {
 		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		int totalRecords = studentService.getTotalRecords(paginationStudentList);
+		paginationStudentList.setTotalRecords(totalRecords);
 	}
 
 	public void getPreviousPage() {
@@ -265,4 +267,11 @@ public class StudentController implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Validation:Error", "Email is existed!"));
 		}
 	}
+	
+	/*
+	 * public void getStudentListTotalRecords() {
+	 * 
+	 * }
+	 */
+	
 }

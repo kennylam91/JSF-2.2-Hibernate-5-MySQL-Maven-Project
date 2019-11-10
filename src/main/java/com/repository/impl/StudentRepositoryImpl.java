@@ -365,8 +365,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			transaction = session.beginTransaction();
 
 			org.hibernate.query.Query<Student> query = session
-					.createQuery("select s from Student s where s.email = :email")
-					.setParameter("email", email);
+					.createQuery("select s from Student s where s.email = :email").setParameter("email", email);
 			Student student = query.uniqueResult();
 			transaction.commit();
 			return (student != null);
@@ -375,6 +374,38 @@ public class StudentRepositoryImpl implements StudentRepository {
 				transaction.rollback();
 			}
 			return false;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getTotalRecords(Pagination paginationStudentList) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+
+			/*
+			 * The reason we are casting to Number is that some databases will return Long
+			 * while others will return BigInteger, so for portability sake you are better
+			 * off casting to a Number and getting an int or a long, depending on how many
+			 * rows you are expecting to be counted
+			 */
+			org.hibernate.query.Query<Number> query = session
+					.createQuery("select count(s.id) from Student s");
+			int totalRecords = query.getSingleResult().intValue();
+			transaction.commit();
+			return totalRecords;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			return 0;
 		} finally {
 			if (session != null) {
 				session.close();
