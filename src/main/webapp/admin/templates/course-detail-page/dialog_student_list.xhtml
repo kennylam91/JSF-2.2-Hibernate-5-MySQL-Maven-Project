@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
+</h:head>
+<h:body>
+   <h:form id="form_student_list_dlg">
+      <p:dataTable value="#{studentListDlgView.studentDtos}" var="student" id="student_list_table"
+         rowKey="#{student.id}" selection="#{studentListDlgView.selectedStudentDtos}" multiViewState="true"
+         styleClass="wpsp-table dataTable dtr-inline">
+         <p:ajax event="sort" listener="#{studentListDlgView.onSort}" update="student_list_table" />
+         <f:facet name="header">
+            <div class="wpsp-dataTable-top ui-g">
+               <div class="ui-g-5">
+                  <p:commandButton actionListener="#{studentListDlgView.closeStudentListDialog}" update="@form"
+                     value="Add Students">
+                  </p:commandButton>
+               </div>
+               <div class="wpsp-label ui-g-7">
+                  <div class="ui-inputgroup" style="float: right;">
+                     <h:selectOneMenu styleClass="select_input" style=";display:inline;width:90px;font-size:13px;" id="search_field"
+                        value="#{studentListDlgView.pagination.searchField}">
+                        <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
+                        <f:selectItem itemLabel="All" itemValue="all" />
+                        <f:selectItem itemLabel="Code" itemValue="code" />
+                        <f:selectItem itemLabel="FirstName" itemValue="firstName" />
+                        <f:selectItem itemLabel="LastName" itemValue="lastName" />
+                        <f:selectItem itemLabel="Field" itemValue="field" />
+                        <f:selectItem itemLabel="Gender" itemValue="gender" />
+                     </h:selectOneMenu>
+                     <p:inputText id="search_keyword" value="#{studentListDlgView.pagination.searchKeyword}"
+                        style="width: 120px" placeholder="Search"
+                        onkeypress="if (event.keyCode == 13) { return false; }">
+                     </p:inputText>
+                     <p:commandButton icon="pi pi-search" styleClass="white-button"
+                        action="#{studentListDlgView.onPaginationChange}" update="student_list_table" />
+                  </div>
+               </div>
+            </div>
+         </f:facet>
+         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:40px;">
+         </p:column>
+         <p:column headerText="Code" style="" sortBy="#{student.code}" field="code">
+            <h:outputText value="#{student.code}" />
+         </p:column>
+         <p:column headerText="Firstname" sortBy="#{student.firstName}" field="firstName" style="width: 120px;">
+            <h:outputText value="#{student.firstName}" />
+         </p:column>
+         <p:column headerText="Lastname" style="" sortBy="#{student.lastName}" field="lastName">
+            <h:outputText value="#{student.lastName}" />
+         </p:column>
+         <p:column headerText="Gender" style="" sortBy="#{student.gender}" field="gender">
+            <h:outputText value="#{student.gender}" />
+         </p:column>
+         <p:column headerText="Field" style="" sortBy="#{student.field}" field="field">
+            <h:outputText value="#{student.field}" />
+         </p:column>
+         <f:facet name="footer">
+            <p:commandButton icon="pi pi-chevron-left" style="margin-right:20px;" title="previous_page"
+               action="#{studentListDlgView.getPreviousPage}" update="@form">
+            </p:commandButton>
+            <label class="wpsp-labelMain">Rows: </label>
+           <!--  <h:selectOneMenu id="rowsperpage" styleClass="select_input" style="margin-right:10px;"
+               value="#{studentListDlgView.pagination.rowsPerPage}">
+               <p:ajax event="valueChange" listener="#{studentListDlgView.onPaginationChange}" update="@form" />
+               <f:selectItem itemLabel="10" itemValue="10" />
+               <f:selectItem itemLabel="20" itemValue="20" />
+               <f:selectItem itemLabel="50" itemValue="50" />
+            </h:selectOneMenu> -->
+            <label class="wpsp-labelMain">Page: <h:outputText id="page" maxlength="3" size="3"
+                  value="#{studentListDlgView.pagination.page}">
+               </h:outputText></label>
+            <p:commandButton icon="pi pi-chevron-right" styleClass="mx-2" title="next_page"
+               action="#{studentListDlgView.getNextPage}" update="@form">
+            </p:commandButton>
+         </f:facet>
+      </p:dataTable>
+   </h:form>
+</h:body>
+</html>

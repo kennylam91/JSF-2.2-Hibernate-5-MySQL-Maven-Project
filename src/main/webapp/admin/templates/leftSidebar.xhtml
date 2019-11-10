@@ -1,0 +1,86 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<body>
+   <ui:composition>
+      <div class="wpsp-sidebar ifnotadmin">
+         <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+            <div class="sidebarScroll" style="overflow: hidden; width: auto; height: 100%;">
+               <h:form>
+                  <f:ajax render=":main-content">
+                     <ul class="wpsp-navigation">
+                        <li class=""><h:commandLink action="#{navigation.navigateToDashboard()}">
+                              <i class="dashicons dashicons-dashboard icon"></i>
+                              <span>Dashboard</span>
+                           </h:commandLink></li>
+                        <li class=""><h:commandLink action="#{studentController.getStudentListForm}">
+                              <i class="dashicons dashicons-id icon"></i>
+                              <span>Students</span>
+                           </h:commandLink></li>
+                        <li class=""><h:commandLink action="#{navigation.navigateToCourseList()}">
+                              <i class="dashicons dashicons-dashboard icon"></i>
+                              <span>Courses</span>
+                           </h:commandLink></li>
+                        <li class=""><h:commandLink action="#{navigation.navigateToSubjectList()}">
+                              <i class="dashicons dashicons-groups icon"></i>
+                              <span>Subjects</span>
+                           </h:commandLink></li>
+                        <li class="has-submenu "><span class="wpsp-droparrow"></span> <a href="#"> <i
+                              class="dashicons dashicons-welcome-widgets-menus icon"></i> <span>Classes</span>
+                        </a>
+                           <ul class="sub-menu">
+                              <li class=""><a href="#"> <span>Classes</span>
+                              </a></li>
+                              <li class="active"><a href="#"> <span>Subjects</span>
+                              </a></li>
+                              <li class=""><a href="#">Subject Mark Fields</a></li>
+                              <li class=""><a href="#"> <span>Marks</span>
+                              </a></li>
+                              <li class=""><a href="#"> <span>Exams</span>
+                              </a></li>
+                              <li class=""><a href="#"> <span>Time Table</span>
+                              </a></li>
+                           </ul></li>
+                        <li class="has-submenu "><span class="wpsp-droparrow"></span> <a href="#"> <i
+                              class="dashicons dashicons-clipboard icon"></i> <span>Attendance</span>
+                        </a>
+                           <ul class="sub-menu">
+                              <li class=""><a href="#"> <span>Students Attendance</span>
+                              </a></li>
+                              <li class=""><a href="#"> <span>Teachers Attendance</span>
+                              </a></li>
+                           </ul></li>
+                        <li class=""><a href="#"> <i class="dashicons dashicons-calendar-alt icon"></i><span>Events</span>
+                        </a></li>
+                        <li class=""><a href="#"> <i class="icon wpsp-notify"></i><span>Notify</span>
+                        </a></li>
+                        <li class=""><a href="#"> <i class="icon wpsp-school-bus"></i><span>Transport</span>
+                        </a></li>
+                        <li class="has-submenu "><span class="wpsp-droparrow"></span> <a href="#"> <i
+                              class="dashicons dashicons-admin-generic"></i> <span>General Settings</span>
+                        </a>
+                           <ul class="sub-menu">
+                              <li class=""><a href="#"> <span>Settings</span>
+                              </a></li>
+                              <li class=""><a href="#"> <span>Working Hours</span>
+                              </a></li>
+                              <li class=""><a href="#"> <span>Leave Calender</span>
+                              </a></li>
+                              <li class=""><a href="#"> <span>Import History</span>
+                              </a></li>
+                           </ul></li>
+                     </ul>
+                  </f:ajax>
+               </h:form>
+            </div>
+            <div class="slimScrollBar"
+               style="background: rgb(0, 0, 0); width: 6px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 1041px;"></div>
+            <div class="slimScrollRail"
+               style="width: 6px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+         </div>
+      </div>
+   </ui:composition>
+</body>
+</html>

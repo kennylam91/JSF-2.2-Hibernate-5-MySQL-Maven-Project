@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+   <ui:composition>
+      <div class="wpsp-card">
+         <h3 class="wpsp-card-title">STUDENT DETAILS</h3>
+         <h:form id="student-detail-form" styleClass="ui-g">
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <h:panelGrid styleClass="ui-g-4" columns="2" cellpadding="10" cellspacing="15" style="margin-top:1rem">
+               <f:facet name="header">
+                  <p:outputLabel value="PERSONAL INFORMATION"></p:outputLabel>
+               </f:facet>
+               <p:outputLabel>Student Code:</p:outputLabel>
+               <h:outputText value="#{studentController.selectedStudent.code}" id="studentCode" required="true"
+                  style="padding: 0 5px;" />
+               <p:outputLabel>Firstname:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.firstName}" id="firstName" required="true" />
+               </p:inplace>
+               <p:outputLabel>Lastname:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.lastName}" id="lastName" required="true" />
+               </p:inplace>
+               <p:outputLabel>Gender:</p:outputLabel>
+               <p:inplace editor="true">
+                  <h:selectOneMenu id="gender" styleClass="select_input" style="font-size:12px;"
+                     value="#{studentController.selectedStudent.gender}">
+                     <f:selectItems value="#{studentController.genders}"></f:selectItems>
+                  </h:selectOneMenu>
+               </p:inplace>
+               <p:outputLabel>Date of birth:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:calendar id="dob" pattern="dd/MM/yyyy" required="true"
+                     value="#{studentController.selectedStudent.dob}" showOn="button">
+                     <f:convertDateTime pattern="dd/MM/yyyy" />
+                  </p:calendar>
+               </p:inplace>
+               <p:outputLabel>Field:</p:outputLabel>
+               <p:inplace editor="true">
+                  <h:selectOneMenu id="field" styleClass="select_input"
+                     value="#{studentController.selectedStudent.field}" style="font-size:12px;">
+                     <f:selectItems value="#{studentController.fields}"></f:selectItems>
+                  </h:selectOneMenu>
+               </p:inplace>
+               <p:outputLabel>Address:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.address}" id="address"
+                     requiredMessage="Address is required" />
+               </p:inplace>
+               <p:outputLabel>Phone:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.phone}" id="phone" required="true"
+                     requiredMessage="Phone is required" />
+               </p:inplace>
+               <p:outputLabel>Email:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.email}" id="email" required="true"
+                     requiredMessage="Email is required" />
+               </p:inplace>
+               <p:outputLabel>Average Score:</p:outputLabel>
+               <h:outputText value="#{studentController.selectedStudent.avgScore}" id="avgScore" required="false">
+                  <f:convertNumber pattern="#0.00"></f:convertNumber>
+               </h:outputText>
+               <p:outputLabel>Note:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
+               </p:inplace>
+               <f:facet name="footer">
+                  <div align="center">
+                     <p:commandButton value="Save" styleClass="save" action="#{studentController.update}"
+                        style="width:110px" />
+                     <p:commandButton action="#{studentController.getStudentListForm}" value="Student List"
+                        style="margin-left:10px;width:120px" update="main-content">
+                     </p:commandButton>
+                  </div>
+               </f:facet>
+            </h:panelGrid>
+            <p:panelGrid styleClass="ui-g-8" columns="2"
+               style="padding-top:1rem;padding-left:1rem;display:inline-block;">
+               <f:facet name="header">
+                  <p:outputLabel value="LEARNING INFORMATION"></p:outputLabel>
+               </f:facet>
+               <p:dataTable id="student_detail_courses_table" var="course"
+                  value="#{studentController.selectedStudent.courses}">
+                  <p:column headerText="Subject">
+                     <h:outputText value="#{course.subject}"></h:outputText>
+                  </p:column>
+                  <p:column headerText="Name">
+                     <h:outputText value="#{course.name}"></h:outputText>
+                  </p:column>
+                  <p:column headerText="Coeff" style="width:60px;">
+                     <h:outputText value="#{course.subject.coefficient}"></h:outputText>
+                  </p:column>
+                  <p:column headerText="BeginTime">
+                     <h:outputText value="#{course.beginTime}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                     </h:outputText>
+                  </p:column>
+                  <p:column headerText="Status">
+                     <h:outputText value="#{course.status}"></h:outputText>
+                  </p:column>
+                  <p:column headerText="Score" style="width:60px;">
+                     <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
+                  </p:column>
+                  <p:column headerText="Action" style="width:60px;">
+                     <p:commandButton icon="pi pi-search" title="View"></p:commandButton>
+                  </p:column>
+               </p:dataTable>
+            </p:panelGrid>
+         </h:form>
+      </div>
+   </ui:composition>
+</h:body>
+</html>

@@ -64,13 +64,19 @@ public class StudentController implements Serializable {
 
 	private static final long serialVersionUID = 7828547113215254846L;
 
-	private static final Logger logger = Logger.getLogger(StudentController.class);
-
 	private Student selectedStudent;
+
+	private Student newStudent;
 
 	private Pagination paginationStudentList = new PaginationStudentList();
 
-	private Student newStudent = new Student();
+	private List<StudentDto> studentDtos;
+
+	private StudentDto selectedStudentDto;
+
+	private List<StudentDto> selectedStudentDtos;
+
+	private Map<Long, String> courseScoreMap;
 
 	@ManagedProperty(value = "#{studentService}")
 	private StudentServiceImpl studentService;
@@ -83,14 +89,6 @@ public class StudentController implements Serializable {
 
 	@ManagedProperty(value = "#{scoreService}")
 	private ScoreService scoreService;
-
-	private List<StudentDto> studentDtos;
-
-	private StudentDto selectedStudentDto;
-
-	private List<StudentDto> selectedStudentDtos;
-
-	private Map<Long, String> courseScoreMap;
 
 	@PostConstruct
 	public void init() {
@@ -256,8 +254,8 @@ public class StudentController implements Serializable {
 		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(email);
-		
-		if(!matcher.matches()) {
+
+		if (!matcher.matches()) {
 			throw new ValidatorException(
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Validation:Error", "Invalid Email !"));
 		}

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:jsf="http://xmlns.jcp.org/jsf">
+<head>
+</head>
+<body>
+  <ui:composition>
+    <div class="wpsp-pageHead">
+      <h1 class="wpsp-pagetitle">Courses Management</h1>
+      <div class="wpsp-right">
+        <ol class="wpsp-breadcrumb">
+          <li><p:commandLink action="#{navigation.navigateToDashboard()}" update="main-content">Dashboard 
+            </p:commandLink></li>
+          <li><p:commandLink action="#{navigation.navigateToCourseList()}" update="main-content">
+              <span class="active">Courses</span>
+            </p:commandLink></li>
+        </ol>
+        <p:commandButton id="create_course_button" styleClass="wpsp-btn "
+          style="height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
+          value="New Course" actionListener="#{courseController.openCreateCourseDialog}" icon="pi pi-plus-circle">
+          <p:ajax event="dialogReturn" update="main-content">
+          </p:ajax>
+        </p:commandButton>
+      </div>
+    </div>
+  </ui:composition>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
+</h:head>
+<h:body>
+   <div class="wpsp-card">
+      <h:panelGroup class="ui-g">
+         <h3 class="wpsp-card-title">COURSE DETAILS</h3>
+         <p:commandButton value="Add Students" id="add_students_button" styleClass="wpsp-btn"
+            style="display:block;position:absolute;right: 63px;height:32px;width: 120px;padding: 0;
+            background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
+            actionListener="#{studentListDlgView.openStudentListDialog}" icon="pi pi-plus-circle">
+            <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}"
+               update=":form-course-students-information:course_student_list_table" immediate="true">
+            </p:ajax>
+         </p:commandButton>
+         <p:commandButton value="Add Scores" id="add_scores_button" styleClass="wpsp-btn"
+            style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
+            background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;"
+            actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
+            <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
+               immediate="true">
+            </p:ajax>
+         </p:commandButton>
+         <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
+            style="
+            display:block;position:absolute;right: 335px;height:32px;width: 111px;padding: 0;
+            background-color:#0178bc;border-color: #0178bc;font-size: 12px;"
+            update="form-course-basic-information"></p:commandButton>
+         <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
+            style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
+            background-color: #54667a;border-color: #54667a;font-size: 12px;"
+            update="main-content">
+         </p:commandButton>
+      </h:panelGroup>
+      <h:panelGroup class="ui-g">
+         <h:form id="form-course-basic-information" styleClass="ui-g-4">
+            <p:panelGrid columns="2">
+               <f:facet name="header">
+                  <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
+               </f:facet>
+               <p:outputLabel>Course Code:</p:outputLabel>
+               <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
+                  style="padding: 0 5px;" />
+               <p:outputLabel>Name:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{courseController.selectedCourse.name}" id="name" required="true" />
+               </p:inplace>
+               <p:outputLabel>Subject:</p:outputLabel>
+               <h:panelGroup>
+                  <h:outputText id="course_selected_subject" value="#{courseController.selectedCourse.subject}">
+                  </h:outputText>
+                  <p:commandLink actionListener="#{courseController.openSubjectListDialog}" value="Edit"
+                     style="margin-left:10px;color:red;font-size:12px;">
+                     <p:ajax event="dialogReturn"
+                        listener="#{courseController.onSubjectSelectedDialogCloseOnCourseDetail}"
+                        update="@form:course_selected_subject"></p:ajax>
+                  </p:commandLink>
+               </h:panelGroup>
+               <p:outputLabel>Begin time:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:calendar id="beginTime" pattern="dd/MM/yyyy" required="true"
+                     value="#{courseController.selectedCourse.beginTime}" showOn="button">
+                     <f:convertDateTime pattern="dd/MM/yyyy" />
+                  </p:calendar>
+               </p:inplace>
+               <p:outputLabel>Finish time:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
+                     showOn="button">
+                     <f:convertDateTime pattern="dd/MM/yyyy" />
+                  </p:calendar>
+               </p:inplace>
+               <p:outputLabel>Status:</p:outputLabel>
+               <p:inplace editor="true">
+                  <h:selectOneMenu id="status" styleClass="select_input" style="font-size:12px;"
+                     value="#{courseController.selectedCourse.status}">
+                     <f:selectItems value="#{courseController.courseStatuses}"/>
+                  </h:selectOneMenu>
+               </p:inplace>
+               <p:outputLabel>Teacher:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{courseController.selectedCourse.teacher}" id="teacher" />
+               </p:inplace>
+               <p:outputLabel>Capacity:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{courseController.selectedCourse.capacity}" id="capacity" required="true" />
+               </p:inplace>
+               <p:outputLabel>Student No:</p:outputLabel>
+               <h:outputText value="#{courseController.selectedCourse.studentsNo}" id="studentsNo" />
+               <p:outputLabel>Description:</p:outputLabel>
+               <p:inplace editor="true">
+                  <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
+               </p:inplace>
+            </p:panelGrid>
+         </h:form>
+         <h:form id="form-course-students-information" styleClass="ui-g-8">
+            <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScores}"
+               selection="#{courseController.selectedScore}" rowKey="#{score.id}">
+               <f:facet name="header">
+                  <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
+               </f:facet>
+               <p:column headerText="StudentCode">
+                  <h:outputText value="#{score.studentCode}"></h:outputText>
+               </p:column>
+               <p:column headerText="FirstName">
+                  <h:outputText value="#{score.studentFirstname}"></h:outputText>
+               </p:column>
+               <p:column headerText="LastName">
+                  <h:outputText value="#{score.studentLastname}"></h:outputText>
+               </p:column>
+               <p:column headerText="Field">
+                  <h:outputText value="#{score.studentField}"></h:outputText>
+               </p:column>
+               <p:column headerText="Score">
+                  <h:outputText id="score_output" value="#{score.score}"></h:outputText>
+               </p:column>
+               <p:column headerText="Action">
+                  <p:commandButton icon="pi pi-trash" title="Del" update="course_student_list_table"
+                     actionListener="#{courseController.removeStudentOutOfCourse(score.studentId)}"
+                     style="color:red;background-color:#f2f5f9;border:none;">
+                     <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                  </p:commandButton>
+               </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+               <p:commandButton value="Confirm" type="button" 
+                  styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+               <p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
+         </h:form>
+      </h:panelGroup>
+   </div>
+</h:body>
+</html>

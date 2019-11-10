@@ -20,7 +20,7 @@
 	</context-param>
 	<!-- Welcome page -->
 	<welcome-file-list>
-		<welcome-file>faces/dashboard.xhtml</welcome-file>
+		<welcome-file>faces/admin/dashboard.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- Install slf4j bridge handler -->
@@ -48,4 +48,6 @@
 		<extension>woff2</extension>
 		<mime-type>application/x-font-woff2</mime-type>
 	</mime-mapping>
+
+
 </web-app>

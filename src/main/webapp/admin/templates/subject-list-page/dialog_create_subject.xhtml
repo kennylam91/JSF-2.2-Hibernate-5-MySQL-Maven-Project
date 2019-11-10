@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
+   <title>CREATE NEW SUBJECT</title>
+</h:head>
+<h:body>
+   <h:form style="padding:20px;">
+      <p:panelGrid id="create_subject_form">
+         <p:row>
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_code" value="Code:" />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_code" value="#{subjectController.newSubjectForm.code}" required="true" />
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="12">
+               <p:message for="create_subject_code"></p:message>
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_name" value="Name:" />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_name" value="#{subjectController.newSubjectForm.name}" required="true"
+                  label="name" />
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="12">
+               <p:message for="create_subject_name"></p:message>
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_field" value="Field:" />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_field" value="#{subjectController.newSubjectForm.field}" required="true"
+                  label="field" />
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="12">
+               <p:message for="create_subject_field"></p:message>
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_description" value="Description: " />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_description" value="#{subjectController.newSubjectForm.description}"
+                  label="description" />
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="12">
+               <p:message for="create_subject_description"></p:message>
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="2">
+               <p:outputLabel for="create_subject_coefficient" value="Coefficient: " />
+            </p:column>
+            <p:column colspan="10">
+               <p:inputText id="create_subject_coefficient" value="#{subjectController.newSubjectForm.coefficient}"
+                  required="true" label="coefficient" />
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="12">
+               <p:message for="create_subject_coefficient"></p:message>
+            </p:column>
+         </p:row>
+         <p:row>
+            <p:column colspan="12">
+               <div style="display: flex; justify-content: center; margin-top: 20px;">
+                  <p:commandButton value="Save" actionListener="#{subjectController.createSubject}"
+                     validateClient="true" update="@form">
+                  </p:commandButton>
+                  <p:commandButton value="Cancel" actionListener="#{subjectController.closeCreateSubjectDialog}"
+                     process="@this">
+                  </p:commandButton>
+               </div>
+            </p:column>
+         </p:row>
+      </p:panelGrid>
+   </h:form>
+</h:body>
+</html>

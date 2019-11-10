@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
+</h:head>
+<h:body>
+   <h:form onkeypress="if (event.keyCode == 13) { return false; }">
+      <p:dataTable value="#{courseController.selectedScores}" var="score" id="scores_table" widgetVar="cellScores"
+         editable="true" editMode="cell">
+         <f:facet name="header">
+            <h3>COURSE SCORES</h3>
+         </f:facet>
+         <p:column headerText="StudentCode">
+            <h:outputText value="#{score.studentCode}"></h:outputText>
+         </p:column>
+         <p:column headerText="FirstName">
+            <h:outputText value="#{score.studentFirstname}"></h:outputText>
+         </p:column>
+         <p:column headerText="LastName">
+            <h:outputText value="#{score.studentLastname}"></h:outputText>
+         </p:column>
+         <p:column headerText="Score">
+            <p:cellEditor>
+               <f:facet name="output">
+                  <h:outputText id="score_output" value="#{score.score}"></h:outputText>
+               </f:facet>
+               <f:facet name="input">
+                  <p:inputText value="#{score.score}" />
+               </f:facet>
+            </p:cellEditor>
+         </p:column>
+         <f:facet name="footer">
+            <p:commandButton value="Update" actionListener="#{courseController.updateScores}"></p:commandButton>
+            <p:commandButton value="Cancel" process="@this" actionListener="#{courseController.closeCourseScoreDialog}"
+               immediate="true">
+            </p:commandButton>
+         </f:facet>
+      </p:dataTable>
+   </h:form>
+</h:body>
+</html>

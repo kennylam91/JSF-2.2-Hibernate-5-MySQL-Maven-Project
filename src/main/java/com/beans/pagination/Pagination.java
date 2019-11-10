@@ -41,6 +41,12 @@ public abstract class Pagination implements Serializable {
 
 	private String searchKeyword = SEARCH_KEYWORD_DEFAULT;
 
+	private int firstRowIndexOnPage;
+
+	private int lastRowIndexOnPage;
+
+	private int totalRecords;
+
 	public int getFirstRowIndexOnPage() {
 		return 1 + rowsPerPage * (page - 1);
 	}
