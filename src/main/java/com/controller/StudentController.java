@@ -68,7 +68,7 @@ public class StudentController implements Serializable {
 
 	private Student newStudent;
 
-	private Pagination paginationStudentList = new PaginationStudentList();
+	private Pagination pagination = new PaginationStudentList();
 
 	private List<StudentDto> studentDtos;
 
@@ -93,7 +93,7 @@ public class StudentController implements Serializable {
 	@PostConstruct
 	public void init() {
 		StudentFilter studentFilter = new StudentFilter();
-		((PaginationStudentList) paginationStudentList).setStudentFilter(studentFilter);
+		((PaginationStudentList) pagination).setStudentFilter(studentFilter);
 		onPaginationChange();
 		courseScoreMap = new HashMap<>();
 	}
@@ -131,7 +131,7 @@ public class StudentController implements Serializable {
 
 	public void deleteStudent() {
 		studentService.deleteStudent(selectedStudentDto.getId());
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		studentDtos = studentService.findStudentsByPagination(pagination);
 	}
 
 	public void getStudentDetail() {
@@ -149,36 +149,38 @@ public class StudentController implements Serializable {
 	}
 
 	public void onPaginationChange() {
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
-		int totalRecords = studentService.getTotalRecords(paginationStudentList);
-		paginationStudentList.setTotalRecords(totalRecords);
+		studentDtos = studentService.findStudentsByPagination(pagination);
+		int totalRecords = studentService.getTotalRecords(pagination);
+		pagination.setTotalRecords(totalRecords);
 	}
 
 	public void getPreviousPage() {
-		if (paginationStudentList.getPage() > 1) {
-			paginationStudentList.setPage(paginationStudentList.getPage() - 1);
-			studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		if (pagination.getPage() > 1) {
+			pagination.setPage(pagination.getPage() - 1);
+			studentDtos = studentService.findStudentsByPagination(pagination);
 		}
 	}
 
 	public void getNextPage() {
-		paginationStudentList.setPage(paginationStudentList.getPage() + 1);
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		if(pagination.getPage() * pagination.getRowsPerPage() < pagination.getTotalRecords()) {
+			pagination.setPage(pagination.getPage() + 1);
+			studentDtos = studentService.findStudentsByPagination(pagination);
+		}
 	}
 
 	public void onSort(SortEvent event) {
 		if (event.isAscending()) {
-			paginationStudentList.setAscOrDesc("asc");
+			pagination.setAscOrDesc("asc");
 		} else {
-			paginationStudentList.setAscOrDesc("desc");
+			pagination.setAscOrDesc("desc");
 		}
-		paginationStudentList.setOrderBy(event.getSortColumn().getField());
+		pagination.setOrderBy(event.getSortColumn().getField());
 		onPaginationChange();
 	}
 
 	public void onActionForMultiChange() {
 		studentService.deleteStudents(selectedStudentDtos);
-		studentDtos = studentService.findStudentsByPagination(paginationStudentList);
+		studentDtos = studentService.findStudentsByPagination(pagination);
 		selectedStudentDtos = new ArrayList<>();
 
 	}
@@ -217,7 +219,7 @@ public class StudentController implements Serializable {
 
 	public void clearPaginationAndSelectedStudentDtos() {
 		courseController.setSelectedCourse(null);
-		paginationStudentList = new PaginationStudentList();
+		pagination = new PaginationStudentList();
 		selectedStudentDtos = new LinkedList<>();
 	}
 
@@ -242,7 +244,7 @@ public class StudentController implements Serializable {
 	}
 
 	public void resetFilter() {
-		((PaginationStudentList) paginationStudentList).setStudentFilter(new StudentFilter());
+		((PaginationStudentList) pagination).setStudentFilter(new StudentFilter());
 	}
 
 	public void validateEmail(FacesContext context, UIComponent component, Object value) {

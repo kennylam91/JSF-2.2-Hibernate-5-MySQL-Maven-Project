@@ -15,7 +15,7 @@
                   <!-- <div id="filter_by_field">
               <label class="wpsp-labelMain">Select Field</label>
               <h:selectOneMenu styleClass="select_input"
-                value="#{studentController.paginationStudentList.searchKeyword}"
+                value="#{studentController.pagination.searchKeyword}"
                 style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
                 <f:selectItem itemLabel="PHP" itemValue="PHP" />
                 <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
@@ -37,8 +37,8 @@
                   </div>
                   <div id="record_search_status">
                      <label class="wpsp-labelMain"> <h:outputText
-                           value="Show records from #{studentController.paginationStudentList.firstRowIndexOnPage} to 
-                  record #{studentController.paginationStudentList.lastRowIndexOnPage} of total #{studentController.paginationStudentList.totalRecords} .">
+                           value="Show records from #{studentController.pagination.firstRowIndexOnPage} to 
+                  record #{studentController.pagination.lastRowIndexOnPage} of total #{studentController.pagination.totalRecords} .">
                         </h:outputText>
                      </label>
                   </div>

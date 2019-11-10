@@ -30,7 +30,7 @@
                   <div class="wpsp-label" style="float: right;">
                      <div class="ui-inputgroup">
                         <h:selectOneMenu styleClass="select_input" style="font-size:13px;display:inline;width:85px"
-                           id="search_field" value="#{studentController.paginationStudentList.searchField}">
+                           id="search_field" value="#{studentController.pagination.searchField}">
                            <f:selectItem itemLabel="Select" itemValue="all" itemDisabled="true" />
                            <f:selectItem itemLabel="All" itemValue="all" />
                            <f:selectItem itemLabel="Code" itemValue="code" />
@@ -44,7 +44,7 @@
                            <f:selectItem itemLabel="Note" itemValue="note" />
                         </h:selectOneMenu>
                         <p:inputText id="search_keyword" style="width:160px;height:31px"
-                           value="#{studentController.paginationStudentList.searchKeyword}" placeholder="Search keyword">
+                           value="#{studentController.pagination.searchKeyword}" placeholder="Search keyword">
                         </p:inputText>
                         <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
                            action="#{studentController.onPaginationChange}" style="height:31px;" />

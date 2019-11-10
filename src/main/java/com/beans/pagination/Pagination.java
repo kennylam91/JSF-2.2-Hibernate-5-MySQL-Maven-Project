@@ -52,7 +52,12 @@ public abstract class Pagination implements Serializable {
 	}
 
 	public int getLastRowIndexOnPage() {
-		return rowsPerPage * page;
+		if(rowsPerPage*page < totalRecords) {
+			return rowsPerPage * page;
+		}
+		else {
+			return totalRecords;
+		}
 	}
 
 }
