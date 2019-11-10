@@ -59,7 +59,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 
 	@Override
 	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
-		return studentRepository.findStudentsByPagination(pagination);
+		return studentRepository.findStudentsByPagination(pagination).getList();
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class StudentServiceImpl implements StudentService, Serializable {
 	}
 
 	public int getTotalRecords(Pagination paginationStudentList) {
-		return studentRepository.getTotalRecords(paginationStudentList);
+		return studentRepository.findStudentsByPagination(paginationStudentList).getTotalFoundRecords();
 	}
 
 }

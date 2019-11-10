@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.beans.Student;
 import com.beans.StudentDto;
+import com.beans.dto.ListStudentDto;
 import com.beans.pagination.Pagination;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
@@ -23,7 +24,7 @@ public interface StudentRepository extends Serializable {
 
 	Student findStudentById(Long studentId);
 
-	List<StudentDto> findStudentsByPagination(Pagination pagination);
+	ListStudentDto findStudentsByPagination(Pagination pagination);
 
 	void deleteStudentList(List<Long> StudentIdList);
 	

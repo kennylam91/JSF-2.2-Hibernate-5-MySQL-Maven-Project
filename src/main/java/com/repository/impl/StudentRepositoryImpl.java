@@ -17,6 +17,7 @@ import com.beans.Score;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.StudentFilter;
+import com.beans.dto.ListStudentDto;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
 import com.constant.FIELDS;
@@ -46,33 +47,44 @@ public class StudentRepositoryImpl implements StudentRepository {
 			+ "from Student s where ";
 
 	@SuppressWarnings("unchecked")
-	public List<StudentDto> findStudentsByPagination(Pagination pagination) {
+	public ListStudentDto findStudentsByPagination(Pagination pagination) {
 		String orderedBy = getStudentField(pagination.getOrderBy());
 		String ascOrDesc = getAscOrDescParameter(pagination.getAscOrDesc());
 		String fieldSearch = getStudentField(pagination.getSearchField());
 		Transaction transaction = null;
 		Session session = null;
 		StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
+		ListStudentDto listStudentDto = new ListStudentDto();
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 			org.hibernate.query.Query<StudentDto> query;
+			org.hibernate.query.Query<Number> querySecond;
+
+			// Query to get StudentDto List
 			String queryString = SELECT_NEW_STUDENTDTO_SQL;
+
+			// Query to get total Records
+			String queryStringSecond = "select count(s.id) from Student s where ";
 
 			// When using student filter function
 			if (filter != null) {
 
 				if (filter.getIsByGender().booleanValue()) {
 					queryString += "s.gender = :genderFV" + " " + "and ";
+					queryStringSecond += "s.gender = :genderFV" + " " + "and ";
 				}
 				if (filter.getIsByField().booleanValue()) {
 					queryString += "s.field = :fieldFV" + " " + "and ";
+					queryStringSecond += "s.field = :fieldFV" + " " + "and ";
 				}
 				if (filter.getIsByScore().booleanValue()) {
 					queryString += "s.avgScore between :scoreFVFrom and :scoreFVTo" + " " + "and ";
+					queryStringSecond +="s.avgScore between :scoreFVFrom and :scoreFVTo" + " " + "and ";
 				}
 				if (filter.getIsByDOB().booleanValue()) {
 					queryString += "s.dob between :dobFVFrom and :dobFVTo" + " " + "and ";
+					queryStringSecond+= "s.dob between :dobFVFrom and :dobFVTo" + " " + "and ";
 				}
 			}
 
@@ -81,40 +93,57 @@ public class StudentRepositoryImpl implements StudentRepository {
 						+ "s.lastName like :searchKeyword or " + "s.gender like :searchKeyword or" + " "
 						+ "s.field like :searchKeyword or " + "s.phone like :searchKeyword or" + " "
 						+ "s.email like :searchKeyword or " + "s.note like :searchKeyword" + " )";
+				
+				queryStringSecond += "(s.code like :searchKeyword or " + "s.firstName like :searchKeyword or" + " "
+						+ "s.lastName like :searchKeyword or " + "s.gender like :searchKeyword or" + " "
+						+ "s.field like :searchKeyword or " + "s.phone like :searchKeyword or" + " "
+						+ "s.email like :searchKeyword or " + "s.note like :searchKeyword" + " )";
 			} else {
 				queryString += fieldSearch + " " + "like :searchKeyword" + " ";
+				queryStringSecond +=fieldSearch + " " + "like :searchKeyword" + " ";
 
 			}
 
 			queryString += "order by " + orderedBy + " " + ascOrDesc + ",s.code asc";
 			query = session.createQuery(queryString);
+			querySecond = session.createQuery(queryStringSecond);
 			query.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
+			querySecond.setParameter("searchKeyword", "%" + pagination.getSearchKeyword() + "%");
 			if (filter != null) {
 				if (filter.getIsByGender().booleanValue()) {
 					query.setParameter("genderFV", filter.getGenderFilterValue());
+					querySecond.setParameter("genderFV", filter.getGenderFilterValue());
 				}
 				if (filter.getIsByField().booleanValue()) {
 					query.setParameter("fieldFV", filter.getFieldFilterValue());
+					querySecond.setParameter("fieldFV", filter.getFieldFilterValue());
 				}
 				if (filter.getIsByScore().booleanValue()) {
 					query.setParameter("scoreFVFrom", filter.getScoreFilterFrom());
 					query.setParameter("scoreFVTo", filter.getScoreFilterTo());
+					querySecond.setParameter("scoreFVFrom", filter.getScoreFilterFrom());
+					querySecond.setParameter("scoreFVTo", filter.getScoreFilterTo());
 				}
 				if (filter.getIsByDOB().booleanValue()) {
 					query.setParameter("dobFVFrom", filter.getDOBFilterFrom());
 					query.setParameter("dobFVTo", filter.getDOBFilterTo());
+					querySecond.setParameter("dobFVFrom", filter.getDOBFilterFrom());
+					querySecond.setParameter("dobFVTo", filter.getDOBFilterTo());
 				}
 			}
 			query.setFirstResult((pagination.getPage() - 1) * pagination.getRowsPerPage());
 			query.setMaxResults(pagination.getRowsPerPage());
 			List<StudentDto> studentDtoList = query.getResultList();
+			int totalRecords = querySecond.getSingleResult().intValue();
 			transaction.commit();
-			return studentDtoList;
+			listStudentDto.setList(studentDtoList);
+			listStudentDto.setTotalFoundRecords(totalRecords);
+			return listStudentDto;
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
 			logger.error(e);
-			return Collections.emptyList();
+			return listStudentDto;
 		} finally {
 			if (session != null) {
 				session.close();
@@ -396,8 +425,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			 * off casting to a Number and getting an int or a long, depending on how many
 			 * rows you are expecting to be counted
 			 */
-			org.hibernate.query.Query<Number> query = session
-					.createQuery("select count(s.id) from Student s");
+			org.hibernate.query.Query<Number> query = session.createQuery("select count(s.id) from Student s");
 			int totalRecords = query.getSingleResult().intValue();
 			transaction.commit();
 			return totalRecords;
