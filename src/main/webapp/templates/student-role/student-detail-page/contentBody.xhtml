@@ -10,7 +10,7 @@
       <div class="wpsp-card">
          <h3 class="wpsp-card-title">STUDENT DETAILS</h3>
          <h:form id="student-detail-form" styleClass="ui-g">
-            <p:growl id="growl" showDetail="true" sticky="true" />
+            <!-- <p:growl id="growl" showDetail="true" sticky="true" /> -->
             <h:panelGrid styleClass="ui-g-4" columns="2" cellpadding="10" cellspacing="15" style="margin-top:1rem">
                <f:facet name="header">
                   <p:outputLabel value="PERSONAL INFORMATION"></p:outputLabel>
@@ -74,9 +74,6 @@
                   <div align="center">
                      <p:commandButton value="Save" styleClass="save" action="#{studentController.update}"
                         style="width:110px" />
-                     <p:commandButton action="#{studentController.getStudentListForm}" value="Student List"
-                        style="margin-left:10px;width:120px" update="main-content">
-                     </p:commandButton>
                   </div>
                </f:facet>
             </h:panelGrid>

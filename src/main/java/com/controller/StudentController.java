@@ -145,7 +145,10 @@ public class StudentController implements Serializable {
 				}
 			}
 		}
-		navigation.navigateToStudentDetail();
+		if(selectedStudentDto != null) {
+			navigation.navigateToStudentDetail();
+		}
+		
 	}
 
 	public void update() {

@@ -51,14 +51,19 @@ public class UserController implements Serializable {
 			session.setAttribute("authority", userFound.getAuthority());
 			user.setAuthority(userFound.getAuthority());
 			user.setUsername(userFound.getUsername());
+			//Admin Role view
 			if(userFound.getAuthority().equals(AUTHORITIES.ADMIN_ROLE)) {
 				navigation.setMainContentHead(Constant.DASHBOARD_CONTENT_HEAD_URL);
 				navigation.setMainContentBody(Constant.DASHBOARD_CONTENT_BODY_URL);
+				navigation.setLeftSidebar(Constant.LEFT_SIDEBAR_URL);
 			}
+			
+			//Student Role View
 			else {
 				studentController.setUserEmail(userFound.getEmail());
-				navigation.setMainContentHead(Constant.STUDENT_CONTENT_HEAD_URL);
-				navigation.setMainContentBody(Constant.STUDENT_DETAIL_CONTENT_BODY_URL);
+				navigation.setMainContentHead(Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_HEAD_URL);
+				navigation.setMainContentBody(Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_BODY_URL);
+				navigation.setLeftSidebar(Constant.STUDENT_ROLE_LEFT_SIDEBAR);
 				studentController.getStudentDetail();	
 			}
 			FacesContext context = FacesContext.getCurrentInstance();

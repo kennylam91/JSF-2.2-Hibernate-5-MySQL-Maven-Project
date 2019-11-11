@@ -30,7 +30,7 @@
           <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
               <f:event listener="#{courseController.getCourses}" type="preRenderView" />
               <ui:insert name="course-list-table">
-                <ui:include src="/templates/course-list-page/course-list-table.xhtml"></ui:include>
+                <ui:include src="/templates/student-role/course-list-page/course-list-table.xhtml"></ui:include>
               </ui:insert>
               <label class="wpsp-labelMain"> <h:outputText
                   value="Show from record #{courseController.paginationCourseList.firstRowIndexOnPage} to 

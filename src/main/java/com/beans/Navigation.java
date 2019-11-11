@@ -24,35 +24,11 @@ public class Navigation implements Serializable {
 
 	private static final long serialVersionUID = -4795264471692140604L;
 
-//	private String mainContentHead = "/templates/dashboard/contentHead.xhtml";
-//	private String mainContentBody = "/templates/dashboard/dashboard_row_content.xhtml";
-
 	private String mainContentHead;
 	private String mainContentBody;
+	private String leftSidebar;
 
 	private AUTHORITIES userAuthority;
-
-	/*
-	 * @PostConstruct public void init() { if
-	 * (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) { mainContentHead =
-	 * "/templates/dashboard/contentHead.xhtml"; mainContentBody =
-	 * "/templates/dashboard/dashboard_row_content.xhtml"; } else { mainContentHead
-	 * = "/templates/student-list-page/contentHead.xhtml"; mainContentBody =
-	 * "/templates/student-detail-page/student-detail-form.xhtml"; } }
-	 */
-	
-
-	/*
-	 * public String getMainContentHead() { if
-	 * (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) { return
-	 * "/templates/dashboard/contentHead.xhtml"; } else { return
-	 * "/templates/student-list-page/contentHead.xhtml"; } }
-	 * 
-	 * public String getMainContentBody() { if
-	 * (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) { return
-	 * "/templates/dashboard/dashboard_row_content.xhtml"; } else { return
-	 * "/templates/student-detail-page/student-detail-form.xhtml"; } }
-	 */
 
 	public void navigateToLogin() {
 		mainContentBody = "/templates/login/contentBody.xhtml";
@@ -84,6 +60,16 @@ public class Navigation implements Serializable {
 
 	public void navigateToCourseDetail() {
 		mainContentBody = "/templates/course-detail-page/course-detail-form.xhtml";
+	}
+	
+	public void navigateToDashboardStudentRole() {
+		mainContentHead = Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_HEAD_URL;
+		mainContentBody = Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_BODY_URL;
+	}
+	
+	public void navigateToCourseListStudentRole() {
+		mainContentHead = Constant.STUDENT_ROLE_COURSE_LIST_CONTENT_HEAD_URL;
+		mainContentBody = Constant.STUDENT_ROLE_COURSE_LIST_CONTENT_BODY_URL;
 	}
 
 }

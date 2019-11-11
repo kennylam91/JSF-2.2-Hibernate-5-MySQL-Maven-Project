@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<head>
+<title><ui:insert name="title">Default title</ui:insert></title>
+</head>
+<body>
+   <ui:composition>
+      <div id="course-list-table-content">
+         <div>
+            <p:ajax event="sort" listener="#{courseController.onSort}" update="course_list_table"></p:ajax>
+            <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:40px;" />
+            <p:column headerText="Code" style="width:100px" sortBy="#{course.code}" field="code">
+               <h:outputText value="#{course.code}" />
+            </p:column>
+            <p:column headerText="Name" style="width:110px" sortBy="#{course.name}" field="name">
+               <h:outputText value="#{course.name}" />
+            </p:column>
+            <p:column headerText="Subject" style="" sortBy="#{course.subject.name}" field="subject">
+               <h:outputText value="#{course.subject.name}" />
+            </p:column>
+            <p:column headerText="BeginTime" style="width:115px;" sortBy="#{course.beginTime}" field="beginTime">
+               <h:outputText value="#{course.beginTime}">
+                  <f:convertDateTime pattern="dd/MM/yyyy" />
+               </h:outputText>
+            </p:column>
+            <p:column headerText="FinishTime" style="width:120px;" sortBy="#{course.finishTime}" field="finishTime">
+               <h:outputText value="#{course.finishTime}">
+                  <f:convertDateTime pattern="dd/MM/yyyy" />
+               </h:outputText>
+            </p:column>
+            <p:column headerText="Status" sortBy="#{course.status}" field="status" style="width:90px;">
+               <h:outputText value="#{course.status}" />
+            </p:column>
+            <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher">
+               <h:outputText value="#{course.teacher}" />
+            </p:column>
+            <p:column headerText="Students No." sortBy="#{course.studentsNo}" field="studentsNo">
+               <h:outputText value="#{course.studentsNo}" />
+            </p:column>
+            <p:column headerText="Cap" style="width:80px;" sortBy="#{course.capacity}" field="capacity">
+               <h:outputText value="#{course.capacity}" />
+            </p:column>
+         </div>
+      </div>
+   </ui:composition>
+</body>
+</html>
