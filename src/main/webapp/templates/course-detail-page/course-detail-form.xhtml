@@ -9,35 +9,37 @@
 </h:head>
 <h:body>
    <div class="wpsp-card">
-      <h:panelGroup class="ui-g">
-         <h3 class="wpsp-card-title">COURSE DETAILS</h3>
-         <p:commandButton value="Add Students" id="add_students_button" styleClass="wpsp-btn"
-            style="display:block;position:absolute;right: 63px;height:32px;width: 120px;padding: 0;
+      <h:form>
+         <h:panelGroup class="ui-g">
+            <h3 class="wpsp-card-title">COURSE DETAILS</h3>
+            <p:commandButton value="Add Students" id="add_students_button" styleClass="wpsp-btn"
+               style="display:block;position:absolute;right: 63px;height:32px;width: 120px;padding: 0;
             background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
-            actionListener="#{studentListDlgView.openStudentListDialog}" icon="pi pi-plus-circle">
-            <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}"
-               update=":form-course-students-information:course_student_list_table" immediate="true">
-            </p:ajax>
-         </p:commandButton>
-         <p:commandButton value="Add Scores" id="add_scores_button" styleClass="wpsp-btn"
-            style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
+               actionListener="#{studentListDlgView.openStudentListDialog}" icon="pi pi-plus-circle">
+               <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}"
+                  update=":form-course-students-information:course_student_list_table" immediate="true">
+               </p:ajax>
+            </p:commandButton>
+            <p:commandButton value="Add Scores" id="add_scores_button" styleClass="wpsp-btn"
+               style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
             background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;"
-            actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
-            <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
-               immediate="true">
-            </p:ajax>
-         </p:commandButton>
-         <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-            style="
+               actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
+               <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
+                  immediate="true">
+               </p:ajax>
+            </p:commandButton>
+            <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
+               style="
             display:block;position:absolute;right: 335px;height:32px;width: 111px;padding: 0;
             background-color:#0178bc;border-color: #0178bc;font-size: 12px;"
-            update="form-course-basic-information"></p:commandButton>
-         <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
-            style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
+               update="form-course-basic-information"></p:commandButton>
+            <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
+               style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
             background-color: #54667a;border-color: #54667a;font-size: 12px;"
-            update="main-content">
-         </p:commandButton>
-      </h:panelGroup>
+               update="main-content">
+            </p:commandButton>
+         </h:panelGroup>
+      </h:form>
       <h:panelGroup class="ui-g">
          <h:form id="form-course-basic-information" styleClass="ui-g-4">
             <p:panelGrid columns="2">
@@ -80,7 +82,7 @@
                <p:inplace editor="true">
                   <h:selectOneMenu id="status" styleClass="select_input" style="font-size:12px;"
                      value="#{courseController.selectedCourse.status}">
-                     <f:selectItems value="#{courseController.courseStatuses}"/>
+                     <f:selectItems value="#{courseController.courseStatuses}" />
                   </h:selectOneMenu>
                </p:inplace>
                <p:outputLabel>Teacher:</p:outputLabel>
@@ -129,8 +131,7 @@
                </p:column>
             </p:dataTable>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-               <p:commandButton value="Confirm" type="button" 
-                  styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+               <p:commandButton value="Confirm" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                <p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
             </p:confirmDialog>
          </h:form>

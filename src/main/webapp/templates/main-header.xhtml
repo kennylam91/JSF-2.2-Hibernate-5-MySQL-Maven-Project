@@ -5,34 +5,37 @@
    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <body>
    <ui:composition>
-      <div class="wpsp-header">
-         <a href="" class="wpsp-logo"> <span class="wpsp-logo-mini"> <img
-               src="https://demo.wpschoolpress.com/wp-content/plugins/wpschoolpress/img/wpschoolpresslogo.jpg"
-               class="img wpsp-school-logo" width="45px" height="40px" />
-         </span> <span class="wpsp-schoolname">Vietnam University of Programming</span>
-         </a>
-         <div class="wpsp-head">
-            <div class="wpsp-menuIcon">
-               <span></span>
-            </div>
-            <h2 class="wpsp-customeMsg">“Live as if you were to die tomorrow. Learn as if you were to live
-               forever.”</h2>
-            <div class="wpsp-righthead">
-               <div class="wpsp-head-action"></div>
-               <div class="wpsp-userMain wpsp-dropdownmain">
-                  <div class="wpsp-profile-pic wpsp-dropdown-toggle">
+      <h:form>
+         <div class="wpsp-header">
+            <a href="" class="wpsp-logo"> <span class="wpsp-logo-mini"> <img
+                  src="https://demo.wpschoolpress.com/wp-content/plugins/wpschoolpress/img/wpschoolpresslogo.jpg"
+                  class="img wpsp-school-logo" width="45px" height="40px" />
+            </span> <span class="wpsp-schoolname">Vietnam University of Programming</span>
+            </a>
+            <div class="wpsp-head">
+               <div class="wpsp-menuIcon">
+                  <span></span>
+               </div>
+               <h2 class="wpsp-customeMsg">“Live as if you were to die tomorrow. Learn as if you were to live
+                  forever.”</h2>
+               <div class="wpsp-righthead">
+                  <div class="wpsp-head-action"></div>
+                  <div class="wpsp-userMain wpsp-dropdownmain">
+                     <div class="wpsp-profile-pic wpsp-dropdown-toggle">
                         <img src="https://demo.wpschoolpress.com/wp-content/plugins/wpschoolpress/img/avatar.png"
                            class="wpsp-userPic" alt="User Image" />
-                     <div style="display: inline-block;vertical-align: middle;">
-                        <p:outputLabel value="Welcome #{userController.user.username}" style="font-size:18px; color:white;" />
-                        <br />
-                        <p:commandLink actionListener="#{userController.logout}" value="Log out" style="color:red;" />
+                        <div style="display: inline-block; vertical-align: middle;">
+                           <p:outputLabel value="Welcome #{userController.user.username}"
+                              style="font-size:18px; color:white;" />
+                           <br />
+                           <p:commandLink actionListener="#{userController.logout}" value="Log out" style="color:red;" />
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
+      </h:form>
    </ui:composition>
 </body>
 </html>
