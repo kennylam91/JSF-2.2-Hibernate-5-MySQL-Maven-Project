@@ -23,6 +23,12 @@ public class Navigation implements Serializable {
 
 	private String mainContentHead = "/templates/dashboard/contentHead.xhtml";
 	private String mainContentBody = "/templates/dashboard/dashboard_row_content.xhtml";
+	
+//	private String mainContentBody = "/templates/login/contentBody.xhtml";
+	
+	public void navigateToLogin() {
+		mainContentBody = "/templates/login/contentBody.xhtml";
+	}
 
 	public void navigateToStudentList() {
 		mainContentHead = "/templates/student-list-page/contentHead.xhtml";

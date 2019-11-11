@@ -37,7 +37,7 @@ import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.exception.ScoreNotFoundException;
 import com.service.ScoreService;
-import com.service.impl.StudentServiceImpl;
+import com.service.StudentService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,7 +68,7 @@ public class StudentController implements Serializable {
 	private Map<Long, String> courseScoreMap;
 
 	@ManagedProperty(value = "#{studentService}")
-	private StudentServiceImpl studentService;
+	private StudentService studentService;
 
 	@ManagedProperty(value = "#{courseController}")
 	private CourseController courseController;
@@ -190,16 +190,6 @@ public class StudentController implements Serializable {
 		}
 	}
 
-	private ScoreDto getScoreDtoObjectFromCourseAndStudent(Course course, Student student) {
-		ScoreDto scoreDto = new ScoreDto();
-		scoreDto.setCourseId(course.getId());
-		scoreDto.setStudentId(student.getId());
-		scoreDto.setStudentCode(student.getCode());
-		scoreDto.setStudentFirstname(student.getFirstName());
-		scoreDto.setStudentLastname(student.getLastName());
-		scoreDto.setStudentField(student.getField());
-		return scoreDto;
-	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();
@@ -269,10 +259,15 @@ public class StudentController implements Serializable {
 		}
 	}
 
-	/*
-	 * public void getStudentListTotalRecords() {
-	 * 
-	 * }
-	 */
+	private ScoreDto getScoreDtoObjectFromCourseAndStudent(Course course, Student student) {
+		ScoreDto scoreDto = new ScoreDto();
+		scoreDto.setCourseId(course.getId());
+		scoreDto.setStudentId(student.getId());
+		scoreDto.setStudentCode(student.getCode());
+		scoreDto.setStudentFirstname(student.getFirstName());
+		scoreDto.setStudentLastname(student.getLastName());
+		scoreDto.setStudentField(student.getField());
+		return scoreDto;
+	}
 
 }

@@ -13,7 +13,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
-import org.apache.log4j.Logger;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.data.SortEvent;
 
@@ -37,7 +36,6 @@ import lombok.Setter;
 public class StudentListDlgView implements Serializable {
 
 	private static final long serialVersionUID = 6318963726091789725L;
-	private static final Logger logger = Logger.getLogger(StudentController.class);
 	private List<StudentDto> studentDtos;
 	private Pagination pagination;
 	private List<StudentDto> selectedStudentDtos;

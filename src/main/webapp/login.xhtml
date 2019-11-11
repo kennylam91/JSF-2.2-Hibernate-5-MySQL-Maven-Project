@@ -7,19 +7,21 @@
    <title>Student List</title>
 </h:head>
 <h:body>
-   <h:form id="formLogin" prependId="false" onsubmit="document.getElementById('formLogin').action = 'j_security_check';">
-      <h:panelGrid columns="2">
+   <h:form id="formLogin">
+      <p:panelGrid columns="3">
          <f:facet name="header">
           Login
         </f:facet>
-         <h:outputLabel for="j_username" value="Username: " />
-         <h:inputText id="j_username" required="true" />
-         <h:outputLabel for="j_password" value="Password: " />
-         <h:inputSecret id="j_password" required="true" />
+         <p:outputLabel for="email" value="Email: " />
+         <p:inputText id="email" required="true" value="#{userController.user.email}" />
+         <p:message for="username" />
+         <p:outputLabel for="password" value="Password: " />
+         <h:inputSecret id="password" required="true" value="#{userController.user.password}" />
+         <p:message for="password" />
          <f:facet name="footer">
-            <h:commandButton value="Login" type="submit" />
+            <p:commandButton value="Login" actionListener="#{userController.login}" />
          </f:facet>
-      </h:panelGrid>
+      </p:panelGrid>
    </h:form>
 </h:body>
 </html>

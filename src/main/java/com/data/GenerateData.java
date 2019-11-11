@@ -10,15 +10,18 @@ import com.beans.Course;
 import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.Subject;
+import com.beans.User;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.controller.SubjectController;
 import com.repository.CourseRepository;
 import com.repository.StudentRepository;
 import com.repository.SubjectRepository;
+import com.repository.UserRepository;
 import com.repository.impl.CourseRepositoryImpl;
 import com.repository.impl.StudentRepositoryImpl;
 import com.repository.impl.SubjectRepositoryImpl;
+import com.repository.impl.UserRepositoryImpl;
 import com.service.SubjectService;
 import com.service.impl.SubjectServiceImpl;
 
@@ -62,7 +65,7 @@ public class GenerateData {
 
 		insertSubjectSQL(10);
 
-		insertStudentSQL(50);
+		insertStudentAndUserSQL(50);
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -137,9 +140,11 @@ public class GenerateData {
 		return GENDER_COLLECTION[getRandomNumberBetween(0, GENDER_COLLECTION.length - 1)];
 	}
 
-	private static void insertStudentSQL(int studentNumber) {
+	private static void insertStudentAndUserSQL(int studentNumber) {
 		Student student = new Student();
 		StudentRepository repo = new StudentRepositoryImpl();
+		UserRepository userRepo = new UserRepositoryImpl();
+		User user = new User();
 		for (int i = 0; i < studentNumber; i++) {
 			String firstName = getRandomStudentFirstname();
 			String lastName = getRandomStudentLastname();
@@ -151,9 +156,18 @@ public class GenerateData {
 			student.setField(getRandomField());
 			student.setDob(getRandomDOB());
 			student.setPhone(getRandomPhone());
-			student.setEmail(getRandomEmail(firstName, lastName));
+			String email = getRandomEmail(firstName, lastName);
+			student.setEmail(email);
+			user.setEmail(email);
+			user.setUsername(firstName +" "+lastName);
+			user.setPassword((firstName +lastName).toLowerCase());
 			repo.saveStudent(student);
+			userRepo.save(user);
 		}
+	}
+	
+	private static void insertUserSQL(int number) {
+		
 	}
 
 	private static void insertSubjectSQL(int subjectNumber) {

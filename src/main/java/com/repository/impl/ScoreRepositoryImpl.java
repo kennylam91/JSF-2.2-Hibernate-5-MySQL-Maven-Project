@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,7 +22,6 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 
 	private static final long serialVersionUID = -1703957031646067590L;
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	private static final Logger logger = Logger.getLogger(ScoreRepositoryImpl.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -43,7 +41,6 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			logger.error(e);
 			return Collections.emptyList();
 		} finally {
 			if (session != null) {
@@ -71,7 +68,6 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			logger.error(e);
 			return Collections.emptyList();
 		} finally {
 			if (session != null) {
@@ -109,7 +105,6 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			logger.error(e);
 		} finally {
 			if (session != null) {
 				session.close();
@@ -132,7 +127,6 @@ public class ScoreRepositoryImpl implements ScoreRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			logger.error(e);
 		} finally {
 			if (session != null) {
 				session.close();

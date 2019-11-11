@@ -20,13 +20,13 @@
 	</context-param>
 	<!-- Welcome page -->
 	<welcome-file-list>
-		<welcome-file>faces/admin/dashboard.xhtml</welcome-file>
+		<welcome-file>faces/dashboard.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- Install slf4j bridge handler -->
-	<listener>
+	<!-- <listener>
 		<listener-class>com.util.MyListener</listener-class>
-	</listener>
+	</listener> -->
 
 	<!-- JSF mapping -->
 	<servlet>

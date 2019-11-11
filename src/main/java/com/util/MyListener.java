@@ -2,7 +2,6 @@ package com.util;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import org.slf4j.bridge.SLF4JBridgeHandler;
 
 public class MyListener implements ServletContextListener {
 
@@ -12,8 +11,10 @@ public class MyListener implements ServletContextListener {
 
 		// remove the jsf root logger, avoid duplicated logging
 		// try comment out this and see the different on the console
-		SLF4JBridgeHandler.removeHandlersForRootLogger();
-		SLF4JBridgeHandler.install();
+		/*
+		 * SLF4JBridgeHandler.removeHandlersForRootLogger();
+		 * SLF4JBridgeHandler.install();
+		 */
 	}
 
 	@Override

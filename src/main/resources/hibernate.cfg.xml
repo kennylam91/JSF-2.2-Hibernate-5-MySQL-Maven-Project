@@ -30,5 +30,6 @@
 		<mapping class="com.beans.Subject" />
 		<mapping class="com.beans.Course" />
 		<mapping class="com.beans.Score" />
+		<mapping class="com.beans.User" />
 	</session-factory>
 </hibernate-configuration>

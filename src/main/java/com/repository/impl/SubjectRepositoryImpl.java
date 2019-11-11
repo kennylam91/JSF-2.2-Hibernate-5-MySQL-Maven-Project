@@ -6,7 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -30,7 +29,6 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	private static final Logger logger = Logger.getLogger(SubjectRepositoryImpl.class);
 
 	@Override
 	public Long saveSubject(Subject subject) {
@@ -47,7 +45,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error(e);
+			
 			return null;
 		} finally {
 			if (session != null)
@@ -68,7 +66,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error(e);
+			
 		} finally {
 			if (session != null)
 				session.close();
@@ -88,7 +86,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error(e);
+			
 		} finally {
 			if (session != null)
 				session.close();
@@ -113,7 +111,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error(e);
+			
 			return null;
 		} finally {
 			if (session != null)
@@ -137,7 +135,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error(e);
+			
 			return Collections.emptyList();
 		} finally {
 			if (session != null)
@@ -164,7 +162,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			logger.error(e);
+			
 			return null;
 		} finally {
 			if (session != null)
