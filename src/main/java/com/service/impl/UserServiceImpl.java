@@ -8,6 +8,13 @@ import com.beans.User;
 import com.repository.UserRepository;
 import com.service.UserService;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
 @ManagedBean(name = "userService")
 @SessionScoped
 public class UserServiceImpl implements UserService {
@@ -18,8 +25,8 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	@Override
-	public boolean validateUser(User user) {
-		return true;
+	public String validateUser(User user) {
+		return userRepository.validateUser(user);
 	}
 
 	@Override

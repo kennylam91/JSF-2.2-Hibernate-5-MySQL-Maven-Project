@@ -11,12 +11,19 @@ import com.beans.User;
 import com.repository.UserRepository;
 import com.util.HibernateUtil;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @ManagedBean(name = "userRepository")
 @SessionScoped
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
 	private static final long serialVersionUID = 2213169556142957993L;
-	
+
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	@Override
@@ -32,7 +39,7 @@ public class UserRepositoryImpl implements UserRepository{
 		} catch (Exception e) {
 			if (transaction != null)
 				transaction.rollback();
-			
+
 			return null;
 		} finally {
 			if (session != null) {
@@ -41,5 +48,34 @@ public class UserRepositoryImpl implements UserRepository{
 		}
 	}
 
-	
+	@Override
+	public String validateUser(User user) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			User userFound = (User) session.createQuery("Select u from User u where u.email = :email")
+					.setParameter("email", user.getEmail()).uniqueResult();
+			transaction.commit();
+			if (userFound == null)
+				return null;
+			else {
+				if (userFound.getPassword().equals(user.getPassword())) {
+					return userFound.getUsername();
+				}
+				return null;
+			}
+
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			return null;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
 }
