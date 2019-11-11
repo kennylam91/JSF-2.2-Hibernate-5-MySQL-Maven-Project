@@ -10,7 +10,6 @@
       <div id="course-list-table-content">
          <div>
             <p:ajax event="sort" listener="#{courseController.onSort}" update="course_list_table"></p:ajax>
-            <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:40px;" />
             <p:column headerText="Code" style="width:100px" sortBy="#{course.code}" field="code">
                <h:outputText value="#{course.code}" />
             </p:column>
@@ -30,7 +29,7 @@
                   <f:convertDateTime pattern="dd/MM/yyyy" />
                </h:outputText>
             </p:column>
-            <p:column headerText="Status" sortBy="#{course.status}" field="status" style="width:90px;">
+            <p:column headerText="Status" sortBy="#{course.status}" field="status" style="width:110px;">
                <h:outputText value="#{course.status}" />
             </p:column>
             <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher">
