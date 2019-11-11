@@ -43,9 +43,10 @@ public class UserController implements Serializable {
 		User userFound = userService.validateUser(user);
 		if (userFound != null) {
 			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", userFound.getUsername());
+			session.setAttribute("authority", userFound.getAuthority());
 			user.setAuthority(userFound.getAuthority());
 			user.setUsername(userFound.getUsername());
+			navigation.setUserAuthority(userFound.getAuthority());
 			FacesContext context = FacesContext.getCurrentInstance();
 			try {
 				String rootUrl = context.getExternalContext().getRequestContextPath();

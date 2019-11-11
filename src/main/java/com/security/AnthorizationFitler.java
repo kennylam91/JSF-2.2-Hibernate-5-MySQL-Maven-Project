@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.constant.AUTHORITIES;
+
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "*" })
 public class AnthorizationFitler implements Filter {
 
@@ -30,7 +32,7 @@ public class AnthorizationFitler implements Filter {
 			HttpSession session = reqt.getSession(false);
 
 			String reqURI = reqt.getRequestURI();
-			if (reqURI.contains("/login.xhtml") || (session != null && session.getAttribute("username") != null)
+			if (reqURI.contains("/login.xhtml") || (session != null && session.getAttribute("authority") != null)
 					|| (reqURI.contains("/public/")) || reqURI.contains("javax.faces.resource"))
 				chain.doFilter(request, response);
 			else {
