@@ -66,7 +66,7 @@ public class StudentController implements Serializable {
 	private List<StudentDto> selectedStudentDtos;
 
 	private Map<Long, String> courseScoreMap;
-	
+
 	private String userEmail;
 
 	@ManagedProperty(value = "#{studentService}")
@@ -126,29 +126,33 @@ public class StudentController implements Serializable {
 	}
 
 	public void getStudentDetail() {
-		
-		//get selectedStudent from student-list-page
-		if(selectedStudentDto != null) {
+
+		// get selectedStudent from student-list-page
+		if (selectedStudentDto != null) {
 			selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
 		}
-		//get selectedStudent from login view
+		// get selectedStudent from login view
 		else {
 			selectedStudent = studentService.findStudentByEmail(userEmail);
 		}
-		
-		for (Course course : selectedStudent.getCourses()) {
-			if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
-				try {
-					courseScoreMap.put(course.getId(), String.valueOf(getScoreByStudentIdAndCourseId(course.getId())));
-				} catch (ScoreNotFoundException e) {
-					e.printStackTrace(); // need logger
+
+		if (selectedStudent.getCourses() != null) {
+			for (Course course : selectedStudent.getCourses()) {
+				if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
+					try {
+						courseScoreMap.put(course.getId(),
+								String.valueOf(getScoreByStudentIdAndCourseId(course.getId())));
+					} catch (ScoreNotFoundException e) {
+						e.printStackTrace(); // need logger
+					}
 				}
 			}
 		}
-		if(selectedStudentDto != null) {
+
+		if (selectedStudentDto != null) {
 			navigation.navigateToStudentDetail();
 		}
-		
+
 	}
 
 	public void update() {
@@ -204,6 +208,16 @@ public class StudentController implements Serializable {
 		}
 	}
 
+	public void addCourseToStudent() {
+		System.out.println("addCourseToStudent");
+		if(courseController.getSelectedCourse() != null) {
+			courseController.getSelectedCourse().addStudent(selectedStudent);
+			courseController.getSelectedScores()
+					.add(getScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), selectedStudent));
+			courseController.updateCourse();
+		}
+		
+	}
 
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();

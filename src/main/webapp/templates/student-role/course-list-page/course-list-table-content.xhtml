@@ -41,6 +41,12 @@
             <p:column headerText="Cap" style="width:80px;" sortBy="#{course.capacity}" field="capacity">
                <h:outputText value="#{course.capacity}" />
             </p:column>
+            <p:column>
+               <p:commandButton value="Register" actionListener="#{studentController.addCourseToStudent}" >
+               <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}">
+               </f:setPropertyActionListener>
+               </p:commandButton>
+            </p:column>
          </div>
       </div>
    </ui:composition>

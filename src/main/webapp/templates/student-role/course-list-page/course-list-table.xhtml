@@ -9,7 +9,7 @@
   <ui:composition>
     <h:form id="form_course_list">
       <p:dataTable value="#{courseController.courses}" var="course" reflow="true" id="course_list_table"
-        rowKey="#{course.id}" multiViewState="true" styleClass="wpsp-table dataTable dtr-inline">
+        rowKey="#{course.id}" multiViewState="true" styleClass="wpsp-table dataTable dtr-inline" selectionMode="single" >
         <f:facet name="header">
           <div class="wpsp-dataTable-top ui-g">
             <div class="ui-g-4" align="left">
