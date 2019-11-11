@@ -98,4 +98,11 @@ public class StudentServiceImpl implements StudentService, Serializable {
 		return studentRepository.findStudentsByPagination(paginationStudentList).getTotalFoundRecords();
 	}
 
+	@Override
+	public Student findStudentByEmail(String userEmail) {
+		return studentRepository.findStudentByEmail(userEmail);
+	}
+	
+	
+
 }

@@ -2,11 +2,13 @@ package com.beans;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.constant.AUTHORITIES;
+import com.constant.Constant;
 import com.controller.StudentController;
 
 import lombok.Getter;
@@ -15,6 +17,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @ManagedBean(name = "navigation")
 @SessionScoped
 public class Navigation implements Serializable {
@@ -29,25 +32,27 @@ public class Navigation implements Serializable {
 
 	private AUTHORITIES userAuthority;
 
-	public Navigation() {
+	/*
+	 * @PostConstruct public void init() { if
+	 * (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) { mainContentHead =
+	 * "/templates/dashboard/contentHead.xhtml"; mainContentBody =
+	 * "/templates/dashboard/dashboard_row_content.xhtml"; } else { mainContentHead
+	 * = "/templates/student-list-page/contentHead.xhtml"; mainContentBody =
+	 * "/templates/student-detail-page/student-detail-form.xhtml"; } }
+	 */
+	
 
-	}
-
-	public String getMainContentHead() {
-		if (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) {
-			return "/templates/dashboard/contentHead.xhtml";
-		} else {
-			return "/templates/student-list-page/contentHead.xhtml";
-		}
-	}
-
-	public String getMainContentBody() {
-		if (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) {
-			return "/templates/dashboard/dashboard_row_content.xhtml";
-		} else {
-			return "/templates/student-detail-page/student-detail-form.xhtml";
-		}
-	}
+	/*
+	 * public String getMainContentHead() { if
+	 * (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) { return
+	 * "/templates/dashboard/contentHead.xhtml"; } else { return
+	 * "/templates/student-list-page/contentHead.xhtml"; } }
+	 * 
+	 * public String getMainContentBody() { if
+	 * (userAuthority.equals(AUTHORITIES.ADMIN_ROLE)) { return
+	 * "/templates/dashboard/dashboard_row_content.xhtml"; } else { return
+	 * "/templates/student-detail-page/student-detail-form.xhtml"; } }
+	 */
 
 	public void navigateToLogin() {
 		mainContentBody = "/templates/login/contentBody.xhtml";
@@ -60,7 +65,7 @@ public class Navigation implements Serializable {
 
 	public void navigateToDashboard() {
 		mainContentHead = "/templates/dashboard/contentHead.xhtml";
-		mainContentBody = "/templates/dashboard/dashboard_row_content.xhtml";
+		mainContentBody = "/templates/dashboard/contentBody.xhtml";
 	}
 
 	public void navigateToCourseList() {
@@ -74,7 +79,7 @@ public class Navigation implements Serializable {
 	}
 
 	public void navigateToStudentDetail() {
-		mainContentBody = "/templates/student-detail-page/student-detail-form.xhtml";
+		mainContentBody = Constant.STUDENT_DETAIL_CONTENT_BODY_URL;
 	}
 
 	public void navigateToCourseDetail() {

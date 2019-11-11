@@ -66,6 +66,8 @@ public class StudentController implements Serializable {
 	private List<StudentDto> selectedStudentDtos;
 
 	private Map<Long, String> courseScoreMap;
+	
+	private String userEmail;
 
 	@ManagedProperty(value = "#{studentService}")
 	private StudentService studentService;
@@ -124,7 +126,16 @@ public class StudentController implements Serializable {
 	}
 
 	public void getStudentDetail() {
-		selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
+		
+		//get selectedStudent from student-list-page
+		if(selectedStudentDto != null) {
+			selectedStudent = studentService.findStudentById(selectedStudentDto.getId());
+		}
+		//get selectedStudent from login view
+		else {
+			selectedStudent = studentService.findStudentByEmail(userEmail);
+		}
+		
 		for (Course course : selectedStudent.getCourses()) {
 			if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
 				try {

@@ -36,5 +36,7 @@ public interface StudentRepository extends Serializable {
 	
 	int getTotalRecords(Pagination paginationStudentList);
 
+	Student findStudentByEmail(String userEmail);
+
 
 }

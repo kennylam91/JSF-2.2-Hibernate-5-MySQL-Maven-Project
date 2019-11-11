@@ -31,4 +31,6 @@ public interface StudentService {
 	
 	int getTotalRecords(Pagination paginationStudentList);
 
+	Student findStudentByEmail(String userEmail);
+
 }

@@ -438,4 +438,34 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Student findStudentByEmail(String userEmail) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+
+			org.hibernate.query.Query<Student> query = session
+					.createQuery("select s from Student s where s.email = :email")
+					.setParameter("email", userEmail);
+			Student student = query.uniqueResult();
+			transaction.commit();
+			return student;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			
+			return null;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	 
+
 }

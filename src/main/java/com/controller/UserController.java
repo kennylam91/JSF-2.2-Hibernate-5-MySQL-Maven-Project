@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.Navigation;
 import com.beans.User;
+import com.constant.AUTHORITIES;
+import com.constant.Constant;
 import com.service.UserService;
 import com.util.SessionUtils;
 
@@ -37,7 +39,10 @@ public class UserController implements Serializable {
 	UserService userService;
 
 	@ManagedProperty(value = "#{navigation}")
-	private Navigation navigation;
+	Navigation navigation;
+	
+	@ManagedProperty(value = "#{studentController}")
+	StudentController studentController;
 
 	public void login() {
 		User userFound = userService.validateUser(user);
@@ -46,7 +51,16 @@ public class UserController implements Serializable {
 			session.setAttribute("authority", userFound.getAuthority());
 			user.setAuthority(userFound.getAuthority());
 			user.setUsername(userFound.getUsername());
-			navigation.setUserAuthority(userFound.getAuthority());
+			if(userFound.getAuthority().equals(AUTHORITIES.ADMIN_ROLE)) {
+				navigation.setMainContentHead(Constant.DASHBOARD_CONTENT_HEAD_URL);
+				navigation.setMainContentBody(Constant.DASHBOARD_CONTENT_BODY_URL);
+			}
+			else {
+				studentController.setUserEmail(userFound.getEmail());
+				navigation.setMainContentHead(Constant.STUDENT_CONTENT_HEAD_URL);
+				navigation.setMainContentBody(Constant.STUDENT_DETAIL_CONTENT_BODY_URL);
+				studentController.getStudentDetail();	
+			}
 			FacesContext context = FacesContext.getCurrentInstance();
 			try {
 				String rootUrl = context.getExternalContext().getRequestContextPath();
