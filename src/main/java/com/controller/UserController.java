@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -40,7 +41,7 @@ public class UserController implements Serializable {
 
 	@ManagedProperty(value = "#{navigation}")
 	Navigation navigation;
-	
+
 	@ManagedProperty(value = "#{studentController}")
 	StudentController studentController;
 
@@ -51,20 +52,20 @@ public class UserController implements Serializable {
 			session.setAttribute("authority", userFound.getAuthority());
 			user.setAuthority(userFound.getAuthority());
 			user.setUsername(userFound.getUsername());
-			//Admin Role view
-			if(userFound.getAuthority().equals(AUTHORITIES.ADMIN_ROLE)) {
+			// Admin Role view
+			if (userFound.getAuthority().equals(AUTHORITIES.ADMIN_ROLE)) {
 				navigation.setMainContentHead(Constant.DASHBOARD_CONTENT_HEAD_URL);
 				navigation.setMainContentBody(Constant.DASHBOARD_CONTENT_BODY_URL);
 				navigation.setLeftSidebar(Constant.LEFT_SIDEBAR_URL);
 			}
-			
-			//Student Role View
+
+			// Student Role View
 			else {
 				studentController.setUserEmail(userFound.getEmail());
 				navigation.setMainContentHead(Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_HEAD_URL);
 				navigation.setMainContentBody(Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_BODY_URL);
 				navigation.setLeftSidebar(Constant.STUDENT_ROLE_LEFT_SIDEBAR);
-				studentController.getStudentDetail();	
+				studentController.getStudentDetail();
 			}
 			FacesContext context = FacesContext.getCurrentInstance();
 			try {
@@ -74,17 +75,21 @@ public class UserController implements Serializable {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("user is invalid");
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Invalid user"));
+
 		}
 	}
-	
+
 	public void logout() {
 		HttpSession session = SessionUtils.getSession();
 		session.removeAttribute("username");
 		FacesContext context = FacesContext.getCurrentInstance();
 		String rootUrl = context.getExternalContext().getRequestContextPath();
 		try {
-			context.getExternalContext().redirect(rootUrl +"/login.xhtml");
+			// destroy session to cannot get view after click log out
+			context.getExternalContext().invalidateSession();
+			context.getExternalContext().redirect(rootUrl + "/login.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -4,24 +4,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
    xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-   <title>Student List</title>
+<ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/javascript.xhtml"></ui:include>
+   <title>Login</title>
 </h:head>
 <h:body>
    <h:form id="formLogin">
-      <p:panelGrid columns="3">
-         <f:facet name="header">
-          Login
+      <div style="display: flex; width: 100vw; justify-content: center; margin-top: 200px;font-size:20px;line-height: 2rem;">
+         <p:panelGrid columns="2">
+            <f:facet name="header">
+          Please Login
         </f:facet>
-         <p:outputLabel for="email" value="Email: " />
-         <p:inputText id="email" required="true" value="#{userController.user.email}" />
-         <p:message for="email" />
-         <p:outputLabel for="password" value="Password: " />
-         <h:inputSecret id="password" required="true" value="#{userController.user.password}" />
-         <p:message for="password" />
-         <f:facet name="footer">
-            <p:commandButton value="Login" actionListener="#{userController.login}" />
-         </f:facet>
-      </p:panelGrid>
+            <p:outputLabel for="email" value="Email: " />
+            <h:inputText id="email" required="true" value="#{userController.user.email}" />
+            <p:outputLabel for="password" value="Password: " />
+            <h:inputSecret id="password" required="true" value="#{userController.user.password}" />
+            <f:facet name="footer">
+               <div align="center">
+                  <p:commandButton value="Login" actionListener="#{userController.login}" />
+               </div>
+            </f:facet>
+         </p:panelGrid>
+      </div>
+      <p:messages id="messages" showDetail="true" closable="true"
+         style="width: 100%;display: flex;justify-content: center;">
+         <p:autoUpdate />
+      </p:messages>
+      
    </h:form>
 </h:body>
 </html>
