@@ -6,7 +6,7 @@ import com.beans.User;
 
 public interface UserService extends Serializable{
 	
-	String validateUser(User user);
+	User validateUser(User user);
 	
 	Long saveUser(User user);
 

@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	@Override
-	public String validateUser(User user) {
+	public User validateUser(User user) {
 		return userRepository.validateUser(user);
 	}
 

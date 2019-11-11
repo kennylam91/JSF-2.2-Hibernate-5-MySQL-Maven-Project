@@ -11,6 +11,7 @@ import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.Subject;
 import com.beans.User;
+import com.constant.AUTHORITIES;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.controller.SubjectController;
@@ -161,6 +162,7 @@ public class GenerateData {
 			user.setEmail(email);
 			user.setUsername(firstName +" "+lastName);
 			user.setPassword((firstName +lastName).toLowerCase());
+			user.setAuthority(AUTHORITIES.STUDENT_ROLE);
 			repo.saveStudent(student);
 			userRepo.save(user);
 		}

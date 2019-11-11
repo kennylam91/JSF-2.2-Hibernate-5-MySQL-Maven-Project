@@ -8,5 +8,5 @@ public interface UserRepository extends Serializable {
 
 	Long save(User user);
 	
-	String validateUser(User user);
+	User validateUser(User user);
 }

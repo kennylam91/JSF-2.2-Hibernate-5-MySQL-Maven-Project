@@ -49,7 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public String validateUser(User user) {
+	public User validateUser(User user) {
 		Transaction transaction = null;
 		Session session = null;
 		try {
@@ -62,7 +62,11 @@ public class UserRepositoryImpl implements UserRepository {
 				return null;
 			else {
 				if (userFound.getPassword().equals(user.getPassword())) {
-					return userFound.getUsername();
+					
+					return User.builder().email(userFound.getEmail())
+							.username(userFound.getUsername())
+							.authority(userFound.getAuthority())
+							.build();
 				}
 				return null;
 			}
