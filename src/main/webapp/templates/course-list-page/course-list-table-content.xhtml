@@ -14,7 +14,7 @@
         <p:column headerText="Code" style="width:100px" sortBy="#{course.code}" field="code">
           <h:outputText value="#{course.code}" />
         </p:column>
-        <p:column headerText="Name" style="width:110px" sortBy="#{course.name}" field="name">
+        <p:column headerText="Name" style="width:170px" sortBy="#{course.name}" field="name">
           <h:outputText value="#{course.name}" />
         </p:column>
         <p:column headerText="Subject" style="" sortBy="#{course.subject.name}" field="subject">
@@ -30,13 +30,14 @@
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
         </p:column>
-        <p:column headerText="Status" sortBy="#{course.status}" field="status" style="width:90px;">
+        <p:column headerText="Status" sortBy="#{course.status}" field="status" style="width:110px;">
           <h:outputText value="#{course.status}" />
         </p:column>
-        <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher">
+        <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher" style="width:120px;" > 
           <h:outputText value="#{course.teacher}" />
         </p:column>
-        <p:column headerText="Students No." sortBy="#{course.studentsNo}" field="studentsNo">
+        <p:column headerText="Reg No." sortBy="#{course.studentsNo}" field="studentsNo"
+        style="width:95px;" > 
           <h:outputText value="#{course.studentsNo}" />
         </p:column>
         <p:column headerText="Cap" style="width:80px;" sortBy="#{course.capacity}" field="capacity">

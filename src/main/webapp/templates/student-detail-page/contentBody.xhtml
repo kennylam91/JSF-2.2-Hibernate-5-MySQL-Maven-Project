@@ -67,7 +67,7 @@
                   <f:convertNumber pattern="#0.00"></f:convertNumber>
                </h:outputText>
                <p:outputLabel>Note:</p:outputLabel>
-               <p:inplace editor="true">
+               <p:inplace editor="true" emptyLabel="_____" >
                   <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
                </p:inplace>
                <f:facet name="footer">
@@ -107,9 +107,9 @@
                   <p:column headerText="Score" style="width:60px;">
                      <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Action" style="width:60px;">
+                  <!-- <p:column headerText="Action" style="width:60px;">
                      <p:commandButton icon="pi pi-search" title="View"></p:commandButton>
-                  </p:column>
+                  </p:column> -->
                </p:dataTable>
             </p:panelGrid>
          </h:form>
