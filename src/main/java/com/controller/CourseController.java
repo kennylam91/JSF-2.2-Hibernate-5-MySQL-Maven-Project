@@ -226,4 +226,8 @@ public class CourseController implements Serializable {
 		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourse.getId());
 
 	}
+	
+	public boolean isSelectedCourseStatusCompleted() {
+		return selectedCourse.getStatus().equals(COURSE_STATUSES.COMPLETED);
+	}
 }

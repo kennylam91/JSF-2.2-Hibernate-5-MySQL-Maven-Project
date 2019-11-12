@@ -5,6 +5,7 @@
 <h:head>
    <ui:include src="/templates/head_template.xhtml"></ui:include>
    <ui:include src="/templates/javascript.xhtml"></ui:include>
+   <title>STUDENT LIST</title>
 </h:head>
 <h:body>
    <h:form id="form_student_list_dlg">
@@ -14,12 +15,12 @@
          <p:ajax event="sort" listener="#{studentListDlgView.onSort}" update="student_list_table" />
          <f:facet name="header">
             <div class="wpsp-dataTable-top ui-g">
-               <div class="ui-g-5">
+               <div class="ui-g-4">
                   <p:commandButton actionListener="#{studentListDlgView.closeStudentListDialog}" update="@form"
                      value="Add Students">
                   </p:commandButton>
                </div>
-               <div class="wpsp-label ui-g-7">
+               <div class="wpsp-label ui-g-8">
                   <div class="ui-inputgroup" style="float: right;">
                      <h:selectOneMenu styleClass="select_input" style=";display:inline;width:90px;font-size:13px;" id="search_field"
                         value="#{studentListDlgView.pagination.searchField}">
@@ -32,7 +33,7 @@
                         <f:selectItem itemLabel="Gender" itemValue="gender" />
                      </h:selectOneMenu>
                      <p:inputText id="search_keyword" value="#{studentListDlgView.pagination.searchKeyword}"
-                        style="width: 120px" placeholder="Search"
+                        style="width: 180px" placeholder="Search"
                         onkeypress="if (event.keyCode == 13) { return false; }">
                      </p:inputText>
                      <p:commandButton icon="pi pi-search" styleClass="white-button"

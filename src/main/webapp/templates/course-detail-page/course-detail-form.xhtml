@@ -20,31 +20,32 @@
                   update=":form-course-students-information:course_student_list_table" immediate="true">
                </p:ajax>
             </p:commandButton>
+            <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
+               style="
+            display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
+            background-color:#0178bc;border-color: #0178bc;font-size: 12px;"
+               update="form-course-basic-information"></p:commandButton>
+            <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
+               style="display:block;position:absolute;right: 335px;height:32px;width: 111px;padding: 0;
+            background-color: #54667a;border-color: #54667a;font-size: 12px;"
+               update="main-content">
+            </p:commandButton>
             <p:commandButton value="Add Scores" id="add_scores_button" styleClass="wpsp-btn"
-               style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
+               rendered="#{courseController.isSelectedCourseStatusCompleted()}"
+               style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
             background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;"
                actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
                <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
                   immediate="true">
                </p:ajax>
             </p:commandButton>
-            <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-               style="
-            display:block;position:absolute;right: 335px;height:32px;width: 111px;padding: 0;
-            background-color:#0178bc;border-color: #0178bc;font-size: 12px;"
-               update="form-course-basic-information"></p:commandButton>
-            <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
-               style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
-            background-color: #54667a;border-color: #54667a;font-size: 12px;"
-               update="main-content">
-            </p:commandButton>
          </h:panelGroup>
       </h:form>
       <h:panelGroup class="ui-g">
          <h:form id="form-course-basic-information" styleClass="ui-g-5">
-            <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-5, ui-grid-col-7" >
-               <f:facet name="header" >
-                  <p:outputLabel value="COURSE INFORMATION" style="display:block;margin:5px;" ></p:outputLabel>
+            <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-5, ui-grid-col-7">
+               <f:facet name="header">
+                  <p:outputLabel value="COURSE INFORMATION" style="display:block;margin:5px;"></p:outputLabel>
                </f:facet>
                <p:outputLabel>Course Code:</p:outputLabel>
                <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
@@ -72,9 +73,9 @@
                   </p:calendar>
                </p:inplace>
                <p:outputLabel>Finish time:</p:outputLabel>
-               <p:inplace editor="true" emptyLabel="_______" >
+               <p:inplace editor="true" emptyLabel="_______">
                   <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
-                     showOn="button" >
+                     showOn="button">
                      <f:convertDateTime pattern="dd/MM/yyyy" />
                   </p:calendar>
                </p:inplace>
@@ -96,7 +97,7 @@
                <p:outputLabel>Student No:</p:outputLabel>
                <h:outputText value="#{courseController.selectedCourse.studentsNo}" id="studentsNo" />
                <p:outputLabel>Description:</p:outputLabel>
-               <p:inplace editor="true" emptyLabel="_______" >
+               <p:inplace editor="true" emptyLabel="_______">
                   <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
                </p:inplace>
             </p:panelGrid>
@@ -122,7 +123,7 @@
                <p:column headerText="Score">
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
-               <p:column headerText="Action" style="width:60px;" >
+               <p:column headerText="Action" style="width:60px;">
                   <p:commandButton icon="pi pi-trash" title="Del" update="course_student_list_table"
                      actionListener="#{courseController.removeStudentOutOfCourse(score.studentId)}"
                      style="color:red;background-color:#f2f5f9;border:none;">
