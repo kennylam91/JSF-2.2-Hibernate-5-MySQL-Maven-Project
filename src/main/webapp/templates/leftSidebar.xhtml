@@ -7,57 +7,47 @@
    <ui:composition>
       <div class="wpsp-sidebar ifnotadmin">
          <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
-            <div class="sidebarScroll" style="overflow: hidden; width: auto; height: 100%;">
+            <div class="sidebarScroll" style="overflow: hidden; width: auto; height: 100%; font-size: 20px;">
                <h:form>
                   <f:ajax render=":main-content">
                      <ul class="wpsp-navigation">
                         <li class=""><h:commandLink action="#{navigation.navigateToDashboard()}">
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                              <i class="pi pi-home"></i>
                               <span>Dashboard</span>
                            </h:commandLink></li>
                         <li class=""><h:commandLink action="#{studentController.getStudentListForm}">
-                              <i class="dashicons dashicons-id icon"></i>
+                              <i class="pi pi-users" />
                               <span>Students</span>
                            </h:commandLink></li>
                         <li class=""><h:commandLink action="#{navigation.navigateToCourseList()}">
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                              <i class="pi pi-list"></i>
                               <span>Courses</span>
                            </h:commandLink></li>
                         <li class=""><h:commandLink action="#{navigation.navigateToSubjectList()}">
-                              <i class="dashicons dashicons-groups icon"></i>
+                              <i class="pi pi-copy"></i>
                               <span>Subjects</span>
                            </h:commandLink></li>
-                           <li>
-                           <h:commandLink>
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                        <li><h:commandLink>
+                              <i class="pi pi-calendar"></i>
                               <span>Attendance</span>
-                           </h:commandLink>
-                           </li>
-                           <li>
-                           <h:commandLink>
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                           </h:commandLink></li>
+                        <li><h:commandLink>
+                              <i class="pi pi-info"></i>
                               <span>Transportation</span>
-                           </h:commandLink>
-                           </li>
-                           <li>
-                           <h:commandLink>
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                           </h:commandLink></li>
+                        <li><h:commandLink>
+                              <i class="pi pi-bell"></i>
                               <span>Notification</span>
-                           </h:commandLink>
-                           </li>
-                           <li>
-                           <h:commandLink>
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                           </h:commandLink></li>
+                        <li><h:commandLink>
+                              <i class="pi pi-clock"></i>
                               <span>Events</span>
-                           </h:commandLink>
-                           </li>
-                           <li>
-                           <h:commandLink>
-                              <i class="dashicons dashicons-dashboard icon"></i>
+                           </h:commandLink></li>
+                        <li><h:commandLink>
+                              <i class="pi pi-bars"></i>
                               <span>Attendance</span>
-                           </h:commandLink>
-                           </li>
-                        </ul>
+                           </h:commandLink></li>
+                     </ul>
                   </f:ajax>
                </h:form>
             </div>
