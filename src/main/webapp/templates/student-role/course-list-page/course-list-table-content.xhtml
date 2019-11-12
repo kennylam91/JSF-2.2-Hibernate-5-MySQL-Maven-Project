@@ -41,10 +41,17 @@
             <p:column headerText="Cap" style="width:80px;" sortBy="#{course.capacity}" field="capacity">
                <h:outputText value="#{course.capacity}" />
             </p:column>
-            <p:column>
-               <p:commandButton value="Register" actionListener="#{studentController.addCourseToStudent}" >
-               <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}">
-               </f:setPropertyActionListener>
+            <p:column headerText="Action" >
+               <p:commandButton value="Register" 
+               rendered="#{studentController.isCourseCanBeRegistered(course)}"
+                  action="#{studentController.addCourseToStudent}" update="@form" style="width:80px;">
+                  <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
+               </p:commandButton>
+               <p:commandButton value="Cancel" 
+               rendered="#{studentController.isCourseCanBeCanceled(course)}"
+               action="#{studentController.removeCourseOutOfStudent}" update="@form"
+               style="background-color: #f33155;border: #f33155 1px solid;width:80px;">
+                  <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
                </p:commandButton>
             </p:column>
          </div>

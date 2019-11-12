@@ -25,6 +25,7 @@ import org.primefaces.event.data.SortEvent;
 
 import com.beans.Course;
 import com.beans.Navigation;
+import com.beans.Score;
 import com.beans.ScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
@@ -204,21 +205,56 @@ public class StudentController implements Serializable {
 			courseController.getSelectedCourse().addStudent(student);
 
 			courseController.getSelectedScores()
-					.add(getScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), student));
+					.add(createScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), student));
 		}
 	}
 
 	public void addCourseToStudent() {
-		System.out.println("addCourseToStudent");
-		if(courseController.getSelectedCourse() != null) {
+		if (courseController.getSelectedCourse() != null) {
 			courseController.getSelectedCourse().addStudent(selectedStudent);
-			courseController.getSelectedScores()
-					.add(getScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), selectedStudent));
+			courseController.getSelectedScores().add(
+					createScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), selectedStudent));
 			courseController.updateCourse();
 		}
-		
+
 	}
 
+	public void removeCourseOutOfStudent() {
+		if (courseController.getSelectedCourse() != null) {
+			courseController.getSelectedCourse().removeStudent(selectedStudent);
+			for (ScoreDto scoreDto : courseController.getSelectedScores()) {
+				if (scoreDto.getCourseId().equals(courseController.getSelectedCourse().getId())
+						&& scoreDto.getStudentId().equals(selectedStudent.getId())) {
+					courseController.getSelectedScores().remove(scoreDto);
+				}
+			}
+			courseController.updateCourse();
+		}
+
+	}
+
+	public String checkCourseStatusAndGetRegisterBySelectedStudentOrNot(Course course) {
+		boolean isCourseOnRegistering = course.getStatus().equals(COURSE_STATUSES.REGISTERING);
+		boolean isCourseGetRegisterBySelectedStudent = false;
+		for (Course c : selectedStudent.getCourses()) {
+			if (c.equals(course))
+				isCourseGetRegisterBySelectedStudent = true;
+		}
+		if (!isCourseOnRegistering)
+			return "cannot be registerd";
+		else if (isCourseGetRegisterBySelectedStudent)
+			return "can be canceled";
+		else
+			return "can be registerd";
+	}
+
+	public boolean isCourseCanBeRegistered(Course course) {
+		return (checkCourseStatusAndGetRegisterBySelectedStudentOrNot(course).equals("can be registerd"));
+	}
+
+	public boolean isCourseCanBeCanceled(Course course) {
+		return checkCourseStatusAndGetRegisterBySelectedStudentOrNot(course).contentEquals("can be canceled");
+	}
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
@@ -287,7 +323,7 @@ public class StudentController implements Serializable {
 		}
 	}
 
-	private ScoreDto getScoreDtoObjectFromCourseAndStudent(Course course, Student student) {
+	private ScoreDto createScoreDtoObjectFromCourseAndStudent(Course course, Student student) {
 		ScoreDto scoreDto = new ScoreDto();
 		scoreDto.setCourseId(course.getId());
 		scoreDto.setStudentId(student.getId());
