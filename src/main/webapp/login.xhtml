@@ -4,21 +4,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
    xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-<ui:include src="/templates/head_template.xhtml"></ui:include>
+   <ui:include src="/templates/head_template.xhtml"></ui:include>
    <ui:include src="/templates/javascript.xhtml"></ui:include>
    <title>Login</title>
 </h:head>
 <h:body>
    <h:form id="formLogin">
-      <div style="display: flex; width: 100vw; justify-content: center; margin-top: 200px;font-size:20px;line-height: 2rem;">
-         <p:panelGrid columns="2">
+      <div
+         style="display: flex; width: 100vw; justify-content: center; margin-top: 200px; font-size: 20px; line-height: 2rem;">
+         <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-4,ui-grid-col-8">
             <f:facet name="header">
           Please Login
         </f:facet>
             <p:outputLabel for="email" value="Email: " />
-            <h:inputText id="email" required="true" value="#{userController.user.email}" />
+            <p:inputText id="email" required="true" value="#{userController.user.email}" />
             <p:outputLabel for="password" value="Password: " />
-            <h:inputSecret id="password" required="true" value="#{userController.user.password}" />
+            <p:password id="password" required="true" value="#{userController.user.password}" />
+            <div></div>
+            <!-- <p:commandLink value="Forget password"
+               style="font-size:15px;text-align:right;width:100%;display:inline-block;color:red;">
+            </p:commandLink> -->
             <f:facet name="footer">
                <div align="center">
                   <p:commandButton value="Login" actionListener="#{userController.login}" />
@@ -26,11 +31,9 @@
             </f:facet>
          </p:panelGrid>
       </div>
-      <p:messages id="messages" showDetail="true" closable="true"
-         style="width: 100%;display: flex;justify-content: center;">
+      <p:messages id="messages" closable="true" style="width: 100%;display: flex;justify-content: center;">
          <p:autoUpdate />
       </p:messages>
-      
    </h:form>
 </h:body>
 </html>

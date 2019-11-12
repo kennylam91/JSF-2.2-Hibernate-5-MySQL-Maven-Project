@@ -83,7 +83,6 @@ public class UserController implements Serializable {
 
 	public void logout() {
 		HttpSession session = SessionUtils.getSession();
-		session.removeAttribute("username");
 		FacesContext context = FacesContext.getCurrentInstance();
 		String rootUrl = context.getExternalContext().getRequestContextPath();
 		try {
