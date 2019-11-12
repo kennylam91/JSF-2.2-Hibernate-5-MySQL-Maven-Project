@@ -209,7 +209,7 @@ public class StudentController implements Serializable {
 		}
 	}
 
-	public void addCourseToStudent() {
+	public void addCourseToStudentAndThenUpdateCourse() {
 		if (courseController.getSelectedCourse() != null) {
 			courseController.getSelectedCourse().addStudent(selectedStudent);
 			courseController.getSelectedScores().add(

@@ -43,7 +43,7 @@
             </p:column>
             <p:column headerText="Action">
                <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
-                  action="#{studentController.addCourseToStudent}" update="@form" style="width:80px;">
+                  action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form" style="width:80px;">
                   <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
                </p:commandButton>
                <p:commandButton value="Cancel" rendered="#{studentController.isCourseCanBeCanceled(course)}"
