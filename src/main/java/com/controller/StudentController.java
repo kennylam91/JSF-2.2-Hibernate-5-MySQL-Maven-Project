@@ -56,7 +56,7 @@ public class StudentController implements Serializable {
 
 	private Student selectedStudent;
 
-	private Student newStudent;
+	private Student newStudent = new Student();
 
 	private Pagination pagination = new PaginationStudentList();
 
