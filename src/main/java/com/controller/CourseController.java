@@ -49,12 +49,12 @@ import lombok.Setter;
 public class CourseController implements Serializable {
 
 	private static final long serialVersionUID = 4251571962723500481L;
-	private List<Course> courses = new LinkedList<>();
+	private List<Course> courses;
 	private boolean editMode = false;
-	private Subject selectedSubject = new Subject();
-	private Course selectedCourse = new Course();
-	private Set<ScoreDto> selectedScores = new HashSet<>();
-	private ScoreDto selectedScore = new ScoreDto();
+	private Subject selectedSubject;
+	private Course selectedCourse;
+	private Set<ScoreDto> selectedScores;
+	private ScoreDto selectedScore;
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
@@ -226,7 +226,7 @@ public class CourseController implements Serializable {
 		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourse.getId());
 
 	}
-	
+
 	public boolean isSelectedCourseStatusCompleted() {
 		return selectedCourse.getStatus().equals(COURSE_STATUSES.COMPLETED);
 	}

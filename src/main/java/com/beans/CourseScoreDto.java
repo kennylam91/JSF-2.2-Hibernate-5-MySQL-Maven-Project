@@ -1,5 +1,7 @@
 package com.beans;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,8 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CourseScoreDto implements Comparable<CourseScoreDto>{
+public class CourseScoreDto implements Comparable<CourseScoreDto>, Serializable{
 	
+	
+	private static final long serialVersionUID = -5021623617949588252L;
 	private Long courseId;
 	private Long subjectId;
 	private float coefficient;

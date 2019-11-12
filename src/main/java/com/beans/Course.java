@@ -1,5 +1,6 @@
 package com.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,7 +36,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "courses")
-public class Course {
+public class Course implements Serializable{
+
+	private static final long serialVersionUID = -4729857325404297004L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

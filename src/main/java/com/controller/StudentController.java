@@ -56,7 +56,7 @@ public class StudentController implements Serializable {
 
 	private Student selectedStudent;
 
-	private Student newStudent = new Student();
+	private Student newStudent;
 
 	private Pagination pagination = new PaginationStudentList();
 
@@ -278,7 +278,13 @@ public class StudentController implements Serializable {
 	}
 
 	public float getScoreByStudentIdAndCourseId(Long courseId) throws ScoreNotFoundException {
-		return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudentDto.getId());
+		//Admin_role view
+		if (selectedStudentDto != null)
+			return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudentDto.getId());
+		//Student_role view
+		else {
+			return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudent.getId());
+		}
 	}
 
 	// return null if not found
