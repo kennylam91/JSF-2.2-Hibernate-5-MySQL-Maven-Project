@@ -255,6 +255,7 @@ public class StudentController implements Serializable {
 	public boolean isCourseCanBeCanceled(Course course) {
 		return checkCourseStatusAndGetRegisterBySelectedStudentOrNot(course).contentEquals("can be canceled");
 	}
+
 	public void openCreateStudentDialog(ActionEvent ae) {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);

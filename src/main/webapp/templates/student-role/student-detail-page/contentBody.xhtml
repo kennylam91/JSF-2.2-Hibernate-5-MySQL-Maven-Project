@@ -104,8 +104,16 @@
                   <p:column headerText="Score" style="width:60px;">
                      <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Action" style="width:60px;">
-                     <p:commandButton icon="pi pi-search" title="View"></p:commandButton>
+                  <p:column headerText="Action">
+                     <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
+                        action="#{studentController.addCourseToStudent}" update="@form" style="width:80px;">
+                        <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
+                     </p:commandButton>
+                     <p:commandButton value="Cancel" rendered="#{studentController.isCourseCanBeCanceled(course)}"
+                        action="#{studentController.removeCourseOutOfStudent}" update="@form"
+                        style="background-color: #f33155;border: #f33155 1px solid;width:80px;">
+                        <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
+                     </p:commandButton>
                   </p:column>
                </p:dataTable>
             </p:panelGrid>
