@@ -1,80 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <head>
 </head>
 <body>
-  <ui:composition>
-    <div class="wpsp-card">
-      <div class="wpsp-card-head">
-        <div class="subject-inner wpsp-left wpsp-class-filter">
-          <div class="subject-inner wpsp-left wpsp-class-filter">
-            <!-- Not use, need to develop more -->
-            <label class="wpsp-labelMain">Select Field</label>
-            <h:selectOneMenu styleClass=" select_input" id="cours_search_field"
-              value="#{courseController.paginationCourseList.searchKeyword}"
-              style="border: 1px solid #ced4da;border-radius: .25rem;vertical-align: middle;line-height: 1.5rem;}">
-              <f:selectItem itemLabel="PHP" itemValue="PHP" />
-              <f:selectItem itemLabel="JAVA" itemValue="JAVA" />
-              <f:selectItem itemLabel="PYTHON" itemValue="PYTHON" />
-              <!-- <p:ajax event="valueChange" listener="#{studentController.onPaginationChange}"
-                  update="main-content" /> -->
-            </h:selectOneMenu>
-          </div>
-        </div>
-        
-      </div>
-      <div class="wpsp-card-body">
-        <div class="subject-head">
-          <h:form id="form_course_table">
-            <!-- Search Function -->
-            <div id="student_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-              <div class="wpsp-dataTable-top">
-                <div id="student_table_filter" class="dataTables_filter">
-                  <h:selectOneMenu styleClass=" select_input" style="width:115px;display:inline;" id="search_field"
-                    value="#{courseController.paginationCourseList.searchField}">
-                    <f:selectItem itemLabel="Select Field" itemValue="all" itemDisabled="true"></f:selectItem>
-                    <f:selectItem itemLabel="Code" itemValue="code" />
-                    <f:selectItem itemLabel="FirstName" itemValue="firstName" />
-                    <f:selectItem itemLabel="LastName" itemValue="lastName" />
-                    <f:selectItem itemLabel="Field" itemValue="field" />
-                    <f:selectItem itemLabel="Dob" itemValue="dob" />
-                    <f:selectItem itemLabel="Phone" itemValue="phone" />
-                    <f:selectItem itemLabel="Email" itemValue="email" />
-                    <f:selectItem itemLabel="AvgScore" itemValue="avgScore" />
-                    <f:selectItem itemLabel="Note" itemValue="note" />
-                    <f:selectItem itemLabel="All" itemValue="all" />
-                  </h:selectOneMenu>
-                  <p:inputText styleClass="wpsp-input-sm" id="search_keyword" onkeyup=""
-                    style="width:180px; display:inline;" value="#{courseController.paginationCourseList.searchKeyword}"
-                    placeholder="Search keyword">
-                    <p:ajax event="change" listener="#{courseController.onPaginationChange}" update="main-content" />
-                  </p:inputText>
-                </div>
-                <div class="wpsp-bulkaction">
-                  <select name="bulkaction" class="select_input" id="bulkaction">
-                    <option value="">Select Action</option>
-                    <option value="bulkUsersDelete">Delete</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <ui:insert name="subject-list-table">
-                  <ui:include src="/templates/subject-list-page/subject_list_table.xhtml"></ui:include>
-                </ui:insert>
-              </div>
-              <label class="wpsp-labelMain"> <h:outputText
-                  value="Show from record #{courseController.paginationCourseList.firstRowIndexOnPage} to 
-                  record #{courseController.paginationCourseList.lastRowIndexOnPage}.">
-                </h:outputText>
-              </label>
+   <ui:composition>
+      <div class="wpsp-card">
+         <div class="wpsp-card-head">
+            <div class="subject-inner wpsp-left wpsp-class-filter">
+               <div class="subject-inner wpsp-left wpsp-class-filter">
+                  <!-- Not use, need to develop more -->
+               </div>
             </div>
-          </h:form>
-        </div>
+         </div>
+         <div class="wpsp-card-body">
+            <div class="subject-head">
+               <h:form id="form_course_table">
+                  <!-- Search Function -->
+                  <div>
+                     <ui:insert name="subject-list-table">
+                        <ui:include src="/templates/subject-list-page/subject_list_table.xhtml"></ui:include>
+                     </ui:insert>
+                  </div>
+                  <label class="wpsp-labelMain"> <h:outputText
+                        value="Show from record #{courseController.paginationCourseList.firstRowIndexOnPage} to 
+                  record #{courseController.paginationCourseList.lastRowIndexOnPage}.">
+                     </h:outputText>
+                  </label>
+               </h:form>
+            </div>
+         </div>
+         <!-- /.box-body -->
       </div>
-      <!-- /.box-body -->
-    </div>
-  </ui:composition>
+   </ui:composition>
 </body>
 </html>
