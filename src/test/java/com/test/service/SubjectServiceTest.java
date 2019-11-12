@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.beans.Subject;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationSubjectList;
+import com.constant.FIELDS;
 import com.repository.SubjectRepository;
 import com.repository.impl.SubjectRepositoryImpl;
 import com.service.SubjectService;
@@ -29,7 +30,7 @@ public class SubjectServiceTest {
 		subjectRepo = new SubjectRepositoryImpl();
 		pagination = new PaginationSubjectList();
 		subjectService = new SubjectServiceImpl(subjectRepo);
-		firstSubject = Subject.builder().code("A01").name("Test").field("JAVA").description("description")
+		firstSubject = Subject.builder().code("A01").name("Test").field(FIELDS.JAVA).description("description")
 				.coefficient(2.0f).build();
 		firstSubjectId = subjectService.saveSubject(firstSubject);
 		firstSubject.setId(firstSubjectId);
@@ -52,13 +53,12 @@ public class SubjectServiceTest {
 
 	@Test
 	public void testUpdateSubject() {
-		String newField = "PHP";
-		firstSubject.setField(newField);
+		firstSubject.setField(FIELDS.PHP);
 		
 		try {
 			subjectService.updateSubject(firstSubject);
-			String foundField = subjectService.findSubjectById(firstSubjectId).getField();
-			assertEquals(newField, foundField);
+			FIELDS foundField = subjectService.findSubjectById(firstSubjectId).getField();
+			assertEquals(FIELDS.PHP, foundField);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import com.beans.Course;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationCourseList;
+import com.constant.COURSE_STATUSES;
 import com.repository.CourseRepository;
 import com.repository.impl.CourseRepositoryImpl;
 import com.service.CourseService;
@@ -41,7 +42,7 @@ public class CourseServiceTest {
 		Calendar firstCalendar = Calendar.getInstance();
 		firstCalendar.set(2019, 11, 03);
 		firstCourse = Course.builder().code("A1111111").name("Java Core 01").beginTime(firstCalendar.getTime())
-				.status("registering").teacher("Mr.Lam").capacity(20).build();
+				.status(COURSE_STATUSES.REGISTERING).teacher("Mr.Lam").capacity(20).build();
 
 		firstCourseId = courseService.saveCourse(firstCourse);
 		firstCourse.setId(firstCourseId);

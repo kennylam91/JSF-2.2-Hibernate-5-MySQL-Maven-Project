@@ -18,6 +18,8 @@ import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 import com.repository.StudentRepository;
 import com.repository.impl.StudentRepositoryImpl;
 import com.service.StudentService;
@@ -51,9 +53,9 @@ public class StudentServiceTest {
 		secondCalendar.set(1993, 05, 58);
 
 		firstStudent = Student.builder().code("A1").firstName("Lam").lastName("Pham").dob(firstCalendar.getTime())
-				.gender("male").field("JAVA").address("Ha noi").phone("0123456789").email("phamlam@gmail.com").build();
+				.gender(GENDERS.MALE).field(FIELDS.JAVA).address("Ha noi").phone("0123456789").email("phamlam@gmail.com").build();
 		secondStudent = Student.builder().code("A2").firstName("Phuong").lastName("Thom").dob(secondCalendar.getTime())
-				.gender("female").field("PHP").address("Nam Dinh").phone("01234567890").email("phuongthom@gmail.com")
+				.gender(GENDERS.FEMALE).field(FIELDS.PHP).address("Nam Dinh").phone("01234567890").email("phuongthom@gmail.com")
 				.build();
 		firstStudentId = studentRepo.saveStudent(firstStudent);
 		firstStudent.setId(firstStudentId);
