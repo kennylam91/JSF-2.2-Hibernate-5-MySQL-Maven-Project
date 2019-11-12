@@ -13,7 +13,7 @@
             <p:column headerText="Code" style="width:100px" sortBy="#{course.code}" field="code">
                <h:outputText value="#{course.code}" />
             </p:column>
-            <p:column headerText="Name" style="width:110px" sortBy="#{course.name}" field="name">
+            <p:column headerText="Name" style="width:160px" sortBy="#{course.name}" field="name">
                <h:outputText value="#{course.name}" />
             </p:column>
             <p:column headerText="Subject" style="" sortBy="#{course.subject.name}" field="subject">
@@ -35,13 +35,13 @@
             <p:column headerText="Teacher" sortBy="#{course.teacher}" field="teacher">
                <h:outputText value="#{course.teacher}" />
             </p:column>
-            <p:column headerText="Students No." sortBy="#{course.studentsNo}" field="studentsNo">
+            <p:column headerText="Reg No." sortBy="#{course.studentsNo}" field="studentsNo" style="width:100px;" >
                <h:outputText value="#{course.studentsNo}" />
             </p:column>
             <p:column headerText="Cap" style="width:80px;" sortBy="#{course.capacity}" field="capacity">
                <h:outputText value="#{course.capacity}" />
             </p:column>
-            <p:column headerText="Action">
+            <p:column headerText="Action" style="width:100px" >
                <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
                   action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form" style="width:80px;">
                   <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />

@@ -104,7 +104,7 @@
                   <p:column headerText="Score" style="width:60px;">
                      <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
-                  <!-- <p:column headerText="Action">
+                  <p:column headerText="Action">
                      <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
                         action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form" style="width:80px;">
                         <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
@@ -114,7 +114,7 @@
                         style="background-color: #f33155;border: #f33155 1px solid;width:80px;">
                         <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
                      </p:commandButton>
-                  </p:column> -->
+                  </p:column>
                </p:dataTable>
             </p:panelGrid>
          </h:form>
