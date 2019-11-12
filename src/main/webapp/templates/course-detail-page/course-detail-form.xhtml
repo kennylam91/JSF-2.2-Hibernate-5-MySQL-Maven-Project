@@ -41,10 +41,10 @@
          </h:panelGroup>
       </h:form>
       <h:panelGroup class="ui-g">
-         <h:form id="form-course-basic-information" styleClass="ui-g-4">
-            <p:panelGrid columns="2">
-               <f:facet name="header">
-                  <p:outputLabel value="COURSE INFORMATION"></p:outputLabel>
+         <h:form id="form-course-basic-information" styleClass="ui-g-5">
+            <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-5, ui-grid-col-7" >
+               <f:facet name="header" >
+                  <p:outputLabel value="COURSE INFORMATION" style="display:block;margin:5px;" ></p:outputLabel>
                </f:facet>
                <p:outputLabel>Course Code:</p:outputLabel>
                <h:outputText value="#{courseController.selectedCourse.code}" id="courseCode" required="true"
@@ -72,9 +72,9 @@
                   </p:calendar>
                </p:inplace>
                <p:outputLabel>Finish time:</p:outputLabel>
-               <p:inplace editor="true">
+               <p:inplace editor="true" emptyLabel="_______" >
                   <p:calendar id="finishTime" pattern="dd/MM/yyyy" value="#{courseController.selectedCourse.finishTime}"
-                     showOn="button">
+                     showOn="button" >
                      <f:convertDateTime pattern="dd/MM/yyyy" />
                   </p:calendar>
                </p:inplace>
@@ -96,16 +96,16 @@
                <p:outputLabel>Student No:</p:outputLabel>
                <h:outputText value="#{courseController.selectedCourse.studentsNo}" id="studentsNo" />
                <p:outputLabel>Description:</p:outputLabel>
-               <p:inplace editor="true">
+               <p:inplace editor="true" emptyLabel="_______" >
                   <p:inputText value="#{courseController.selectedCourse.description}" id="description" />
                </p:inplace>
             </p:panelGrid>
          </h:form>
-         <h:form id="form-course-students-information" styleClass="ui-g-8">
+         <h:form id="form-course-students-information" styleClass="ui-g-7">
             <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScores}"
                selection="#{courseController.selectedScore}" rowKey="#{score.id}">
                <f:facet name="header">
-                  <p:outputLabel value="STUDENTS INFORMATION"></p:outputLabel>
+                  <p:outputLabel value="STUDENTS INFORMATION" style="display:block;margin:5px;"></p:outputLabel>
                </f:facet>
                <p:column headerText="StudentCode">
                   <h:outputText value="#{score.studentCode}"></h:outputText>
@@ -122,7 +122,7 @@
                <p:column headerText="Score">
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
-               <p:column headerText="Action">
+               <p:column headerText="Action" style="width:60px;" >
                   <p:commandButton icon="pi pi-trash" title="Del" update="course_student_list_table"
                      actionListener="#{courseController.removeStudentOutOfCourse(score.studentId)}"
                      style="color:red;background-color:#f2f5f9;border:none;">
