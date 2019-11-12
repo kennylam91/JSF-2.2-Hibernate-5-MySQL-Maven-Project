@@ -35,8 +35,10 @@ public class GenerateData {
 	private static final String LOWER_ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 	private static final String NUMBER = "0123456789";
 	private static final String[] LAST_NAME_COLLECTION = { "Lam", "Thang", "Dung", "Ngoc", "Nga", "Huyen", "Thao", "An",
-			"Anh", "Luyen", "Cham", "Dung", "Duong", "Duc", "Van", "Hiep", "Khanh", "Tuan", "Nam", "Nhat", "Minh" };
-	private static final String[] FIRST_NAME_COLLECTION = { "Nguyen", "Pham", "Do", "Hoang", "Le", "Dinh", "Duong" };
+			"Anh", "Luyen", "Cham", "Dung", "Duong", "Duc", "Van", "Hiep", "Khanh", "Tuan", "Nam", "Nhat", "Minh",
+			"Lien", "Lung", "Lanh", "Phuong", "Thao", "Thuong", "Thom", "Quynh", "Son", "Toan" };
+	private static final String[] FIRST_NAME_COLLECTION = { "Nguyen", "Pham", "Do", "Hoang", "Le", "Dinh", "Duong",
+			"Phung", "Ly", "Phan", "Huynh" };
 	private static final FIELDS[] FIELD_COLLECTION = { FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON };
 	private static final String[] ADDRESS_COLLECTION = { "Ha Noi", "Hai Phong", "Ho Chi Minh", "Da Nang", "Hue",
 			"Can Tho", "Quang Ninh" };
@@ -50,8 +52,9 @@ public class GenerateData {
 			"PHP Corec", "Python Web Basic", "Java Immediate", "PHP Immediate", "Python Immediate", "Java Advanced",
 			"PHP Advanced", "Python Basic", "Python advanced" };
 
-	private static final FIELDS[] SUBJECT_FIELD_COLLECTION = {FIELDS.JAVA,FIELDS.PHP, FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON,
-			FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON, FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON, FIELDS.PYTHON};
+	private static final FIELDS[] SUBJECT_FIELD_COLLECTION = { FIELDS.JAVA, FIELDS.PHP, FIELDS.JAVA, FIELDS.PHP,
+			FIELDS.PYTHON, FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON, FIELDS.JAVA, FIELDS.PHP, FIELDS.PYTHON,
+			FIELDS.PYTHON };
 
 	public static void main(String[] args) {
 
@@ -64,9 +67,9 @@ public class GenerateData {
 		 * courseRepo.saveCourse(course);
 		 */
 
-		insertSubjectSQL(10);
+//		insertSubjectSQL(10);
 
-		insertStudentAndUserSQL(50);
+		insertStudentAndUserSQL(4000);
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -133,7 +136,8 @@ public class GenerateData {
 
 	private static String getRandomEmail(String firstName, String lastName) {
 		StringBuilder email = new StringBuilder();
-		email.append(firstName).append(".").append(lastName).append("@gmail.com");
+		email.append(firstName.toLowerCase()).append(".").append(lastName.toLowerCase())
+				.append(String.valueOf(getRandomNumberBetween(0, 10000))).append("@gmail.com");
 		return email.toString();
 	}
 
@@ -160,16 +164,16 @@ public class GenerateData {
 			String email = getRandomEmail(firstName, lastName);
 			student.setEmail(email);
 			user.setEmail(email);
-			user.setUsername(firstName +" "+lastName);
-			user.setPassword((firstName +lastName).toLowerCase());
+			user.setUsername(firstName + " " + lastName);
+			user.setPassword((firstName + lastName).toLowerCase());
 			user.setAuthority(AUTHORITIES.STUDENT_ROLE);
 			repo.saveStudent(student);
 			userRepo.save(user);
 		}
 	}
-	
+
 	private static void insertUserSQL(int number) {
-		
+
 	}
 
 	private static void insertSubjectSQL(int subjectNumber) {
