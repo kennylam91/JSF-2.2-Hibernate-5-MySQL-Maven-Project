@@ -188,7 +188,9 @@ public class CourseController implements Serializable {
 
 	public void openSubjectListDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("resizable", false);
+		options.put("resizable", true);
+		options.put("contentWidth", "100%");
+		options.put("contentHeight", "100%");
 		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_SUBJECT_LIST_URL, options, null);
 	}
@@ -207,7 +209,9 @@ public class CourseController implements Serializable {
 
 	public void openAddScoresDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("resizable", false);
+		options.put("resizable", true);
+		options.put("contentWidth", "100%");
+		options.put("contentHeight", "100%");
 		options.put("model", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_ADD_SCORES_URL, options, null);
 	}
@@ -223,7 +227,7 @@ public class CourseController implements Serializable {
 		}
 		closeCourseScoreDialog();
 	}
-	
+
 	public void informAfterAddingScores() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"ADD SCORES COMPLETED", "COURSE: " + selectedCourse.getName()));
@@ -239,8 +243,8 @@ public class CourseController implements Serializable {
 			e.printStackTrace();
 		}
 		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourse.getId());
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"REMOVING COMPLETED", "STUDENT: " + student.getCode()));
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "REMOVING COMPLETED", "STUDENT: " + student.getCode()));
 	}
 
 	// Sort for Course Detail Table of Student detail page

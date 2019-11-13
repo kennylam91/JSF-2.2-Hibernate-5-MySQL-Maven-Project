@@ -122,7 +122,7 @@ public class StudentController implements Serializable {
 	public void informAfterCreateStudent() {
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "CREATING COMPLETED", "STUDENT: " + newStudent.getCode()));
-		newStudent = new Student(); //Clear new Student Form
+		newStudent = new Student(); // Clear new Student Form
 	}
 
 	public void deleteStudent() {
@@ -142,7 +142,7 @@ public class StudentController implements Serializable {
 		else {
 			selectedStudent = studentService.findStudentByEmail(userEmail);
 		}
-		//get Score by StudentId and CourseId
+		// get Score by StudentId and CourseId
 		if (selectedStudent.getCourses() != null) {
 			for (Course course : selectedStudent.getCourses()) {
 				if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
@@ -158,8 +158,7 @@ public class StudentController implements Serializable {
 
 		if (selectedStudentDto != null) {
 			navigation.navigateToStudentDetail();
-		}
-		else {
+		} else {
 			navigation.navigateToDashboardStudentRole();
 		}
 
@@ -208,8 +207,8 @@ public class StudentController implements Serializable {
 		for (StudentDto student : selectedStudentDtos) {
 			deletedStudentCodes.append(student.getCode()).append(", ");
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"DELETING COMPLETED", "STUDENTS: " + deletedStudentCodes));
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "DELETING COMPLETED", "STUDENTS: " + deletedStudentCodes));
 		studentDtos = studentService.findStudentsByPagination(pagination);
 		selectedStudentDtos = new ArrayList<>();
 
@@ -221,13 +220,13 @@ public class StudentController implements Serializable {
 		List<Student> students = studentService.findStudentsByStudentDtos(list);
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
-			
+
 			courseController.getSelectedScores()
 					.add(createScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), student));
 		}
 		courseController.updateCourse();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"ADD STUDENTS COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
+				"ADD STUDENTS COMPLETED", "COURSE: " + courseController.getSelectedCourse().getName()));
 	}
 
 	public void addCourseToStudentAndThenUpdateCourse() {
@@ -236,7 +235,7 @@ public class StudentController implements Serializable {
 			courseController.getSelectedScores().add(
 					createScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), selectedStudent));
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"ADD COURSE COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
+					"ADD COURSE COMPLETED", "COURSE: " + courseController.getSelectedCourse().getName()));
 			courseController.updateCourse();
 			update();
 			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
@@ -254,11 +253,11 @@ public class StudentController implements Serializable {
 				}
 			}
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"REMOVE COURSE COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
+					"REMOVE COURSE COMPLETED", "COURSE: " + courseController.getSelectedCourse().getName()));
 			courseController.updateCourse();
 			update();
 			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
-			
+
 		}
 
 	}
@@ -324,13 +323,34 @@ public class StudentController implements Serializable {
 
 	public void openFilterDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("width", "470px");
-		options.put("height", "400px");
+		options.put("width", "500px");
+		options.put("height", "450px");
+		options.put("contentWidth", "100%");
+		options.put("contentHeight", "100%");
+		options.put("modal", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_STUDENT_LIST_FILTER_URL, options, null);
 	}
 
 	public void closeStudentFilterDialog() {
-		PrimeFaces.current().dialog().closeDynamic(null);
+		if (isFilterBoxValid()) {
+			PrimeFaces.current().dialog().closeDynamic(null);
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"FILTER NOT VALID", "PLEASE CHECK!!!!"));
+		}
+	}
+
+	private boolean isFilterBoxValid() {
+		StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
+		if(filter.getIsByDOB().booleanValue()) {
+			if(filter.getDOBFilterFrom()==null || filter.getDOBFilterTo()==null
+					|| (filter.getDOBFilterFrom().compareTo(filter.getDOBFilterTo()) > 0)) return false;
+		}
+		if(filter.getIsByScore().booleanValue()) {
+			if((filter.getScoreFilterFrom().compareTo(filter.getScoreFilterTo()) > 0)) return false;
+		}
+		return true;
+
 	}
 
 	public void resetFilter() {
@@ -371,7 +391,7 @@ public class StudentController implements Serializable {
 		return scoreDto;
 	}
 
-	private List<Course> courseListOfSelectedStudent= new ArrayList<>();
+	private List<Course> courseListOfSelectedStudent = new ArrayList<>();
 
 	public List<Course> getCourseListOfSelectedStudent() {
 		if (courseListOfSelectedStudent.isEmpty()) {

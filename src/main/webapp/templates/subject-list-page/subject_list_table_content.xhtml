@@ -9,6 +9,9 @@
   <ui:composition>
     <div id="subject-list-table-content">
       <div>
+         <f:facet name="header">
+         <h2 style="display:inline-block;margin:10px;color:#0178bc;" >SUBJECTS LIST TABLE</h2>
+         </f:facet>
         <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:20px;" />
         <p:column headerText="Code" style="width:60px">
           <h:outputText value="#{subject.code}" />

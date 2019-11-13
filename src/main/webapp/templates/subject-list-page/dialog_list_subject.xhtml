@@ -6,6 +6,7 @@
 <h:head>
   <ui:include src="/templates/head_template.xhtml"></ui:include>
    <ui:include src="/templates/javascript.xhtml"></ui:include>
+   <title>SUBJECTS LIST DIALOG</title>
 </h:head>
 <h:body>
   <h:form id="form_dialog_list_subject">
@@ -13,8 +14,7 @@
       styleClass="wpsp-table dataTable dtr-inline" selectionMode="single"
       selection="#{courseController.selectedSubject}">
       <p:ajax event="rowSelect" listener="#{courseController.closeSubjectListDialog}"></p:ajax>
-      <f:facet name="header">SUBJECT LIST</f:facet>
-      <p:column headerText="Code">
+      <p:column headerText="Code" style="height:40px;" >
         <h:outputText value="#{subject.code}" />
       </p:column>
       <p:column headerText="Name">
