@@ -17,14 +17,13 @@
             background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
                actionListener="#{studentListDlgView.openStudentListDialog}" icon="pi pi-plus-circle">
                <p:ajax event="dialogReturn" listener="#{studentController.addStudentToCourse}"
-                  update=":form-course-students-information:course_student_list_table" immediate="true">
+                  update=":form-course-students-information:course_student_list_table main-content" immediate="true">
                </p:ajax>
             </p:commandButton>
             <p:commandButton value="Save" styleClass="save" action="#{courseController.updateCourse}"
-               style="
-            display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
+               style="display:block;position:absolute;right: 200px;height:32px;width: 111px;padding: 0;
             background-color:#0178bc;border-color: #0178bc;font-size: 12px;"
-               update="form-course-basic-information @form"></p:commandButton>
+               update="main-content form-course-basic-information @form "></p:commandButton>
             <p:commandButton action="#{courseController.getCourseListView()}" value="Course List"
                style="display:block;position:absolute;right: 335px;height:32px;width: 111px;padding: 0;
             background-color: #54667a;border-color: #54667a;font-size: 12px;"
@@ -35,8 +34,8 @@
                style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
             background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;"
                actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
-               <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table"
-                  immediate="true">
+               <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table main-content"
+                  immediate="true" listener="#{courseController.informAfterAddingScores}">
                </p:ajax>
             </p:commandButton>
          </h:panelGroup>
@@ -124,15 +123,16 @@
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
                <p:column headerText="Action" style="width:60px;">
-                  <p:commandButton icon="pi pi-trash" title="Del" update="course_student_list_table"
+                  <p:commandButton icon="pi pi-trash" title="Del" update="main-content course_student_list_table"
                      actionListener="#{courseController.removeStudentOutOfCourse(score.studentId)}"
                      style="color:red;background-color:#f2f5f9;border:none;">
-                     <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                     <p:confirm header="Confirmation" message="Remove student ?" icon="pi pi-exclamation-triangle" />
                   </p:commandButton>
                </p:column>
             </p:dataTable>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-               <p:commandButton value="Confirm" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+               <p:commandButton value="Remove" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"
+               style="background-color:#ff0000a6;border:solid 1px #ff0000a6" />
                <p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
             </p:confirmDialog>
          </h:form>

@@ -10,9 +10,11 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.PrimeFaces;
@@ -25,6 +27,7 @@ import com.beans.Course;
 import com.beans.Navigation;
 import com.beans.Score;
 import com.beans.ScoreDto;
+import com.beans.Student;
 import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
 import com.beans.pagination.Pagination;
@@ -50,7 +53,6 @@ public class CourseController implements Serializable {
 
 	private static final long serialVersionUID = 4251571962723500481L;
 	private List<Course> courses = new LinkedList<>();
-	private boolean editMode = false;
 	private Subject selectedSubject = new Subject();
 	private Course selectedCourse = new Course();
 	private Set<ScoreDto> selectedScores = new HashSet<>();
@@ -88,14 +90,23 @@ public class CourseController implements Serializable {
 
 	public void createCourse() {
 		Course course = ObjectMapper.convertToCourseFromNewCourseForm(newCourseForm);
-		Long newCourseId = courseService.saveCourse(course);
+		courseService.saveCourse(course);
 		closeCreateCourseDialog();
-		newCourseForm = new NewCourseForm();
+
+	}
+
+	public void informAfterCreateCourse() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"CREATING COMPLETED", "COURSE: " + newCourseForm.getCode()));
+		newCourseForm = new NewCourseForm(); // Clear new Course Form
 	}
 
 	public void deleteCourse() {
 		try {
 			courseService.deleteCourse(selectedCourse.getId());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"DELETING COMPLETED", "COURSE: " + selectedCourse.getName()));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,6 +116,8 @@ public class CourseController implements Serializable {
 		try {
 			courseService.updateCourse(selectedCourse);
 			scoreService.saveAllScoreDtos(selectedScores);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"UPDATING COMPLETED", "COURSE: " + selectedCourse.getName()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,10 +139,6 @@ public class CourseController implements Serializable {
 	public void getCourseListView() {
 		courses = courseService.findAllCourses();
 		navigation.navigateToCourseList();
-	}
-
-	public void activeEditMode() {
-		editMode = true;
 	}
 
 	public void onSort(SortEvent event) {
@@ -214,9 +223,15 @@ public class CourseController implements Serializable {
 		}
 		closeCourseScoreDialog();
 	}
+	
+	public void informAfterAddingScores() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"ADD SCORES COMPLETED", "COURSE: " + selectedCourse.getName()));
+	}
 
 	public void removeStudentOutOfCourse(Long studentId) {
-		selectedCourse.removeStudent(studentService.findStudentById(studentId));
+		Student student = studentService.findStudentById(studentId);
+		selectedCourse.removeStudent(student);
 		try {
 			courseService.updateCourse(selectedCourse);
 			scoreService.delete(selectedCourse.getId(), studentId);
@@ -224,17 +239,18 @@ public class CourseController implements Serializable {
 			e.printStackTrace();
 		}
 		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourse.getId());
-
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"REMOVING COMPLETED", "STUDENT: " + student.getCode()));
 	}
-	
-	//Sort for Course Detail Table of Student detail page
+
+	// Sort for Course Detail Table of Student detail page
 
 	public boolean isSelectedCourseStatusCompleted() {
 		return selectedCourse.getStatus().equals(COURSE_STATUSES.COMPLETED);
 	}
-	
+
 	public int sortCourseByString(Object c1, Object c2) {
-		return ((String)c1).compareTo((String)c2);
+		return ((String) c1).compareTo((String) c2);
 	}
-	
+
 }

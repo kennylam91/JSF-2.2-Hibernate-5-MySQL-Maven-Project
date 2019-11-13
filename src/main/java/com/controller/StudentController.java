@@ -218,10 +218,13 @@ public class StudentController implements Serializable {
 		List<Student> students = studentService.findStudentsByStudentDtos(list);
 		for (Student student : students) {
 			courseController.getSelectedCourse().addStudent(student);
-
+			
 			courseController.getSelectedScores()
 					.add(createScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), student));
 		}
+		courseController.updateCourse();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"ADD STUDENTS COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
 	}
 
 	public void addCourseToStudentAndThenUpdateCourse() {

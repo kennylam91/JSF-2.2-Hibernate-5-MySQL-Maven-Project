@@ -10,7 +10,6 @@
     <div id="course-list-table-content">
       <div>
         <p:ajax event="sort" listener="#{courseController.onSort}" update="course_list_table"></p:ajax>
-        <p:column selectionMode="multiple" styleClass="nosortsorting_disabled" style="width:40px;" />
         <p:column headerText="Code" style="width:100px" sortBy="#{course.code}" field="code">
           <h:outputText value="#{course.code}" />
         </p:column>
@@ -51,7 +50,7 @@
           </p:commandButton>
           <p:commandButton title="Delete" id="delete_button" icon="pi pi-minus" style="color:red;font-size:16px"
             action="#{courseController.deleteCourse()}" update="main-content">
-            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+            <p:confirm header="Confirmation" message="Delete Course ?" icon="pi pi-exclamation-triangle" />
             <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}">
             </f:setPropertyActionListener>
           </p:commandButton>
