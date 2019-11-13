@@ -166,7 +166,6 @@ public class StudentController implements Serializable {
 		studentService.updateStudent(selectedStudent);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"UPDATING COMPLETED", "STUDENT: " + selectedStudent.getCode()));
-	
 	}
 
 	public void onPaginationChange() {
@@ -202,6 +201,12 @@ public class StudentController implements Serializable {
 
 	public void onActionForMultiChange() {
 		studentService.deleteStudents(selectedStudentDtos);
+		StringBuilder deletedStudentCodes = new StringBuilder();
+		for (StudentDto student : selectedStudentDtos) {
+			deletedStudentCodes.append(student.getCode()).append(", ");
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"DELETING COMPLETED", "STUDENTS: " + deletedStudentCodes));
 		studentDtos = studentService.findStudentsByPagination(pagination);
 		selectedStudentDtos = new ArrayList<>();
 
