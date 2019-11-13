@@ -13,12 +13,13 @@
                <div class="ui-g-4" align="left">
                   <p:menuButton id="action_for_multi" value="Options">
                      <p:menuitem actionListener="#{studentController.onActionForMultiChange}"
-                        update=":form_student_list:student_list_table growl" value="Delete All" process="student_list_table"
-                        style="width:95px;font-size:13px;">
+                        update=":form_student_list:student_list_table growl" value="Delete All"
+                        process="student_list_table" style="width:95px;font-size:14px;color:#ff0000a6">
+                        <p:confirm header="Confirmation" message="Delete students ?" icon="pi pi-exclamation-triangle" />
                      </p:menuitem>
                   </p:menuButton>
                   <p:commandButton value="Filter Box" actionListener="#{studentController.openFilterDialog}"
-                     style="margin-left:20px;" >
+                     style="margin-left:20px;">
                      <p:ajax event="dialogReturn" listener="#{studentController.onPaginationChange()}"
                         update="main-content" />
                   </p:commandButton>
@@ -95,7 +96,7 @@
                action="#{studentController.deleteStudent}" update="main-content">
                <f:setPropertyActionListener value="#{student}" target="#{studentController.selectedStudentDto}">
                </f:setPropertyActionListener>
-               <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+               <p:confirm header="Confirmation" message="Delete student ?" icon="pi pi-exclamation-triangle" />
             </p:commandButton>
             <ui:insert name="dialog_delete_student">
                <ui:include src="/templates/student-list-page/dialog_delete_student.xhtml"></ui:include>
