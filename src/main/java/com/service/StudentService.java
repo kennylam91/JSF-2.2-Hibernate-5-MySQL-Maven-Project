@@ -1,15 +1,13 @@
 package com.service;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
-import com.constant.FIELDS;
-import com.constant.GENDERS;
 
-public interface StudentService {
+public interface StudentService extends Serializable {
 
 	Long saveStudent(Student student);
 
@@ -24,11 +22,11 @@ public interface StudentService {
 	void deleteStudents(List<StudentDto> StudentDtos);
 
 	List<Student> findStudentsByStudentDtos(List<StudentDto> studentDtos);
-	
+
 	void updateStudentAvgScore(Long studentId);
-	
+
 	boolean checkDuplicatedEmail(String string);
-	
+
 	int getTotalRecords(Pagination paginationStudentList);
 
 	Student findStudentByEmail(String userEmail);

@@ -1,8 +1,5 @@
 package com.beans.pagination;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

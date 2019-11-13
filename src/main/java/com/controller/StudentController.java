@@ -25,7 +25,6 @@ import org.primefaces.event.data.SortEvent;
 
 import com.beans.Course;
 import com.beans.Navigation;
-import com.beans.Score;
 import com.beans.ScoreDto;
 import com.beans.Student;
 import com.beans.StudentDto;
@@ -240,7 +239,6 @@ public class StudentController implements Serializable {
 			update();
 			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
 		}
-
 	}
 
 	public void removeCourseOutOfStudent() {
@@ -257,9 +255,7 @@ public class StudentController implements Serializable {
 			courseController.updateCourse();
 			update();
 			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
-
 		}
-
 	}
 
 	public String checkCourseStatusAndGetRegisterBySelectedStudentOrNot(Course course) {
@@ -335,19 +331,21 @@ public class StudentController implements Serializable {
 		if (isFilterBoxValid()) {
 			PrimeFaces.current().dialog().closeDynamic(null);
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"FILTER NOT VALID", "PLEASE CHECK!!!!"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "FILTER NOT VALID", "PLEASE CHECK!!!!"));
 		}
 	}
 
 	private boolean isFilterBoxValid() {
 		StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
-		if(filter.getIsByDOB().booleanValue()) {
-			if(filter.getDOBFilterFrom()==null || filter.getDOBFilterTo()==null
-					|| (filter.getDOBFilterFrom().compareTo(filter.getDOBFilterTo()) > 0)) return false;
+		if (filter.getIsByDOB().booleanValue()) {
+			if (filter.getDOBFilterFrom() == null || filter.getDOBFilterTo() == null
+					|| (filter.getDOBFilterFrom().compareTo(filter.getDOBFilterTo()) > 0))
+				return false;
 		}
-		if(filter.getIsByScore().booleanValue()) {
-			if((filter.getScoreFilterFrom().compareTo(filter.getScoreFilterTo()) > 0)) return false;
+		if (filter.getIsByScore().booleanValue()) {
+			if ((filter.getScoreFilterFrom().compareTo(filter.getScoreFilterTo()) > 0))
+				return false;
 		}
 		return true;
 

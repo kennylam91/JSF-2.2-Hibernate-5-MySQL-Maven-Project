@@ -1,7 +1,6 @@
 package com.repository.impl;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -19,8 +18,6 @@ import com.beans.StudentFilter;
 import com.beans.dto.ListStudentDto;
 import com.beans.pagination.Pagination;
 import com.beans.pagination.PaginationStudentList;
-import com.constant.FIELDS;
-import com.constant.GENDERS;
 import com.repository.StudentRepository;
 import com.util.HibernateUtil;
 

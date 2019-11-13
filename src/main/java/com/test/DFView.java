@@ -14,7 +14,6 @@ import org.primefaces.event.SelectEvent;
 public class DFView {
 
 	public void viewCars() {
-		System.out.println("viewCars");
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", false);
 		PrimeFaces.current().dialog().openDynamic("viewCars", options, null);
@@ -41,7 +40,6 @@ public class DFView {
 	}
 
 	public void onCarChosen(SelectEvent event) {
-		System.out.println("oncarchosen");
 		Car car = (Car) event.getObject();
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Id:" + car.getId());
 

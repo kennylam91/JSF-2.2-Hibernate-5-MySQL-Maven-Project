@@ -8,11 +8,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.SelectEvent;
-
 import com.beans.Navigation;
 import com.beans.Subject;
 import com.beans.formbeans.NewCourseForm;
@@ -59,9 +55,7 @@ public class SubjectController implements Serializable {
 	public void deleteSubject() {
 		try {
 			subjectService.deleteSubject(selectedSubject.getId());
-			System.out.println("delete " + selectedSubject.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		subjects = subjectService.findAllSubjects();

@@ -1,23 +1,16 @@
 package com.beans;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.constant.FIELDS;
 import com.constant.GENDERS;
-import com.controller.StudentController;
-import com.service.StudentService;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

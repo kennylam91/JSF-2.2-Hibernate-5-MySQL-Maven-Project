@@ -1,8 +1,6 @@
 package com.service.impl;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,8 +9,6 @@ import javax.faces.bean.SessionScoped;
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.pagination.Pagination;
-import com.constant.FIELDS;
-import com.constant.GENDERS;
 import com.repository.StudentRepository;
 import com.service.StudentService;
 
@@ -27,7 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @ManagedBean(name = "studentService")
 @SessionScoped
-public class StudentServiceImpl implements StudentService, Serializable {
+public class StudentServiceImpl implements StudentService{
 
 	private static final long serialVersionUID = -2495755716198044889L;
 

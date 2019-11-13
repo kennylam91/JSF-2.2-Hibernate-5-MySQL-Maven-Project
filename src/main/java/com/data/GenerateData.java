@@ -1,30 +1,20 @@
 package com.data;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
-import com.beans.Course;
-import com.beans.CourseScoreDto;
 import com.beans.Student;
 import com.beans.Subject;
 import com.beans.User;
 import com.constant.AUTHORITIES;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
-import com.controller.SubjectController;
-import com.repository.CourseRepository;
 import com.repository.StudentRepository;
 import com.repository.SubjectRepository;
 import com.repository.UserRepository;
-import com.repository.impl.CourseRepositoryImpl;
 import com.repository.impl.StudentRepositoryImpl;
 import com.repository.impl.SubjectRepositoryImpl;
 import com.repository.impl.UserRepositoryImpl;
-import com.service.SubjectService;
-import com.service.impl.SubjectServiceImpl;
 
 public class GenerateData {
 

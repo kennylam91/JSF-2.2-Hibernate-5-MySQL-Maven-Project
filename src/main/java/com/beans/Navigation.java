@@ -2,15 +2,11 @@ package com.beans;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.constant.AUTHORITIES;
 import com.constant.Constant;
-import com.controller.StudentController;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
