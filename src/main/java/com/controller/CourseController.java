@@ -226,8 +226,15 @@ public class CourseController implements Serializable {
 		selectedScores = scoreService.findScoreDtosByCourseId(selectedCourse.getId());
 
 	}
+	
+	//Sort for Course Detail Table of Student detail page
 
 	public boolean isSelectedCourseStatusCompleted() {
 		return selectedCourse.getStatus().equals(COURSE_STATUSES.COMPLETED);
 	}
+	
+	public int sortCourseByString(Object c1, Object c2) {
+		return ((String)c1).compareTo((String)c2);
+	}
+	
 }

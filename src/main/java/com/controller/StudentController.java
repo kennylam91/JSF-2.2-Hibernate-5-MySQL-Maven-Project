@@ -340,5 +340,13 @@ public class StudentController implements Serializable {
 		scoreDto.setStudentField(student.getField());
 		return scoreDto;
 	}
+	private List<Course> courseListOfSelectedStudent;
+	
+	public List<Course> getCourseListOfSelectedStudent(){
+		if(courseListOfSelectedStudent == null) {
+			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
+		}
+		return courseListOfSelectedStudent;
+	}
 
 }

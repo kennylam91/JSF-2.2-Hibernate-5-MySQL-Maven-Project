@@ -77,36 +77,36 @@
                   </div>
                </f:facet>
             </h:panelGrid>
-            <p:panelGrid styleClass="ui-g-8" columns="2"
-               style="padding-top:1rem;padding-left:1rem;display:inline-block;">
+            <h:panelGrid styleClass="ui-g-8" cellpadding="10" cellspacing="15" style="margin-top:1rem">
                <f:facet name="header">
-                  <p:outputLabel value="LEARNING INFORMATION"></p:outputLabel>
+                  <p:outputLabel value="LEARNING INFORMATION" style="display:block; margin:5px;"></p:outputLabel>
                </f:facet>
-               <p:dataTable id="student_detail_courses_table" var="course"
-                  value="#{studentController.selectedStudent.courses}">
-                  <p:column headerText="Subject">
+               <p:dataTable id="student_detail_courses_table" var="course" rowKey="#{course.id}"
+                  value="#{studentController.courseListOfSelectedStudent}">
+                  <p:column headerText="Subject" sortBy="#{course.subject.name}">
                      <h:outputText value="#{course.subject}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Name">
+                  <p:column headerText="Name" sortBy="#{course.name}">
                      <h:outputText value="#{course.name}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Coeff" style="width:60px;">
+                  <p:column headerText="Coeff" style="width:60px;" sortBy="#{course.subject.coefficient}">
                      <h:outputText value="#{course.subject.coefficient}"></h:outputText>
                   </p:column>
-                  <p:column headerText="BeginTime">
+                  <p:column headerText="BeginTime" sortBy="#{course.beginTime}">
                      <h:outputText value="#{course.beginTime}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                      </h:outputText>
                   </p:column>
-                  <p:column headerText="Status">
+                  <p:column headerText="Status" sortBy="#{course.status}">
                      <h:outputText value="#{course.status}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Score" style="width:60px;">
+                  <p:column headerText="Score" style="width:60px;" sortBy="#{studentController.getScore(course.id)}">
                      <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
                   <p:column headerText="Action">
                      <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
-                        action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form" style="width:80px;">
+                        action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form"
+                        style="width:80px;">
                         <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
                      </p:commandButton>
                      <p:commandButton value="Cancel" rendered="#{studentController.isCourseCanBeCanceled(course)}"
@@ -116,7 +116,7 @@
                      </p:commandButton>
                   </p:column>
                </p:dataTable>
-            </p:panelGrid>
+            </h:panelGrid>
          </h:form>
       </div>
    </ui:composition>
