@@ -10,7 +10,7 @@
       <div id="course-list-table-content">
          <div>
             <p:ajax event="sort" listener="#{courseController.onSort}" update="course_list_table"></p:ajax>
-            <p:column headerText="Code" style="width:100px" sortBy="#{course.code}" field="code">
+            <p:column headerText="Code" style="width:100px;height:40px;" sortBy="#{course.code}" field="code">
                <h:outputText value="#{course.code}" />
             </p:column>
             <p:column headerText="Name" style="width:160px" sortBy="#{course.name}" field="name">

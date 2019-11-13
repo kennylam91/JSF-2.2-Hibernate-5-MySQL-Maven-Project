@@ -79,17 +79,17 @@
             </h:panelGrid>
             <h:panelGrid styleClass="ui-g-8" cellpadding="10" cellspacing="15" style="margin-top:1rem">
                <f:facet name="header">
-                  <p:outputLabel value="LEARNING INFORMATION" style="display:block; margin:5px;"></p:outputLabel>
+                  <p:outputLabel value="REGISTERED COURSES INFORMATION" style="display:block; margin:5px;"></p:outputLabel>
                </f:facet>
                <p:dataTable id="student_detail_courses_table" var="course" rowKey="#{course.id}"
                   value="#{studentController.courseListOfSelectedStudent}">
-                  <p:column headerText="Subject" sortBy="#{course.subject.name}">
+                  <p:column headerText="Subject" sortBy="#{course.subject.name}" style="height:40px;">
                      <h:outputText value="#{course.subject}"></h:outputText>
                   </p:column>
                   <p:column headerText="Name" sortBy="#{course.name}">
                      <h:outputText value="#{course.name}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Coeff" style="width:60px;" sortBy="#{course.subject.coefficient}">
+                  <p:column headerText="Coeff" style="width:80px;" sortBy="#{course.subject.coefficient}">
                      <h:outputText value="#{course.subject.coefficient}"></h:outputText>
                   </p:column>
                   <p:column headerText="BeginTime" sortBy="#{course.beginTime}">
@@ -103,7 +103,7 @@
                   <p:column headerText="Score" style="width:60px;" sortBy="#{studentController.getScore(course.id)}">
                      <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
-                  <p:column headerText="Action">
+                  <p:column headerText="Action" style="width:100px;">
                      <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
                         action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form"
                         style="width:80px;">
