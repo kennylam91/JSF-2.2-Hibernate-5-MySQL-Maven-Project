@@ -18,7 +18,7 @@
                      </p:menuitem>
                   </p:menuButton>
                   <p:commandButton value="Filter Box" actionListener="#{studentController.openFilterDialog}"
-                     style="margin-left:20px;">
+                     style="margin-left:20px;" >
                      <p:ajax event="dialogReturn" listener="#{studentController.onPaginationChange()}"
                         update="main-content" />
                   </p:commandButton>
@@ -44,7 +44,8 @@
                            <f:selectItem itemLabel="Note" itemValue="note" />
                         </h:selectOneMenu>
                         <p:inputText id="search_keyword" style="width:160px;height:31px"
-                           value="#{studentController.pagination.searchKeyword}" placeholder="Search keyword">
+                           value="#{studentController.pagination.searchKeyword}" placeholder="Search keyword"
+                           onkeypress="if (event.keyCode == 13) { return false; }">
                         </p:inputText>
                         <p:commandButton icon="pi pi-search" styleClass="white-button" update="main-content"
                            action="#{studentController.onPaginationChange}" style="height:31px;" />

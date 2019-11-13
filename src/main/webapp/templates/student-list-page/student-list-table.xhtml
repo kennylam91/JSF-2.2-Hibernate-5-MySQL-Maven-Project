@@ -7,7 +7,7 @@
 </head>
 <body>
    <ui:composition>
-      <h:form id="form_student_list">
+      <h:form id="form_student_list"  >
          <p:dataTable value="#{studentController.studentDtos}" var="student" reflow="true" id="student_list_table"
             rowKey="#{student.id}" selection="#{studentController.selectedStudentDtos}" multiViewState="true"
             styleClass="wpsp-table dataTable dtr-inline">

@@ -116,14 +116,20 @@ public class StudentController implements Serializable {
 
 	public void createStudent() {
 		studentService.saveStudent(newStudent);
-		newStudent = new Student();
 		closeCreateStudentDialog();
+	}
 
+	public void informAfterCreateStudent() {
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "CREATING COMPLETED", "STUDENT: " + newStudent.getCode()));
+		newStudent = new Student(); //Clear new Student Form
 	}
 
 	public void deleteStudent() {
 		studentService.deleteStudent(selectedStudentDto.getId());
 		studentDtos = studentService.findStudentsByPagination(pagination);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"DELETING COMPLETED", "STUDENT: " + selectedStudentDto.getCode()));
 	}
 
 	public void getStudentDetail() {
@@ -158,12 +164,16 @@ public class StudentController implements Serializable {
 
 	public void update() {
 		studentService.updateStudent(selectedStudent);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"UPDATING COMPLETED", "STUDENT: " + selectedStudent.getCode()));
+	
 	}
 
 	public void onPaginationChange() {
 		studentDtos = studentService.findStudentsByPagination(pagination);
 		int totalRecords = studentService.getTotalRecords(pagination);
 		pagination.setTotalRecords(totalRecords);
+
 	}
 
 	public void getPreviousPage() {
@@ -278,10 +288,10 @@ public class StudentController implements Serializable {
 	}
 
 	public float getScoreByStudentIdAndCourseId(Long courseId) throws ScoreNotFoundException {
-		//Admin_role view
+		// Admin_role view
 		if (selectedStudentDto != null)
 			return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudentDto.getId());
-		//Student_role view
+		// Student_role view
 		else {
 			return scoreService.findScoreByCourseIdAndStudentId(courseId, selectedStudent.getId());
 		}
@@ -340,10 +350,11 @@ public class StudentController implements Serializable {
 		scoreDto.setStudentField(student.getField());
 		return scoreDto;
 	}
+
 	private List<Course> courseListOfSelectedStudent;
-	
-	public List<Course> getCourseListOfSelectedStudent(){
-		if(courseListOfSelectedStudent == null) {
+
+	public List<Course> getCourseListOfSelectedStudent() {
+		if (courseListOfSelectedStudent == null) {
 			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
 		}
 		return courseListOfSelectedStudent;

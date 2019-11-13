@@ -22,7 +22,7 @@
                   style="height: 32px;width: 111px;padding: 0;background-color: #00bdda;border-color: #00bdda;font-size: 12px;"
                   value="New Student" actionListener="#{studentController.openCreateStudentDialog}"
                   icon="pi pi-plus-circle">
-                  <p:ajax event="dialogReturn" update="main-content"></p:ajax>
+                  <p:ajax event="dialogReturn" update="main-content" listener="#{studentController.informAfterCreateStudent}"></p:ajax>
                </p:commandButton>
             </div>
          </div>
