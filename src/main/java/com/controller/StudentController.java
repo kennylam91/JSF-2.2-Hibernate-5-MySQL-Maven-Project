@@ -159,6 +159,9 @@ public class StudentController implements Serializable {
 		if (selectedStudentDto != null) {
 			navigation.navigateToStudentDetail();
 		}
+		else {
+			navigation.navigateToDashboardStudentRole();
+		}
 
 	}
 
@@ -232,7 +235,10 @@ public class StudentController implements Serializable {
 			courseController.getSelectedCourse().addStudent(selectedStudent);
 			courseController.getSelectedScores().add(
 					createScoreDtoObjectFromCourseAndStudent(courseController.getSelectedCourse(), selectedStudent));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"ADD COURSE COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
 			courseController.updateCourse();
+			update();
 		}
 
 	}
@@ -246,7 +252,11 @@ public class StudentController implements Serializable {
 					courseController.getSelectedScores().remove(scoreDto);
 				}
 			}
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"REMOVE COURSE COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
 			courseController.updateCourse();
+			update();
+			
 		}
 
 	}

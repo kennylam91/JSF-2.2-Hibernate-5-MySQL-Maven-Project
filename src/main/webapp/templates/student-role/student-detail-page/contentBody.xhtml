@@ -104,19 +104,20 @@
                      <h:outputText value="#{studentController.getScore(course.id)}"></h:outputText>
                   </p:column>
                   <p:column headerText="Action" style="width:100px;">
-                     <p:commandButton value="Register" rendered="#{studentController.isCourseCanBeRegistered(course)}"
-                        action="#{studentController.addCourseToStudentAndThenUpdateCourse}" update="@form"
-                        style="width:80px;">
-                        <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
-                     </p:commandButton>
+                     
                      <p:commandButton value="Cancel" rendered="#{studentController.isCourseCanBeCanceled(course)}"
-                        action="#{studentController.removeCourseOutOfStudent}" update="@form"
+                        action="#{studentController.removeCourseOutOfStudent}" update="main-content @form"
                         style="background-color: #f33155;border: #f33155 1px solid;width:80px;">
                         <f:setPropertyActionListener value="#{course}" target="#{courseController.selectedCourse}" />
+                        <p:confirm header="Confirmation" message="Cancel this course?" icon="pi pi-exclamation-triangle" />
                      </p:commandButton>
                   </p:column>
                </p:dataTable>
             </h:panelGrid>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+               <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+               <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
          </h:form>
       </div>
    </ui:composition>

@@ -49,7 +49,7 @@ public class SubjectController implements Serializable {
 	private CourseController courseController;
 
 	private List<Subject> subjects;
-
+	private boolean editMode = false;
 	private Subject selectedSubject = new Subject();
 
 	public List<Subject> getSubjects() {
@@ -79,32 +79,23 @@ public class SubjectController implements Serializable {
 
 	}
 
-	public void onSubjectRowSelect(SelectEvent event) {
-
-		if (!courseController.isEditMode()) {
-			PrimeFaces.current().executeScript("PF('dlg_list_subject').hide(); PF('dlg_create_course').show()");
-			newCourseForm.setSubject((Subject) event.getObject());
-		} else {
-			courseController.getSelectedCourse().setSubject((Subject) event.getObject());
-		}
-	}
-	
 	public void openCreateSubjectDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
-		options.put("width","410px");
-		options.put("height","470px");
+		options.put("width", "410px");
+		options.put("height", "470px");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("modal", true);
 		PrimeFaces.current().dialog().openDynamic("/templates/subject-list-page/dialog_create_subject", options, null);
 	}
-	
+
 	public void closeCreateSubjectDialog() {
 		PrimeFaces.current().dialog().closeDynamic(null);
 	}
-	
 
+	public void activeEditMode() {
+		editMode = true;
+	}
 
-	
 }
