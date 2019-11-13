@@ -48,6 +48,7 @@ import lombok.Setter;
 public class CourseController implements Serializable {
 
 	private static final long serialVersionUID = 4251571962723500481L;
+	
 	private List<Course> courses = new LinkedList<>();
 	private Subject selectedSubject = new Subject();
 	private Course selectedCourse = new Course();

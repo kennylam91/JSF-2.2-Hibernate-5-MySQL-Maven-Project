@@ -10,11 +10,17 @@
 </h:head>
 <h:body>
    <h:form id="formLogin">
+      <p:selectOneMenu id="language" value="#{userController.locale}" style="margin:10px;" >
+         <f:selectItem itemLabel="Select Language" ></f:selectItem>
+         <f:selectItem itemValue="en" itemLabel="English"></f:selectItem>
+         <f:selectItem itemValue="vi" itemLabel="Vietnamese"></f:selectItem>
+         <f:ajax listener="#{userController.onLocaleChange}" render="@form" ></f:ajax>
+      </p:selectOneMenu>
       <div
          style="display: flex; width: 100vw; justify-content: center; margin-top: 200px; font-size: 20px; line-height: 2rem;">
          <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-4,ui-grid-col-8">
             <f:facet name="header">
-          Please Login
+          #{msgs.loginHeader}
         </f:facet>
             <p:outputLabel for="email" value="Email: " />
             <p:inputText id="email" required="true" value="#{userController.user.email}" />
@@ -23,7 +29,7 @@
             <div></div>
             <f:facet name="footer">
                <div align="center">
-                  <p:commandButton value="Login" actionListener="#{userController.login}" />
+                  <p:commandButton value="#{msgs.login}" actionListener="#{userController.login}" />
                </div>
             </f:facet>
          </p:panelGrid>

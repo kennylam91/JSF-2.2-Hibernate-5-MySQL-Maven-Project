@@ -2,11 +2,13 @@ package com.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +31,8 @@ public class UserController implements Serializable {
 	private static final long serialVersionUID = 4908733315796400288L;
 
 	private User user;
+	
+	private String locale;
 
 	public UserController() {
 		user = new User();
@@ -91,5 +95,16 @@ public class UserController implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void onLocaleChange() {
+		UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();
+		if(locale.contentEquals("vi")) {
+			viewRoot.setLocale(new Locale("vi"));
+		}
+		if(locale.contentEquals("en")) {
+			viewRoot.setLocale(new Locale("en"));
+		}
+	}
+	
 
 }
