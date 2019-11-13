@@ -142,7 +142,7 @@ public class StudentController implements Serializable {
 		else {
 			selectedStudent = studentService.findStudentByEmail(userEmail);
 		}
-
+		//get Score by StudentId and CourseId
 		if (selectedStudent.getCourses() != null) {
 			for (Course course : selectedStudent.getCourses()) {
 				if (course.getStatus().equals(COURSE_STATUSES.COMPLETED)) {
@@ -239,6 +239,7 @@ public class StudentController implements Serializable {
 					"ADD COURSE COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
 			courseController.updateCourse();
 			update();
+			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
 		}
 
 	}
@@ -256,6 +257,7 @@ public class StudentController implements Serializable {
 					"REMOVE COURSE COMPLETED", "COURSE: "+courseController.getSelectedCourse().getName()));
 			courseController.updateCourse();
 			update();
+			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
 			
 		}
 
@@ -369,10 +371,10 @@ public class StudentController implements Serializable {
 		return scoreDto;
 	}
 
-	private List<Course> courseListOfSelectedStudent;
+	private List<Course> courseListOfSelectedStudent= new ArrayList<>();
 
 	public List<Course> getCourseListOfSelectedStudent() {
-		if (courseListOfSelectedStudent == null) {
+		if (courseListOfSelectedStudent.isEmpty()) {
 			courseListOfSelectedStudent = new ArrayList<>(selectedStudent.getCourses());
 		}
 		return courseListOfSelectedStudent;
