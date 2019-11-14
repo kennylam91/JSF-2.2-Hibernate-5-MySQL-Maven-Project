@@ -13,7 +13,7 @@ public interface StudentService extends Serializable {
 
 	void updateStudent(Student student);
 
-	void deleteStudent(Long studentId);
+	void deleteStudent(Long studentId) throws Exception;
 
 	Student findStudentById(Long studentId);
 

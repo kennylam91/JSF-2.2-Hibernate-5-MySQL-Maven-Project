@@ -103,26 +103,26 @@
             </p:panelGrid>
          </h:form>
          <h:form id="form-course-students-information" styleClass="ui-g-7">
-            <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScoresList}"
+            <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScores}"
                paginator="true" rows="10" paginatorPosition="bottom"
                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                rowsPerPageTemplate="5,10,15" selection="#{courseController.selectedScore}" rowKey="#{score.id}">
                <f:facet name="header">
                   <p:outputLabel value="STUDENTS INFORMATION" style="display:block;margin:5px;"></p:outputLabel>
                </f:facet>
-               <p:column headerText="StudentCode" sortBy="#{score.studentCode}" >
+               <p:column headerText="StudentCode"  >
                   <h:outputText value="#{score.studentCode}"></h:outputText>
                </p:column>
-               <p:column headerText="FirstName" sortBy="#{score.studentFirstname}">
+               <p:column headerText="FirstName">
                   <h:outputText value="#{score.studentFirstname}"></h:outputText>
                </p:column>
-               <p:column headerText="LastName" sortBy="#{score.studentLastname}">
+               <p:column headerText="LastName" >
                   <h:outputText value="#{score.studentLastname}"></h:outputText>
                </p:column>
-               <p:column headerText="Field" sortBy="#{score.studentField}" style="width:100px;">
+               <p:column headerText="Field" style="width:100px;">
                   <h:outputText value="#{score.studentField}"></h:outputText>
                </p:column>
-               <p:column headerText="Score" sortBy="#{score.score}" style="width:85px;">
+               <p:column headerText="Score"  style="width:85px;">
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
                <p:column headerText="Action" style="width:65px;">

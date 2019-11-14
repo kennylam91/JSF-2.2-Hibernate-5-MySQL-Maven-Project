@@ -42,7 +42,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public void deleteStudent(Long studentId) {
+	public void deleteStudent(Long studentId) throws Exception {
 		Student student = studentRepository.findStudentById(studentId);
 		studentRepository.deleteStudent(student);
 	}

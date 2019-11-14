@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/*This class used to contains data include: List<StudentDto> and totalFoundRecords from method: findStudentsByPagination*/
 @Getter
 @Setter
 @AllArgsConstructor

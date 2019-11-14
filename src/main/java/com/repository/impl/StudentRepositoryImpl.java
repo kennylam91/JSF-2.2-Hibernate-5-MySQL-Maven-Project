@@ -81,7 +81,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 					queryStringSecond+= "s.dob between :dobFVFrom and :dobFVTo" + " " + "and ";
 				}
 			}
-
+			
+			//When search all field
 			if (pagination.getSearchField().equals("all")) {
 				queryString += "(s.code like :searchKeyword or " + "s.firstName like :searchKeyword or" + " "
 						+ "s.lastName like :searchKeyword or " + "s.gender like :searchKeyword or" + " "
@@ -92,6 +93,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 						+ "s.lastName like :searchKeyword or " + "s.gender like :searchKeyword or" + " "
 						+ "s.field like :searchKeyword or " + "s.phone like :searchKeyword or" + " "
 						+ "s.email like :searchKeyword or " + "s.note like :searchKeyword" + " )";
+				//Search by single field
 			} else {
 				queryString += fieldSearch + " " + "like :searchKeyword" + " ";
 				queryStringSecond +=fieldSearch + " " + "like :searchKeyword" + " ";
@@ -186,7 +188,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 	}
 
-	public void deleteStudent(Student student) {
+	public void deleteStudent(Student student) throws Exception {
 		Transaction transaction = null;
 		Session session = null;
 		try {
@@ -198,7 +200,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			
+			throw new Exception("sql exception");
 		} finally {
 			if (session != null) {
 				session.close();
@@ -320,11 +322,13 @@ public class StudentRepositoryImpl implements StudentRepository {
 		try {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
+			//Find all courses of studentId where status = completed
 			List<CourseScoreDto> courseScoreDtoList = session
 					.createQuery("Select new com.beans.CourseScoreDto(c.id, c.subject.id, c.subject.coefficient) "
 							+ "from Course c join c.students s "
 							+ "where s.id = :studentId and c.status like 'COMPLETED'")
 					.setParameter("studentId", studentId).getResultList();
+			//Loop the completed courses then find the score of single course
 			for (CourseScoreDto courseScoreDto : courseScoreDtoList) {
 				Score score = (Score) session
 						.createQuery(
@@ -350,6 +354,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 	}
 
+	//filter the score of courses that in the same subject, only choose the hightest score of single subject
 	public void filterCourseScoreListBySubject(List<CourseScoreDto> courseScoreDtoList) {
 		for (int i = 0; i < courseScoreDtoList.size() - 1; i++) {
 			if (courseScoreDtoList.get(i).getSubjectId().equals(courseScoreDtoList.get(i + 1).getSubjectId())) {
@@ -364,6 +369,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		}
 	}
 
+	//Calculate the avgScore of student by courseScoreDtoList
 	public float getAvgScore(List<CourseScoreDto> courseScoreDtoList) {
 		float coeffSum = 0;
 		float total = 0;
@@ -387,6 +393,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
 
+			//should select count
 			org.hibernate.query.Query<Student> query = session
 					.createQuery("select s from Student s where s.email = :email").setParameter("email", email);
 			Student student = query.uniqueResult();

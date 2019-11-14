@@ -13,6 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+/* This class to calculate the avgScore */
 public class CourseScoreDto implements Comparable<CourseScoreDto>, Serializable{
 	
 	

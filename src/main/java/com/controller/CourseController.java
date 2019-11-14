@@ -259,13 +259,5 @@ public class CourseController implements Serializable {
 		return ((String) c1).compareTo((String) c2);
 	}
 
-	private List<ScoreDto> selectedScoresList;
-
-	public List<ScoreDto> getSelectedScoresList() {
-		if (selectedScoresList == null) {
-			selectedScoresList = new ArrayList<>(selectedScores);
-		}
-		return selectedScoresList;
-	}
 
 }

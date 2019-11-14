@@ -125,10 +125,17 @@ public class StudentController implements Serializable {
 	}
 
 	public void deleteStudent() {
-		studentService.deleteStudent(selectedStudentDto.getId());
-		studentDtos = studentService.findStudentsByPagination(pagination);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"DELETING COMPLETED", "STUDENT: " + selectedStudentDto.getCode()));
+		try {
+			studentService.deleteStudent(selectedStudentDto.getId());
+			studentDtos = studentService.findStudentsByPagination(pagination);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"DELETING COMPLETED", "STUDENT: " + selectedStudentDto.getCode()));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"DELETING FAILED", "STUDENT: " + selectedStudentDto.getCode()));
+		}
+		
+		
 	}
 
 	public void getStudentDetail() {
