@@ -67,7 +67,7 @@
                   <f:convertNumber pattern="#0.00"></f:convertNumber>
                </h:outputText>
                <p:outputLabel>Note:</p:outputLabel>
-               <p:inplace editor="true" emptyLabel="_____" >
+               <p:inplace editor="true" emptyLabel="_____">
                   <p:inputText value="#{studentController.selectedStudent.note}" id="note" required="false" />
                </p:inplace>
                <f:facet name="footer">
@@ -85,7 +85,9 @@
                   <p:outputLabel value="REGISTERED COURSES INFORMATION" style="display:block; margin:5px;"></p:outputLabel>
                </f:facet>
                <p:dataTable id="student_detail_courses_table" var="course" rowKey="#{course.id}"
-                  value="#{studentController.courseListOfSelectedStudent}">
+                  value="#{studentController.courseListOfSelectedStudent}" rows="10" paginator="true"
+                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                  rowsPerPageTemplate="5,10,15" paginatorPosition="bottom" >
                   <p:column headerText="Subject" sortBy="#{course.subject.name}" style="height:40px;">
                      <h:outputText value="#{course.subject}"></h:outputText>
                   </p:column>

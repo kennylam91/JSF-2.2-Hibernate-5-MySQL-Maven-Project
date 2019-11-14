@@ -211,7 +211,7 @@ public class CourseController implements Serializable {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
 		options.put("width", "500px");
-		options.put("height", "500px");
+		options.put("height", "460px");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("modal", true);
