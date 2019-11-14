@@ -34,8 +34,9 @@
                style="display:block;position:absolute;right: 470px;height:32px;width: 111px;padding: 0;
             background-color: #cd0a0ab8;border-color: #00bdda;font-size: 12px;"
                actionListener="#{courseController.openAddScoresDialog}" icon="pi pi-plus-circle">
-               <p:ajax event="dialogReturn" update=":form-course-students-information:course_student_list_table main-content"
-                  immediate="true" listener="#{courseController.informAfterAddingScores}">
+               <p:ajax event="dialogReturn"
+                  update=":form-course-students-information:course_student_list_table main-content" immediate="true"
+                  listener="#{courseController.informAfterAddingScores}">
                </p:ajax>
             </p:commandButton>
          </h:panelGroup>
@@ -102,27 +103,29 @@
             </p:panelGrid>
          </h:form>
          <h:form id="form-course-students-information" styleClass="ui-g-7">
-            <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScores}"
-               selection="#{courseController.selectedScore}" rowKey="#{score.id}">
+            <p:dataTable id="course_student_list_table" var="score" value="#{courseController.selectedScoresList}"
+               paginator="true" rows="10" paginatorPosition="bottom"
+               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+               rowsPerPageTemplate="5,10,15" selection="#{courseController.selectedScore}" rowKey="#{score.id}">
                <f:facet name="header">
                   <p:outputLabel value="STUDENTS INFORMATION" style="display:block;margin:5px;"></p:outputLabel>
                </f:facet>
-               <p:column headerText="StudentCode">
+               <p:column headerText="StudentCode" sortBy="#{score.studentCode}" >
                   <h:outputText value="#{score.studentCode}"></h:outputText>
                </p:column>
-               <p:column headerText="FirstName">
+               <p:column headerText="FirstName" sortBy="#{score.studentFirstname}">
                   <h:outputText value="#{score.studentFirstname}"></h:outputText>
                </p:column>
-               <p:column headerText="LastName">
+               <p:column headerText="LastName" sortBy="#{score.studentLastname}">
                   <h:outputText value="#{score.studentLastname}"></h:outputText>
                </p:column>
-               <p:column headerText="Field">
+               <p:column headerText="Field" sortBy="#{score.studentField}" style="width:100px;">
                   <h:outputText value="#{score.studentField}"></h:outputText>
                </p:column>
-               <p:column headerText="Score">
+               <p:column headerText="Score" sortBy="#{score.score}" style="width:85px;">
                   <h:outputText id="score_output" value="#{score.score}"></h:outputText>
                </p:column>
-               <p:column headerText="Action" style="width:60px;">
+               <p:column headerText="Action" style="width:65px;">
                   <p:commandButton icon="pi pi-trash" title="Del" update="main-content course_student_list_table"
                      actionListener="#{courseController.removeStudentOutOfCourse(score.studentId)}"
                      style="color:red;background-color:#f2f5f9;border:none;">
@@ -132,7 +135,7 @@
             </p:dataTable>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                <p:commandButton value="Remove" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"
-               style="background-color:#ff0000a6;border:solid 1px #ff0000a6" />
+                  style="background-color:#ff0000a6;border:solid 1px #ff0000a6" />
                <p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
             </p:confirmDialog>
          </h:form>

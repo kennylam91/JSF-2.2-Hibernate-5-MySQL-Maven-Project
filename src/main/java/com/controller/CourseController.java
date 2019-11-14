@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -48,7 +49,7 @@ import lombok.Setter;
 public class CourseController implements Serializable {
 
 	private static final long serialVersionUID = 4251571962723500481L;
-	
+
 	private List<Course> courses = new LinkedList<>();
 	private Subject selectedSubject = new Subject();
 	private Course selectedCourse = new Course();
@@ -256,6 +257,15 @@ public class CourseController implements Serializable {
 
 	public int sortCourseByString(Object c1, Object c2) {
 		return ((String) c1).compareTo((String) c2);
+	}
+
+	private List<ScoreDto> selectedScoresList;
+
+	public List<ScoreDto> getSelectedScoresList() {
+		if (selectedScoresList == null) {
+			selectedScoresList = new ArrayList<>(selectedScores);
+		}
+		return selectedScoresList;
 	}
 
 }
