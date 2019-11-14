@@ -186,9 +186,11 @@ public class CourseController implements Serializable {
 	public void openSubjectListDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
+		options.put("width", "650px");
+		options.put("height", "600px");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
-		options.put("model", true);
+		options.put("modal", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_SUBJECT_LIST_URL, options, null);
 	}
 
@@ -207,9 +209,11 @@ public class CourseController implements Serializable {
 	public void openAddScoresDialog() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("resizable", true);
+		options.put("width", "500px");
+		options.put("height", "500px");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
-		options.put("model", true);
+		options.put("modal", true);
 		PrimeFaces.current().dialog().openDynamic(Constant.DIALOG_ADD_SCORES_URL, options, null);
 	}
 

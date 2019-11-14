@@ -11,7 +11,6 @@
    <h:form onkeypress="if (event.keyCode == 13) { return false; }">
       <p:dataTable value="#{courseController.selectedScores}" var="score" id="scores_table" widgetVar="cellScores"
          editable="true" editMode="cell">
-        
          <p:column headerText="StudentCode">
             <h:outputText value="#{score.studentCode}"></h:outputText>
          </p:column>
@@ -32,7 +31,8 @@
             </p:cellEditor>
          </p:column>
          <f:facet name="footer">
-            <p:commandButton value="Update" actionListener="#{courseController.updateScores}"></p:commandButton>
+            <p:commandButton value="Update" actionListener="#{courseController.updateScores}" style="margin-right:20px;">
+            </p:commandButton>
             <p:commandButton value="Cancel" process="@this" actionListener="#{courseController.closeCourseScoreDialog}"
                immediate="true">
             </p:commandButton>
