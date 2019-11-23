@@ -35,8 +35,9 @@ public class UserRepositoryImplJdbc implements UserRepository {
 
 	@Override
 	public Long save(User user) {
-		String sql = "insert into users(username,password,email,authority)"
-				+ "values(?,?,?,?)";
+		String sql = ""
+				+ "INSERT into users(username,password,email,authority) "
+				+ "VALUES(?,?,?,?)";
 		Long status = null;
 		try {
 			Connection con = JdbcConnection.getConnection();
@@ -54,15 +55,17 @@ public class UserRepositoryImplJdbc implements UserRepository {
 
 	@Override
 	public User validateUser(User user) {
-		String sql = "select username, email, authority " + 
-				"from users " + 
-				"where email = ? and password = ?";
+		String sql = ""
+				+ "SELECT username, email, authority "
+				+ "FROM users "
+				+ "WHERE email = ? and password = ?";
 		try {
 			Connection con = JdbcConnection.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());
 			ResultSet rs = ps.executeQuery();
+			System.out.println(ps.toString());
 			if(rs.next()) {
 				String username = rs.getString("username");
 				String email = rs.getString("email");
