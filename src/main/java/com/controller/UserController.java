@@ -67,7 +67,12 @@ public class UserController implements Serializable {
 				navigation.setMainContentHead(Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_HEAD_URL);
 				navigation.setMainContentBody(Constant.STUDENT_ROLE_STUDENT_DETAIL_CONTENT_BODY_URL);
 				navigation.setLeftSidebar(Constant.STUDENT_ROLE_LEFT_SIDEBAR);
-				studentController.getStudentDetail();
+				try {
+					studentController.getStudentDetail();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println(e);
+				}
 			}
 			FacesContext context = FacesContext.getCurrentInstance();
 			try {

@@ -138,7 +138,7 @@ public class StudentController implements Serializable {
 		
 	}
 
-	public void getStudentDetail() {
+	public void getStudentDetail() throws Exception {
 
 		// get selectedStudent from student-list-page
 		if (selectedStudentDto != null) {
@@ -147,6 +147,9 @@ public class StudentController implements Serializable {
 		// get selectedStudent from login view
 		else {
 			selectedStudent = studentService.findStudentByEmail(userEmail);
+		}
+		if(selectedStudent == null) {
+			throw new Exception("Cannot find student detail");
 		}
 		// get Score by StudentId and CourseId
 		if (selectedStudent.getCourses() != null) {

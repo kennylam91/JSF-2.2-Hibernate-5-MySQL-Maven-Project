@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
 	private static final long serialVersionUID = 1186987175499333079L;
 
-	@ManagedProperty(value = "#{userRepository}")
+	@ManagedProperty(value = "#{userRepositoryJdbc}")
 	UserRepository userRepository;
 
 	@Override

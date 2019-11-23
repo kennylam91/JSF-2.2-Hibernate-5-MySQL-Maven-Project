@@ -20,5 +20,9 @@ public class Constant {
 	public static String STUDENT_ROLE_COURSE_LIST_CONTENT_HEAD_URL = "/templates/student-role/course-list-page/contentHead.xhtml";
 	public static String STUDENT_ROLE_COURSE_LIST_CONTENT_BODY_URL = "/templates/student-role/course-list-page/contentBody.xhtml";
 	public static String STUDENT_ROLE_LEFT_SIDEBAR = "/templates/student-role/leftSidebar.xhtml";
+	
+	public static String ORACLE_DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	public static String ORACLE_DB_USERNAME = "admin";
+	public static String ORACLE_DB_PASSWORD = "admin";
 
 }

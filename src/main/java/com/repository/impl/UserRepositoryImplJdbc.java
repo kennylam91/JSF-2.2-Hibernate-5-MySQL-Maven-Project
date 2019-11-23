@@ -1,0 +1,115 @@
+package com.repository.impl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Collections;
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import org.hibernate.SessionFactory;
+
+import com.beans.User;
+import com.constant.AUTHORITIES;
+import com.constant.Constant;
+import com.repository.UserRepository;
+import com.util.JdbcConnection;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ManagedBean(name = "userRepositoryJdbc")
+@SessionScoped
+public class UserRepositoryImplJdbc implements UserRepository {
+
+	private static final long serialVersionUID = -8381815397768976670L;
+
+	@Override
+	public Long save(User user) {
+		String sql = "insert into users(username,password,email,authority)"
+				+ "values(?,?,?,?)";
+		Long status = null;
+		try {
+			Connection con = JdbcConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getEmail());
+			ps.setString(4, user.getAuthority().toString());
+			status = (long) ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
+
+	@Override
+	public User validateUser(User user) {
+		String sql = "select username, email, authority " + 
+				"from users " + 
+				"where email = ? and password = ?";
+		try {
+			Connection con = JdbcConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getPassword());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				String username = rs.getString("username");
+				String email = rs.getString("email");
+				AUTHORITIES authority = AUTHORITIES.valueOf(rs.getString("authority"));
+				con.close();
+				return User.builder()
+						.username(username)
+						.email(email)
+						.authority(authority)
+						.build();
+			}
+			return null;
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}		
+	}
+
+	public List<User> getAllUsers() {
+		Connection con = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			con = DriverManager.getConnection(Constant.ORACLE_DB_URL, Constant.ORACLE_DB_USERNAME,
+					Constant.ORACLE_DB_PASSWORD);
+			Statement stmt = con.createStatement();
+			System.out.println("select users");
+			ResultSet rs = null;
+			rs = stmt.executeQuery("select * from users");
+
+			while (rs.next()) {
+				System.out.println(rs.getInt(1) + " " + rs.getString(2));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.out.println(e);
+				}
+			}
+
+		}
+		return Collections.emptyList();
+	}
+
+}

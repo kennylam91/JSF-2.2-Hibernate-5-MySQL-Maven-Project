@@ -110,11 +110,6 @@ public class StudentRepositoryTest extends TestCase {
 		assertEquals(students.size(), studentIds.size());
 	}
 	
-	@Test
-	public void testDeleteStudent() {
-		studentRepo.deleteStudent(secondStudent);
-		assertTrue(studentRepo.findStudentById(secondStudent.getId()) == null);
-	}
 
 	@Test
 	public void testDeleteStudentList() {
