@@ -3,6 +3,7 @@ package com.test.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,8 +109,26 @@ public class StudentRepositoryImplJdbcTest {
 		Student firstFound = studentRepository.findStudentById(firstId);
 		Student secondFound = studentRepository.findStudentById(secondId);
 		assertNull(firstFound);
-		assertNull(secondFound);
-		
+		assertNull(secondFound);	
+	}
+	@Test
+	public void testCheckDuplicateEmail() {
+		firstStudent.setCode("Dks092");
+		firstStudent.setEmail("duplicate@gmail.com");
+		studentRepository.saveStudent(firstStudent);
+		boolean actual = studentRepository.checkDuplicatedEmail("duplicate@gmail.com");
+		assertTrue(actual);			
+	}
+	@Test
+	public void testFindStudentByEmail() {
+		String email = "check@gmail.com";
+		firstStudent.setCode("DKske092");
+		firstStudent.setEmail(email);
+		studentRepository.saveStudent(firstStudent);
+		Student studentFound = studentRepository.findStudentByEmail(email);
+		assertEquals(studentFound.getCode(), firstStudent.getCode());
+		assertEquals(studentFound.getEmail(), firstStudent.getEmail());
+		assertEquals(studentFound.getFirstName(), firstStudent.getFirstName());
 	}
 	
 }

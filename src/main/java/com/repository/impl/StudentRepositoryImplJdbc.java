@@ -324,7 +324,33 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	@Override
 	public boolean checkDuplicatedEmail(String email) {
-		// TODO Auto-generated method stub
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	1 "
+					+ "FROM		students "
+					+ "WHERE	email = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next())
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		return false;
 	}
 
@@ -336,8 +362,50 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	@Override
 	public Student findStudentByEmail(String userEmail) {
-		// TODO Auto-generated method stub
-		return null;
+		Student student = null;
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	student_id, student_code, first_name, last_name, date_of_birth, "
+					+ "			gender, field, address, phone_number, email, note, avg_score "
+					+ "FROM		students "
+					+ "WHERE	email = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userEmail);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				student = Student.builder()
+						.id(rs.getLong("student_id"))
+						.code(rs.getString("student_code"))
+						.firstName(rs.getString("first_name"))
+						.lastName(rs.getString("last_name"))
+						.dob(rs.getDate("date_of_birth"))
+						.gender(GENDERS.valueOf(rs.getString("gender")))
+						.field(FIELDS.valueOf(rs.getString("field")))
+						.address(rs.getString("address"))
+						.phone(rs.getString("phone_number"))
+						.email(rs.getString("email"))
+						.note(rs.getString("note"))
+						.avgScore(rs.getFloat("avg_score"))
+						.build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return student;
 	}
 
 }
