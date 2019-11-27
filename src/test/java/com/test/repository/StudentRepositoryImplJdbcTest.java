@@ -13,6 +13,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.beans.Student;
+import com.beans.StudentDto;
+import com.beans.StudentFilter;
+import com.beans.dto.ListStudentDto;
+import com.beans.pagination.Pagination;
+import com.beans.pagination.PaginationStudentList;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.repository.StudentRepository;
@@ -129,6 +134,31 @@ public class StudentRepositoryImplJdbcTest {
 		assertEquals(studentFound.getCode(), firstStudent.getCode());
 		assertEquals(studentFound.getEmail(), firstStudent.getEmail());
 		assertEquals(studentFound.getFirstName(), firstStudent.getFirstName());
+	}
+	@Test
+	public void testFindStudentsByPagination() {
+		Calendar dobFilterFrom = Calendar.getInstance();
+		dobFilterFrom.set(1990, 01, 01);
+		Calendar dobFilterTo = Calendar.getInstance();
+		dobFilterTo.set(1995, 01, 01);
+		StudentFilter studentFilter = StudentFilter.builder()
+				.isByGender(true)
+				.isByField(true)
+				.isByDOB(true)
+				.isByScore(false)
+				.genderFilterValue(GENDERS.MALE)
+				.fieldFilterValue(FIELDS.JAVA)
+				.DOBFilterFrom(dobFilterFrom.getTime())
+				.DOBFilterTo(dobFilterTo.getTime())
+				.scoreFilterFrom(0.0f)
+				.scoreFilterTo(8.0f)
+				.build();
+		Pagination pagination = new PaginationStudentList();
+		((PaginationStudentList)pagination).setStudentFilter(studentFilter);
+		ListStudentDto result = studentRepository.findStudentsByPagination(pagination);
+		List<StudentDto> studentDtos = result.getList();
+		assertTrue(studentDtos.size() > 0);
+		
 	}
 	
 }

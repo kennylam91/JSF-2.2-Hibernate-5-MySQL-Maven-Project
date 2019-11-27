@@ -1,12 +1,16 @@
 package com.repository.impl;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.beans.Student;
+import com.beans.StudentDto;
+import com.beans.StudentFilter;
 import com.beans.dto.ListStudentDto;
 import com.beans.pagination.Pagination;
+import com.beans.pagination.PaginationStudentList;
 import com.constant.FIELDS;
 import com.constant.GENDERS;
 import com.repository.StudentRepository;
@@ -222,8 +226,79 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	@Override
 	public ListStudentDto findStudentsByPagination(Pagination pagination) {
-		// TODO Auto-generated method stub
-		return null;
+		ListStudentDto listStudentDto = new ListStudentDto();
+		List<StudentDto> studentDtoList = new LinkedList<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	student_id, student_code, first_name, last_name, "
+					+ "			gender, field, date_of_birth, phone_number, email, note, avg_score "
+					+ "FROM		students "
+					+ "WHERE ";
+			StringBuilder sqlBuilder = new StringBuilder(sql);
+			StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
+			if(filter.getIsByGender()) {
+				sqlBuilder.append("gender = ").append("'")
+				.append(filter.getGenderFilterValue().toString()).append("'");
+			}
+			if(filter.getIsByField()) {
+				sqlBuilder.append(" AND ")
+				.append("field = ").append("'")
+				.append(filter.getFieldFilterValue().toString())
+				.append("'");
+			}
+			if(filter.getIsByDOB()) {
+				String dobFrom = dateFormat.format(filter.getDOBFilterFrom());
+				String dobTo = dateFormat.format(filter.getDOBFilterTo());
+				sqlBuilder.append(" AND ")
+				.append("date_of_birth BETWEEN ")
+				.append("'").append(dobFrom).append("'")
+				.append(" AND ")
+				.append("'").append(dobTo).append("'");
+			}
+			if(filter.getIsByScore()) {
+				sqlBuilder.append(" AND ")
+				.append("avg_score BETWEEN ")
+				.append(filter.getScoreFilterFrom()).append(" AND ")
+				.append(filter.getScoreFilterTo()).append(" ");
+			}
+			ps = con.prepareStatement(sqlBuilder.toString());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				StudentDto studentDto = StudentDto.builder()
+						.id(rs.getLong("student_id"))
+						.code(rs.getString("student_code"))
+						.firstName(rs.getString("first_name"))
+						.lastName(rs.getString("last_name"))
+						.dob(rs.getDate("date_of_birth"))
+						.gender(GENDERS.valueOf(rs.getString("gender")))
+						.field(FIELDS.valueOf(rs.getString("field")))
+						.phone(rs.getString("phone_number"))
+						.email(rs.getString("email"))
+						.note(rs.getString("note"))
+						.avgScore(rs.getFloat("avg_score"))
+						.build();
+				studentDtoList.add(studentDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		listStudentDto.setList(studentDtoList);
+		return listStudentDto;
 	}
 
 	@Override
