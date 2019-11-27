@@ -1,6 +1,7 @@
 package com.repository.impl;
 
 import java.sql.*;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.beans.Student;
@@ -261,8 +262,58 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	@Override
 	public List<Student> findStudentsByIds(List<Long> Ids) {
-		// TODO Auto-generated method stub
-		return null;
+		Student student = null;
+		List<Student> students = new LinkedList<>();
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	* "
+					+ "FROM		students "
+					+ "WHERE	student_id = ?";
+			StringBuilder sqlBuilder = new StringBuilder(sql);
+			for (int i=0;i<Ids.size()-1;i++) {
+				sqlBuilder.append(" OR student_id =?");
+			}
+			ps = con.prepareStatement(sqlBuilder.toString());
+			for(int i=0;i<Ids.size();i++) {
+				ps.setInt(i+1, (int)Ids.get(i).longValue());
+			}
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				student = Student.builder()
+						.id(rs.getLong("student_id"))
+						.code(rs.getString("student_code"))
+						.firstName(rs.getString("first_name"))
+						.lastName(rs.getString("last_name"))
+						.dob(rs.getDate("date_of_birth"))
+						.gender(GENDERS.valueOf(rs.getString("gender")))
+						.field(FIELDS.valueOf(rs.getString("field")))
+						.address(rs.getString("address"))
+						.phone(rs.getString("phone_number"))
+						.email(rs.getString("email"))
+						.note(rs.getString("note"))
+						.avgScore(rs.getFloat("avg_score"))
+						.build();
+				students.add(student);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return students;
 	}
 
 	@Override

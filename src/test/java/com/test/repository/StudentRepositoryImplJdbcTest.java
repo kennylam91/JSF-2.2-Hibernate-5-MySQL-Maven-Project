@@ -93,7 +93,7 @@ public class StudentRepositoryImplJdbcTest {
 	}
 	
 	@Test
-	public void testDeleteStudentList() {
+	public void testDeleteStudentListAndFindStudentsByIds() {
 		firstStudent.setCode("A092k2");
 		firstStudent.setEmail("lkfjskfdf@gmail.com");
 		Long firstId = studentRepository.saveStudent(firstStudent);
@@ -101,6 +101,9 @@ public class StudentRepositoryImplJdbcTest {
 		List<Long> idList = new ArrayList<>();
 		idList.add(firstId);
 		idList.add(secondId);
+		List<Student> students = studentRepository.findStudentsByIds(idList);
+		assertEquals(2,students.size());
+		assertNotNull(students.get(0).getId());
 		studentRepository.deleteStudentList(idList);
 		Student firstFound = studentRepository.findStudentById(firstId);
 		Student secondFound = studentRepository.findStudentById(secondId);
