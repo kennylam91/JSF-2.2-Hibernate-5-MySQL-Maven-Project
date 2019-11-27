@@ -133,7 +133,39 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	@Override
 	public void deleteStudent(Student student) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			con = JdbcConnection.getConnection();
+			con.setAutoCommit(false);
+			String sql = ""
+					+ "DELETE FROM students "
+					+ "WHERE student_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, (int)student.getId().longValue());
+			ps.executeUpdate();
+			con.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		} finally {
+			try {
+				if (ps != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 
 	}
 
@@ -195,7 +227,35 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	@Override
 	public void deleteStudentList(List<Long> StudentIdList) {
-		// TODO Auto-generated method stub
+		try {
+			con = JdbcConnection.getConnection();
+			con.setAutoCommit(false);
+			String sql = ""
+					+ "DELETE FROM students "
+					+ "WHERE student_id = ?";
+			ps = con.prepareStatement(sql);
+			for (Long id : StudentIdList) {
+				ps.setInt(1, (int)id.longValue());
+				ps.addBatch();
+			}
+			ps.executeBatch();
+			con.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 
 	}
 
