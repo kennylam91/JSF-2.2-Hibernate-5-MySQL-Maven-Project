@@ -40,17 +40,25 @@ public class StudentRepositoryImplJdbcTest {
 	@Test
 	public void testSaveStudent() {
 		firstStudentId = studentRepository.saveStudent(firstStudent);
-		System.out.println(firstStudentId);
 		assertNotNull(firstStudentId);
 	}
 	
 	@Test
-	public void testFindStudentById() {
+	public void testFindStudentByIdAndUpdateStudent() {
 		firstStudent.setCode("A109298");
 		firstStudent.setEmail("phamdkfj@gmail.com");
 		Long id = studentRepository.saveStudent(firstStudent);
 		Student studentFound = studentRepository.findStudentById(id);
 		firstStudent.setId(id);
 		assertEquals(firstStudent, studentFound);
+		
+		Calendar dob = Calendar.getInstance();
+		dob.set(1992, 04, 20);
+		firstStudent.setFirstName("Van");
+		firstStudent.setDob(dob.getTime());
+		studentRepository.updateStudent(firstStudent);
+		Student studentFound2 = studentRepository.findStudentById(id);
+		assertEquals(firstStudent, studentFound2);
 	}
+	
 }
