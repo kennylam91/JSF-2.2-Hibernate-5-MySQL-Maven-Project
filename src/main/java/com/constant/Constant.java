@@ -28,8 +28,12 @@ public class Constant {
 	public static String ORACLE_TEST_DB_USERNAME = "testdb";
 	public static String ORACLE_TEST_DB_PASSWORD = "testdb";
 
-	public static String POSTGRE_DB_URL = "jdbc:postgresql://localhost:5432/student_app";
-	public static String POSTGRE_DB_USERNAME = "postgres";
-	public static String POSTGRE_DB_PASSWORD = "postgres";
+	public static String POSTGRES_DB_URL = "jdbc:postgresql://localhost:5432/student_app";
+	public static String POSTGRES_DB_USERNAME = "postgres";
+	public static String POSTGRES_DB_PASSWORD = "postgres";
+	
+	public static String POSTGRES_TEST_DB_URL = "jdbc:postgresql://localhost:5432/test_db";
+	public static String POSTGRES_TEST_DB_USERNAME = "postgres";
+	public static String POSTGRES_TEST_DB_PASSWORD = "postgres";
 
 }
