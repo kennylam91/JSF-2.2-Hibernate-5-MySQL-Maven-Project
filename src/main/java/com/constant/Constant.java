@@ -24,5 +24,9 @@ public class Constant {
 	public static String ORACLE_DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static String ORACLE_DB_USERNAME = "admin";
 	public static String ORACLE_DB_PASSWORD = "admin";
+	
+	public static String ORACLE_TEST_DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	public static String ORACLE_TEST_DB_USERNAME = "testdb";
+	public static String ORACLE_TEST_DB_PASSWORD = "testdb";
 
 }

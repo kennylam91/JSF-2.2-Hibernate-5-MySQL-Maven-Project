@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -36,7 +37,7 @@ public class UserRepositoryImplJdbc implements UserRepository {
 	@Override
 	public Long save(User user) {
 		String sql = ""
-				+ "INSERT into users(username,password,email,authority) "
+				+ "INSERT into users( username, password, email, authority ) "
 				+ "VALUES(?,?,?,?)";
 		Long status = null;
 		try {
@@ -86,33 +87,55 @@ public class UserRepositoryImplJdbc implements UserRepository {
 		}		
 	}
 
-	public List<User> getAllUsers() {
-		Connection con = null;
+	public List<User> getAllUsers(){
+		String sql = ""
+				+ "SELECT 	user_id, username, email, authority "
+				+ "FROM 	users";
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection(Constant.ORACLE_DB_URL, Constant.ORACLE_DB_USERNAME,
-					Constant.ORACLE_DB_PASSWORD);
-			Statement stmt = con.createStatement();
-			System.out.println("select users");
-			ResultSet rs = null;
-			rs = stmt.executeQuery("select * from users");
-
-			while (rs.next()) {
-				System.out.println(rs.getInt(1) + " " + rs.getString(2));
+			Connection con = JdbcConnection.getConnection();
+			Statement sttm = con.createStatement();
+			ResultSet rs = sttm.executeQuery(sql);
+			List<User> users = new LinkedList<>();
+			if(rs.next()) {
+				User user = User.builder()
+						.username(rs.getString("username"))
+						.id(Long.parseLong(rs.getString("user_id")))
+						.email(rs.getString("email"))
+						.authority(AUTHORITIES.valueOf(rs.getString("authority")))
+						.build();
+				users.add(user);
+			}
+			return users;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
+	}
+	
+	public User findUserByEmail(String email) {
+		String sql = ""
+				+ "SELECT 	user_id, username, email, authority "
+				+ "FROM 	users "
+				+ "WHERE 	email = ?";
+		User user = null;
+		try {
+			Connection con = JdbcConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				user = User.builder()
+						.username(rs.getString("username"))
+						.id(Long.parseLong(rs.getString("user_id")))
+						.email(rs.getString("email"))
+						.authority(AUTHORITIES.valueOf(rs.getString("authority")))
+						.build();
 			}
 		} catch (Exception e) {
-			System.out.println(e);
-		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.out.println(e);
-				}
-			}
-
+			e.printStackTrace();
 		}
-		return Collections.emptyList();
+		return user;
 	}
 
 }
