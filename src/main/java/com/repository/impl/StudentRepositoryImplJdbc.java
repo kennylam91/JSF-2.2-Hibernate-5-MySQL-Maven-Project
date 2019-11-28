@@ -263,6 +263,32 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 				.append(filter.getScoreFilterFrom()).append(" AND ")
 				.append(filter.getScoreFilterTo()).append(" ");
 			}
+			//Search by all fields
+			if(pagination.getSearchField().contentEquals("all")) {
+				sqlBuilder.append(" AND ").append("( ")
+				.append( "concat_ws(' ',student_id, student_code, first_name, last_name, date_of_birth, "
+						+"gender, field, address, phone_number, email, note, avg_score) ~ '")
+				.append(pagination.getSearchKeyword()).append("')");
+			}
+			//Search by single field
+			else {
+				String searchField = getStudentField(pagination.getSearchField());
+				sqlBuilder.append(" AND ").append("LOWER(")
+				.append(searchField).append(") ~ '")
+				.append(pagination.getSearchKeyword())
+				.append("' ");
+			}
+			//Order by 
+			String orderByField = getStudentField(pagination.getOrderBy());
+			sqlBuilder.append("ORDER BY ")
+			.append(orderByField).append(" ")
+			.append(pagination.getAscOrDesc()).append(" ");
+			
+			//Limit
+			int offsetRows = (pagination.getPage() -1) * pagination.getRowsPerPage();
+			int limit = pagination.getRowsPerPage();
+			sqlBuilder.append("OFFSET ").append(offsetRows).append(" ")
+			.append("LIMIT ").append(limit);
 			ps = con.prepareStatement(sqlBuilder.toString());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
@@ -481,6 +507,27 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 			}
 		}
 		return student;
+	}
+
+	private String getStudentField(String input) {
+		switch (input) {
+		case "firstName":
+			return "first_name";
+		case "lastName":
+			return "last_name";
+		case "field":
+			return "field";
+		case "dob":
+			return "date_of_birth";
+		case "gender":
+			return "gender";
+		case "phone":
+			return "phone_number";
+		case "avgScore":
+			return "avg_score";
+		default:
+			return "student_code";
+		}
 	}
 
 }

@@ -150,11 +150,15 @@ public class StudentRepositoryImplJdbcTest {
 				.fieldFilterValue(FIELDS.JAVA)
 				.DOBFilterFrom(dobFilterFrom.getTime())
 				.DOBFilterTo(dobFilterTo.getTime())
-				.scoreFilterFrom(5.0f)
-				.scoreFilterTo(8.0f)
+				.scoreFilterFrom(0.0f)
+				.scoreFilterTo(10.0f)
 				.build();
 		Pagination pagination = new PaginationStudentList();
 		((PaginationStudentList)pagination).setStudentFilter(studentFilter);
+		pagination.setSearchField("firstName");
+		pagination.setSearchKeyword("lam");
+		pagination.setPage(1);
+		pagination.setRowsPerPage(2);
 		ListStudentDto result = studentRepository.findStudentsByPagination(pagination);
 		List<StudentDto> studentDtos = result.getList();
 		for (StudentDto studentDto : studentDtos) {
