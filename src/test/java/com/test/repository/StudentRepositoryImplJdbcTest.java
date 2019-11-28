@@ -140,23 +140,26 @@ public class StudentRepositoryImplJdbcTest {
 		Calendar dobFilterFrom = Calendar.getInstance();
 		dobFilterFrom.set(1990, 01, 01);
 		Calendar dobFilterTo = Calendar.getInstance();
-		dobFilterTo.set(1995, 01, 01);
+		dobFilterTo.set(1996, 01, 01);
 		StudentFilter studentFilter = StudentFilter.builder()
 				.isByGender(true)
 				.isByField(true)
 				.isByDOB(true)
-				.isByScore(false)
+				.isByScore(true)
 				.genderFilterValue(GENDERS.MALE)
 				.fieldFilterValue(FIELDS.JAVA)
 				.DOBFilterFrom(dobFilterFrom.getTime())
 				.DOBFilterTo(dobFilterTo.getTime())
-				.scoreFilterFrom(0.0f)
+				.scoreFilterFrom(5.0f)
 				.scoreFilterTo(8.0f)
 				.build();
 		Pagination pagination = new PaginationStudentList();
 		((PaginationStudentList)pagination).setStudentFilter(studentFilter);
 		ListStudentDto result = studentRepository.findStudentsByPagination(pagination);
 		List<StudentDto> studentDtos = result.getList();
+		for (StudentDto studentDto : studentDtos) {
+			System.out.println(studentDto);
+		}
 		assertTrue(studentDtos.size() > 0);
 		
 	}

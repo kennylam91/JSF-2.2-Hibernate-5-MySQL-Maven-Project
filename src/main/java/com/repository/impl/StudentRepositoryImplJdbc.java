@@ -238,17 +238,17 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 					+ "WHERE ";
 			StringBuilder sqlBuilder = new StringBuilder(sql);
 			StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
-			if(filter.getIsByGender()) {
+			if(filter.getIsByGender().booleanValue()) {
 				sqlBuilder.append("gender = ").append("'")
 				.append(filter.getGenderFilterValue().toString()).append("'");
 			}
-			if(filter.getIsByField()) {
+			if(filter.getIsByField().booleanValue()) {
 				sqlBuilder.append(" AND ")
 				.append("field = ").append("'")
 				.append(filter.getFieldFilterValue().toString())
 				.append("'");
 			}
-			if(filter.getIsByDOB()) {
+			if(filter.getIsByDOB().booleanValue()) {
 				String dobFrom = dateFormat.format(filter.getDOBFilterFrom());
 				String dobTo = dateFormat.format(filter.getDOBFilterTo());
 				sqlBuilder.append(" AND ")
@@ -257,7 +257,7 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 				.append(" AND ")
 				.append("'").append(dobTo).append("'");
 			}
-			if(filter.getIsByScore()) {
+			if(filter.getIsByScore().booleanValue()) {
 				sqlBuilder.append(" AND ")
 				.append("avg_score BETWEEN ")
 				.append(filter.getScoreFilterFrom()).append(" AND ")
