@@ -142,8 +142,8 @@ public class StudentRepositoryImplJdbcTest {
 		Calendar dobFilterTo = Calendar.getInstance();
 		dobFilterTo.set(1996, 01, 01);
 		StudentFilter studentFilter = StudentFilter.builder()
-				.isByGender(true)
-				.isByField(true)
+				.isByGender(false)
+				.isByField(false)
 				.isByDOB(true)
 				.isByScore(true)
 				.genderFilterValue(GENDERS.MALE)
@@ -157,8 +157,9 @@ public class StudentRepositoryImplJdbcTest {
 		((PaginationStudentList)pagination).setStudentFilter(studentFilter);
 		pagination.setSearchField("firstName");
 		pagination.setSearchKeyword("lam");
+		pagination.setAscOrDesc("desc");
 		pagination.setPage(1);
-		pagination.setRowsPerPage(2);
+		pagination.setRowsPerPage(3);
 		ListStudentDto result = studentRepository.findStudentsByPagination(pagination);
 		List<StudentDto> studentDtos = result.getList();
 		for (StudentDto studentDto : studentDtos) {

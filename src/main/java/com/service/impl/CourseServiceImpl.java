@@ -26,7 +26,7 @@ import lombok.Setter;
 public class CourseServiceImpl implements CourseService {
 
 	private static final long serialVersionUID = -1271596208609992371L;
-	@ManagedProperty(value = "#{courseRepository}")
+	@ManagedProperty(value = "#{courseRepositoryJdbc}")
 	private CourseRepository courseRepository;
 
 	@ManagedProperty(value = "#{subjectService}")

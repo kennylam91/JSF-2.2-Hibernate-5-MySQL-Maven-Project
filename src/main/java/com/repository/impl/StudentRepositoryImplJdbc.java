@@ -2,8 +2,11 @@ package com.repository.impl;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.beans.Student;
 import com.beans.StudentDto;
@@ -228,8 +231,11 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 	public ListStudentDto findStudentsByPagination(Pagination pagination) {
 		ListStudentDto listStudentDto = new ListStudentDto();
 		List<StudentDto> studentDtoList = new LinkedList<>();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		int totalRecords = 0;
+		String genderFilterValue = ".";
+		String fieldFilterValue = ".";
+		float avgScoreFrom = 0.0f;
+		float avgScoreTo = 10.0f;
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
@@ -237,65 +243,77 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 					+ "SELECT	student_id, student_code, first_name, last_name, "
 					+ "			gender, field, date_of_birth, phone_number, email, note, avg_score "
 					+ "FROM		students "
-					+ "WHERE ";
+					+ "WHERE gender ~ ? AND field ~ ? ";
 			StringBuilder sqlBuilder = new StringBuilder(sql);
 			StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
-			if(filter.getIsByGender().booleanValue()) {
-				sqlBuilder.append("gender = ").append("'")
-				.append(filter.getGenderFilterValue().toString()).append("'");
-			}
-			if(filter.getIsByField().booleanValue()) {
-				sqlBuilder.append(" AND ")
-				.append("field = ").append("'")
-				.append(filter.getFieldFilterValue().toString())
-				.append("'");
-			}
-			if(filter.getIsByDOB().booleanValue()) {
-				String dobFrom = dateFormat.format(filter.getDOBFilterFrom());
-				String dobTo = dateFormat.format(filter.getDOBFilterTo());
-				sqlBuilder.append(" AND ")
-				.append("date_of_birth BETWEEN ")
-				.append("'").append(dobFrom).append("'")
-				.append(" AND ")
-				.append("'").append(dobTo).append("'");
-			}
+			
+			//filter by Score
 			if(filter.getIsByScore().booleanValue()) {
 				sqlBuilder.append(" AND ")
-				.append("avg_score BETWEEN ")
-				.append(filter.getScoreFilterFrom()).append(" AND ")
-				.append(filter.getScoreFilterTo()).append(" ");
+				.append("avg_score BETWEEN ?").append(" AND ? ");
 			}
 			//Search by all fields
 			if(pagination.getSearchField().contentEquals("all")) {
 				sqlBuilder.append(" AND ").append("( ")
 				.append( "concat_ws(' ',student_id, student_code, first_name, last_name, date_of_birth, "
-						+"gender, field, address, phone_number, email, note, avg_score) ~ '")
-				.append(pagination.getSearchKeyword()).append("')");
+						+"gender, field, address, phone_number, email, note, avg_score) ~ ? ");
 			}
 			//Search by single field
 			else {
 				String searchField = getStudentField(pagination.getSearchField());
 				sqlBuilder.append(" AND ").append("LOWER(")
-				.append(searchField).append(") ~ '")
-				.append(pagination.getSearchKeyword())
-				.append("' ");
+				.append(getStudentField(pagination.getSearchField())).append(") ~ ? ");
 			}
+			//filter by DOB
+			if(filter.getIsByDOB().booleanValue()) {
+				sqlBuilder.append(" AND ")
+				.append("date_of_birth BETWEEN ? ")
+				.append(" AND ? ");
+			}
+			
 			//Order by 
 			String orderByField = getStudentField(pagination.getOrderBy());
-			sqlBuilder.append("ORDER BY ")
-			.append(orderByField).append(" ")
-			.append(pagination.getAscOrDesc()).append(" ) ");
+			sqlBuilder.append("ORDER BY ").append(getStudentField(pagination.getOrderBy()));
+			
+			if(pagination.getAscOrDesc().contentEquals("desc")) {
+				sqlBuilder.append(" DESC ) ");
+			}
 			
 			//Limit
-			StringBuilder sqlForGetList = new StringBuilder(sqlBuilder);
-			sqlForGetList.append(""
-					+ "SELECT	*"
+			sqlBuilder.append(""
+					+ "SELECT	*, ("
+					+ "		SELECT 	COUNT(*) "
+					+ "		FROM 	search_result_without_limit) AS total_records "
 					+ "FROM		search_result_without_limit ");
 			int offsetRows = (pagination.getPage() -1) * pagination.getRowsPerPage();
 			int limit = pagination.getRowsPerPage();
-			sqlForGetList.append("OFFSET ").append(offsetRows).append(" ")
-			.append("LIMIT ").append(limit);
-			ps = con.prepareStatement(sqlForGetList.toString());
+			sqlBuilder.append("OFFSET ? ")
+			.append("LIMIT ? ");
+			
+			ps = con.prepareStatement(sqlBuilder.toString());
+			if(filter.getIsByGender().booleanValue()) {
+				genderFilterValue = filter.getGenderFilterValue().toString();
+			}
+			if(filter.getIsByField().booleanValue()) {
+				fieldFilterValue = filter.getFieldFilterValue().toString();
+			}
+			if(filter.getIsByScore().booleanValue()) {
+				avgScoreFrom = filter.getScoreFilterFrom();
+				avgScoreTo = filter.getScoreFilterTo();
+			}
+			ps.setString(1, genderFilterValue);
+			ps.setString(2, fieldFilterValue);
+			ps.setFloat(3, avgScoreFrom);
+			ps.setFloat(4, avgScoreTo);
+			int startIndex = 0;
+			ps.setString(5, pagination.getSearchKeyword());
+			startIndex = 6;
+			if(filter.getIsByDOB().booleanValue()) {
+				ps.setTimestamp(startIndex++, new Timestamp(filter.getDOBFilterFrom().getTime()));
+				ps.setTimestamp(startIndex++, new Timestamp(filter.getDOBFilterTo().getTime()));
+			}			
+			ps.setInt(startIndex++, offsetRows);
+			ps.setInt(startIndex++, limit);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				StudentDto studentDto = StudentDto.builder()
@@ -312,16 +330,9 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 						.avgScore(rs.getFloat("avg_score"))
 						.build();
 				studentDtoList.add(studentDto);
-			}
-			//Get total records
-			StringBuilder sqlForGetTotalRecords = new StringBuilder(sqlBuilder);
-			sqlForGetTotalRecords.append(""
-					+ "SELECT	COUNT(*) as total_records "
-					+ "FROM 	search_result_without_limit");
-			ps = con.prepareStatement(sqlForGetTotalRecords.toString());
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				totalRecords = rs.getInt("total_records");
+				if(totalRecords == 0) {
+					totalRecords = rs.getInt("total_records");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
