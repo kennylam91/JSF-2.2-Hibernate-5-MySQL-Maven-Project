@@ -90,7 +90,57 @@ public class CourseRepositoryImplJdbc implements CourseRepository{
 
 	@Override
 	public void updateCourse(Course course) {
-		// TODO Auto-generated method stub
+		try {
+			con = JdbcConnection.getConnection();
+			con.setAutoCommit(false);
+			String sql = ""
+					+ "UPDATE	courses "
+					+ "SET"
+					+ "		course_name = ? , "
+					+ "		begin_time = ? , "
+					+ "		status = ? , "
+					+ "		teacher = ? , "
+					+ "		capacity = ? , "
+					+ "		description = ? , "
+					+ "		subject_id = ? ";
+			StringBuilder sqlBuilder = new StringBuilder(sql);
+			if(course.getFinishTime() != null) {
+				sqlBuilder.append(", finish_time = ? ");
+			}
+			sqlBuilder.append(""
+					+ "WHERE course_id = ?");
+			ps = con.prepareStatement(sqlBuilder.toString());
+			int i = 1;
+			ps.setString(i++, course.getName());
+			ps.setTimestamp(i++, new Timestamp(course.getBeginTime().getTime()));
+			ps.setString(i++, course.getStatus().toString());
+			ps.setString(i++, course.getTeacher());
+			ps.setInt(i++, course.getCapacity());
+			ps.setString(i++, course.getDescription());
+			ps.setLong(i++, course.getSubject().getId());
+			if(course.getFinishTime() != null)
+				ps.setTimestamp(i++, new Timestamp(course.getFinishTime().getTime()));
+			ps.setInt(i++, (int)course.getId().longValue());
+			ps.executeUpdate();
+			con.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		
 	}
 

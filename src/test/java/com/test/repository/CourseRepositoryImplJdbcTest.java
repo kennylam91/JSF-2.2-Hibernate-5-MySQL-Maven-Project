@@ -44,6 +44,8 @@ public class CourseRepositoryImplJdbcTest {
 		firstCourse = Course.builder().code("A1111111").name("Java Core 01").beginTime(firstCalendar.getTime())
 				.status(COURSE_STATUSES.REGISTERING).teacher("Mr.Lam").capacity(20)
 				.subject(Subject.builder().id(1L).build()).build();
+		Calendar secondCalendar = Calendar.getInstance();
+		secondCalendar.set(2019,11,31);
 	}
 	
 	@Test
@@ -51,5 +53,19 @@ public class CourseRepositoryImplJdbcTest {
 		Long firstCourseId = courseRepo.saveCourse(firstCourse);
 		System.out.println(firstCourseId);
 		assertNotNull(firstCourseId);
+	}
+	
+	@Test
+	public void testUpdateCourse() {
+		firstCourse.setCode("DKA092");
+		firstCourse.setName("Java Core 02");
+		Long firstCourseId = courseRepo.saveCourse(firstCourse);
+		firstCourse.setId(firstCourseId);
+		Calendar secondCalendar = Calendar.getInstance();
+		secondCalendar.set(2019,11,31);
+		firstCourse.setFinishTime(secondCalendar.getTime());
+		courseRepo.updateCourse(firstCourse);
+		
+		
 	}
 }
