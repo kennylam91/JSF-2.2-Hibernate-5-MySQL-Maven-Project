@@ -229,9 +229,11 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 		ListStudentDto listStudentDto = new ListStudentDto();
 		List<StudentDto> studentDtoList = new LinkedList<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		int totalRecords = 0;
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
+					+ "WITH search_result_without_limit AS ("
 					+ "SELECT	student_id, student_code, first_name, last_name, "
 					+ "			gender, field, date_of_birth, phone_number, email, note, avg_score "
 					+ "FROM		students "
@@ -282,14 +284,18 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 			String orderByField = getStudentField(pagination.getOrderBy());
 			sqlBuilder.append("ORDER BY ")
 			.append(orderByField).append(" ")
-			.append(pagination.getAscOrDesc()).append(" ");
+			.append(pagination.getAscOrDesc()).append(" ) ");
 			
 			//Limit
+			StringBuilder sqlForGetList = new StringBuilder(sqlBuilder);
+			sqlForGetList.append(""
+					+ "SELECT	*"
+					+ "FROM		search_result_without_limit ");
 			int offsetRows = (pagination.getPage() -1) * pagination.getRowsPerPage();
 			int limit = pagination.getRowsPerPage();
-			sqlBuilder.append("OFFSET ").append(offsetRows).append(" ")
+			sqlForGetList.append("OFFSET ").append(offsetRows).append(" ")
 			.append("LIMIT ").append(limit);
-			ps = con.prepareStatement(sqlBuilder.toString());
+			ps = con.prepareStatement(sqlForGetList.toString());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				StudentDto studentDto = StudentDto.builder()
@@ -306,6 +312,16 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 						.avgScore(rs.getFloat("avg_score"))
 						.build();
 				studentDtoList.add(studentDto);
+			}
+			//Get total records
+			StringBuilder sqlForGetTotalRecords = new StringBuilder(sqlBuilder);
+			sqlForGetTotalRecords.append(""
+					+ "SELECT	COUNT(*) as total_records "
+					+ "FROM 	search_result_without_limit");
+			ps = con.prepareStatement(sqlForGetTotalRecords.toString());
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				totalRecords = rs.getInt("total_records");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -324,6 +340,7 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 			}
 		}
 		listStudentDto.setList(studentDtoList);
+		listStudentDto.setTotalFoundRecords(totalRecords);
 		return listStudentDto;
 	}
 

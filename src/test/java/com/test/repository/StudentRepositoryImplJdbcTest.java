@@ -164,6 +164,9 @@ public class StudentRepositoryImplJdbcTest {
 		for (StudentDto studentDto : studentDtos) {
 			System.out.println(studentDto);
 		}
+		int totalFoundRecords = result.getTotalFoundRecords();
+		System.out.println(totalFoundRecords);
+		assertTrue(totalFoundRecords > 0);
 		assertTrue(studentDtos.size() > 0);
 		
 	}
