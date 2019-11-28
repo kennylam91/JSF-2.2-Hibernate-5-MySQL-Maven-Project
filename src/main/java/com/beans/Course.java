@@ -95,9 +95,9 @@ public class Course implements Serializable{
 		return name;
 	}
 	
-	public int getStudentsNo() {
-		return students.size();
-	}
+	/*
+	 * public int getStudentsNo() { return students.size(); }
+	 */
 
 	@Override
 	public int hashCode() {

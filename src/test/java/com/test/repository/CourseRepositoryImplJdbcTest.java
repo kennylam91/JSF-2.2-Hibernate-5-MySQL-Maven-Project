@@ -1,8 +1,11 @@
 package com.test.repository;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -49,10 +52,11 @@ public class CourseRepositoryImplJdbcTest {
 	}
 	
 	@Test
-	public void testSaveCourse() {
+	public void testSaveCourseAndFindCourseById() {
 		Long firstCourseId = courseRepo.saveCourse(firstCourse);
-		System.out.println(firstCourseId);
-		assertNotNull(firstCourseId);
+		Course courseFound = courseRepo.findCourseById(firstCourseId);
+		assertEquals(firstCourse.getCode(), courseFound.getCode());
+		assertEquals(firstCourse.getName(), courseFound.getName());
 	}
 	
 	@Test
@@ -65,7 +69,20 @@ public class CourseRepositoryImplJdbcTest {
 		secondCalendar.set(2019,11,31);
 		firstCourse.setFinishTime(secondCalendar.getTime());
 		courseRepo.updateCourse(firstCourse);
-		
-		
 	}
+	
+	@Test
+	public void testDeleteCourse() {
+		firstCourse.setId(6L);
+		courseRepo.deleteCourse(firstCourse);
+	}
+	@Test
+	public void testFindAllCourses() {
+		List<Course> courses = courseRepo.findAllCourses();
+		for (Course course : courses) {
+			System.out.println(course);
+		}
+		assertTrue(courses.size() > 0);
+	}
+	
 }

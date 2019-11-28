@@ -15,15 +15,8 @@ public class JdbcConnection {
 	static String password = Constant.POSTGRES_DB_PASSWORD;
 
 	public static Connection getConnection() {
-//		if (con == null) {
-//			try {
-//				con = DriverManager.getConnection(databaseUrl, username, password);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return con;
 		try {
+			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(databaseUrl, username, password);
 		} catch (Exception e) {
 			e.printStackTrace();

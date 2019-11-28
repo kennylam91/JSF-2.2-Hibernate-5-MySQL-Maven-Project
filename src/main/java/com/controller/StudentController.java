@@ -88,6 +88,7 @@ public class StudentController implements Serializable {
 		onPaginationChange();
 		courseScoreMap = new HashMap<>();
 	}
+	 
 
 	public GENDERS[] getGenders() {
 		return GENDERS.values();

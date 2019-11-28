@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService{
 
 	private static final long serialVersionUID = -2495755716198044889L;
 
-	@ManagedProperty(value = "#{studentRepository}")
+	@ManagedProperty(value = "#{studentRepositoryJdbc}")
 	StudentRepository studentRepository;
 
 	@Override

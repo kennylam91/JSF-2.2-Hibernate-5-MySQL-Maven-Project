@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -146,27 +147,214 @@ public class CourseRepositoryImplJdbc implements CourseRepository{
 
 	@Override
 	public void deleteCourse(Course course) {
-		// TODO Auto-generated method stub
-		
+		try {
+			con = JdbcConnection.getConnection();
+			con.setAutoCommit(false);
+			String sql = ""
+					+ "DELETE FROM courses "
+					+ "WHERE course_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, (int)course.getId().longValue());
+			ps.executeUpdate();
+			con.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public Course findCourseById(Long courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		Course course = null;
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	* "
+					+ "FROM 	courses "
+					+ "WHERE 	course_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, (int)courseId.longValue());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				course = Course.builder()
+						.id(courseId)
+						.code(rs.getString("course_code"))
+						.name(rs.getString("course_name"))
+						.beginTime(rs.getDate("begin_time"))
+						.finishTime(rs.getDate("finish_time"))
+						.status(COURSE_STATUSES.valueOf(rs.getString("status")))
+						.teacher(rs.getString("teacher"))
+						.capacity(rs.getInt("capacity"))
+						.description(rs.getString("description"))
+						.studentsNo(rs.getInt("student_number"))
+						.build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return course;
 	}
 
 	@Override
 	public List<Course> findAllCourses() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courses = new LinkedList<>();
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	* "
+					+ "FROM 	courses ";
+			ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Course course = Course.builder()
+						.id(rs.getLong("course_id"))
+						.code(rs.getString("course_code"))
+						.name(rs.getString("course_name"))
+						.beginTime(rs.getDate("begin_time"))
+						.finishTime(rs.getDate("finish_time"))
+						.status(COURSE_STATUSES.valueOf(rs.getString("status")))
+						.teacher(rs.getString("teacher"))
+						.capacity(rs.getInt("capacity"))
+						.description(rs.getString("description"))
+						.studentsNo(rs.getInt("student_number"))
+						.build();
+				courses.add(course);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return courses;
 	}
 
 	@Override
 	public List<Course> findAllCoursesByPagination(Pagination pagination) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courses = new LinkedList<>();
+		try {
+			con = JdbcConnection.getConnection();
+			String sql = ""
+					+ "SELECT	* "
+					+ "FROM 	courses "
+					+ "WHERE ";
+			StringBuilder sqlBuilder = new StringBuilder(sql);
+			if(pagination.getSearchField().contentEquals("all")) {
+				sqlBuilder.append("CONCAT_WS(' ', course_id, course_code, course_name, begin_time, finish_time, "
+						+ "status, teacher, capacity, description, student_number) ~ ? ");
+			}
+			else {
+				sqlBuilder.append(getCourseField(pagination.getSearchField()))
+				.append(" ~ ?");
+			}
+			sqlBuilder.append("ORDER BY ")
+			.append(getCourseField(pagination.getOrderBy()))
+			.append(" OFFSET ?")
+			.append(" LIMIT ?");
+			ps = con.prepareStatement(sqlBuilder.toString());
+			int offset = (pagination.getPage() -1)*pagination.getRowsPerPage();
+			int limit = pagination.getRowsPerPage();
+			ps.setString(1, pagination.getSearchKeyword());
+			ps.setInt(2, offset);
+			ps.setInt(3, limit);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Course course = Course.builder()
+						.id(rs.getLong("course_id"))
+						.code(rs.getString("course_code"))
+						.name(rs.getString("course_name"))
+						.beginTime(rs.getDate("begin_time"))
+						.finishTime(rs.getDate("finish_time"))
+						.status(COURSE_STATUSES.valueOf(rs.getString("status")))
+						.teacher(rs.getString("teacher"))
+						.capacity(rs.getInt("capacity"))
+						.description(rs.getString("description"))
+						.studentsNo(rs.getInt("student_number"))
+						.build();
+				courses.add(course);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return courses;
 	}
-
+	private String getCourseField(String input) {
+		switch (input) {
+		case "name":
+			return "course_name";
+		case "status":
+			return "status";
+		case "teacher":
+			return "teacher";
+		case "capacity":
+			return "capacity";
+		case "description":
+			return "description";
+		case "studentsNo":
+			return "student_number";
+		case "finishTime":
+			return "finish_time";
+		case "beginTime":
+			return "begin_time";
+		default:
+			return "course_code";
+		}
+	}
 	
 }

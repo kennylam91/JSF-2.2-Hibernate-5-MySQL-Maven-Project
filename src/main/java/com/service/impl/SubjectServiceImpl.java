@@ -25,7 +25,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	private static final long serialVersionUID = -4568732441570624725L;
 
-	@ManagedProperty(value = "#{subjectRepository}")
+	@ManagedProperty(value = "#{subjectRepositoryJdbc}")
 	private SubjectRepository subjectRepository;
 
 	@Override

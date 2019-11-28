@@ -28,7 +28,7 @@ public class ScoreServiceImpl implements ScoreService {
 
 	private static final long serialVersionUID = -4393343651463239429L;
 
-	@ManagedProperty(value = "#{scoreRepository}")
+	@ManagedProperty(value = "#{scoreRepositoryJdbc}")
 	ScoreRepository scoreRepository;
 
 	@Override

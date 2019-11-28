@@ -8,6 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import org.hibernate.SessionFactory;
+
 import com.beans.Student;
 import com.beans.StudentDto;
 import com.beans.StudentFilter;
@@ -19,6 +24,15 @@ import com.constant.GENDERS;
 import com.repository.StudentRepository;
 import com.util.JdbcConnection;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ManagedBean(name = "studentRepositoryJdbc")
+@SessionScoped
 public class StudentRepositoryImplJdbc implements StudentRepository {
 
 	private static final long serialVersionUID = 4964168177811809187L;
@@ -243,20 +257,16 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 					+ "SELECT	student_id, student_code, first_name, last_name, "
 					+ "			gender, field, date_of_birth, phone_number, email, note, avg_score "
 					+ "FROM		students "
-					+ "WHERE gender ~ ? AND field ~ ? ";
+					+ "WHERE 	gender ~ ? AND field ~ ? AND "
+					+ "			avg_score BETWEEN ? AND ? ";
 			StringBuilder sqlBuilder = new StringBuilder(sql);
 			StudentFilter filter = ((PaginationStudentList) pagination).getStudentFilter();
 			
-			//filter by Score
-			if(filter.getIsByScore().booleanValue()) {
-				sqlBuilder.append(" AND ")
-				.append("avg_score BETWEEN ?").append(" AND ? ");
-			}
 			//Search by all fields
 			if(pagination.getSearchField().contentEquals("all")) {
 				sqlBuilder.append(" AND ").append("( ")
 				.append( "concat_ws(' ',student_id, student_code, first_name, last_name, date_of_birth, "
-						+"gender, field, address, phone_number, email, note, avg_score) ~ ? ");
+						+"gender, field, address, phone_number, email, note, avg_score) ~ ? )");
 			}
 			//Search by single field
 			else {
@@ -273,11 +283,13 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 			
 			//Order by 
 			String orderByField = getStudentField(pagination.getOrderBy());
-			sqlBuilder.append("ORDER BY ").append(getStudentField(pagination.getOrderBy()));
+			sqlBuilder.append("ORDER BY ").append(getStudentField(pagination.getOrderBy()))
+			.append(" ");
 			
 			if(pagination.getAscOrDesc().contentEquals("desc")) {
-				sqlBuilder.append(" DESC ) ");
+				sqlBuilder.append(" DESC ");
 			}
+			sqlBuilder.append(") ");
 			
 			//Limit
 			sqlBuilder.append(""
@@ -557,5 +569,4 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 			return "student_code";
 		}
 	}
-
 }

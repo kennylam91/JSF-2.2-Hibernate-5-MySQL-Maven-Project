@@ -13,8 +13,11 @@ import com.repository.StudentRepository;
 import com.repository.SubjectRepository;
 import com.repository.UserRepository;
 import com.repository.impl.StudentRepositoryImpl;
+import com.repository.impl.StudentRepositoryImplJdbc;
 import com.repository.impl.SubjectRepositoryImpl;
+import com.repository.impl.SubjectRepositoryImplJdbc;
 import com.repository.impl.UserRepositoryImpl;
+import com.repository.impl.UserRepositoryImplJdbc;
 
 public class GenerateData {
 
@@ -57,9 +60,9 @@ public class GenerateData {
 		 * courseRepo.saveCourse(course);
 		 */
 
-//		insertSubjectSQL(10);
+		insertSubjectSQL(10);
 
-		insertStudentAndUserSQL(4000);
+//		insertStudentAndUserSQL(50);
 
 		/*
 		 * SubjectController subjectController = new SubjectController(); List<Subject>
@@ -137,8 +140,8 @@ public class GenerateData {
 
 	private static void insertStudentAndUserSQL(int studentNumber) {
 		Student student = new Student();
-		StudentRepository repo = new StudentRepositoryImpl();
-		UserRepository userRepo = new UserRepositoryImpl();
+		StudentRepository repo = new StudentRepositoryImplJdbc();
+		UserRepository userRepo = new UserRepositoryImplJdbc();
 		User user = new User();
 		for (int i = 0; i < studentNumber; i++) {
 			String firstName = getRandomStudentFirstname();
@@ -162,13 +165,9 @@ public class GenerateData {
 		}
 	}
 
-	private static void insertUserSQL(int number) {
-
-	}
-
 	private static void insertSubjectSQL(int subjectNumber) {
 		Subject subject = new Subject();
-		SubjectRepository subjectRepo = new SubjectRepositoryImpl();
+		SubjectRepository subjectRepo = new SubjectRepositoryImplJdbc();
 		for (int i = 0; i < subjectNumber; i++) {
 			subject.setCode(getRandomCode(4));
 			subject.setCoefficient(getRandomCoefficient());
