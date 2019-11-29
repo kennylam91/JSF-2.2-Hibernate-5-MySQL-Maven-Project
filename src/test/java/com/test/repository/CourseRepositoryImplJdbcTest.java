@@ -53,8 +53,9 @@ public class CourseRepositoryImplJdbcTest {
 	
 	@Test
 	public void testSaveCourseAndFindCourseById() {
-		Long firstCourseId = courseRepo.saveCourse(firstCourse);
-		Course courseFound = courseRepo.findCourseById(firstCourseId);
+//		Long firstCourseId = courseRepo.saveCourse(firstCourse);
+		Course courseFound = courseRepo.findCourseById(10L);
+		System.out.println(courseFound);
 		assertEquals(firstCourse.getCode(), courseFound.getCode());
 		assertEquals(firstCourse.getName(), courseFound.getName());
 	}

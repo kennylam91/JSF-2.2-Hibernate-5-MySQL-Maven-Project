@@ -5,15 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.beans.Course;
+import com.beans.Student;
 import com.beans.pagination.Pagination;
 import com.constant.COURSE_STATUSES;
+import com.constant.FIELDS;
+import com.constant.GENDERS;
 import com.repository.CourseRepository;
 import com.service.CourseService;
 import com.service.SubjectService;
@@ -180,12 +185,15 @@ public class CourseRepositoryImplJdbc implements CourseRepository{
 	@Override
 	public Course findCourseById(Long courseId) {
 		Course course = null;
+		Set<Student> students = new HashSet<>();
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
-					+ "SELECT	* "
-					+ "FROM 	courses "
-					+ "WHERE 	course_id = ?";
+					+ "SELECT	c.*, s.* "
+					+ "FROM 	courses c "
+					+ "JOIN		student_course sc ON c.course_id = sc.course_id "
+					+ "JOIN		students s ON sc.student_id = s.student_id "
+					+ "WHERE 	c.course_id = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int)courseId.longValue());
 			ResultSet rs = ps.executeQuery();
@@ -202,7 +210,23 @@ public class CourseRepositoryImplJdbc implements CourseRepository{
 						.description(rs.getString("description"))
 						.studentsNo(rs.getInt("student_number"))
 						.build();
+				Student student = Student.builder()
+						.id( (long) rs.getInt("student_id") )
+						.code(rs.getString("student_code"))
+						.firstName(rs.getString("first_name"))
+						.lastName(rs.getString("last_name"))
+						.dob(rs.getDate("date_of_birth"))
+						.gender(GENDERS.valueOf(rs.getString("gender")))
+						.field(FIELDS.valueOf(rs.getString("field")))
+						.address(rs.getString("address"))
+						.phone(rs.getString("phone_number"))
+						.email(rs.getString("email"))
+						.note(rs.getString("note"))
+						.avgScore(rs.getFloat("avg_score"))
+						.build();
+				students.add(student);
 			}
+			course.setStudents(students);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

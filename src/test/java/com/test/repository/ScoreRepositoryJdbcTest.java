@@ -1,5 +1,7 @@
 package com.test.repository;
 
+import static org.junit.Assert.assertNull;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,5 +54,17 @@ public class ScoreRepositoryJdbcTest {
 		for (ScoreDto scoreDto : scoreDtosFound) {
 			System.out.println(scoreDto);
 		}
+	}
+	@Test
+	public void testFindScoreByCourseIdAndStudentId() {
+		Score scoreFound = scoreRepo.findScoreByCourseIdAndStudentId(4L, 410L);
+		System.out.println(scoreFound);
+	}
+	
+	@Test
+	public void deleteScoreByCourseIdAndStudentId() {
+		scoreRepo.delete(4L, 410L);
+		Score scoreFound = scoreRepo.findScoreByCourseIdAndStudentId(4L, 410L);
+		assertNull(scoreFound);
 	}
 }

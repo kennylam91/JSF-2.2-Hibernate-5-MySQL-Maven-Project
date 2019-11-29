@@ -233,8 +233,8 @@ public class ScoreRepositoryImplJdbc implements ScoreRepository{
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
-					+ "SELECT	*"
-					+ "FROM		scores"
+					+ "SELECT	* "
+					+ "FROM		scores "
 					+ "WHERE	course_id = ? "
 					+ "			AND student_id = ?";
 			ps = con.prepareStatement(sql);
