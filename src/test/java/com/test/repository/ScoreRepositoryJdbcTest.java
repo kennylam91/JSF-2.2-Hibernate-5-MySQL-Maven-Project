@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.beans.Score;
+import com.beans.ScoreDto;
 import com.repository.ScoreRepository;
 import com.repository.impl.ScoreRepositoryImplJdbc;
 
@@ -43,6 +44,13 @@ public class ScoreRepositoryJdbcTest {
 		List<Score> scoresFound = scoreRepo.findScoresByCourseId(4L);
 		for (Score score : scoresFound) {
 			System.out.println(score);
+		}
+	}
+	@Test
+	public void testFindScoreDtosByCourseId() {
+		List<ScoreDto> scoreDtosFound = scoreRepo.findScoreDtosByCourseId(4L);
+		for (ScoreDto scoreDto : scoreDtosFound) {
+			System.out.println(scoreDto);
 		}
 	}
 }

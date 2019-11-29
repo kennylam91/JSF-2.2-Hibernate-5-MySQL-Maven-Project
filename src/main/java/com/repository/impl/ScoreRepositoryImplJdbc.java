@@ -77,25 +77,25 @@ public class ScoreRepositoryImplJdbc implements ScoreRepository{
 	@Override
 	public List<ScoreDto> findScoreDtosByCourseId(Long courseId) {
 		List<ScoreDto> scoreDtos = new LinkedList<>();
+		
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
 					+ "SELECT	sc.*, st.student_code, st.first_name, st.last_name, st.field "
 					+ "FROM		scores sc "
-					+ "JOIN		students st ON sc.student_id = st.student_id"
-					+ "WHERE	course_id = ?"
+					+ "JOIN		students st ON sc.student_id = st.student_id "
+					+ "WHERE	course_id = ? "
 					+ "ORDER BY score_id "
 					+ "";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int)courseId.longValue());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				ScoreDto scoreDto = (ScoreDto) ScoreDto.builder()
-						.id((long)rs.getInt("score_id"))
-						.studentId((long)rs.getInt("student_id"))
-						.courseId(courseId)
-						.score(rs.getFloat("score"))
-						.build();
+				ScoreDto scoreDto = new ScoreDto();
+				scoreDto.setId((long)rs.getInt("score_id"));
+				scoreDto.setStudentId((long)rs.getInt("student_id"));
+				scoreDto.setCourseId(courseId);
+				scoreDto.setScore(rs.getFloat("score"));
 				scoreDto.setStudentCode(rs.getString("student_code"));
 				scoreDto.setStudentFirstname(rs.getString("first_name"));
 				scoreDto.setStudentLastname(rs.getString("last_name"));
