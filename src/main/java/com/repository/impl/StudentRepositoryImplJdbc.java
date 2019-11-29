@@ -159,8 +159,8 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 			con = JdbcConnection.getConnection();
 			con.setAutoCommit(false);
 			String sql = ""
-					+ "DELETE FROM students "
-					+ "WHERE student_id = ?";
+					+ "DELETE 	FROM students "
+					+ "WHERE	student_id = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int)student.getId().longValue());
 			ps.executeUpdate();
@@ -253,7 +253,7 @@ public class StudentRepositoryImplJdbc implements StudentRepository {
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
-					+ "WITH search_result_without_limit AS ("
+					+ "WITH 	search_result_without_limit AS ("
 					+ "SELECT	student_id, student_code, first_name, last_name, "
 					+ "			gender, field, date_of_birth, phone_number, email, note, avg_score "
 					+ "FROM		students "
