@@ -37,10 +37,10 @@ public class ScoreRepositoryImplJdbc implements ScoreRepository{
 		try {
 			con = JdbcConnection.getConnection();
 			String sql = ""
-					+ "SELECT	*"
-					+ "FROM		scores"
-					+ "WHERE	course_id = ?"
-					+ "ORDER BY score_id";
+					+ "SELECT	* "
+					+ "FROM		scores "
+					+ "WHERE	course_id = ? "
+					+ "ORDER BY score_id ";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int)courseId.longValue());
 			ResultSet rs = ps.executeQuery();

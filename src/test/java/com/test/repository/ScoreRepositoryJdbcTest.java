@@ -1,6 +1,7 @@
 package com.test.repository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -32,5 +33,16 @@ public class ScoreRepositoryJdbcTest {
 		Score score4 = Score.builder().courseId(4L).studentId(4L).score(8.0f).build();
 		scores.add(score4);
 		scoreRepo.saveAll(scores);
+	}
+	
+	@Test
+	public void testFindScoresByCourseId() {
+		Score score5 = Score.builder().courseId(4L).studentId(3L).score(5.0f).build();
+		scores.add(score5);
+		scoreRepo.saveAll(scores);
+		List<Score> scoresFound = scoreRepo.findScoresByCourseId(4L);
+		for (Score score : scoresFound) {
+			System.out.println(score);
+		}
 	}
 }
